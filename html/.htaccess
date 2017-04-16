@@ -91,11 +91,11 @@ Redirect 301 /blog/creating-scriptableobjects-in-unity /blog/unity/creating-scri
 Redirect 301 /blog/inversion-of-control-in-unity /blog/unity/inversion-of-control-in-unity.html
 Redirect 301 /blog/a-whiff-of-christmas /blog/web-games/a-whiff-of-christmas.html
 Redirect 301 /blog/best-soccer-game /blog/web-games/best-soccer-game.html
-Redirect 301 /blog/finite-state-machines-with-ash /blog/ash/finite-state-machines-with-ash.html
-Redirect 301 /blog/introducing-ash /blog/ash/introducing-ash.html
-Redirect 301 /blog/linked-list-performance-test /blog/ash/linked-list-performance-test.html
-Redirect 301 /blog/what-is-an-entity-framework /blog/ash/what-is-an-entity-framework.html
-Redirect 301 /blog/why-use-an-entity-framework /blog/ash/why-use-an-entity-framework.html
+Redirect 301 /blog/finite-state-machines-with-ash /blog/ecs/finite-state-machines-with-ash.html
+Redirect 301 /blog/introducing-ash /blog/ecs/introducing-ash.html
+Redirect 301 /blog/linked-list-performance-test /blog/ecs/linked-list-performance-test.html
+Redirect 301 /blog/what-is-an-entity-framework /blog/ecs/what-is-an-entity-framework.html
+Redirect 301 /blog/why-use-an-entity-framework /blog/ecs/why-use-an-entity-framework.html
 Redirect 301 /blog/bubble-pack-becomes-freak-factory /freak-factory/blog/bubble-pack-becomes-freak-factory.html
 Redirect 301 /blog/bubble-pack-my-first-indie-game /freak-factory/blog/bubble-pack-my-first-indie-game.html
 Redirect 301 /blog/bubble-pack-update-gameplay /freak-factory/blog/bubble-pack-update-gameplay.html
