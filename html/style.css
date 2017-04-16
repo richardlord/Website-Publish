@@ -218,6 +218,21 @@ img.banner {
     width: 100%;
 }
 
+.youtubecontainer {
+    position: relative;
+    height: 0;
+    padding-top: 56.25%;
+    overflow: hidden;
+}
+
+.youtubecontainer iframe {
+	position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
 h1 {
 	margin: 2em 0 0;
 	padding: 0;
