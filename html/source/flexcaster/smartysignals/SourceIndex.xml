@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+	<title>Source of Flexcaster_SmartySignals</title>
+	<nodes>
+		<node label="libs">
+			<node label="As3-Signals.swc" url="source/libs/As3-Signals.swc"/>
+			<node label="SmartyPants-IOC.swc" url="source/libs/SmartyPants-IOC.swc"/>
+		</node>
+		<node label="src">
+			<node label="net.richardlord.flexcaster.smartysignals.config" icon="packageIcon" expanded="true">
+				<node label="FlexcasterConfig.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/smartysignals/config/FlexcasterConfig.as.html"/>
+			</node>
+			<node label="net.richardlord.flexcaster.smartysignals.controller" icon="packageIcon" expanded="true">
+				<node label="FeedController.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/smartysignals/controller/FeedController.as.html"/>
+				<node label="FeedsController.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/smartysignals/controller/FeedsController.as.html"/>
+				<node label="PodcastController.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/smartysignals/controller/PodcastController.as.html"/>
+			</node>
+			<node label="net.richardlord.flexcaster.smartysignals.controller.impl" icon="packageIcon" expanded="true">
+				<node label="SimpleFeedController.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/smartysignals/controller/impl/SimpleFeedController.as.html"/>
+				<node label="SimpleFeedsController.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/smartysignals/controller/impl/SimpleFeedsController.as.html"/>
+				<node label="SimplePodcastController.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/smartysignals/controller/impl/SimplePodcastController.as.html"/>
+				<node label="StartupController.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/smartysignals/controller/impl/StartupController.as.html"/>
+			</node>
+			<node label="net.richardlord.flexcaster.smartysignals.media" icon="packageIcon" expanded="true">
+				<node label="Mp3Player.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/smartysignals/media/Mp3Player.as.html"/>
+			</node>
+			<node label="net.richardlord.flexcaster.smartysignals.model" icon="packageIcon" expanded="true">
+				<node label="FeedManager.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/smartysignals/model/FeedManager.as.html"/>
+				<node label="FeedsManager.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/smartysignals/model/FeedsManager.as.html"/>
+				<node label="PodcastManager.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/smartysignals/model/PodcastManager.as.html"/>
+				<node label="StateManager.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/smartysignals/model/StateManager.as.html"/>
+			</node>
+			<node label="net.richardlord.flexcaster.smartysignals.model.constant" icon="packageIcon" expanded="true">
+				<node label="FlexcasterStates.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/smartysignals/model/constant/FlexcasterStates.as.html"/>
+			</node>
+			<node label="net.richardlord.flexcaster.smartysignals.model.impl" icon="packageIcon" expanded="true">
+				<node label="SimpleFeedManager.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/smartysignals/model/impl/SimpleFeedManager.as.html"/>
+				<node label="SimpleFeedsManager.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/smartysignals/model/impl/SimpleFeedsManager.as.html"/>
+				<node label="SimplePodcastManager.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/smartysignals/model/impl/SimplePodcastManager.as.html"/>
+				<node label="SimpleStateManager.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/smartysignals/model/impl/SimpleStateManager.as.html"/>
+			</node>
+			<node label="net.richardlord.flexcaster.smartysignals.model.vo" icon="packageIcon" expanded="true">
+				<node label="Feed.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/smartysignals/model/vo/Feed.as.html"/>
+				<node label="Podcast.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/smartysignals/model/vo/Podcast.as.html"/>
+			</node>
+			<node label="net.richardlord.flexcaster.smartysignals.service" icon="packageIcon" expanded="true">
+				<node label="LoadFeedService.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/smartysignals/service/LoadFeedService.as.html"/>
+				<node label="LoadFeedsService.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/smartysignals/service/LoadFeedsService.as.html"/>
+			</node>
+			<node label="net.richardlord.flexcaster.smartysignals.service.impl" icon="packageIcon" expanded="true">
+				<node label="LoadFeedRss.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/smartysignals/service/impl/LoadFeedRss.as.html"/>
+				<node label="LoadFeedsOpml.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/smartysignals/service/impl/LoadFeedsOpml.as.html"/>
+			</node>
+			<node label="net.richardlord.flexcaster.smartysignals.view" icon="packageIcon" expanded="true">
+				<node label="FeedsView.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/smartysignals/view/FeedsView.as.html"/>
+				<node label="FeedView.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/smartysignals/view/FeedView.as.html"/>
+				<node label="MainView.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/smartysignals/view/MainView.as.html"/>
+				<node label="PodcastView.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/smartysignals/view/PodcastView.as.html"/>
+			</node>
+			<node label="net.richardlord.flexcaster.smartysignals.view.component" icon="packageIcon" expanded="true">
+				<node label="FeedsViewComponent.mxml" icon="mxmlIcon" url="source/net/richardlord/flexcaster/smartysignals/view/component/FeedsViewComponent.mxml.html"/>
+				<node label="FeedViewComponent.mxml" icon="mxmlIcon" url="source/net/richardlord/flexcaster/smartysignals/view/component/FeedViewComponent.mxml.html"/>
+				<node label="MainViewComponent.mxml" icon="mxmlIcon" url="source/net/richardlord/flexcaster/smartysignals/view/component/MainViewComponent.mxml.html"/>
+				<node label="PodcastViewComponent.mxml" icon="mxmlIcon" url="source/net/richardlord/flexcaster/smartysignals/view/component/PodcastViewComponent.mxml.html"/>
+			</node>
+			<node label="net.richardlord.flexcaster.smartysignals.view.impl" icon="packageIcon" expanded="true">
+				<node label="SimpleFeedsView.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/smartysignals/view/impl/SimpleFeedsView.as.html"/>
+				<node label="SimpleFeedView.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/smartysignals/view/impl/SimpleFeedView.as.html"/>
+				<node label="SimpleMainView.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/smartysignals/view/impl/SimpleMainView.as.html"/>
+				<node label="SimplePodcastView.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/smartysignals/view/impl/SimplePodcastView.as.html"/>
+			</node>
+			<node label="net.richardlord.flexcaster.smartysignals.view.renderer" icon="packageIcon" expanded="true">
+				<node label="FeedRenderer.mxml" icon="mxmlIcon" url="source/net/richardlord/flexcaster/smartysignals/view/renderer/FeedRenderer.mxml.html"/>
+				<node label="PodcastRenderer.mxml" icon="mxmlIcon" url="source/net/richardlord/flexcaster/smartysignals/view/renderer/PodcastRenderer.mxml.html"/>
+			</node>
+			<node label="feeds.opml" url="source/feeds.opml"/>
+			<node selected="true" label="Flexcaster.mxml" icon="mxmlAppIcon" url="source/Flexcaster.mxml.html"/>
+			<node label="licence.txt" url="source/licence.txt"/>
+		</node>
+	</nodes>
+</index>

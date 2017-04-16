@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Flint Particles Brownian Motion</title>
+<link rel="stylesheet" type="text/css" media="all" href="/style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/flint-particles/style.css" />
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9509078-6', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+<div id="page">
+<header role="banner">
+
+	<div id="branding"><img id="site-image" src="/flint-particles/images/core/logobig.gif" width="325" height="37" /></div>
+
+	<nav id="menu" role="navigation">
+	<div>
+		<ul>
+			<li><a href="/flint-particles/index.html">ABOUT</a></li>
+			<li><a href="/flint-particles/source-code.html">SOURCE CODE</a></li>
+			<li><a href="/flint-particles/documentation.html">DOCUMENTATION</a></li>
+			<li><a href="/flint-particles/examples/">EXAMPLES</a></li>
+			<li><a href="/flint-particles/blog/">BLOG</a></li>
+		</ul>
+	</div>
+	</nav>
+</header>
+
+<div id="main">
+<div id="content">
+
+
+<link type="text/css" href="/flint-particles/css/jquery-ui-1.8.2.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/flint-particles/javascript/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="/flint-particles/javascript/jquery-ui-1.8.2.custom.min.js"></script>
+
+<h1>Brownian Motion</h1>
+
+<div class="spaced center">
+  <object width="500" height="500" data="/flint-particles/source/examples2D/BrownianMotion/PureAS3/BrownianMotion.swf" type="application/x-shockwave-flash">
+    <param name="movie" value="/flint-particles/source/examples2D/BrownianMotion/PureAS3/BrownianMotion.swf" />
+    <param name="loop" value="false" />
+    <param name="quality" value="high" />
+    <param name="allowfullscreen" value="true" />
+  </object>
+</div>
+
+<p>This example simulates <a href="https://en.wikipedia.org/wiki/Brownian_motion">Brownian Motion</a>. It demonstrates Flint&#8217;s built-in collision handling between particles.</p>
+
+<p>The example also includes a custom action created to show and hide the air particles.</p>
+
+<script type="text/javascript">$(function() { $("#source").tabs(); });</script>
+
+<div id="source">
+<ul><li><a href="#PureAS3">PureAS3</a></li>
+<li><a href="#Flash">Flash</a></li>
+<li><a href="#Flex">Flex</a></li>
+</ul><div id="PureAS3"><pre class="code">package
+{
+  import org.flintparticles.twoD.emitters.Emitter2D;
+  import org.flintparticles.twoD.renderers.DisplayObjectRenderer;
+
+  import flash.display.Sprite;
+
+  [SWF(width='500', height='500', frameRate='60', backgroundColor='#000000')]
+  
+  public class Main extends Sprite
+  {
+    private var emitter:Emitter2D;
+    
+    public function Main()
+    {
+      emitter = new BrownianMotion( stage );
+
+      var renderer:DisplayObjectRenderer = new DisplayObjectRenderer();
+      renderer.addEmitter( emitter );
+      addChild( renderer );
+
+      emitter.start();
+    }
+  }
+}</pre><pre class="code">package
+{
+  import org.flintparticles.common.counters.Blast;
+  import org.flintparticles.common.displayObjects.Dot;
+  import org.flintparticles.common.initializers.ChooseInitializer;
+  import org.flintparticles.common.initializers.CollisionRadiusInit;
+  import org.flintparticles.common.initializers.ColorInit;
+  import org.flintparticles.common.initializers.ImageClass;
+  import org.flintparticles.common.initializers.InitializerGroup;
+  import org.flintparticles.common.initializers.MassInit;
+  import org.flintparticles.twoD.actions.BoundingBox;
+  import org.flintparticles.twoD.actions.Collide;
+  import org.flintparticles.twoD.actions.Move;
+  import org.flintparticles.twoD.emitters.Emitter2D;
+  import org.flintparticles.twoD.initializers.Position;
+  import org.flintparticles.twoD.initializers.Velocity;
+  import org.flintparticles.twoD.zones.DiscZone;
+  import org.flintparticles.twoD.zones.RectangleZone;
+
+  import flash.display.DisplayObject;
+  import flash.geom.Point;
+
+  public class BrownianMotion extends Emitter2D
+  {
+    public function BrownianMotion( stage:DisplayObject )
+    {
+      counter = new Blast( 500 );
+      
+      var air:InitializerGroup = new InitializerGroup();
+      air.addInitializer( new ImageClass( Dot, [2] ) );
+      air.addInitializer( new ColorInit( 0xFF666666, 0xFF666666 ) );
+      air.addInitializer( new MassInit( 1 ) );
+      air.addInitializer( new CollisionRadiusInit( 2 ) );
+      
+      var smoke:InitializerGroup = new InitializerGroup();
+      smoke.addInitializer( new ImageClass( Dot, [10] ) );
+      smoke.addInitializer( new ColorInit( 0xFFFFFFFF, 0xFFFFFFFF ) );
+      smoke.addInitializer( new MassInit( 10 ) );
+      smoke.addInitializer( new CollisionRadiusInit( 10 ) );
+      
+      addInitializer( new Position( new RectangleZone( 0, 0, 500, 500 ) ) );
+      addInitializer( new Velocity( new DiscZone( new Point( 0, 0 ), 150, 100 ) ) );
+      addInitializer( new ChooseInitializer( [ air, smoke ], [ 30, 1 ] ) );
+      
+      addAction( new Move() );
+      addAction( new Collide( 1 ) );
+      addAction( new BoundingBox( 0, 0, 500, 500, 1 ) );
+      addAction( new ShowAirAction( stage ) );
+    }
+  }
+}</pre><pre class="code">package
+{
+  import flash.display.DisplayObject;
+  import flash.events.KeyboardEvent;
+  import flash.ui.Keyboard;
+  
+  import org.flintparticles.common.actions.ActionBase;
+  import org.flintparticles.common.emitters.Emitter;
+  import org.flintparticles.common.particles.Particle;  
+
+  
+
+  public class ShowAirAction extends ActionBase
+  {
+    private var _isDown:Boolean;
+    
+    
+    public function ShowAirAction( stage:DisplayObject )
+    {
+      _isDown = false;
+      stage.addEventListener( KeyboardEvent.KEY_DOWN, keyDownListener, false, 0, true );
+      stage.addEventListener( KeyboardEvent.KEY_UP, keyUpListener, false, 0, true );
+    }
+    
+    private function keyDownListener( ev:KeyboardEvent ):void
+    {
+      if( ev.keyCode == Keyboard.SHIFT )
+      {
+        _isDown = true;
+      }
+    }
+    private function keyUpListener( ev:KeyboardEvent ):void
+    {
+      if( ev.keyCode == Keyboard.SHIFT )
+      {
+        _isDown = false;
+      }
+    }
+
+    
+    override public function update( emitter:Emitter, particle:Particle, time:Number ):void
+    {
+      if( particle.mass == 1 )
+      {
+        if( _isDown )
+        {
+          particle.color = 0;
+        }
+        else
+        {
+          particle.color = 0xFF666666;
+        }
+      }
+    }
+  }
+}</pre></div>
+<div id="Flash"><pre class="code">import org.flintparticles.common.counters.Blast;
+import org.flintparticles.common.debug.Stats;
+import org.flintparticles.common.displayObjects.Dot;
+import org.flintparticles.common.initializers.ChooseInitializer;
+import org.flintparticles.common.initializers.CollisionRadiusInit;
+import org.flintparticles.common.initializers.ColorInit;
+import org.flintparticles.common.initializers.ImageClass;
+import org.flintparticles.common.initializers.InitializerGroup;
+import org.flintparticles.common.initializers.MassInit;
+import org.flintparticles.twoD.actions.BoundingBox;
+import org.flintparticles.twoD.actions.Collide;
+import org.flintparticles.twoD.actions.Move;
+import org.flintparticles.twoD.emitters.Emitter2D;
+import org.flintparticles.twoD.initializers.Position;
+import org.flintparticles.twoD.initializers.Velocity;
+import org.flintparticles.twoD.renderers.DisplayObjectRenderer;
+import org.flintparticles.twoD.zones.DiscZone;
+import org.flintparticles.twoD.zones.RectangleZone;
+
+var emitter:Emitter2D = new Emitter2D();
+emitter.counter = new Blast( 500 );
+
+var air:InitializerGroup = new InitializerGroup();
+air.addInitializer( new ImageClass( Dot, [2] ) );
+air.addInitializer( new ColorInit( 0xFF666666, 0xFF666666 ) );
+air.addInitializer( new MassInit( 1 ) );
+air.addInitializer( new CollisionRadiusInit( 2 ) );
+
+var smoke:InitializerGroup = new InitializerGroup();
+smoke.addInitializer( new ImageClass( Dot, [10] ) );
+smoke.addInitializer( new ColorInit( 0xFFFFFFFF, 0xFFFFFFFF ) );
+smoke.addInitializer( new MassInit( 10 ) );
+smoke.addInitializer( new CollisionRadiusInit( 10 ) );
+
+emitter.addInitializer( new Position( new RectangleZone( 0, 0, 500, 500 ) ) );
+emitter.addInitializer( new Velocity( new DiscZone( new Point( 0, 0 ), 150, 100 ) ) );
+emitter.addInitializer( new ChooseInitializer( [ air, smoke ], [ 30, 1 ] ) );
+
+emitter.addAction( new Move() );
+emitter.addAction( new Collide( 1 ) );
+emitter.addAction( new BoundingBox( 0, 0, 500, 500, 1 ) );
+emitter.addAction( new ShowAirAction( stage ) );
+
+var renderer:DisplayObjectRenderer = new DisplayObjectRenderer();
+renderer.addEmitter( emitter );
+addChild( renderer );
+
+emitter.start();</pre><pre class="code">package
+{
+  import flash.display.DisplayObject;
+  import flash.events.KeyboardEvent;
+  import flash.ui.Keyboard;
+
+  import org.flintparticles.common.actions.ActionBase;
+  import org.flintparticles.common.emitters.Emitter;
+  import org.flintparticles.common.particles.Particle;
+
+  public class ShowAirAction extends ActionBase
+  {
+    private var _isDown:Boolean;
+    
+    public function ShowAirAction( stage:DisplayObject )
+    {
+      _isDown = false;
+      stage.addEventListener( KeyboardEvent.KEY_DOWN, keyDownListener, false, 0, true );
+      stage.addEventListener( KeyboardEvent.KEY_UP, keyUpListener, false, 0, true );
+    }
+    
+    private function keyDownListener( ev:KeyboardEvent ):void
+    {
+      if( ev.keyCode == Keyboard.SHIFT )
+      {
+        _isDown = true;
+      }
+    }
+    private function keyUpListener( ev:KeyboardEvent ):void
+    {
+      if( ev.keyCode == Keyboard.SHIFT )
+      {
+        _isDown = false;
+      }
+    }
+    
+    override public function update( emitter:Emitter, particle:Particle, time:Number ):void
+    {
+      if( particle.mass == 1 )
+      {
+        if( _isDown )
+        {
+          particle.color = 0;
+        }
+        else
+        {
+          particle.color = 0xFF666666;
+        }
+      }
+    }
+  }
+}</pre></div>
+<div id="Flex"><pre class="code">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;s:Application
+  xmlns:fx=&quot;http://ns.adobe.com/mxml/2009&quot; 
+  xmlns:s=&quot;library://ns.adobe.com/flex/spark&quot; 
+  xmlns:f=&quot;http://flintparticles.org/2009/flint2d&quot;
+  xmlns:local=&quot;*&quot;
+  width=&quot;500&quot; height=&quot;500&quot;
+  backgroundColor=&quot;#000000&quot;&gt;
+  
+&lt;fx:Script&gt;
+  &lt;![CDATA[
+    import org.flintparticles.common.displayObjects.Dot;
+  ]]&gt;
+&lt;/fx:Script&gt;
+
+&lt;f:DisplayObjectRenderer id=&quot;renderer&quot; width=&quot;500&quot; height=&quot;500&quot;&gt;
+  &lt;f:emitters&gt;
+    &lt;f:Emitter id=&quot;emitter&quot; autoStart=&quot;true&quot;&gt;
+      &lt;f:counter&gt;
+        &lt;f:Blast startCount=&quot;500&quot;/&gt;
+      &lt;/f:counter&gt;
+      &lt;f:initializers&gt;
+        &lt;f:Position&gt;
+          &lt;f:RectangleZone left=&quot;0&quot; right=&quot;500&quot; top=&quot;0&quot; bottom=&quot;500&quot;/&gt;
+        &lt;/f:Position&gt;
+        &lt;f:Velocity&gt;
+          &lt;f:DiscZone centerX=&quot;0&quot; centerY=&quot;0&quot; innerRadius=&quot;100&quot; outerRadius=&quot;150&quot;/&gt;
+        &lt;/f:Velocity&gt;
+        &lt;f:ChooseInitializer weights=&quot;1,19&quot;&gt;
+          &lt;f:InitializerGroup&gt;
+            &lt;f:ImageClass imageClass=&quot;{Dot}&quot; parameters=&quot;10&quot;/&gt;
+            &lt;f:CollisionRadiusInit radius=&quot;10&quot;/&gt;
+            &lt;f:MassInit mass=&quot;10&quot;/&gt;
+            &lt;f:ColorInit minColor=&quot;0xFFFFFFFF&quot; maxColor=&quot;0xFFFFFFFF&quot;/&gt;
+          &lt;/f:InitializerGroup&gt;
+          &lt;f:InitializerGroup&gt;
+            &lt;f:ImageClass imageClass=&quot;{Dot}&quot; parameters=&quot;2&quot;/&gt;
+            &lt;f:CollisionRadiusInit radius=&quot;2&quot;/&gt;
+            &lt;f:MassInit mass=&quot;1&quot;/&gt;
+            &lt;f:ColorInit minColor=&quot;0xFF666666&quot; maxColor=&quot;0xFF666666&quot;/&gt;
+          &lt;/f:InitializerGroup&gt;            
+        &lt;/f:ChooseInitializer&gt;
+      &lt;/f:initializers&gt;
+      &lt;f:actions&gt;
+        &lt;f:Move/&gt;
+        &lt;f:Collide bounce=&quot;1&quot;/&gt;
+        &lt;f:BoundingBox top=&quot;0&quot; left=&quot;0&quot; bottom=&quot;500&quot; right=&quot;500&quot; bounce=&quot;1&quot;/&gt;
+        &lt;local:ShowAirAction/&gt;
+      &lt;/f:actions&gt;
+    &lt;/f:Emitter&gt;
+  &lt;/f:emitters&gt;
+&lt;/f:DisplayObjectRenderer&gt;
+&lt;/s:Application&gt;</pre><pre class="code">package
+{
+  import org.flintparticles.common.actions.ActionBase;
+  import org.flintparticles.common.emitters.Emitter;
+  import org.flintparticles.common.particles.Particle;
+
+  import mx.core.IMXMLObject;
+
+  import flash.display.DisplayObject;
+  import flash.events.Event;
+  import flash.events.KeyboardEvent;
+  import flash.ui.Keyboard;
+
+  public class ShowAirAction extends ActionBase implements IMXMLObject
+  {
+    private var _isDown:Boolean;
+    
+    public function ShowAirAction()
+    {
+      _isDown = false;
+    }
+    
+    public function initialized( document:Object, id:String ):void
+    {
+      if( DisplayObject( document ).stage )
+      {
+        setStage( DisplayObject( document ).stage );
+      }
+      else
+      {
+        DisplayObject( document ).addEventListener( Event.ADDED_TO_STAGE, addedToStage );
+      }
+    }
+      
+    private function addedToStage( ev:Event ):void
+    {
+      setStage( ev.target.stage );
+    }  
+    
+    private function setStage( stage:DisplayObject ):void
+    {
+      stage.addEventListener( KeyboardEvent.KEY_DOWN, keyDownListener, false, 0, true );
+      stage.addEventListener( KeyboardEvent.KEY_UP, keyUpListener, false, 0, true );
+    }
+    
+    private function keyDownListener( ev:KeyboardEvent ):void
+    {
+      if( ev.keyCode == Keyboard.SHIFT )
+      {
+        _isDown = true;
+      }
+    }
+    private function keyUpListener( ev:KeyboardEvent ):void
+    {
+      if( ev.keyCode == Keyboard.SHIFT )
+      {
+        _isDown = false;
+      }
+    }
+    
+    override public function update( emitter:Emitter, particle:Particle, time:Number ):void
+    {
+      if( particle.mass == 1 )
+      {
+        if( _isDown )
+        {
+          particle.color = 0;
+        }
+        else
+        {
+          particle.color = 0xFF666666;
+        }
+      }
+    }
+  }
+}</pre></div>
+
+
+</div>
+</div>
+
+<footer role="contentinfo">
+	<p>Richard Lord - Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+</footer>
+</div>
+</body>
+</html>

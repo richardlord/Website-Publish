@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>20 tips for creating Air Native Extensions for iOS</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" media="all" href="/style.css" />
+<link rel="alternate" type="application/rss+xml" title="Richard Lord's Feed" href="http://www.richardlord.net/feed.xml" />
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9509078-6', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+<div id="page">
+<header role="banner">
+	<div id="social">
+		<a href="https://twitter.com/richard_lord"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+		<a href="https://uk.linkedin.com/in/richardlord"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+		<a href="https://github.com/richardlord"><img src="/images/social/github_logo.png" width="36" height="36" /></a>
+		<a href="https://www.youtube.com/c/RichardLordNet"><img src="/images/social/youtube_logo.png" width="36" height="36" /></a>
+	</div>
+
+	<div id="branding">
+		<img id="site-image" src="/images/social/me.png" />
+		<div id="site-title"><a href="/" title="Richard Lord" rel="home">Richard Lord</a></div>
+		<div id="site-description">Game Developer</div>
+	</div>
+
+	<nav id="menu" role="navigation">
+	<div>
+		<ul>
+			<li><a href="/games.html">GAMES</a></li>
+			<li><a href="/consulting.html">CONSULTING</a></li>
+			<li><a href="/blog/">BLOG</a></li>
+			<li><a href="/presentations/">PRESENTATIONS</a></li>
+			<li><a href="/press.html">PRESS</a></li>
+			<li><a href="/about/">ABOUT</a></li>
+		</ul>
+	</div>
+	</nav>
+</header>
+
+<div id="main">
+<div id="content">
+<h1>20 tips for creating Air Native Extensions for iOS</h1>
+
+<div id="meta">Posted on <time datetime="2007-03-04T21:08:12Z">04 March 2007</time></div>
+
+
+
+
+<p>Over the past three months I've created three Air Native Extensions for iOS (<a href="https://github.com/StickSports">available on Github</a>), which were all used in our game <a href="https://itunes.apple.com/app/id483135193?ls=1&mt=8">Stick Cricket Super Sixes</a>, and have discovered a lot along the way. I've forgotten some of it, but here's a few of the tips I can remember for anyone else approaching this task.</p>
+
+<h2>Documentation</h2>
+
+<h4>1. Getting Started</h4>
+
+<p>Here's a couple of useful getting started guides. If you don't know what you're doing, this is a good place to start. There are more on the web, just ask Google.</p>
+
+<ul>
+<li><a href="http://www.adobe.com/devnet/air/articles/extending-air.html">Extending Adobe Air</a></li>
+<li><a href="https://www.custardbelly.com/blog/blog-posts/2011/09/21/air-native-extension-example-ibattery-for-ios/index.html">AIR Native Extension Example: iBattery for iOS</a></li>
+</ul>
+
+<h4>2. Read Adobe's documentation.</h4>
+
+<p>For the most part <a href="http://help.adobe.com/en_US/air/extensions/index.html">Adobe's documentation</a> is comprehensive and detailed. <a href="http://help.adobe.com/en_US/air/extensions/index.html">Use it</a>.</p>
+
+<h2>Writing the Actionscript code</h2>
+
+<h4>3. Pay attention to the Actionscript API</h4>
+
+<p>Make an Actionscript API that suits the functionality you're implementing. Don't get pulled into copying Apple's iOS API in Actionscript if there's a better, more Actionscript like, way to do it.</p>
+
+<p>Remember, changing the implementation later only affects the extension, but changing this API breaks all projects that use the extension so make it as good as you can.</p>
+
+<h4>4. Maximise the error checking in your Actionscript code</h4>
+
+<p>You need to check the input to your extension methods to avoid errors. You could do this in the native code, but it's a lot easier to do it in the Actionscript code. If you know you'll always call the native code with the correct number of parameters, and that those parameters will always be valid values, you can avoid a lot of error checking in the native code.</p>
+
+<p>Of course, if you enjoy writing error checking code in C, go right ahead. Personally, I prefer to do this in Actionscript.</p>
+
+<h4>5. Always create a default implementation</h4>
+
+<p>Even if you're only planning to use your extension on iOS, create a default implementation anyway. You build this default implementation in pure Actionscript, so it works on all platforms. It implements the same API as the iOS version, but using only Actionscript. That means it may throw errors or returns null values, but it will be valid Actionscript code that you can compile against for platforms other than iOS.</p>
+
+<p>Without a default implementation, you can only ever test your app on an iOS device. This makes testing your app during development very tiresome. Being able to compile your app for desktop Air to test a new feature that's unrelated to your native extension is very useful.</p>
+
+<h2>Writing the native code</h2>
+
+<h4>6. Use Objective-C to interface to Apple's APIs.</h4>
+
+<p>You don't have to use Objective-C, but if you're interfacing with any of Apple's APIs it's easier if you do. Otherwise, you can use C or C++.</p>
+
+<h4>7. Place the C code for the Air-Native interface in a .m file.</h4>
+
+<p>The interface between the native code and Air is via C, so your native code will include one file of C code to provide this interface. If you place this code inside a .c file, you can't use any Objective-C functionality in there (e.g. you can't use objective-c style code to call objective-c APIs), but if you place it inside a .m file you can. So life is easier if you use a .m extension.</p>
+
+<h4>8. The .m file containing the Air-Native interface doesn't need a .h header file.</h4>
+
+<p>But you'll want to disable the error messages so turn off warnings for "missing function prototypes" in your XCode project settings.</p>
+
+<h4>9. Use unique names for your extension initializer and finalizer functions.</h4>
+
+<p>A number of example extensions use generic names like "extInitializer" and "extFinalizer" for the initializer and finalizer functions. No two extensions in your project may have the same names for these functions, so use names that are appropriate to your project.</p>
+
+<h4>10. Use macros in your source code</h4>
+
+<p>How many times can you type</p>
+
+<pre>FREObject someFunction(FREContext context, void* functionData, uint32_t argc, FREObject argv[])</pre>
+
+<p>before you want to poke yourself in the eye with a blunt stick? Create a macro for this, and any other repetitive tasks for implementing the Air-Native interface. You can see a few of my macros in <a href="https://github.com/StickSports/ANE-Game-Center/blob/master/ios/GameCenterIosExtension/GameCenterIosExtension.m">this source file</a>. (Thank you to <a href="https://github.com/mnem/box2d_ane">David Wagner</a> for some of these.)</p>
+
+<h4>11. Set "Enable linking with shared libraries" to yes</h4>
+
+<p>There's a lot of noise around the web about this XCode project setting, with some saying use "no" and some saying use "yes". Basically, setting this to yes means your extension will be linked with the required libraries later when you compile your app. This is what you want. But it means when you compile your Air app that uses your native extension, you'll need to direct the compiler to the iOS SDK so it can link to the libraries. See item 18 below.</p>
+
+<p>N.B. If you get a build error</p>
+
+<pre>ld warning: unexpected srelocation type 9</pre>
+
+<p>then you probably either have this setting as no or you haven't specified the location of the iOS SDK when building your app.</p>
+
+<h4>12. Be careful with threads</h4>
+
+<p>Your native extension can't create Actionscript objects in any but the main thread from which it is called, and must do so during a call from Air. This makes using blocks in your objective-c code problematic. However, there is one thing you can do from another thread, and that is dispatch an event to the Actionscript ExtensionContext. This offers a solution</p>
+
+<ol>
+<li>In your block or other threaded code, store your data into a native object.</li>
+<li>Dispatch an event to your ExtensionContext with whatever details it needs for step 3.</li>
+<li>In response to the event, call a native method to fetch the object.</li>
+<li>In this native method, create the Actionscript object from the native object created in step 1 and return it.</li>
+</ol>
+
+<h4>13. Creating native views</h4>
+
+<p>Your Air application runs inside a standard native window. You can get a reference to this window as</p>
+
+<pre>[UIApplication sharedApplication].keyWindow</pre>
+
+<p>Once you have this window reference you can add subviews to it to display native views.</p>
+
+<h2>Compiling the Extension</h2>
+
+<h4>14. Automate the compiling and testing of your extension</h4>
+
+<p>When building my Game Center extension I created a simple air app for testing the extension.</p>
+
+<p>I created an ant build script to compile the whole extension (build the native C/obj-C library, build the native AS3 library, build the default AS3 library, wrap them all as an Air native extension) and to build the test project.</p>
+
+<p>The result, one click in Eclipse and I had the extension built and the test project built against it, ready to drop on my phone (and using the Organiser in XCode makes this last step easy too). The result - it took about 10 seconds to go from writing code to having the test project with the latest extension on my phone. That's still 9 seconds too long but it's a lot better than most workflows I've seen.</p>
+
+<p>Maybe there's a better way if you use Flash Builder (I use <a href="http://fdt.powerflasher.com/">FDT</a>), and you certainly don't have to use Ant - any build tool will do. But streamline the build and test process as much as you can. My ant scripts are in my <a href="https://github.com/StickSports/ANE-Game-Center/blob/master/build/build.xml">Game Center extension project</a> if you want them.</p>
+
+<h4>15. Using a third party library</h4>
+
+<p>If you're using a third party library in your extension (e.g. the Flurry analytics library in my <a href="https://github.com/StickSports/ANE-Flurry-Analytics">Flurry extension</a>), include that library along with your compiled native library in the "-platform iPhone-ARM" argument when compiling the extension.</p>
+
+<h4>16. You may need a platform.xml file.</h4>
+
+<p>If using any but the most common libraries in the iOS SDK, create a <a href="https://github.com/StickSports/ANE-Game-Center/blob/master/build/platform.xml">platform.xml</a> file to specify the libraries you're using and the minimum iOS version to build against.</p>
+
+<p>I create a platform.xml file for all my extensions - it hides the warning about unknown minimum iOS version that Air 3.1 will display if you don't.</p>
+
+<h2>Building your mobile application</h2>
+
+<h4>17. If your IDE doesn't know about native extensions, use the .swc from the default implementation.</h4>
+
+<p>This swc contains the full Actionscript API of the native extension in a pure Actionscript implementation, so you can code against it, and compile with it for testing on your dev computer.</p>
+
+<p>Of course, an IDE that doesn't know about native extensions won't build your mobile app correctly, but you're using a build script for that aren't you.</p>
+
+<h4>18. Specify the location of the iOS SDK when compiling your Air mobile app.</h4>
+
+<p>By default, the Air compiler compiles against version 4.0 of the iOS SDK. If your native extension uses features that don't exist in this version it will fail to compile because the required libraries can't be found. Specify the location of a later version of the iOS SDK to enable this linking. See <a href="http://blogs.adobe.com/rajorshi/2011/11/16/ios5-support-for-airusing-external-sdks-to-package-apps/">this blog post</a> for more details.</p>
+
+<p>In Flash Builder, there is a setting for this somewhere in the various screens for configuring the native extensions your project uses. If you're using the command line compiler, use the -platformsdk compiler flag to specify the path to the iOS SDK.</p>
+
+<p>Unfortunately, this is only possible if you're compiling your app on Mac OS X. Adobe are, apparently, working to get this working on Windows too. If you try to use a native extension that requires you to link to the SDK and don't link to it, you will get a compile error like this (the second line may or may not be present).</p>
+
+<pre>Compilation failed while executing : ld64
+ld: unknown option: -ios_version_min</pre>
+
+<p>Unfortunately, this means that for the time being some native extensions can only be used if you compile on a Mac.</p>
+
+<h4>19. ld: warning: ARM function not 4-byte aligned</h4>
+
+<p>When compiling your app, you may get a number of warnings of the form</p>
+
+<pre>ld: warning: ARM function not 4-byte aligned</pre>
+
+<p>These are just warnings and nothing to worry about. 4-byte alignment is an optimisation rather than a requirement.</p>
+
+<h2>When it's all done</h2>
+
+<h4>20. Make your native extension available to others.</h4>
+
+<p>Having completed your extension, you have three choices</p>
+
+<ol>
+<li>Keep it to yourself</li>
+<li>Open-source it for other developers</li>
+<li>Sell it to other developers</li>
+</ol>
+
+<p>Ask yourself what makes your app unique and special. If it's not your native extension (and it very rarely is) then choosing option 2 or 3 may have many benefits for you like code contributions from others or additional income.</p>
+
+<p>Further, by making your extension available to other developers you strengthen the ecosystem around Adobe Air as a tool for mobile development. This encourages other developers to use Air and encourages Adobe to continue to develop and improve it. This is in your interests.</p>
+
+<p>At <a href="http://www.sticksports.com/mobile/">Stick Sports</a> we favour option 2 because we'd rather spend time marketing and supporting our games than marketing and supporting our extensions as commercial products.</p>
+
+
+<p>Share this post or a comment online -</p>
+<div id="share">
+<a href="https://twitter.com/intent/tweet?text=20+tips+for+creating+Air+Native+Extensions+for+iOS&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fair%2F20-tips-for-creating-air-native-extensions-for-ios.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+<a href="https://www.facebook.com/dialog/share?app_id=206081586545847&amp;href=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fair%2F20-tips-for-creating-air-native-extensions-for-ios.html" target="_blank" title="Facebook"><img src="/images/social/facebook_logo.png" width="36" height="36" /></a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=20+tips+for+creating+Air+Native+Extensions+for+iOS&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fair%2F20-tips-for-creating-air-native-extensions-for-ios.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+</div>
+<hr />
+<p>Also in the collection <b><a href="./">Adobe Air</a></b></p>
+<ul><li><a href="using-the-ipad-retina-display-with-adobe-air.html">Using the iPad retina display with Adobe Air</a></li>
+</ul>
+
+</div>
+</div>
+
+<footer role="contentinfo">
+	<p>Richard Lord - Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+</footer>
+</div>
+</body>
+</html>

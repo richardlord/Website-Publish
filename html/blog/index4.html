@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Blog page 4</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" media="all" href="/style.css" />
+<link rel="alternate" type="application/rss+xml" title="Richard Lord's Feed" href="http://www.richardlord.net/feed.xml" />
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9509078-6', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+<div id="page">
+<header role="banner">
+	<div id="social">
+		<a href="https://twitter.com/richard_lord"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+		<a href="https://uk.linkedin.com/in/richardlord"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+		<a href="https://github.com/richardlord"><img src="/images/social/github_logo.png" width="36" height="36" /></a>
+		<a href="https://www.youtube.com/c/RichardLordNet"><img src="/images/social/youtube_logo.png" width="36" height="36" /></a>
+	</div>
+
+	<div id="branding">
+		<img id="site-image" src="/images/social/me.png" />
+		<div id="site-title"><a href="/" title="Richard Lord" rel="home">Richard Lord</a></div>
+		<div id="site-description">Game Developer</div>
+	</div>
+
+	<nav id="menu" role="navigation">
+	<div>
+		<ul>
+			<li><a href="/games.html">GAMES</a></li>
+			<li><a href="/consulting.html">CONSULTING</a></li>
+			<li><a href="/blog/">BLOG</a></li>
+			<li><a href="/presentations/">PRESENTATIONS</a></li>
+			<li><a href="/press.html">PRESS</a></li>
+			<li><a href="/about/">ABOUT</a></li>
+		</ul>
+	</div>
+	</nav>
+</header>
+
+<div id="main">
+<div id="content">
+
+
+<h2><a href="/blog/ecs/linked-list-performance-test.html">Four ways to link a list (a performance test on linked list architectures)</a></h2>
+<div id="meta">Posted on <time datetime="2011-10-25T12:00:00Z">25 October 2011</time></div>
+
+<p>In looking at entity systems for Flash games, and particularly the projects Ember and Xember, I was wondering what is the most efficient architecture for the linked lists used by these systems. So I ran some tests.
+
+The code for these tests is all available on Github.
+
+The lists in these frameworks are used to manage the component sets for the systems that run the game. These lists need to provide three functions - add an item, remove an item, and loop through all the items, and they need to do this as efficiently as possible.
+
+So I created four different architectures for linked lists and ran a few performance tests. <a href="/blog/ecs/linked-list-performance-test.html">Continue reading &rarr;</a></p>
+<p class="tag">Collection: <a href="/blog/ecs/">Entity-Component-System architecture</a></p>
+
+<hr />
+
+
+
+<h2><a href="/flint-particles/blog/version-4-0-1-released.html">Version 4.0.1 of Flint released</a></h2>
+<div id="meta">Posted on <time datetime="2011-10-17T12:00:00Z">17 October 2011</time></div>
+
+<p>There was a critical bug in version 4.0.0 so here's a quick update to fix that bug. <a href="/flint-particles/blog/version-4-0-1-released.html">Continue reading &rarr;</a></p>
+<p class="tag">Collection: <a href="/flint-particles/blog/">Flint Particles</a></p>
+
+<hr />
+
+
+
+<h2><a href="/flint-particles/blog/version-4-0-0-released.html">Version 4.0.0 of Flint released</a></h2>
+<div id="meta">Posted on <time datetime="2011-10-16T12:00:00Z">16 October 2011</time></div>
+
+<p>Earlier this week I released version 4.0.0 of Flint. This release is to support the new crop of 3d engines that are using Stage3d for rendering. As part of this it was necessary to alter a couple of APIs, hence the major release number incrementing to 4. The core architecture of Flint remains unchanged. <a href="/flint-particles/blog/version-4-0-0-released.html">Continue reading &rarr;</a></p>
+<p class="tag">Collection: <a href="/flint-particles/blog/">Flint Particles</a></p>
+
+<hr />
+
+
+
+<h2><a href="/flint-particles/blog/flint-and-molehill.html">Flint and Molehill</a></h2>
+<div id="meta">Posted on <time datetime="2011-07-28T12:00:00Z">28 July 2011</time></div>
+
+<p>We've been doing a lot of work recently on adding molehill (aka Flash 11) support to Flint. Rather than integrate molehill support directly into Flint, I decided that the best way, at least for now, to bring the power of molehill to Flint is to integrate with the 3D rendering libraries that are themselves integrating with molehill. So we've been adding support for the molehill compatible versions of Away3D, Flare3D and Alternativa3D. <a href="/flint-particles/blog/flint-and-molehill.html">Continue reading &rarr;</a></p>
+<p class="tag">Collection: <a href="/flint-particles/blog/">Flint Particles</a></p>
+
+<hr />
+
+
+
+<h2><a href="/blog/coral/bugs-in-vector3d-and-matrix3d.html">Bugs in Vector3D and Matrix3D</a></h2>
+<div id="meta">Posted on <time datetime="2011-02-27T12:00:00Z">27 February 2011</time></div>
+
+<p>This last post about Coral is about bugs. I adapted the unit tests from Coral to test Flash's native Vector3D and Matrix3D classes. In so doing, I discovered a number of bugs in the native classes. <a href="/blog/coral/bugs-in-vector3d-and-matrix3d.html">Continue reading &rarr;</a></p>
+<p class="tag">Collection: <a href="/blog/coral/">Coral, an Actionscript library for 3D Math</a></p>
+
+<hr />
+
+
+
+<h2><a href="/flint-particles/blog/version-3-0-1-released.html">Version 3.0.1 of Flint released</a></h2>
+<div id="meta">Posted on <time datetime="2011-02-27T12:00:00Z">27 February 2011</time></div>
+
+<p>Today I released version 3.0.1 of Flint. This is a minor bugfix release. There are no API changes so it should be fine for all users of version 3.0.0 to update immediately. <a href="/flint-particles/blog/version-3-0-1-released.html">Continue reading &rarr;</a></p>
+<p class="tag">Collection: <a href="/flint-particles/blog/">Flint Particles</a></p>
+
+<hr />
+
+
+
+<h2><a href="/blog/coral/performance-of-coral-vs-vector3d-and-matrix3d.html">Performance of Coral vs Vector3D and Matrix3D</a></h2>
+<div id="meta">Posted on <time datetime="2011-02-26T12:00:00Z">26 February 2011</time></div>
+
+<p>TCoral is covered by a set of performance tests for measuring and optimizing it's performance. These tests are run using Grant Skinner's performance test suite. I adapted these tests to also apply to the native 3D geometry classes, for comparison. This article is about the results of those tests. <a href="/blog/coral/performance-of-coral-vs-vector3d-and-matrix3d.html">Continue reading &rarr;</a></p>
+<p class="tag">Collection: <a href="/blog/coral/">Coral, an Actionscript library for 3D Math</a></p>
+
+<hr />
+
+
+
+<h2><a href="/blog/coral/architecture-of-coral-vs-vector3d-and-matrix3d.html">Architecture of Coral vs Vector3D and Matrix3D</a></h2>
+<div id="meta">Posted on <time datetime="2011-02-25T12:00:00Z">25 February 2011</time></div>
+
+<p>In this post I look at the key architectural differences between Coral and the native Vector3D and Matrix3D classes. Code architecture is an important area to me. I find well architected code is much easier to use, leading to more rapid development and fewer bugs. So good architecture in core classes like Vector3D and Matrix3D can make a lot of difference to developers. <a href="/blog/coral/architecture-of-coral-vs-vector3d-and-matrix3d.html">Continue reading &rarr;</a></p>
+<p class="tag">Collection: <a href="/blog/coral/">Coral, an Actionscript library for 3D Math</a></p>
+
+<hr />
+
+<div class="back"><a href="index5.html">&larr; older posts</a></div>
+<div class="forward"><a href="index3.html">newer posts &rarr;</a></div>
+
+
+</div>
+</div>
+
+<footer role="contentinfo">
+	<p>Richard Lord - Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+</footer>
+</div>
+</body>
+</html>

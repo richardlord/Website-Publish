@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Architecture of Coral vs Vector3D and Matrix3D</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" media="all" href="/style.css" />
+<link rel="alternate" type="application/rss+xml" title="Richard Lord's Feed" href="http://www.richardlord.net/feed.xml" />
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9509078-6', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+<div id="page">
+<header role="banner">
+	<div id="social">
+		<a href="https://twitter.com/richard_lord"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+		<a href="https://uk.linkedin.com/in/richardlord"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+		<a href="https://github.com/richardlord"><img src="/images/social/github_logo.png" width="36" height="36" /></a>
+		<a href="https://www.youtube.com/c/RichardLordNet"><img src="/images/social/youtube_logo.png" width="36" height="36" /></a>
+	</div>
+
+	<div id="branding">
+		<img id="site-image" src="/images/social/me.png" />
+		<div id="site-title"><a href="/" title="Richard Lord" rel="home">Richard Lord</a></div>
+		<div id="site-description">Game Developer</div>
+	</div>
+
+	<nav id="menu" role="navigation">
+	<div>
+		<ul>
+			<li><a href="/games.html">GAMES</a></li>
+			<li><a href="/consulting.html">CONSULTING</a></li>
+			<li><a href="/blog/">BLOG</a></li>
+			<li><a href="/presentations/">PRESENTATIONS</a></li>
+			<li><a href="/press.html">PRESS</a></li>
+			<li><a href="/about/">ABOUT</a></li>
+		</ul>
+	</div>
+	</nav>
+</header>
+
+<div id="main">
+<div id="content">
+<h1>Architecture of Coral vs Vector3D and Matrix3D</h1>
+
+<div id="meta">Posted on <time datetime="2007-03-04T21:08:12Z">04 March 2007</time></div>
+
+
+
+
+<p>This is part 2 of a 4 part series comparing <a href="https://github.com/richardlord/Coral">Coral</a>, a derivative of the 3D math classes that used to be in the <a href="/flint-particles/">Flint Particles</a> project, and Flash's native 3D math classes.</p>
+
+<p>In the first post I <a href="/blog/coral/introducing-coral-an-actionscript-library-for-3d-math.html">introduced Coral</a>, explaining what it is and why I'm releasing it as an open source project. In later posts I will <a href="/blog/coral/performance-of-coral-vs-vector3d-and-matrix3d.html">compare the performance of Coral with the native Vector3D & Matrix3D classes</a> and will discuss <a href="/blog/coral/bugs-in-vector3d-and-matrix3d.html">the bugs I discovered in the native 3D math classes</a>.</p>
+
+<p>In this post I look at the key architectural differences between Coral and the native Vector3D and Matrix3D classes. Code architecture is an important area to me. I find well architected code is much easier to use, leading to more rapid development and fewer bugs. So good architecture in core classes like Vector3D and Matrix3D can make a lot of difference to developers.</p>
+
+<p>I happen to think that Coral has a much better architecture than the native classes, but then I would - I wrote it. I'd like to know what you think, in the comments below or <a href="https://twitter.com/richard_lord">on Twitter</a>.</p>
+
+<h2>How many core classes do we need?</h2>
+
+<p>The first thing you'll notice when comparing the two projects is the number of core classes they have. The core 3D geometry classes in Flash are</p>
+
+<ul>
+<li><a href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/geom/Vector3D.html">Vector3D</a></li>
+<li><a href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/geom/Matrix3D.html">Matrix3D</a></li>
+</ul>
+
+<p>In Coral, the core classes are</p>
+
+<ul>
+<li><a href="https://github.com/richardlord/Coral/blob/master/src/net/richardlord/coral/Vector3d.as">Vector3d</a></li>
+<li><a href="https://github.com/richardlord/Coral/blob/master/src/net/richardlord/coral/Point3d.as">Point3d</a></li>
+<li><a href="https://github.com/richardlord/Coral/blob/master/src/net/richardlord/coral/Quaternion.as">Quaternion</a></li>
+<li><a href="https://github.com/richardlord/Coral/blob/master/src/net/richardlord/coral/Matrix3d.as">Matrix3d</a></li>
+</ul>
+
+<p>This is because the native Vector3D class is used to represent vectors, points and quaternions. I think this is a big architectural mistake and so Coral has separate classes for each type. Here's why...</p>
+
+<h2>Vectors and Points</h2>
+
+<p>A point is a location in space, like the centre of Trafalgar Square in London, or the centre of Times Square in New York. You can't do much to a point - you can't add points together (Times Square + Trafalgar Square = ?), you can't multiply them by a scalar (what's 2 x the centre of Times Square?). You can't find the dot product of two points. Points have zero dimensions and there's not a lot you can do with points alone, except change the coordinate system you use to represent them.</p>
+
+<p>A vector on the other hand represents a direction and distance in space. Like 5 miles north, or 3 miles west. 5 miles north is a vector - it's a distance and a direction. We can do lots more with vectors. For example, we can add them together: 5 miles north + 5 miles west = 7 and a bit miles north west (thanks to Pythagoras for that one). We can subtract them: 5 miles north - 5 miles west = 7 and a bit miles north east. We can multiply them by a scalar: 2 * 5 miles north = 10 miles north, and we can do a whole lot more besides, like dot product, cross product, normalize, etc.</p>
+
+<p>We can also add a vector to a point, to get a new point - Times square + 5 miles north = somewhere in New Jersey.</p>
+
+<p>The whole point of this is, points and vectors are different. Yes, they can both be represented in cartesian coordinate space by three coordinates, but that doesn't make them the same.</p>
+
+<p>Yet Actionscript uses a single class (Vector3D) to represent them both. So, in the Vector3D class we have methods like crossProduct() and properties like length that only apply to vectors, and we have methods like project() that only apply to points. It's the developer's responsibility to know whether the Vector3D object they're using actually represents a point or a vector, and hence which methods are valid.</p>
+
+<p>Coral has no such issues because in Coral points and vectors are represented by different classes.</p>
+
+<h2>Matrix Transformations</h2>
+
+<p>Transformations in 3D space are commonly represented by a 4x4 matrix. A transformation that doesn't move the origin can be, and often is, represented with a 3x3 matrix.</p>
+
+<pre>[ a b c ]
+[ d e f ]
+[ g h i ]</pre>
+
+<p>We can multiply our vector or point by this matrix to get the transformed vector or point.</p>
+
+<pre>[ a b c ]   [ x ]   [ new_x ]
+[ d e f ] x [ y ] = [ new_y ]
+[ g h i ]   [ z ]   [ new_z ]</pre>
+
+<p>If we want to include translations in the transformation we use a 4x4 matrix.</p>
+
+<pre>[ a b c tx ]
+[ d e f ty ]
+[ g h i tz ]
+[ 0 0 0 1  ]</pre>
+
+<p>Where tx, ty and tz represent the translation in the x, y and z directions. We also add a fourth value to the point or vector, often called the w coordinate, to bring the translation in to play. For a point we would use 1 for the w value.</p>
+
+<pre>[ a b c tx ]   [ x ]   [ new_x + tx ]
+[ d e f ty ] x [ y ] = [ new_y + ty ]
+[ g h i tz ]   [ z ]   [ new_z + tz ]
+[ 0 0 0 1  ]   [ 1 ]   [     1      ]</pre>
+
+<p>By using a 1 for the w coordinate, we ensure the translation elements are added in to the transformation of the point.</p>
+
+<p>However, when transforming a vector, the translation part of the transformation should not be applied. This is because, unlike a point, a vector is not located in the three-d space. The vector "5 miles north" is the same whether you are in London or New York.</p>
+
+<p>To avoid applying the translation part of the 4x4 matrix when transforming a vector, we set the w coordinate of the vector to 0.</p>
+
+<pre>[ a b c tx ]   [ x ]   [ new_x ]
+[ d e f ty ] x [ y ] = [ new_y ]
+[ g h i tz ]   [ z ]   [ new_z ]
+[ 0 0 0 1  ]   [ 0 ]   [   0   ]</pre>
+
+<p>This is another area where vectors and points differ, and Coral takes care of the difference for you. Coral's Vector3d and Point3d classes both have a w coordinate, which defaults to 0 in the Vector3d class and 1 in the Point3d class. You don't usually have to change these values, but if you do that's fine. The Matrix3d class will use whatever value of w the point or vector has when transforming it.</p>
+
+<p>Actionscript's Vector3D class also has a w coordinate property. The value of this property defaults to 0. Don't bother changing it because the value of this property is ignored when applying a Matrix3D transformation to a Vector3D object. Instead, to transform your point or vector you have to choose between the radically misnamed transformVector() method, which assumes a w coordinate of 1, for transforming a point and the almost as badly named deltaTransformVector() method, which assumes a w coordinate of 0, for transforming a vector.</p>
+
+<h2>Quaternions</h2>
+
+<p><a href="https://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation">Quaternions</a> are another object type used in 3D geometry. A quaternion represents a rotation in 3D space. Rotations can be represented using a Matrix, but sometimes it's much easier to use a quaternion.</p>
+
+<p>A quaternion has nothing in common with a vector or a point, although a quaternion is represented using four numbers, commonly called w, x, y & z. These are not like the coordinates of a vector or point and the common methods of vectors and points don't apply to quaternions. Despite this, in the native 3D classes quaternions are represented using the Vector3D class. This overloads the Vector3D class with yet another object to represent - an object to which methods like crossProduct() and project() are meaningless, and which can't be transformed by a matrix.</p>
+
+<p>This is so confusing that most 3D Actionscript libraries give up at this point and create their own class to represent a quaternion. Flint is no exception to this rule - it uses the quaternion class from Coral.</p>
+
+<h2>More methods</h2>
+
+<p>Coral contains many methods that are not in the native Vector3D and Matrix3D classes, ranging from simple methods like Vector3d.multiply() to more complex methods like Matrix3d.appendBasisTransform(). These are all useful additions to the classes and make 3D development simpler because it frees developers from having to implement these behaviours in their own code.</p>
+
+<h2>Method chaining</h2>
+
+<p>Often the code that uses classes like Vector3D is performing simple mathematical methods on vector or point objects. For example, if you have an initial position point p, an initial velocity vector u and final velocity vector v and a time number t, and you want to calculate the new position after time t. In mathematics, this would be expressed as</p>
+
+<pre>newP = p + ( u + v ) * t / 2</pre>
+
+<p>In the absence of operator overloading, we can't make the same calculation in Acrionscript look as concise as the mathematics, but we can do better than Flash's native Vector3D class.</p>
+
+<p>Using Flash's native Vector3D class the calculation above is expressed as</p>
+
+<pre>var temp:Vector3D = u.add( v );
+temp.scaleBy( t / 2 );
+p.incrementBy( temp );
+
+<i>(252 ms for 1,000,000 iterations)</i></pre>
+
+<p>Using Coral's classes, the same calculation is expressed as</p>
+
+<pre>p.incrementBy( u.add( v ).scaleBy( t / 2 ) );
+
+<i>(194 ms for 1,000,000 iterations)</i></pre>
+
+<p>In Coral, all methods that manipulate the object the method belongs to return a reference to that object (i.e. a reference to 'this'). So in the example above, the scaleBy method of the Vector3d class returns a reference to the vector that has been scaled. This enables chaining of methods to produce more compact, cleaner code.</p>
+
+<h2>Optional result objects</h2>
+
+<p>It is common knowledge that object creation in Actionscript is slow. That's why many speed-critical projects use object pools to reuse objects rather than create new ones. Unfortunately, it's very difficult to use Flash's native geometry classes without creating lots of temporary Vector3D and Matrix3D objects.</p>
+
+<p>The previous example is a case in point. The temporary vector object is explicitly required in the native example. In the Coral example, a similar temporary object is created from the addition. But with Coral this can be avoided. In Coral, all methods that would create an object to hold the result of the method, have an optional parameter allowing you to pass in an object to hold the result and thus avoid the object creation.</p>
+
+<p>So, if I have a temporary Vector3d available, from an object pool or elsewhere, I can rewrite the calculation above as</p>
+
+<pre>p.incrementBy( ( u.add( v, temp ).scaleBy( t / 2 ) );
+
+<i>(35 ms for 1,000,000 iterations)</i></pre>
+
+<p>and get a fivefold speed increase by avoiding the object creation.</p>
+
+<h2>Conclusion</h2>
+
+<p>It's my opinion that the overloading of a single Vector3D class to represent vectors, points and quaternions is the worst architectural mistake in Actionscript's native 3D math classes. That the matrix transformations also ignore the w coordinate, forcing one to choose between two badly named methods instead, compounds the problem.</p>
+
+<p>The other architectural improvements in Coral that I mention above improve readability and performance of the code, and hence are very useful.</p>
+
+<h2>Next</h2>
+
+<p>That's all for architecture. Next time I'll <a href="/blog/coral/performance-of-coral-vs-vector3d-and-matrix3d.html">compare the performance of Flash's native 3D math classes and the classes in Coral</a>. Then I'll finish up by describing <a href="/blog/coral/bugs-in-vector3d-and-matrix3d.html">the bugs I found in the native Vector3D and Matrix3D classes</a>.</p>
+
+
+<p>Share this post or a comment online -</p>
+<div id="share">
+<a href="https://twitter.com/intent/tweet?text=Architecture+of+Coral+vs+Vector3D+and+Matrix3D&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fcoral%2Farchitecture-of-coral-vs-vector3d-and-matrix3d.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+<a href="https://www.facebook.com/dialog/share?app_id=206081586545847&amp;href=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fcoral%2Farchitecture-of-coral-vs-vector3d-and-matrix3d.html" target="_blank" title="Facebook"><img src="/images/social/facebook_logo.png" width="36" height="36" /></a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=Architecture+of+Coral+vs+Vector3D+and+Matrix3D&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fcoral%2Farchitecture-of-coral-vs-vector3d-and-matrix3d.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+</div>
+<hr />
+<p>Also in the collection <b><a href="./">Coral, an Actionscript library for 3D Math</a></b></p>
+<ul><li><a href="introducing-coral-an-actionscript-library-for-3d-math.html">Introducing Coral, an Actionscript library for 3D Math</a></li>
+<li><a href="performance-of-coral-vs-vector3d-and-matrix3d.html">Performance of Coral vs Vector3D and Matrix3D</a></li>
+<li><a href="bugs-in-vector3d-and-matrix3d.html">Bugs in Vector3D and Matrix3D</a></li>
+</ul>
+
+</div>
+</div>
+
+<footer role="contentinfo">
+	<p>Richard Lord - Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+</footer>
+</div>
+</body>
+</html>

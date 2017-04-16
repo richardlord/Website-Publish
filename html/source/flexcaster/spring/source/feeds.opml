@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="1.0">
+<head>
+	<title>iTunes Subscribed Feeds</title>
+	<dateCreated>Wed, 09 Sep 2009 18:08:36 GMT</dateCreated>
+	<dateModified>Wed, 09 Sep 2009 18:08:36 GMT</dateModified>
+</head>
+<body>
+	<outline text="Software Engineering Radio - the podcast for professional software developers" type="rss" xmlUrl="http://se-radio.net/rss" htmlUrl="http://www.se-radio.net" />
+	<outline text="Pragmatic Podcasts" type="rss" xmlUrl="http://pragprog.com/podcasts/feed.rss" htmlUrl="http://pragprog.com/podcasts" />
+	<outline text="Blog - Stack Overflow" type="rss" xmlUrl="http://blog.stackoverflow.com/?feed=podcast" htmlUrl="http://blog.stackoverflow.com" />
+	<outline text="Hanselminutes" type="rss" xmlUrl="http://feeds.feedburner.com/Hanselminutes" htmlUrl="http://www.hanselminutes.com" />
+	<outline text="Herding Code" type="rss" xmlUrl="http://herdingcode.com/?feed=rss2" htmlUrl="http://herdingcode.com" />
+	<outline text="Elegant Code » CodeCast" type="rss" xmlUrl="http://feeds.feedburner.com/elegantcodecast" htmlUrl="http://elegantcode.com" />
+	<outline text="The Thirsty Developer - Podcast" type="rss" xmlUrl="http://feeds.feedburner.com/ThirstyDeveloperPodcast" htmlUrl="http://thirstydeveloper.com/" />
+	<outline text="Deep Fried Bytes" type="rss" xmlUrl="http://feeds.feedburner.com/deepfriedbytes" htmlUrl="http://deepfriedbytes.com/" />
+	<outline text="The Java Posse" type="rss" xmlUrl="http://feeds.feedburner.com/javaposse" htmlUrl="http://pipes.yahoo.com/pipes/pipe.info?_id=oNnUn0EZ3RGZ6TmZ2h2EvQ" />
+	<outline text="Lean Agile Straight Talk podcast" type="rss" xmlUrl="http://feeds.feedburner.com/NetObjectivesPodcast_LAST" htmlUrl="http://www.netobjectives.com/LAST_view/feed" />
+	<outline text="Agile Toolkit Podcast" type="rss" xmlUrl="http://agiletoolkit.libsyn.com/rss" htmlUrl="http://agiletoolkit.libsyn.com" />
+	<outline text="The Flex Show - Audio Only" type="rss" xmlUrl="http://feeds.feedburner.com/TheFlexShow-AudioOnly" htmlUrl="http://www.theflexshow.com/blog/index.cfm" />
+	<outline text="RIApodcast - a ColdFusion, Flex and Flash Podcast" type="rss" xmlUrl="http://feeds.feedburner.com/riapodcast" htmlUrl="http://www.riapodcast.com/" />
+</body>
+</opml>

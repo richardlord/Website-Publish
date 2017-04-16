@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Refactoring the meta-game in Intergalactic Delivery Driver</title>
+<link rel="icon" href="/intergalactic-delivery-driver/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/intergalactic-delivery-driver/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" media="all" href="/style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/intergalactic-delivery-driver/style.css" />
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9509078-6', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+<div id="page">
+<header role="banner">
+
+	<div><img src="/intergalactic-delivery-driver/images/header.png" width="537" height="29" /></div>
+
+	<nav id="menu" role="navigation">
+	<div>
+		<ul>
+			<li><a href="/intergalactic-delivery-driver/index.html">ABOUT</a></li>
+			<li><a href="/intergalactic-delivery-driver/blog/">BLOG</a></li>
+			<li><a href="/intergalactic-delivery-driver/contact.html">CONTACT</a></li>
+		</ul>
+	</div>
+	</nav>
+</header>
+
+<div id="main">
+<div id="content">
+<h1>Refactoring the meta-game in Intergalactic Delivery Driver</h1>
+
+<div id="meta">Posted on <time datetime="2007-03-04T21:08:12Z">04 March 2007</time></div>
+
+
+
+
+<p>Last week was an interesting week for <a href="/intergalactic-delivery-driver/">Intergalactic Delivery Driver</a>, the game I'm currently developing. The week started with a crisis in confidence as I debated whether the meta-game would work and ended with a number of changes and much greater confidence in the quality of the game in general and the meta-game in particular.</p>
+
+<p>The meta-game has always been a difficulty within the project. The core-loop was easy, it barely feels like I designed it at all. It was born of inspiration and has felt right since the start. Yes, sometimes I do wonder how many players want to play a game that involves tilting your phone, but it works so well that it's always been worth the risk. The meta-game on the other hand is all hard graft and design. I have thought about it so much and tried so many permutations in my head, on paper and in prototypes that I am bored with it, while still trying hard to make it better. Maybe this time I am there.</p>
+
+<p>When I started prototyping the game I imagined a simple level-unlock scenario, maybe with a "saga-map" like King use in most of their games. This puts all the emphasis on the core loop and lets me put all my effort into creating good quality levels for you to play. Developing those levels might lead me to introduce pick-ups, power-ups and other fun details to add joy and progression to the levels and decisions about when to use objects that span multiple levels.</p>
+
+<p>But later, as the prototype developed, I decided to focus more on your career as a delivery driver. I want to use the game to comment on the idea of independence in the workplace, of working for oneself, of the importance of your personal brand, about what Tim O'Reilly calls the <a href="https://conferences.oreilly.com/nextcon/">next:economy</a>. With different agents and opportunities open to the player I can let you choose the direction your career takes. I can hint at what it feels like to work for yourself. I can show how hard it is to get started in this new economy, when everyone else seems to have the good contacts. How a lucky break can open new possibilities that you haven't imagined and how your career path is based as much on luck as planning. As John Lennon sang "Life is what happens to you while you're busy making other plans" (I used that line when talking about <a href="/freak-factory/blog/why-freak-factory.html">Freak Factory</a> too - maybe there is a theme developing in my work).</p>
+
+<p>Those are grand ambitions, and if I followed them literally then the start of the game would be slow, hard and frustrating and as your career developed your decisions, based as much on luck as judgement, would take you down a path that closed off whole sections of the game to you and made your game uniquely different to everyone else's. The former is clearly not a good idea and the later, while interesting in concept, means producing lots more game than any one person can play or make (although procedural generation could help). Instead, I have focused on the ideas of choice and reputation. You pick the agents you work with and you build a reputation that opens up new options for your career as an Intergalactic Delivery Driver.</p>
+
+<p>All of that led me to a meta-game based around a jobs board which lists a number of delivery jobs that are available to you. Different jobs have different challenges and rewards and you choose which job to attempt next. Jobs are from different agents and as you gain reputation new agents take an interest in you and offer you work. Each agent brings with them a new type of job with new skills to develop and challenges to overcome.</p>
+
+<p><img src="/intergalactic-delivery-driver/images/blog/deliveries0.png" width="288" height="512" alt="" /></p>
+
+<p>All of which sounded good except that there is no hint to the player as to what direction to take. You are left alone with a list of jobs and little guidance to help you decide what to do next (see, it is like working for yourself!).</p>
+
+<p>So last week I set out to fix this. The first step was to separate the jobs board into multiple jobs boards, one for each agency. This lets you see all the agencies at the start, see which are offering you work, and see what you need to do to gain work from the others. This gives you a clear set of goals you need to complete to get attention from the other agencies.</p>
+
+<p><img src="/intergalactic-delivery-driver/images/blog/agencies1.png" width="288" height="512" alt="" /></p>
+
+<p>Having unlocked an agency the next challenge is to give the player direction and purpose when doing jobs for that agency. In real life it's great if clients keep offering you more work, but in the game a jobs board which keeps refilling with new jobs to do makes it feel to the player like they're not progressing at all. There are other measures of your progress - your reputation, the spaceships you own, the money you have earned, the agents that are offering you work. But when it comes to doing the deliveries, a list of deliveries that keeps refilling feels like a grind.</p>
+
+<p>So what I have decided is to return back to the original plan of a level unlock game, but rather than one massive level unlock I will present each agency as a fixed set of deliveries to complete. That means that each agency will contain a set of deliveries in a particular style for you to unlock, play through, and gain three stars on. The levels within an agency get progressively harder and have a theme to tie them together based on the nature of the agency. You still get to choose which jobs to do, which agencies to develop your relationship with, and which to avoid. But you also get the attraction of completing the next level, of a clear progression through the game, and of playing the same levels as your friends.</p>
+
+<p><img src="/intergalactic-delivery-driver/images/blog/deliveries1.png" width="288" height="512" alt="" /></p>
+
+<p>So that's where the game is at now. I haven't thrown away the procedural generation code, instead I have adapted it to run within the Unity editor. When creating a new agency, I procedurally generate a set of levels for that agency based on the character of that agency. Then I play and manually adjust these levels to make them more interesting. This has enabled me to make 120 levels in an afternoon - 120 levels that I am now playing through and altering to make them better.</p>
+
+
+
+<p>Share this post or a comment online -</p>
+<div id="share">
+<a href="https://twitter.com/intent/tweet?text=Refactoring+the+meta-game+in+Intergalactic+Delivery+Driver&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fintergalactic-delivery-driver%2Fblog%2Frefactoring-the-meta-game-in-intergalactic-delivery-driver.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+<a href="https://www.facebook.com/dialog/share?app_id=206081586545847&amp;href=http%3A%2F%2Fwww.richardlord.net%2Fintergalactic-delivery-driver%2Fblog%2Frefactoring-the-meta-game-in-intergalactic-delivery-driver.html" target="_blank" title="Facebook"><img src="/images/social/facebook_logo.png" width="36" height="36" /></a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=Refactoring+the+meta-game+in+Intergalactic+Delivery+Driver&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fintergalactic-delivery-driver%2Fblog%2Frefactoring-the-meta-game-in-intergalactic-delivery-driver.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+</div>
+<hr />
+<p>Also in the collection <b><a href="./">Intergalactic Delivery Driver</a></b></p>
+<ul><li><a href="taking-a-break.html">Taking A Break</a></li>
+</ul>
+
+</div>
+</div>
+
+<footer role="contentinfo">
+	<p>Richard Lord - Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+</footer>
+</div>
+</body>
+</html>

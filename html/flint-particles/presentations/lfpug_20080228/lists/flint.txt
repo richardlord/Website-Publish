@@ -1,0 +1,7 @@
+Flint particle system
+Actionscript 3 Library
+For Flash and Flex
+Open Source
+MIT Licence
+flintparticles.org
+code.google.com/p/flint-particle-system

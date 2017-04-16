@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Bugs in Vector3D and Matrix3D</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" media="all" href="/style.css" />
+<link rel="alternate" type="application/rss+xml" title="Richard Lord's Feed" href="http://www.richardlord.net/feed.xml" />
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9509078-6', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+<div id="page">
+<header role="banner">
+	<div id="social">
+		<a href="https://twitter.com/richard_lord"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+		<a href="https://uk.linkedin.com/in/richardlord"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+		<a href="https://github.com/richardlord"><img src="/images/social/github_logo.png" width="36" height="36" /></a>
+		<a href="https://www.youtube.com/c/RichardLordNet"><img src="/images/social/youtube_logo.png" width="36" height="36" /></a>
+	</div>
+
+	<div id="branding">
+		<img id="site-image" src="/images/social/me.png" />
+		<div id="site-title"><a href="/" title="Richard Lord" rel="home">Richard Lord</a></div>
+		<div id="site-description">Game Developer</div>
+	</div>
+
+	<nav id="menu" role="navigation">
+	<div>
+		<ul>
+			<li><a href="/games.html">GAMES</a></li>
+			<li><a href="/consulting.html">CONSULTING</a></li>
+			<li><a href="/blog/">BLOG</a></li>
+			<li><a href="/presentations/">PRESENTATIONS</a></li>
+			<li><a href="/press.html">PRESS</a></li>
+			<li><a href="/about/">ABOUT</a></li>
+		</ul>
+	</div>
+	</nav>
+</header>
+
+<div id="main">
+<div id="content">
+<h1>Bugs in Vector3D and Matrix3D</h1>
+
+<div id="meta">Posted on <time datetime="2007-03-04T21:08:12Z">04 March 2007</time></div>
+
+
+
+
+<p>This is part 4 of a 4 part series comparing <a href="https://github.com/richardlord/Coral">Coral</a>, a derivative of the 3D math classes that used to be in the <a href="/flint-particles/">Flint Particles</a> project, and Flash's native 3D math classes.</p>
+
+<p>In the first post I <a href="/blog/coral/introducing-coral-an-actionscript-library-for-3d-math.html">introduced Coral</a>, explaining what it is and why I'm releasing it as an open source project. The next post looked at <a href="/blog/coral/architecture-of-coral-vs-vector3d-and-matrix3d.html">the key architectural differences between Coral and the native Vector3D and Matrix3D classes</a>. The third post <a href="/blog/coral/performance-of-coral-vs-vector3d-and-matrix3d.html">compared the performance of Coral and the native 3D math classes</a>. This last post is about bugs.</p>
+
+<p>The classes in Coral are covered by <a href="https://github.com/richardlord/Coral/tree/master/test/net/richardlord/coral">unit tests</a>. I don't write unit tests for every bit of code I write, but for classes like these 3D Math classes, which will be used in many different projects, in many different circumstances, where bugs could be hard to track down, I consider unit tests essential.</p>
+
+<p>I adapted the unit tests from Coral to <a href="https://github.com/richardlord/Coral/tree/master/native/test">test Flash's native Vector3D and Matrix3D classes</a>. In so doing, I discovered a number of bugs in the native classes. All the test code is <a href="https://github.com/richardlord/Coral">in the Coral project on Github</a>. This is what I found.</p>
+
+<h2>Bugs in Vector3D</h2>
+
+<p>Vector3D passed most of the tests. These are the tests it failed.</p>
+
+<h2>X_AXIS, Y_AXIS & Z_ AXIS are mutable.</h2>
+
+<p>Consider this code</p>
+
+<pre>var v : Vector3D = Vector3D.X_AXIS;
+v.scaleBy( 2 );
+var u : Vector3D = Vector3D.X_AXIS;
+trace( u );</pre>
+
+<p>It would be natural to expect u to be the vector ( 1 0 0 ), but it isn't. It's ( 2 0 0 ). Because X_AXIS, Y_AXIS & Z_AXIS return a reference to the same vector every time. They should return a new vector each time, so the value of the X_AXIS, Y_AXIS & Z_AXIS properties can't be changed.</p>
+
+<p><strike>Vote for this bug on Adobe's bug tracker</strike></p>
+
+<h2>CrossProduct sets the w coordinate to 1</h2>
+
+<p>The default value for the w coordinate is supposed to be zero. So the w coordinate of the result of the crossProduct of two vectors should be zero. It isn't - it's one.</p>
+
+<pre>var u : Vector3D = new Vector3D( 1, 0, 0 );
+var v : Vector3D = new Vector3D( 0, 1, 0 );
+var r : Vector3D = u.crossProduct( v );
+trace( u.w ); // 0
+trace( v.w ); // 0
+trace( r.w ); // 1</pre>
+
+<p><strike>Vote for this bug on Adobe's bug tracker</strike></p>
+
+<h2>Bugs in Matrix3D</h2>
+
+<p>Matrix3D contains more serious bugs than Vector3D. Here they are.</p>
+
+<h2>The determinant is incorrect</h2>
+
+<p>When the Matrix3D class calculates the determinant, it gets it wrong. Every time. Consider this matrix, for example.</p>
+
+<pre>[ 1 2 3 4 ]
+[ 2 3 4 5 ]
+[ 3 4 5 6 ]
+[ 4 5 6 7 ]</pre>
+
+<p>The determinant of this matrix is zero. But the Matrix3D class thinks it is -36. Stranger, but reassuring, if you ask Matrix3D to calculate the inverse, it recognizes that the inverse can't be calculated because the determinant is zero!!</p>
+
+<pre>var m : Matrix3D = new Matrix3D(Vector.<Number>([1,2,3,4,2,3,4,5,3,4,5,6,4,5,6,7]));
+trace( m.determinant ); // -36
+var b : Boolean = m.invert();
+trace( b ); // false</pre>
+
+<p>Matrix3D even gets the determinant of the identity matrix wrong.</p>
+
+<pre>var m : Matrix3D = new Matrix3D();
+trace( m.determinant ); // -1</pre>
+
+<p>The correct value is 1.</p>
+
+<p><strike>Vote for this bug on Adobe's bug tracker</strike></p>
+
+<h2>Floating point inaccuracies</h2>
+
+<p>The Matrix3D class introduces inaccuracies in floating point numbers that far exceed the normal floating point inaccuracies in Flash. You can see this without even touching the matrix after creating it...</p>
+
+<pre>var m : Matrix3D = new Matrix3D(Vector.<Number>([1.1,0,0,0,0,1.1,0,0,0,0,1.1,0,0,0,0,1]));
+trace( m.rawData );</pre>
+
+<p>The output from this is</p>
+
+<pre>1.100000023841858,0,0,0,0,1.100000023841858,0,0,0,0,1.100000023841858,0,0,0,0,1</pre>
+
+<p>This appears to be caused by Flash internally using single-precision floating point numbers for Matrix3D, even though the type is specified as Number and Number is specified as double-precision floating point. Flash doesn't even have a single-precision floating point type. So, at the very least, the documentation for Matrix3D is incorrect, but I would suggest that using a data type that doesn't exist within the Actionscript language is a bug.</p>
+
+<p>Anyway, the Matrix3D class intermittently fails some of Coral's unit tests because the results are not within 0.0001 of what they should be.</p>
+
+<p><strike>Vote for this bug on Adobe's bug tracker</strike></p>
+
+<h2>appendRotation() and prependRotation() assume the axis is of unit length</h2>
+
+<p>The appendRotation() and prependRotation() methods only produce the correct matrix if the axis property passed to the method is of unit length.</p>
+
+<p>This code specifies a 90° rotation about the x-axis.</p>
+
+<pre>var m : Matrix3D = new Matrix3D();
+m.appendRotation( 90, new Vector3D( 1, 0, 0 ) );
+trace( m.rawData );</pre>
+
+<p>The result is the matrix</p>
+
+<pre>[ 1 0 0 0 ]
+[ 0 0-1 0 ]
+[ 0 1 0 0 ]
+[ 0 0 0 1 ]</pre>
+
+<p>This code also specifies a 90° rotation about the x-axis.</p>
+
+<pre>var m : Matrix3D = new Matrix3D();
+m.appendRotation( 90, new Vector3D( 2, 0, 0 ) );
+trace( m.rawData );</pre>
+
+<p>But the result is the matrix</p>
+
+<pre>[ 4 0 0 0 ]
+[ 0 0-2 0 ]
+[ 0 2 0 0 ]
+[ 0 0 0 1 ]</pre>
+
+<p>Which is a rotation and scale.</p>
+
+<p>That the axis should be a unit vector isn't specified as a requirement in the documentation and it isn't enforced in the code. These methods should calculate a unit vector from the axis and use that to calculate the rotation.</p>
+
+<p><strike>Vote for this bug on Adobe's bug tracker</strike></p>
+
+<h2>appendTranslation() ignores the bottom row of the matrix</h2>
+
+<p>The appendTranslation() method simply adds the new translation coordinates to the translation coordinates in the last column of the matrix. This is only correct if the first three numbers in the bottom row of the matrix are zero.</p>
+
+<pre>[ 1 0 0 2 ]   [ 2 1 0 0 ]   [ 2 1 0 2 ]
+[ 0 1 0 3 ] . [ 3 1 2 0 ] = [ 3 1 2 3 ]
+[ 0 0 1 4 ]   [ 1 0 1 0 ]   [ 1 0 1 4 ]
+[ 0 0 0 1 ]   [ 0 0 0 1 ]   [ 0 0 0 1 ]</pre>
+
+<pre>[ 1 0 0 2 ]   [ 2 1 0 0 ]   [ 4 3 2 2 ]
+[ 0 1 0 3 ] . [ 3 1 2 0 ] = [ 6 4 5 3 ]
+[ 0 0 1 4 ]   [ 1 0 1 0 ]   [ 5 4 5 4 ]
+[ 0 0 0 1 ]   [ 1 1 1 1 ]   [ 1 1 1 1 ]</pre>
+
+<p>The Matrix3D class gets the first calculation correct and gets the second one wrong.</p>
+
+<pre>var m1 : Matrix3D = new Matrix3D(Vector.<Number>([2,3,1,0,1,1,0,0,0,2,1,0,0,0,0,1]));
+m1.appendTranslation( 2, 3, 4 );
+trace( m1.rawData ); // 2,3,1,0,1,1,0,0,0,2,1,0,2,3,4,1 
+var m2 : Matrix3D = new Matrix3D(Vector.<Number>([2,3,1,1,1,1,0,1,0,2,1,1,0,0,0,1]));
+m2.appendTranslation( 2, 3, 4 );
+trace( m2.rawData ); // 2,3,1,1,1,1,0,1,0,2,1,1,2,3,4,1</pre>
+
+<p><strike>Vote for this bug on Adobe's bug tracker</strike></p>
+
+<h2>transformVector() ignores the w coordinate</h2>
+
+<p>The transformVector() method ignores the value of the w property of the input vector. The transformVector() method will set the w property if you define a matrix that affects the fourth coordinate of the vector, for example a perspective projection matrix. However, it assumes the w coordinate of the input vector is 1, even though the default value for the w coordinate is 0.</p>
+
+<p><strike>Vote for this bug on Adobe's bug tracker</strike></p>
+
+<h2>The end</h2>
+
+<p>That's all the bugs I found.</p>
+
+<p>That's also the end of this series of posts about Coral and Flash's native 3D Math classes. Please feel free to <a href="https://github.com/richardlord/Coral">use, fork and improve</a> Coral. And let me know what you think, in the comments or <a href="https://twitter.com/richard_lord">via Twitter</a>.</p>
+
+<h2>Footnote</h2>
+
+<p>The new <a href="http://labs.adobe.com/technologies/flashplatformruntimes/incubator/">Flash Player 11 Incubator pre-release</a> became available on 28 February. I ran the test suite using this new player and all the bugs appear to still be present. That's not surprising since I only notified Adobe of the bugs a few days before the pre-release.</p>
+
+
+<p>Share this post or a comment online -</p>
+<div id="share">
+<a href="https://twitter.com/intent/tweet?text=Bugs+in+Vector3D+and+Matrix3D&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fcoral%2Fbugs-in-vector3d-and-matrix3d.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+<a href="https://www.facebook.com/dialog/share?app_id=206081586545847&amp;href=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fcoral%2Fbugs-in-vector3d-and-matrix3d.html" target="_blank" title="Facebook"><img src="/images/social/facebook_logo.png" width="36" height="36" /></a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=Bugs+in+Vector3D+and+Matrix3D&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fcoral%2Fbugs-in-vector3d-and-matrix3d.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+</div>
+<hr />
+<p>Also in the collection <b><a href="./">Coral, an Actionscript library for 3D Math</a></b></p>
+<ul><li><a href="introducing-coral-an-actionscript-library-for-3d-math.html">Introducing Coral, an Actionscript library for 3D Math</a></li>
+<li><a href="architecture-of-coral-vs-vector3d-and-matrix3d.html">Architecture of Coral vs Vector3D and Matrix3D</a></li>
+<li><a href="performance-of-coral-vs-vector3d-and-matrix3d.html">Performance of Coral vs Vector3D and Matrix3D</a></li>
+</ul>
+
+</div>
+</div>
+
+<footer role="contentinfo">
+	<p>Richard Lord - Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+</footer>
+</div>
+</body>
+</html>

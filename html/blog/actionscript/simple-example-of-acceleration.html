@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Simple example of acceleration</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" media="all" href="/style.css" />
+<link rel="alternate" type="application/rss+xml" title="Richard Lord's Feed" href="http://www.richardlord.net/feed.xml" />
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9509078-6', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+<div id="page">
+<header role="banner">
+	<div id="social">
+		<a href="https://twitter.com/richard_lord"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+		<a href="https://uk.linkedin.com/in/richardlord"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+		<a href="https://github.com/richardlord"><img src="/images/social/github_logo.png" width="36" height="36" /></a>
+		<a href="https://www.youtube.com/c/RichardLordNet"><img src="/images/social/youtube_logo.png" width="36" height="36" /></a>
+	</div>
+
+	<div id="branding">
+		<img id="site-image" src="/images/social/me.png" />
+		<div id="site-title"><a href="/" title="Richard Lord" rel="home">Richard Lord</a></div>
+		<div id="site-description">Game Developer</div>
+	</div>
+
+	<nav id="menu" role="navigation">
+	<div>
+		<ul>
+			<li><a href="/games.html">GAMES</a></li>
+			<li><a href="/consulting.html">CONSULTING</a></li>
+			<li><a href="/blog/">BLOG</a></li>
+			<li><a href="/presentations/">PRESENTATIONS</a></li>
+			<li><a href="/press.html">PRESS</a></li>
+			<li><a href="/about/">ABOUT</a></li>
+		</ul>
+	</div>
+	</nav>
+</header>
+
+<div id="main">
+<div id="content">
+<h1>Simple example of acceleration</h1>
+
+<div id="meta">Posted on <time datetime="2007-03-04T21:08:12Z">04 March 2007</time></div>
+
+
+
+
+<p>While teaching my Actionscript Fundamentals course a couple of days ago one of the trainees asked me how to do a simple example of using acceleration and deceleration within an animation. Here it is. Roll over the centre of the propeller below.</p>
+
+<div class="spaced">
+    <object width="300" height="300" data="/images/blog/propeller.swf" type="application/x-shockwave-flash">
+        <param name="movie" value="/images/blog/propeller.swf" />
+        <param name="loop" value="false" />
+        <param name="quality" value="high" />
+        <param name="allowfullscreen" value="true" />
+    </object>
+</div>
+
+<p>The code looks like this.</p>
+
+<pre>var rate:Number = 0;
+var acceleration:Number = 0.5;
+
+prop_mc.centre_mc.onRollOver = function()
+{
+    prop_mc.onEnterFrame = function()
+    {
+        rate += acceleration;
+        rate = Math.min( rate, 15 );
+        prop_mc._rotation += rate;
+    }
+};
+
+prop_mc.centre_mc.onRollOut = function()
+{
+    prop_mc.onEnterFrame = function()
+    {
+        rate -= acceleration;
+        rate = Math.max( rate, 0 );
+        prop_mc._rotation += rate;
+    }
+};
+
+prop_mc.centre_mc.onDragOver = prop_mc.centre_mc.onRollOver;
+prop_mc.centre_mc.onDragOut = prop_mc.centre_mc.onRollOut;</pre>
+
+<p>For a brief explaination, rate is the speed of rotation of the propeller. When the mouse is over the propeller, the rate increases each frame by the acceleration and is capped at a maximum rate of 15. When the mouse is not over the propeller, the rate decreases each frame by the acceleration and is capped at zero. The result is what you see.</p>
+
+<p>The source file can be <a href="/files/propeller.zip">downloaded here</a>.</p>
+
+
+<p>Share this post or a comment online -</p>
+<div id="share">
+<a href="https://twitter.com/intent/tweet?text=Simple+example+of+acceleration&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Factionscript%2Fsimple-example-of-acceleration.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+<a href="https://www.facebook.com/dialog/share?app_id=206081586545847&amp;href=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Factionscript%2Fsimple-example-of-acceleration.html" target="_blank" title="Facebook"><img src="/images/social/facebook_logo.png" width="36" height="36" /></a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=Simple+example+of+acceleration&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Factionscript%2Fsimple-example-of-acceleration.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+</div>
+<hr />
+<p>Also in the collection <b><a href="./">Actionscript</a></b></p>
+<ul><li><a href="finite-state-machines-for-ai-in-actionscript.html">Finite State Machines for AI in Actionscript</a></li>
+<li><a href="better-without-singletons.html">Singletons - we're better off without them</a></li>
+<li><a href="list-loader-for-actionscript-2.html">List Loader for Actionscript 2</a></li>
+<li><a href="singleton-factory.html">Singleton Factory</a></li>
+<li><a href="events-in-actionscript-2.html">Events in Actionscript 2</a></li>
+<li><a href="events-in-actionscript-3.html">Events in Actionscript 3</a></li>
+<li><a href="different-types-of-weak-references.html">Different types of weak references</a></li>
+<li><a href="create-your-own-weak-references-in-actionscript-3.html">Creating weak references in Actionscript 3</a></li>
+<li><a href="polling-the-keyboard-in-actionscript-3.html">Polling the keyboard in Actionscript 3</a></li>
+<li><a href="radial-perlin-noise.html">Radial Perlin Noise</a></li>
+<li><a href="the-parentheses-operator.html">The parentheses operator</a></li>
+<li><a href="object-pool-class.html">Object Pool class</a></li>
+<li><a href="the-i-in-interface.html">The I in Interface</a></li>
+</ul>
+
+</div>
+</div>
+
+<footer role="contentinfo">
+	<p>Richard Lord - Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+</footer>
+</div>
+</body>
+</html>

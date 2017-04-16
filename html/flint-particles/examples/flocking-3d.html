@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Flint Particles Flocking</title>
+<link rel="stylesheet" type="text/css" media="all" href="/style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/flint-particles/style.css" />
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9509078-6', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+<div id="page">
+<header role="banner">
+
+	<div id="branding"><img id="site-image" src="/flint-particles/images/core/logobig.gif" width="325" height="37" /></div>
+
+	<nav id="menu" role="navigation">
+	<div>
+		<ul>
+			<li><a href="/flint-particles/index.html">ABOUT</a></li>
+			<li><a href="/flint-particles/source-code.html">SOURCE CODE</a></li>
+			<li><a href="/flint-particles/documentation.html">DOCUMENTATION</a></li>
+			<li><a href="/flint-particles/examples/">EXAMPLES</a></li>
+			<li><a href="/flint-particles/blog/">BLOG</a></li>
+		</ul>
+	</div>
+	</nav>
+</header>
+
+<div id="main">
+<div id="content">
+
+
+<link type="text/css" href="/flint-particles/css/jquery-ui-1.8.2.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/flint-particles/javascript/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="/flint-particles/javascript/jquery-ui-1.8.2.custom.min.js"></script>
+
+<h1>Flocking</h1>
+
+<div class="spaced center">
+  <object width="700" height="500" data="/flint-particles/source/examples3D/Flocking/PureAS3/Flocking.swf" type="application/x-shockwave-flash">
+    <param name="movie" value="/flint-particles/source/examples3D/Flocking/PureAS3/Flocking.swf" />
+    <param name="loop" value="false" />
+    <param name="quality" value="high" />
+    <param name="allowfullscreen" value="true" />
+  </object>
+</div>
+
+<p>By combining three of Flint&#8217;s actions that manage interactions between particles, we can cause the particles to approach one another but not get too close and to match velocity with each other. The result is flocking behaviour.</p>
+
+<script type="text/javascript">$(function() { $("#source").tabs(); });</script>
+
+<div id="source">
+  <ul><li><a href="#PureAS3">PureAS3</a></li>
+<li><a href="#Flash">Flash</a></li>
+<li><a href="#Flex">Flex</a></li>
+</ul><div id="PureAS3"><pre class="code">package
+{
+  import org.flintparticles.threeD.emitters.Emitter3D;
+  import org.flintparticles.threeD.renderers.DisplayObjectRenderer;
+  import org.flintparticles.threeD.renderers.controllers.FirstPersonCamera;
+
+  import flash.display.Sprite;
+  import flash.geom.Vector3D;
+
+  [SWF(width='700', height='500', frameRate='60', backgroundColor='#CCCCCC')]
+  public class Main extends Sprite
+  {
+    private var emitter : Emitter3D;
+    private var controller : FirstPersonCamera;
+
+    public function Main()
+    {
+      emitter = new Flock();
+
+      var renderer : DisplayObjectRenderer = new DisplayObjectRenderer( false );
+      renderer.x = 350;
+      renderer.y = 250;
+      renderer.addEmitter( emitter );
+      addChild( renderer );
+
+      renderer.camera.position = new Vector3D( 0, 0, -400 );
+      renderer.camera.target = new Vector3D( 0, 0, 0 );
+      renderer.camera.projectionDistance = 400;
+      controller = new FirstPersonCamera( stage, renderer.camera );
+      controller.start();
+
+      emitter.start();
+    }
+  }
+}</pre><pre class="code">package
+{
+  import org.flintparticles.common.counters.Blast;
+  import org.flintparticles.common.initializers.ImageClass;
+  import org.flintparticles.threeD.actions.ApproachNeighbours;
+  import org.flintparticles.threeD.actions.BoundingBox;
+  import org.flintparticles.threeD.actions.MatchVelocity;
+  import org.flintparticles.threeD.actions.MinimumDistance;
+  import org.flintparticles.threeD.actions.Move;
+  import org.flintparticles.threeD.actions.RotateToDirection;
+  import org.flintparticles.threeD.actions.SpeedLimit;
+  import org.flintparticles.threeD.emitters.Emitter3D;
+  import org.flintparticles.threeD.initializers.Position;
+  import org.flintparticles.threeD.initializers.Velocity;
+  import org.flintparticles.threeD.zones.BoxZone;
+  import org.flintparticles.threeD.zones.SphereZone;
+
+  import flash.geom.Vector3D;
+
+  public class Flock extends Emitter3D
+  {
+    public function Flock()
+    {
+      counter = new Blast( 300 );
+      
+      addInitializer( new ImageClass( Bird ) );
+      addInitializer( new Position( new BoxZone( 580, 380, 580, new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), new Vector3D( 0, 0, 1 ) ) ) );
+      addInitializer( new Velocity( new SphereZone( new Vector3D( 0, 0, 0 ), 150, 100 ) ) );
+
+      addAction( new ApproachNeighbours( 200, 100 ) );
+      addAction( new MatchVelocity( 40, 200 ) );
+      addAction( new MinimumDistance( 20, 600 ) );
+      addAction( new RotateToDirection() );
+      addAction( new BoundingBox( -300, 300, -200, 200, -300, 300 ) );
+      addAction( new SpeedLimit( 100, true ) );
+      addAction( new SpeedLimit( 200 ) );
+      addAction( new Move() );
+    }
+  }
+}</pre></div>
+<div id="Flash"><pre class="code">import org.flintparticles.common.counters.*;
+import org.flintparticles.common.initializers.*;
+import org.flintparticles.threeD.actions.*;
+import org.flintparticles.threeD.emitters.Emitter3D;
+import org.flintparticles.threeD.initializers.*;
+import org.flintparticles.threeD.renderers.*;
+import org.flintparticles.threeD.renderers.controllers.*;
+import org.flintparticles.threeD.zones.*;  
+
+var emitter:Emitter3D = new Emitter3D();
+emitter.counter = new Blast( 300 );
+
+emitter.addInitializer( new ImageClass( Bird ) );
+emitter.addInitializer( new Position( new BoxZone( 580, 380, 580, new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), new Vector3D( 0, 0, 1 ) ) ) );
+emitter.addInitializer( new Velocity( new SphereZone( new Vector3D( 0, 0, 0 ), 150, 100 ) ) );
+
+emitter.addAction( new ApproachNeighbours( 200, 100 ) );
+emitter.addAction( new MatchVelocity( 40, 200 ) );
+emitter.addAction( new MinimumDistance( 20, 600 ) );
+emitter.addAction( new RotateToDirection() );
+emitter.addAction( new BoundingBox( -300, 300, -200, 200, -300, 300 ) );
+emitter.addAction( new SpeedLimit( 100, true ) );
+emitter.addAction( new SpeedLimit( 200 ) );
+emitter.addAction( new Move() );
+
+var renderer:DisplayObjectRenderer = new DisplayObjectRenderer( false );
+renderer.x = 350;
+renderer.y = 250;
+renderer.addEmitter( emitter );
+addChild( renderer );
+
+renderer.camera.position = new Vector3D( 0, 0, -400 );
+renderer.camera.target = new Vector3D( 0, 0, 0 );
+renderer.camera.projectionDistance = 400;
+var controller:FirstPersonCamera = new FirstPersonCamera( stage, renderer.camera );
+controller.start();
+
+emitter.start( );</pre></div>
+<div id="Flex"><pre class="code">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;s:Application
+  xmlns:fx=&quot;http://ns.adobe.com/mxml/2009&quot; 
+  xmlns:s=&quot;library://ns.adobe.com/flex/spark&quot;
+  xmlns:f=&quot;http://flintparticles.org/2009/flint3d&quot;
+  xmlns:geom=&quot;flash.geom.*&quot;
+  width=&quot;700&quot; height=&quot;500&quot;
+  backgroundColor=&quot;#999999&quot;&gt;
+
+&lt;f:DisplayObjectRenderer id=&quot;renderer&quot; width=&quot;700&quot; height=&quot;500&quot;&gt;
+  &lt;f:camera&gt;
+    &lt;f:Camera projectionDistance=&quot;400&quot;&gt;
+      &lt;f:position&gt;
+        &lt;geom:Vector3D x=&quot;0&quot; y=&quot;0&quot; z=&quot;-400&quot;/&gt;
+      &lt;/f:position&gt;
+    &lt;/f:Camera&gt;
+  &lt;/f:camera&gt;
+  &lt;f:emitters&gt;
+    &lt;f:Emitter id=&quot;emitter&quot; autoStart=&quot;true&quot;&gt;
+      &lt;f:counter&gt;
+        &lt;f:Blast startCount=&quot;300&quot;/&gt;
+      &lt;/f:counter&gt;
+      &lt;f:initializers&gt;
+        &lt;f:Position&gt;
+          &lt;f:BoxZone width=&quot;580&quot; height=&quot;380&quot; depth=&quot;580&quot;/&gt;
+        &lt;/f:Position&gt;
+        &lt;f:Velocity&gt;
+          &lt;f:SphereZone innerRadius=&quot;100&quot; outerRadius=&quot;150&quot;/&gt;
+        &lt;/f:Velocity&gt;
+        &lt;f:ImageClass imageClass=&quot;{Bird}&quot;/&gt;
+      &lt;/f:initializers&gt;
+      &lt;f:actions&gt;
+        &lt;f:Move/&gt;
+        &lt;f:SpeedLimit limit=&quot;200&quot;/&gt;
+        &lt;f:SpeedLimit limit=&quot;100&quot; isMinimum=&quot;true&quot;/&gt;
+        &lt;f:ApproachNeighbours acceleration=&quot;100&quot; maxDistance=&quot;200&quot;/&gt;
+        &lt;f:MatchVelocity acceleration=&quot;200&quot; maxDistance=&quot;40&quot;/&gt;
+        &lt;f:MinimumDistance acceleration=&quot;600&quot; minimum=&quot;20&quot;/&gt;
+        &lt;f:BoundingBox minX=&quot;-300&quot; maxX=&quot;300&quot; minY=&quot;-200&quot; maxY=&quot;200&quot; minZ=&quot;-300&quot; maxZ=&quot;300&quot;/&gt;
+        &lt;f:RotateToDirection/&gt;
+      &lt;/f:actions&gt;
+    &lt;/f:Emitter&gt;
+  &lt;/f:emitters&gt;
+&lt;/f:DisplayObjectRenderer&gt;
+&lt;/s:Application&gt;</pre></div>
+
+
+</div>
+</div>
+
+<footer role="contentinfo">
+	<p>Richard Lord - Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+</footer>
+</div>
+</body>
+</html>

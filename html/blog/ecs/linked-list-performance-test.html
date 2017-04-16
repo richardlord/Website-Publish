@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Four ways to link a list (a performance test on linked list architectures)</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" media="all" href="/style.css" />
+<link rel="alternate" type="application/rss+xml" title="Richard Lord's Feed" href="http://www.richardlord.net/feed.xml" />
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9509078-6', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+<div id="page">
+<header role="banner">
+	<div id="social">
+		<a href="https://twitter.com/richard_lord"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+		<a href="https://uk.linkedin.com/in/richardlord"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+		<a href="https://github.com/richardlord"><img src="/images/social/github_logo.png" width="36" height="36" /></a>
+		<a href="https://www.youtube.com/c/RichardLordNet"><img src="/images/social/youtube_logo.png" width="36" height="36" /></a>
+	</div>
+
+	<div id="branding">
+		<img id="site-image" src="/images/social/me.png" />
+		<div id="site-title"><a href="/" title="Richard Lord" rel="home">Richard Lord</a></div>
+		<div id="site-description">Game Developer</div>
+	</div>
+
+	<nav id="menu" role="navigation">
+	<div>
+		<ul>
+			<li><a href="/games.html">GAMES</a></li>
+			<li><a href="/consulting.html">CONSULTING</a></li>
+			<li><a href="/blog/">BLOG</a></li>
+			<li><a href="/presentations/">PRESENTATIONS</a></li>
+			<li><a href="/press.html">PRESS</a></li>
+			<li><a href="/about/">ABOUT</a></li>
+		</ul>
+	</div>
+	</nav>
+</header>
+
+<div id="main">
+<div id="content">
+<h1>Four ways to link a list (a performance test on linked list architectures)</h1>
+
+<div id="meta">Posted on <time datetime="2007-03-04T21:08:12Z">04 March 2007</time></div>
+
+
+
+
+<p>In looking at entity systems for Flash games, and particularly the projects <a href="https://github.com/tdavies/Ember">Ember</a> and <a href="https://github.com/alecmce/xember">Xember</a>, I was wondering what is the most efficient architecture for the linked lists used by these systems. So I ran some tests.</p>
+
+<p><a href="https://github.com/richardlord/Four-ways-to-link-a-list">The code for these tests is all available on Github.</a></p>
+
+<p>The lists in these frameworks are used to manage the component sets for the systems that run the game. These lists need to provide three functions - add an item, remove an item, and loop through all the items, and they need to do this as efficiently as possible.</p>
+
+<p>So I created four different architectures for linked lists and ran a few performance tests.</p>
+
+<h2>1. The list node contains the data (NodeContainsDataList).</h2>
+
+<p><a href="https://github.com/richardlord/Four-ways-to-link-a-list/blob/master/src/lists/NodeContainsDataList.as">(source code)</a></p>
+
+<p>This is a classic linked list architecture where the nodes in the list have a data property which contains the data to be added to the list. Because removing data from the list requires finding the node that contains the data, I added a dictionary for quickly finding the node that contains a specific piece of data.</p>
+
+<p>I expect adding an item to the list to be slow because it involves creating a node object. Reading the data from the node requires casting from a dynamic property to the specific data type, which may slow it down a little. Removing data from the list also requires removing data from the dictionary, which will slow it down somewhat.</p>
+
+<h2>2. The data extends the list node class (DataExtendsNodeList).</h2>
+
+<p><a href="https://github.com/richardlord/Four-ways-to-link-a-list/blob/master/src/lists/DataExtendsNodeList.as">(source code)</a></p>
+
+<p>In this scenario the data class to be stored in the list extends a list node class. So this architecture uses inheritance rather than composition to create the list node that contains the data. This is the mechanism used in Ember.</p>
+
+<p>Adding and removing data from the list should be quick because the data is the node. There is no casting and no object creation required. However, looping through the list members requires an upcast from the base list node type to the specific data type which is likely to slow it down.</p>
+
+<h2>3. The data is the list node (DataIsNodeList).</h2>
+
+<p><a href="https://github.com/richardlord/Four-ways-to-link-a-list/blob/master/src/lists/DataIsNodeList.as">(source code)</a></p>
+
+<p>In this scenario the data node is the list node. The data node has two properties, next and previous, which link it in to the list. This is the mechanism used in Xember.</p>
+
+<p>Adding and removing items may be slowed a little by the dynamic casts required, but looping should be very fast since the data type is explicitly known at all times and no type-casting is required.</p>
+
+<h2>4. There is no list node (NoNodeList).</h2>
+
+<p><a href="https://github.com/richardlord/Four-ways-to-link-a-list/blob/master/src/lists/NoNodeList.as">(source code)</a></p>
+
+<p>Rather than using list nodes, this list maintains two dictionaries for mapping between each data item and the next and previous data items in the list.</p>
+
+<p>This is an attempt to find a solution that had the simplicity of the NodeContainsDataList class, where the data requires no modification for storage within the list, but without the penalty of creating nodes for each data item. It does require the use of dictionary objects, which are not particularly fast, so it's interesting to see if it's faster or slower than the other scenarios.</p>
+
+<h2>The results</h2>
+
+<p>I ran the tests over Flash's native Array and Vector classes too. The tests add 50,000 items to a list, remove 50,000 items from a list, and loop through 500,000 items in a list. I ran the tests four times and display the average of the results below. The tests were run using the release version of Flash Player 11.0.1.152 on a MacBook Pro. The times are measured in milliseconds.</p>
+
+<table>
+<tr><td>Collection</td><td>Add</td><td>Remove</td><td>Loop</td></tr>
+<tr><td>Array</td><td class="right">3</td><td class="right">11824</td><td class="right">13</td></tr>
+<tr><td>Vector</td><td class="right">4</td><td class="right">11448</td><td class="right">14</td></tr>
+<tr><td>NodeContainsDataList</td><td class="right">31</td><td class="right">34</td><td class="right">9</td></tr>
+<tr><td>DataExtendsNodeList</td><td class="right">2</td><td class="right">5</td><td class="right">23</td></tr>
+<tr><td>DataIsNodeList</td><td class="right">3</td><td class="right">9</td><td class="right">11</td></tr>
+<tr><td>NoNodeList</td><td class="right">22</td><td class="right">53</td><td class="right">56</td></tr>
+</table>
+
+<p>(N.B. Linked list performance is disproportionately affected by using the debug version of the Flash Player. If you <a href="https://github.com/richardlord/Four-ways-to-link-a-list/tree/master/bin">run the tests yourself</a> use the release version of the player.)</p>
+
+<p>As expected, the fastest architecture overall is the one where the data is the node (DataIsNodeList). However, lets consider the scenario for an entity & component based game architecture.</p>
+
+<p>Given the size of the data sets, the only overwhelmingly slow results are for removing items from the Array and Vector collections. If we reject these, all four linked list architectures have reasonable speeds.</p>
+
+<p>For an entity system, the most critical aspect of the collection architecture is the loop speed. In this context, only two of the loop architectures stand out as significantly slower, DataExtendsNodeList and NoNodeList. Rejecting these leaves two architectures to choose from.</p>
+
+<p>Of these, NodeContainsDataList is, surprisingly, a little faster on the loop test despite the dynamic cast required to read the data. However, I'm not convinced that the difference is significant relative to other differences.</p>
+
+<p>In the add and removal tests, DataIsNodeList is significantly faster for reasons outlined above. But add and remove are far less critical to the game engine than looping through the list items.</p>
+
+<p>There is one other significant difference between these two list architectures. DataIsNodeList requires the user of the game engine to explicitly add the next and previous properties to the data class, while NodeContainsDataList requires no modification to the data class. This ease of use may outweigh the speed difference, particularly in a framework designed for general use.</p>
+
+<p>What do you think? Is there another, potentially better, architecture that I've missed?</p>
+
+
+<p>Share this post or a comment online -</p>
+<div id="share">
+<a href="https://twitter.com/intent/tweet?text=Four+ways+to+link+a+list+%28a+performance+test+on+linked+list+architectures%29&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fecs%2Flinked-list-performance-test.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+<a href="https://www.facebook.com/dialog/share?app_id=206081586545847&amp;href=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fecs%2Flinked-list-performance-test.html" target="_blank" title="Facebook"><img src="/images/social/facebook_logo.png" width="36" height="36" /></a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=Four+ways+to+link+a+list+%28a+performance+test+on+linked+list+architectures%29&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fecs%2Flinked-list-performance-test.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+</div>
+<hr />
+<p>Also in the collection <b><a href="./">Entity-Component-System architecture</a></b></p>
+<ul><li><a href="introducing-ash.html">Ash - a new entity system framework for Actionscript games</a></li>
+<li><a href="what-is-an-entity-framework.html">What is an entity system framework for game development?</a></li>
+<li><a href="why-use-an-entity-framework.html">Why use an entity system framework for game development?</a></li>
+<li><a href="finite-state-machines-with-ash.html">Finite State Machines with Ash entity system framework</a></li>
+</ul>
+
+</div>
+</div>
+
+<footer role="contentinfo">
+	<p>Richard Lord - Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+</footer>
+</div>
+</body>
+</html>

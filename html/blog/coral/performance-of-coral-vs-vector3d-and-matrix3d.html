@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Performance of Coral vs Vector3D and Matrix3D</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" media="all" href="/style.css" />
+<link rel="alternate" type="application/rss+xml" title="Richard Lord's Feed" href="http://www.richardlord.net/feed.xml" />
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9509078-6', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+<div id="page">
+<header role="banner">
+	<div id="social">
+		<a href="https://twitter.com/richard_lord"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+		<a href="https://uk.linkedin.com/in/richardlord"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+		<a href="https://github.com/richardlord"><img src="/images/social/github_logo.png" width="36" height="36" /></a>
+		<a href="https://www.youtube.com/c/RichardLordNet"><img src="/images/social/youtube_logo.png" width="36" height="36" /></a>
+	</div>
+
+	<div id="branding">
+		<img id="site-image" src="/images/social/me.png" />
+		<div id="site-title"><a href="/" title="Richard Lord" rel="home">Richard Lord</a></div>
+		<div id="site-description">Game Developer</div>
+	</div>
+
+	<nav id="menu" role="navigation">
+	<div>
+		<ul>
+			<li><a href="/games.html">GAMES</a></li>
+			<li><a href="/consulting.html">CONSULTING</a></li>
+			<li><a href="/blog/">BLOG</a></li>
+			<li><a href="/presentations/">PRESENTATIONS</a></li>
+			<li><a href="/press.html">PRESS</a></li>
+			<li><a href="/about/">ABOUT</a></li>
+		</ul>
+	</div>
+	</nav>
+</header>
+
+<div id="main">
+<div id="content">
+<h1>Performance of Coral vs Vector3D and Matrix3D</h1>
+
+<div id="meta">Posted on <time datetime="2007-03-04T21:08:12Z">04 March 2007</time></div>
+
+
+
+
+<p>This is part 3 of a 4 part series comparing <a href="https://github.com/richardlord/Coral">Coral</a>, a derivative of the 3D math classes that used to be in the <a href="/flint-particles/">Flint Particles</a> project, and Flash's native 3D math classes.</p>
+
+<p>In the first post I <a href="/blog/coral/introducing-coral-an-actionscript-library-for-3d-math.html">introduced Coral</a>, explaining what it is and why I'm releasing it as an open source project. The next post looked at <a href="/blog/coral/architecture-of-coral-vs-vector3d-and-matrix3d.html">the key architectural differences between Coral and the native Vector3D and Matrix3D classes</a>. In a later post I will show you <a href="/blog/coral/bugs-in-vector3d-and-matrix3d.html">the bugs I discovered in the native 3D math classes</a>. This post is about performance.</p>
+
+<p>Coral is covered by <a href="https://github.com/richardlord/Coral/tree/master/performance/net/richardlord/coral">a set of performance tests</a> for measuring and optimizing it's performance. These tests are run using Grant Skinner's <a href="http://gskinner.com/blog/archives/2010/02/performancetest.html">performance test suite</a>. I adapted these tests to also apply to the <a href="https://github.com/richardlord/Coral/tree/master/native/performance">native 3D geometry classes</a>, for comparison. All the test code is <a href="https://github.com/richardlord/Coral">in the Coral project on Github</a>.</p>
+
+<p>I ran these tests on my laptop, a MacBook with a 2.4GHz Core2Duo cpu, with the release version of Flash Player 10.2.152.26. All tests were over 1,000,000 iterations and each test is run four times and an average taken.</p>
+
+<h2>Vector3d performance tests</h2>
+
+<table>
+<tr><td colspan="2">Coral Vector3d Performance tests.</td><td colspan="2">Native Vector3D Performance tests.</td><td></td></tr>
+<tr><td>Description</td><td>Time (ms)</td><td>Description</td><td>Time (ms)</td><td>% diff</td></tr>
+<tr><td>new Vector3d()</td><td>154.5</td><td>new Vector3D()</td><td>178</td><td>87%</td></tr>
+<tr><td>new Vector3d( x, y, z )</td><td>156</td><td>new Vector3D( x, y, z )</td><td>173.5</td><td>90%</td></tr>
+<tr><td>Vector3d.reset( x, y, z )</td><td>21.75</td><td>v = new Vector3D( x, y, z )</td><td>173.5</td><td>13%</td></tr>
+<tr><td>Vector3d.assign( v )</td><td>17.25</td><td>u = v.clone()</td><td>183.75</td><td>9%</td></tr>
+<tr><td>Vector3d.clone()</td><td>179.75</td><td>Vector3D.clone()</td><td>183.75</td><td>98%</td></tr>
+<tr><td>Vector3d.add( v )</td><td>171</td><td>Vector3D.add( v )</td><td>183.25</td><td>93%</td></tr>
+<tr><td>Vector3d.add( v, r )</td><td>13.5</td><td>Vector3D.add( v )</td><td>183.25</td><td>7%</td></tr>
+<tr><td>Vector3d.subtract( v )</td><td>176.25</td><td>Vector3D.subtract( v )</td><td>184.25</td><td>96%</td></tr>
+<tr><td>Vector3d.subtract( v, r )</td><td>13.75</td><td>Vector3D.subtract( v )</td><td>184.25</td><td>7%</td></tr>
+<tr><td>Vector3d.multiply( s )</td><td>205.5</td><td>Vector3D.clone().scaleBy( s )</td><td>191.75</td><td>107%</td></tr>
+<tr><td>Vector3d.multiply( s, r )</td><td>13</td><td>Vector3D.clone().scaleBy( s )</td><td>191.75</td><td>7%</td></tr>
+<tr><td>Vector3d.divide( s )</td><td>207</td><td>Vector3D.clone().scaleBy( 1 / s )</td><td>199.75</td><td>104%</td></tr>
+<tr><td>Vector3d.divide( s, r )</td><td>21.75</td><td>Vector3D.clone().scaleBy( 1 / s )</td><td>199.75</td><td>11%</td></tr>
+<tr><td>Vector3d.incrementBy( v )</td><td>11.75</td><td>Vector3D.incrementBy( v )</td><td>11</td><td>107%</td></tr>
+<tr><td>Vector3d.decrementBy( v )</td><td>12</td><td>Vector3D.decrementBy( v )</td><td>12</td><td>100%</td></tr>
+<tr><td>Vector3d.scaleBy( s )</td><td>9.75</td><td>Vector3D.scaleBy( s )</td><td>10</td><td>98%</td></tr>
+<tr><td>Vector3d.divideBy( s )</td><td>11</td><td>Vector3D.scaleBy( 1 / s )</td><td>12.5</td><td>88%</td></tr>
+<tr><td>Vector3d.equals( v ) true</td><td>16.25</td><td>Vector3D.equals( v ) true</td><td>16.25</td><td>100%</td></tr>
+<tr><td>Vector3d.equals( v ) false</td><td>12.75</td><td>Vector3D.equals( v ) false</td><td>13.25</td><td>96%</td></tr>
+<tr><td>Vector3d.nearEquals( v ) true</td><td>13</td><td>Vector3D.nearEquals( v ) true</td><td>20</td><td>65%</td></tr>
+<tr><td>Vector3d.nearEquals( v ) false</td><td>13</td><td>Vector3D.nearEquals( v ) false</td><td>13.5</td><td>96%</td></tr>
+<tr><td>Vector3d.dotProduct( v )</td><td>12.5</td><td>Vector3D.dotProduct( v )</td><td>12</td><td>104%</td></tr>
+<tr><td>Vector3d.crossProduct( v )</td><td>178</td><td>Vector3D.crossProduct( v )</td><td>186.25</td><td>96%</td></tr>
+<tr><td>Vector3d.crossProduct( v, r )</td><td>18.5</td><td>Vector3D.crossProduct( v )</td><td>186.25</td><td>10%</td></tr>
+<tr><td>Vector3d.length</td><td>32.75</td><td>Vector3D.length</td><td>35.25</td><td>93%</td></tr>
+<tr><td>Vector3d.lengthSquared</td><td>9.25</td><td>Vector3D.lengthSquared</td><td>9</td><td>103%</td></tr>
+<tr><td>Vector3d.negative()</td><td>172</td><td>Vector3D.clone().negate()</td><td>192.75</td><td>89%</td></tr>
+<tr><td>Vector3d.negative( r )</td><td>13.5</td><td>Vector3D.clone().negate()</td><td>192.75</td><td>7%</td></tr>
+<tr><td>Vector3d.negate()</td><td>10.75</td><td>Vector3D.negate()</td><td>11</td><td>98%</td></tr>
+<tr><td>Vector3d.normalize()</td><td>47</td><td>Vector3D.normalize()</td><td>45.75</td><td>103%</td></tr>
+<tr><td>Vector3d.unit()</td><td>222.75</td><td>Vector3D.clone().normalize()</td><td>240.75</td><td>93%</td></tr>
+<tr><td>Vector3d.unit( r )</td><td>41.25</td><td>Vector3D.clone().normalize()</td><td>240.75</td><td>17%</td></tr>
+</table>
+
+<p>Comparing Coral's Vector3d class to the native Vector3D class, the first thing I notice is that the majority of methods show insignificant differences. Those methods where significant differences occur are situations where Coral avoids creation of a temporary object. Thus, Coral is marginally faster when adding two vectors to produce a third new vector, but is very much quicker when it's allowed to use an existing vector to hold the result - something which the native vector class can't do.</p>
+
+<h2>Point3d performance tests</h2>
+
+<table>
+<tr><td colspan="2">Coral Point3d Performance tests.</td><td colspan="2">Native Vector3D Performance tests.</td><td></td></tr>
+<tr><td>Description</td><td>Time (ms)</td><td>Description</td><td>Time (ms)</td><td>% diff</td></tr>
+<tr><td>new Point3d()</td><td>155</td><td>new Vector3D()</td><td>178</td><td>87%</td></tr>
+<tr><td>new Point3d( x, y, z )</td><td>164</td><td>new Vector3D( x, y, z )</td><td>173.5</td><td>95%</td></tr>
+<tr><td>Point3d.reset( x, y, z )</td><td>20.75</td><td>v = new Vector3D( x, y, z )</td><td>173.5</td><td>12%</td></tr>
+<tr><td>Point3d.assign( v )</td><td>12.5</td><td>u = Vector3D.clone()</td><td>183.75</td><td>7%</td></tr>
+<tr><td>Point3d.clone()</td><td>166.75</td><td>Vector3D.clone()</td><td>183.75</td><td>91%</td></tr>
+<tr><td>Point3d.add( v )</td><td>173.5</td><td>Vector3D.add( v )</td><td>183.25</td><td>95%</td></tr>
+<tr><td>Point3d.add( v, r )</td><td>13.25</td><td>Vector3D.add( v )</td><td>183.25</td><td>7%</td></tr>
+<tr><td>Point3d.subtract( v )</td><td>170.75</td><td>Vector3D.subtract( v )</td><td>184.25</td><td>93%</td></tr>
+<tr><td>Point3d.subtract( v, r )</td><td>14</td><td>Vector3D.subtract( v )</td><td>184.25</td><td>8%</td></tr>
+<tr><td>Point3d.incrementBy( v )</td><td>11.75</td><td>Vector3D.incrementBy( v )</td><td>11</td><td>107%</td></tr>
+<tr><td>Point3d.decrementBy( v )</td><td>10.75</td><td>Vector3D.decrementBy( v )</td><td>12</td><td>90%</td></tr>
+<tr><td>Point3d.equals( v ) true</td><td>15.25</td><td>Vector3D.equals( v ) true</td><td>16.25</td><td>94%</td></tr>
+<tr><td>Point3d.equals( v ) false</td><td>12</td><td>Vector3D.equals( v ) false</td><td>13.25</td><td>91%</td></tr>
+<tr><td>Point3d.nearTo( p ) true</td><td>13.75</td><td>Vector3D.nearEquals( v ) true</td><td>20</td><td>69%</td></tr>
+<tr><td>Point3d.nearTo( p ) false</td><td>13.75</td><td>Vector3D.nearEquals( v ) false</td><td>13.5</td><td>102%</td></tr>
+<tr><td>Point3d.distance( v )</td><td>37</td><td>Vector3D.subtract( v ).length</td><td>214.75</td><td>17%</td></tr>
+<tr><td>Point3d.distanceSquared( v )</td><td>12</td><td>Vector3D.subtract( v ).lengthSquared</td><td>194.25</td><td>6%</td></tr>
+<tr><td>Point3d.project()</td><td>15.75</td><td>Vector3D.project()</td><td>16.25</td><td>97%</td></tr>
+</table>
+
+<p>As with Coral's Vector3d class, the Point3d class has comparable (usually marginally faster) performance where functionality is identical, but is very much faster where it is able to avoid creating a temporary object.</p>
+
+<h2>Matrix3d performance tests</h2>
+
+<table>
+<tr><td colspan="2">Coral Matrix3d Performance tests.</td><td colspan="2">Native Matrix3D Performance tests.</td><td></td></tr>
+<tr><td>Description</td><td>Time (ms)</td><td>Description</td><td>Time (ms)</td><td>% diff</td></tr>
+<tr><td>new Matrix3d()</td><td>185</td><td>new Matrix3D()</td><td>242.75</td><td>76%</td></tr>
+<tr><td>new Matrix3d( n11, n12, ... )</td><td>212</td><td>new Matrix3D( v )</td><td>255.5</td><td>83%</td></tr>
+<tr><td>Matrix3d.clone()</td><td>218.75</td><td>Matrix3D.clone()</td><td>637.75</td><td>34%</td></tr>
+<tr><td>Matrix3d.rawData</td><td>536.75</td><td>Matrix3D.rawData</td><td>312.5</td><td>172%</td></tr>
+<tr><td>Matrix3d.rawData = v</td><td>120.75</td><td>Matrix3D.rawData = v</td><td>54.5</td><td>222%</td></tr>
+<tr><td>Matrix3d.assign( m )</td><td>16.75</td><td>m1.rawData = m2.rawData</td><td>729.25</td><td>2%</td></tr>
+<tr><td>Matrix3d.newScale( x, y, z )</td><td>208.25</td><td>new Matrix3D().appendScale( x, y, z )</td><td>314.5</td><td>66%</td></tr>
+<tr><td>Matrix3d.newTranslation( x, y, z )</td><td>209.75</td><td>new Matrix3D().appendTranslation( x, y, z )</td><td>253.75</td><td>83%</td></tr>
+<tr><td>Matrix3d.newRotation( angle, axis, point )</td><td>387.25</td><td>new Matrix3D().appendRotation( angle, axis, point )</td><td>502.5</td><td>77%</td></tr>
+<tr><td>Matrix3d.newBasisTransform( v1, v2, v3 )</td><td>266.75</td><td>-</td><td>-</td><td></td></tr>
+<tr><td>Matrix3d.append( m )</td><td>68.5</td><td>Matrix3D.append( m )</td><td>65.75</td><td>104%</td></tr>
+<tr><td>Matrix3d.appendScale( x, y, z )</td><td>14.75</td><td>Matrix3D.appendScale( x, y, z )</td><td>83.25</td><td>18%</td></tr>
+<tr><td>Matrix3d.appendTranslation( x, y, z )</td><td>25.5</td><td>Matrix3D.appendTranslation( x, y, z )</td><td>21.25</td><td>120%</td></tr>
+<tr><td>Matrix3d.appendRotation( angle, axis, point )</td><td>263.25</td><td>Matrix3D.appendRotation( angle, axis, point )</td><td>273.25</td><td>96%</td></tr>
+<tr><td>Matrix3d.appendBasisTransform( v1, v2, v3 )</td><td>104.75</td><td>-</td><td>-</td><td></td></tr>
+<tr><td>Matrix3d.prepend( m )</td><td>76.5</td><td>Matrix3D.prepend( m )</td><td>65.75</td><td>116%</td></tr>
+<tr><td>Matrix3d.prependScale( x, y, z )</td><td>14.75</td><td>Matrix3D.prependScale( x, y, z )</td><td>171.5</td><td>9%</td></tr>
+<tr><td>Matrix3d.prependTranslation( x, y, z )</td><td>22.25</td><td>Matrix3D.prependTranslation( x, y, z )</td><td>89.5</td><td>25%</td></tr>
+<tr><td>Matrix3d.prependRotation( angle, axis, point )</td><td>278.25</td><td>Matrix3D.prependRotation( angle, axis, point )</td><td>273.25</td><td>102%</td></tr>
+<tr><td>Matrix3d.prependBasisTransform( v1, v2, v3 )</td><td>103.5</td><td>-</td><td>-</td><td></td></tr>
+<tr><td>Matrix3d.determinant</td><td>30.75</td><td>Matrix3D.determinant</td><td>84</td><td>37%</td></tr>
+<tr><td>Matrix3d.invert()</td><td>138.5</td><td>Matrix3D.invert()</td><td>150.5</td><td>92%</td></tr>
+<tr><td>Matrix3d.inverse()</td><td>315.75</td><td>Matrix3D.clone().invert()</td><td>821.5</td><td>38%</td></tr>
+<tr><td>Matrix3d.inverse( r )</td><td>127.75</td><td>Matrix3D.clone().invert()</td><td>821.5</td><td>16%</td></tr>
+<tr><td>Matrix3d.transformVector( v )</td><td>187.75</td><td>Matrix3D.deltaTransformVector( v )</td><td>542</td><td>35%</td></tr>
+<tr><td>Matrix3d.transformVector( v, r )</td><td>23.75</td><td>Matrix3D.deltaTransformVector( v )</td><td>542</td><td>4%</td></tr>
+<tr><td>Matrix3d.transformVectorSelf( v )</td><td>19.5</td><td>Matrix3D.deltaTransformVector( v )</td><td>542</td><td>4%</td></tr>
+<tr><td>Matrix3d.transformPoint( v )</td><td>186.5</td><td>Matrix3D.transformVector( v )</td><td>537.5</td><td>35%</td></tr>
+<tr><td>Matrix3d.transformPoint( v, r )</td><td>23.5</td><td>Matrix3D.transformVector( v )</td><td>537.5</td><td>4%</td></tr>
+<tr><td>Matrix3d.transformPointSelf( v )</td><td>19.5</td><td>Matrix3D.transformVector( v )</td><td>537.5</td><td>4%</td></tr>
+<tr><td>Matrix3d.transformVectors( v )*</td><td>903</td><td>-</td><td>-</td><td></td></tr>
+<tr><td>Matrix3d.transformVectors( v, r )*</td><td>182</td><td>-</td><td>-</td><td></td></tr>
+<tr><td>Matrix3d.transformVectorsSelf( v )*</td><td>184</td><td>-</td><td>-</td><td></td></tr>
+<tr><td>Matrix3d.transformPoints( v )*</td><td>904.5</td><td>Matrix3D.transformVectors( v, r )*</td><td>129.75</td><td>697%</td></tr>
+<tr><td>Matrix3d.transformPoints( v, r )*</td><td>183</td><td>Matrix3D.transformVectors( v, r )*</td><td>129.75</td><td>141%</td></tr>
+<tr><td>Matrix3d.transformPointsSelf( v )*</td><td>184.5</td><td>Matrix3D.transformVectors( v, r )*</td><td>129.75</td><td>142%</td></tr>
+</table>
+
+<p><i>* collection being transformed contained 30 vectors/points</i></p>
+
+<p>The results of the matrix tests are more diverse than the vector and point tests. Creating transformation matrices using 'new' plus the various append/prepend transformation methods will usually be quicker with Coral than with the native classes. In some cases (e.g. prependScale) the difference is very large.</p>
+
+<p>However, it could be argued that this is rarely important. The area where real speed is needed is when performing transformations on vectors and points. Here the performance profiles differ. Coral is very much faster when performing transformations on individual vectors and points, where it can produce a 25x speed improvement by avoiding creating temporary objects.</p>
+
+<p>However, if you bundle all your points into a Vector.&lt;Number&gt; collection, the native Matrix3D class outperforms everything else.</p>
+
+<h2>Next</h2>
+
+<p>That's all for performance. Overall I have found Coral to be a lot more performant than the native 3D math classes. In the final post in this series I will look at <a href="/blog/coral/bugs-in-vector3d-and-matrix3d.html">the bugs in Flash's native 3D classes that were revealed by applying Coral's unit tests to the native 3D classes</a>.</p>
+
+<h2>Footnote</h2>
+
+<p>The new <a href="http://labs.adobe.com/technologies/flashplatformruntimes/incubator/">Flash Player 11 Incubator pre-release</a> became available on 28 February. This pre-release is only available as a debug version, so results from it are not comparable to the release players. Even so, I ran the tests out of interest and it looks like Matrix3D.transformVectors() has got a lot faster. There is nothing else of significance to draw from the debug version - we'll have to wait for a release version to land to find out more.</p>
+
+
+<p>Share this post or a comment online -</p>
+<div id="share">
+<a href="https://twitter.com/intent/tweet?text=Performance+of+Coral+vs+Vector3D+and+Matrix3D&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fcoral%2Fperformance-of-coral-vs-vector3d-and-matrix3d.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+<a href="https://www.facebook.com/dialog/share?app_id=206081586545847&amp;href=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fcoral%2Fperformance-of-coral-vs-vector3d-and-matrix3d.html" target="_blank" title="Facebook"><img src="/images/social/facebook_logo.png" width="36" height="36" /></a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=Performance+of+Coral+vs+Vector3D+and+Matrix3D&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fcoral%2Fperformance-of-coral-vs-vector3d-and-matrix3d.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+</div>
+<hr />
+<p>Also in the collection <b><a href="./">Coral, an Actionscript library for 3D Math</a></b></p>
+<ul><li><a href="introducing-coral-an-actionscript-library-for-3d-math.html">Introducing Coral, an Actionscript library for 3D Math</a></li>
+<li><a href="architecture-of-coral-vs-vector3d-and-matrix3d.html">Architecture of Coral vs Vector3D and Matrix3D</a></li>
+<li><a href="bugs-in-vector3d-and-matrix3d.html">Bugs in Vector3D and Matrix3D</a></li>
+</ul>
+
+</div>
+</div>
+
+<footer role="contentinfo">
+	<p>Richard Lord - Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+</footer>
+</div>
+</body>
+</html>

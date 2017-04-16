@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-US" xml:base="http://www.richardlord.net/">
+<id>http://www.richardlord.net</id>
+<title type="text">Richard Lord</title>
+<subtitle type="text">Game Developer</subtitle>
+<updated>2017-04-16T11:42:24Z</updated>
+<link rel="alternate" type="text/html" href="http://www.richardlord.net" />
+<link rel="self" type="application/atom+xml" href="http://www.richardlord.net/feed.xml" />
+<author>
+  <name>Richard Lord</name>
+  <uri>http://www.richardlord.net</uri>
+</author>
+<rights>©1996-2017 Richard Lord</rights>
+
+<entry>
+<id>http://www.richardlord.net/intergalactic-delivery-driver/blog/taking-a-break.html</id>
+<title>Taking A Break</title>
+<link rel="alternate" type="text/html" href="http://www.richardlord.net/intergalactic-delivery-driver/blog/taking-a-break.html" />
+<updated>2016-09-12T12:00:00Z</updated>
+<published>2016-09-12T12:00:00Z</published>
+<category scheme="http://www.richardlord.net" term="Intergalactic Delivery Driver" />
+<summary type="text">Working on a long project is hard. I’ve been working on and off on Intergalactic Delivery Driver for ten months now. There were some gaps in that time, particularly the three months I spent working at King when I got almost nothing done on the game.</summary>
+<content type="html" xml:base="http://www.richardlord.net/intergalactic-delivery-driver/blog/taking-a-break.html"><![CDATA[
+<p>Working on a long project is hard. I’ve been working on and off on <a href="/intergalactic-delivery-driver/">Intergalactic Delivery Driver</a> for ten months now. There were some gaps in that time, particularly the three months I spent working at <a href="https://king.com">King</a> when I got almost nothing done on the game. Even so, the project is ten months old and sometimes my enthusiasm for it wanes. Not because I think any less of the project, I still believe it will be a great game, but because it’s hard to get up every morning and find the energy and enthusiasm to work on the same project day in and day out, particularly when there is no-one else to enthuse you. One week I may sprint along, getting lots done and making enormous progress. Another week I may crawl, achieving very little.</p>
+
+<p>So I have a new plan. When my enthusiasm wanes I will allow myself a break. This break will be deliberate and will involve me working on something different. I may be a small project, a prototype, or some writing. Whatever, it will involve not working on my main project for a short while.</p>
+
+<p><image src="/images/vr/gearvr.png" width="653" height="490" alt="" /></p>
+
+<p>Which is why last week and this I am not working on Intergalactic Delivery Driver. I have bought a VR kit (the <a href="http://www.samsung.com/global/galaxy/gear-vr/">Gear VR</a> because it’s relatively inexpensive) and am experimenting with an idea for a VR project. It’s a small project with some interesting technical hurdles and if the result is good I’ll make it available, probably for free.</p>
+
+<p>Then I’ll return to Intergalactic Delivery Driver with, I am sure, renewed enthusiasm and energy.</p>
+]]></content>
+</entry>
+
+<entry>
+<id>http://www.richardlord.net/blog/general/most-people-are-good-people.html</id>
+<title>Most people are good people</title>
+<link rel="alternate" type="text/html" href="http://www.richardlord.net/blog/general/most-people-are-good-people.html" />
+<updated>2016-06-22T12:00:00Z</updated>
+<published>2016-06-22T12:00:00Z</published>
+<category scheme="http://www.richardlord.net" term="General Stuff" />
+<summary type="text">Most of us trust most of our friends. We trust them not to cheat and lie to us for their own gain. We trust them not to steal from us or to assault us. But how about strangers? Not a specific stranger but strangers in general. Do you trust them? Do you trust the other people in your country not to cheat, lie, steal, and assault others for their own gain? Maybe you think like me that most people are okay but there’s a few bad apples. Or maybe not. Maybe there’s a group of people you particularly don’t trust.</summary>
+<content type="html" xml:base="http://www.richardlord.net/blog/general/most-people-are-good-people.html"><![CDATA[
+<p>Most of us trust most of our friends. We trust them not to cheat and lie to us for their own gain. We trust them not to steal from us or to assault us. But how about strangers? Not a specific stranger but strangers in general. Do you trust them? Do you trust the other people in your country not to cheat, lie, steal, and assault others for their own gain? Maybe you think like me that most people are okay but there’s a few bad apples. Or maybe not. Maybe there’s a group of people you particularly don’t trust. A group that you think has more than a few bad apples. Like maybe politicians, or bankers, or immigrants, or muslims, or christians, or atheists, or women, or men, etc.</p>
+
+<p>How much we trust strangers has a very significant impact on politics, economics and the well being of our country. Trust is the social glue that enables us to live and work together. For example, those who trust others tend to be more accepting of higher taxes. They trust their politicians to spend the money sensibly. They trust other people to use the social welfare system appropriately, not to abuse it. They trust successful people, all of whom have been helped by social policies like education and infrastructure, to give back through the tax system. Socialism is built on trust.</p>
+
+<p>When the trust of others breaks down we instead expect politicians to spend our taxes looking after their self-interests, we expect successfully people to avoid paying their taxes, and we expect strangers to abuse the social welfare system to their own advantage. In such a world it’s only natural to want to pay less tax, to want less money spent on welfare, and to blame these others that we don’t trust for the problems we face.</p>
+
+<p>In Britain there have been a number of incidents recently that likely reduce the trust we have in others.</p>
+<ul>
+<li>The global financial crisis and the subsequent bail-out of the rich through bank bail-outs and the propping-up of asset prices</li>
+<li>The Members of Parliament expenses scandal</li>
+<li>The high levels of immigration from Eastern Europe</li>
+</ul>
+
+<p>There’s probably a lot more if you think about it. In hindsight there are things that could have been handled better. But I want to speak about immigration because it’s particularly relevant at the moment.</p>
+
+<p>When a few foreigners immigrate into Britain they are welcomed. We like quirky and unusual and the foreign couple living near the village pub are precisely that. We welcome them, we ask them about their homeland, their family, what they like about Britain. They become the friends of the people that meet them and are of no concern to the rest of us.</p>
+
+<p>But when there are many immigrants we become suspicious. Why are so many foreigners coming to live here? It’s certainly not for the weather. What do they want? Can we trust them? In time the suspicion fades and the newcomers are treated as British (and their children of course are British), and they in turn may join us in being suspicious of the next wave of immigrants.</p>
+
+<p>The European Union’s policy of free movement of people is laudable, but while it produces long-term benefit to all the nations of Europe it also causes short-term pain in this failure of trust. The EU is still trying to absorb and adjust to the immigration patterns instigated by the large number of countries that joined in 2004 (Cyprus, Czech Republic, Estonia, Hungary, Latvia, Lithuania, Malta, Poland, Slovenia, Slovakia) and 2007 (Bulgaria, Romania) and to calm down from the resulting surge in distrust and nationalist politics.</p>
+
+<p>In time we will trust these strangers among us and regard them as our own. Because most people are good people. Meanwhile, this is the worst time in our 40 year membership for the UK government to call a referendum on our EU membership. This is likely a high point for the Leave vote. I just hope that Remain wins despite the trust deficit that is stacked against it.</p>
+]]></content>
+</entry>
+
+<entry>
+<id>http://www.richardlord.net/intergalactic-delivery-driver/blog/refactoring-the-meta-game-in-intergalactic-delivery-driver.html</id>
+<title>Refactoring the meta-game in Intergalactic Delivery Driver</title>
+<link rel="alternate" type="text/html" href="http://www.richardlord.net/intergalactic-delivery-driver/blog/refactoring-the-meta-game-in-intergalactic-delivery-driver.html" />
+<updated>2016-05-18T12:00:00Z</updated>
+<published>2016-05-18T12:00:00Z</published>
+<category scheme="http://www.richardlord.net" term="Intergalactic Delivery Driver" />
+<summary type="text">Last week was an interesting week for Intergalactic Delivery Driver, the game I'm currently developing. The week started with a crisis in confidence as I debated whether the meta-game would work and ended with a number of changes and much greater confidence in the quality of the game in general and the meta-game in particular.</summary>
+<content type="html" xml:base="http://www.richardlord.net/intergalactic-delivery-driver/blog/refactoring-the-meta-game-in-intergalactic-delivery-driver.html"><![CDATA[
+<p>Last week was an interesting week for <a href="/intergalactic-delivery-driver/">Intergalactic Delivery Driver</a>, the game I'm currently developing. The week started with a crisis in confidence as I debated whether the meta-game would work and ended with a number of changes and much greater confidence in the quality of the game in general and the meta-game in particular.</p>
+
+<p>The meta-game has always been a difficulty within the project. The core-loop was easy, it barely feels like I designed it at all. It was born of inspiration and has felt right since the start. Yes, sometimes I do wonder how many players want to play a game that involves tilting your phone, but it works so well that it's always been worth the risk. The meta-game on the other hand is all hard graft and design. I have thought about it so much and tried so many permutations in my head, on paper and in prototypes that I am bored with it, while still trying hard to make it better. Maybe this time I am there.</p>
+
+<p>When I started prototyping the game I imagined a simple level-unlock scenario, maybe with a "saga-map" like King use in most of their games. This puts all the emphasis on the core loop and lets me put all my effort into creating good quality levels for you to play. Developing those levels might lead me to introduce pick-ups, power-ups and other fun details to add joy and progression to the levels and decisions about when to use objects that span multiple levels.</p>
+
+<p>But later, as the prototype developed, I decided to focus more on your career as a delivery driver. I want to use the game to comment on the idea of independence in the workplace, of working for oneself, of the importance of your personal brand, about what Tim O'Reilly calls the <a href="https://conferences.oreilly.com/nextcon/">next:economy</a>. With different agents and opportunities open to the player I can let you choose the direction your career takes. I can hint at what it feels like to work for yourself. I can show how hard it is to get started in this new economy, when everyone else seems to have the good contacts. How a lucky break can open new possibilities that you haven't imagined and how your career path is based as much on luck as planning. As John Lennon sang "Life is what happens to you while you're busy making other plans" (I used that line when talking about <a href="/freak-factory/blog/why-freak-factory.html">Freak Factory</a> too - maybe there is a theme developing in my work).</p>
+
+<p>Those are grand ambitions, and if I followed them literally then the start of the game would be slow, hard and frustrating and as your career developed your decisions, based as much on luck as judgement, would take you down a path that closed off whole sections of the game to you and made your game uniquely different to everyone else's. The former is clearly not a good idea and the later, while interesting in concept, means producing lots more game than any one person can play or make (although procedural generation could help). Instead, I have focused on the ideas of choice and reputation. You pick the agents you work with and you build a reputation that opens up new options for your career as an Intergalactic Delivery Driver.</p>
+
+<p>All of that led me to a meta-game based around a jobs board which lists a number of delivery jobs that are available to you. Different jobs have different challenges and rewards and you choose which job to attempt next. Jobs are from different agents and as you gain reputation new agents take an interest in you and offer you work. Each agent brings with them a new type of job with new skills to develop and challenges to overcome.</p>
+
+<p><img src="/intergalactic-delivery-driver/images/blog/deliveries0.png" width="288" height="512" alt="" /></p>
+
+<p>All of which sounded good except that there is no hint to the player as to what direction to take. You are left alone with a list of jobs and little guidance to help you decide what to do next (see, it is like working for yourself!).</p>
+
+<p>So last week I set out to fix this. The first step was to separate the jobs board into multiple jobs boards, one for each agency. This lets you see all the agencies at the start, see which are offering you work, and see what you need to do to gain work from the others. This gives you a clear set of goals you need to complete to get attention from the other agencies.</p>
+
+<p><img src="/intergalactic-delivery-driver/images/blog/agencies1.png" width="288" height="512" alt="" /></p>
+
+<p>Having unlocked an agency the next challenge is to give the player direction and purpose when doing jobs for that agency. In real life it's great if clients keep offering you more work, but in the game a jobs board which keeps refilling with new jobs to do makes it feel to the player like they're not progressing at all. There are other measures of your progress - your reputation, the spaceships you own, the money you have earned, the agents that are offering you work. But when it comes to doing the deliveries, a list of deliveries that keeps refilling feels like a grind.</p>
+
+<p>So what I have decided is to return back to the original plan of a level unlock game, but rather than one massive level unlock I will present each agency as a fixed set of deliveries to complete. That means that each agency will contain a set of deliveries in a particular style for you to unlock, play through, and gain three stars on. The levels within an agency get progressively harder and have a theme to tie them together based on the nature of the agency. You still get to choose which jobs to do, which agencies to develop your relationship with, and which to avoid. But you also get the attraction of completing the next level, of a clear progression through the game, and of playing the same levels as your friends.</p>
+
+<p><img src="/intergalactic-delivery-driver/images/blog/deliveries1.png" width="288" height="512" alt="" /></p>
+
+<p>So that's where the game is at now. I haven't thrown away the procedural generation code, instead I have adapted it to run within the Unity editor. When creating a new agency, I procedurally generate a set of levels for that agency based on the character of that agency. Then I play and manually adjust these levels to make them more interesting. This has enabled me to make 120 levels in an afternoon - 120 levels that I am now playing through and altering to make them better.</p>
+
+]]></content>
+</entry>
+
+<entry>
+<id>http://www.richardlord.net/blog/game-design/the-choreography-of-monument-valley.html</id>
+<title>The Choreography of Monument Valley</title>
+<link rel="alternate" type="text/html" href="http://www.richardlord.net/blog/game-design/the-choreography-of-monument-valley.html" />
+<updated>2016-03-31T12:00:00Z</updated>
+<published>2016-03-31T12:00:00Z</published>
+<category scheme="http://www.richardlord.net" term="Game Design" />
+<summary type="text">The brilliant Critical Distance have proposed "Choreography" as the topic for their March collection of Blogs of the Round Table and I think, as a choreographer turned game developer, I should have something to say on this. I pondered what to write and eventually decided to write about just one game, the wonderful Monument Valley by ustwo.</summary>
+<content type="html" xml:base="http://www.richardlord.net/blog/game-design/the-choreography-of-monument-valley.html"><![CDATA[
+<p>The brilliant <a href="http://www.critical-distance.com/">Critical Distance</a> have proposed <a href="http://www.critical-distance.com/2016/03/05/march-2016-choreography/">"Choreography"</a> as the topic for their March collection of Blogs of the Round Table and I think, as a choreographer turned game developer, I should have something to say on this. I pondered what to write and eventually decided to write about just one game, the wonderful <a href="http://www.monumentvalleygame.com">Monument Valley</a> by <a href="https://ustwo.com">ustwo</a>.</p>
+
+<p>Launch Monument Valley and the first thing you see is a temple with the number one inside it. The symmetry of the view gives it stability, a calm beginning to the game. But there is far more going on than this screen-shot can reveal.</p>
+
+<p><img src="/images/monument/mv1.jpg" width="250" height="445" alt="" /></p>
+
+<p>Stars fade in and out of existence, the patterns in the centre of the temple grow and transform, and the temple itself gently bounces like it's the heartbeat of this game.</p>
+
+<p>Through this movement the temple gently invites you to enter its portal. Touch it and the image fades and a new one replaces it.</p>
+
+<p><img src="/images/monument/mv2.jpg" width="250" height="445" alt="" /></p>
+
+<p>Ida, standing on a walkway, looking around, calm and unconcerned as the breeze flutters her dress. You touch the path and Ida quickly turns and moves towards your touch. That turn is important. If you want Ida to walk this way she must first turn and face where she's going and, unlike so many game characters, for Ida turning takes time. The turn is quick, but it is real. The designers decided it was important to animate that turn, to make Ida's movement fluid.</p>
+
+<p>On reaching your touch, Ida stands patiently once more. It is your turn to make some choreography of your own as you rotate the walkway to form the path that Ida requires and with that movement you discover your power to transform this world to her needs.</p>
+
+<p><img src="/images/monument/mv3.jpg" width="250" height="445" alt="" /></p>
+
+<p>So you lead Ida along the walkway and up the steps to her destination. Note the gentle bounce as the control handles retract and then extend again, hear Ida quicken her pace as she climbs the steps to her goal, and then she stands at the top gazing out across the valley. A valley that she and you will explore together.</p>
+
+<p><img src="/images/monument/mv4.jpg" width="250" height="445" alt="" /></p>
+
+<p>The choreography of Monument Valley isn't about how characters move or how the player moves, it's about how everything moves. The choreography is a vital part of the experience and without it the game would be flatter, duller and less enjoyable.</p>
+
+<p>Of all the dance styles I'm familiar with Monument Valley reminds me most of classical ballet. The rigid discipline of the ballerina's body as she turns and jumps, her fast footwork as she chass&eacute;s and coup&eacute;s around the stage, and the lyrical flow of her arms atop her rigidly controlled body are replaced by the mechanics of this world, Ida's rapid steps, and the fluttering flags and flowers that suffuse most levels. The whole is a careful balance between strong mechanics and gentle lyricism.</p>
+
+<p>With each level that balance shifts a little more away from the lyrical and towards the mechanical as Ida gets closer to her goal.</p>
+
+<p>
+<img src="/images/monument/mv5.jpg" width="250" height="445" alt="" />
+<img src="/images/monument/mv6.jpg" width="250" height="445" alt="" />
+</p>
+]]></content>
+</entry>
+
+<entry>
+<id>http://www.richardlord.net/blog/unity/creating-scriptableobjects-in-unity.html</id>
+<title>Creating ScriptableObjects in Unity</title>
+<link rel="alternate" type="text/html" href="http://www.richardlord.net/blog/unity/creating-scriptableobjects-in-unity.html" />
+<updated>2015-11-03T12:00:00Z</updated>
+<published>2015-11-03T12:00:00Z</published>
+<category scheme="http://www.richardlord.net" term="Unity Game Engine" />
+<summary type="text">This is a short editor script that I use for creating instances of ScriptableObject classes in the Unity editor. Most scripts that create ScriptableObjects require you to add new code for each object type. This script does not. Select any class that extends ScriptableObject and choose Create->Instance to create an instance of that class.</summary>
+<content type="html" xml:base="http://www.richardlord.net/blog/unity/creating-scriptableobjects-in-unity.html"><![CDATA[
+<p>This is a short editor script that I use for creating instances of ScriptableObject classes in the Unity editor. Most scripts that create ScriptableObjects require you to add new code for each object type. This script does not. Select any class that extends ScriptableObject and choose Create->Instance to create an instance of that class.</p>
+
+<pre>using UnityEngine;
+using UnityEditor;
+using System.IO;
+
+public static class ScriptableObjectCreator {
+  [MenuItem( "Assets/Create/Instance" )]
+  public static void CreateInstance() {
+    foreach( Object o in Selection.objects ) {
+      if( o is MonoScript ) {
+        MonoScript script = (MonoScript)o;
+        System.Type type = script.GetClass();
+        if( type.IsSubclassOf( typeof( ScriptableObject ) ) ) {
+          CreateAsset( type );
+        }
+      }
+    }
+  }
+
+  [MenuItem( "Assets/Create/Instance", true )]
+  public static bool ValidateCreateInstance() {
+    foreach( Object o in Selection.objects ) {
+      if( o is MonoScript ) {
+        MonoScript script = (MonoScript)o;
+        System.Type type = script.GetClass();
+        if( type.IsSubclassOf( typeof( ScriptableObject ) ) ) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  private static void CreateAsset( System.Type type ) {
+    var asset = ScriptableObject.CreateInstance( type );
+    string path = AssetDatabase.GetAssetPath( Selection.activeObject );
+    if( path == "" )  {
+      path = "Assets";
+    } else if( Path.GetExtension( path ) != "" ) {
+      path = path.Replace( Path.GetFileName( AssetDatabase.GetAssetPath( Selection.activeObject ) ), "" );
+    }
+    string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath( path + "/New " + type.ToString() + ".asset" );
+    AssetDatabase.CreateAsset( asset, assetPathAndName );
+    AssetDatabase.SaveAssets();
+    EditorUtility.FocusProjectWindow();
+    Selection.activeObject = asset;
+  }
+}</pre>
+
+<p>To use the script, just add it to a folder called "Editor" inside your Unity assets folder.</p>
+
+<p>The script isn't as sophisticated as <a href="https://github.com/liortal53/ScriptableObjectFactory">ScriptableObject Factory</a> but I prefer it because it is quicker to use - just right click on a class and choose Create->Instance.</p>
+
+]]></content>
+</entry>
+
+<entry>
+<id>http://www.richardlord.net/blog/unity/inversion-of-control-in-unity.html</id>
+<title>Inversion of Control in Unity</title>
+<link rel="alternate" type="text/html" href="http://www.richardlord.net/blog/unity/inversion-of-control-in-unity.html" />
+<updated>2015-10-22T12:00:00Z</updated>
+<published>2015-10-22T12:00:00Z</published>
+<category scheme="http://www.richardlord.net" term="Unity Game Engine" />
+<summary type="text">Many developers come to Unity from a background in object-oriented programming and look to use the same patterns in Unity that they used elsewhere. You don't neglect what you have learnt elsewhere just because you are using a different tool but sometimes you have to apply those lessons differently with the new tool. Unity has its own idea about how you should architect a game and before you start fighting against this it is best to try working with it - you will be a lot more productive if you do.</summary>
+<content type="html" xml:base="http://www.richardlord.net/blog/unity/inversion-of-control-in-unity.html"><![CDATA[
+<p>Many developers come to <a href="https://unity3d.com/">Unity</a> from a background in object-oriented programming and look to use the same patterns in Unity that they used elsewhere. You don't neglect what you have learnt elsewhere just because you are using a different tool but sometimes you have to apply those lessons differently with the new tool. Unity has its own idea about how you should architect a game and before you start fighting against this it is best to try working with it - you will be a lot more productive if you do.</p>
+
+<h2>Everything is a MonoBehaviour</h2>
+
+<p>The first principle of working with Unity's architecture is that everything should be a <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html">MonoBehaviour</a>. Which means everything should be a component on a game object. Even the stuff that doesn't represent a feature of a specific game object, like code that initialises the scene or code that saves the current game state - just create an empty game object, call it something sensible like "scene controller" or "services" and add these components there.</p>
+
+<p>If your code is a MonoBehaviour then Unity knows about it, the Unity editor knows about it, and the tools that Unity provides will work with it. If your code is not a MonoBehaviour then it sits outside of Unity's knowledge and ability to manage it and you can't configure it in the Unity editor.</p>
+
+<p>(Scriptable Object is an exception to this but you probably don't need that.)</p>
+
+<h2>The editor</h2>
+
+<p>There is one disadvantage to making everything a MonoBehaviour - you have to work with two IDEs. The first is your coding tool - usually MonoDevelop or Visual Studio - and the second is the Unity editor. You can't spend your day entirely inside your coding tool of choice, you have to mess with the Unity editor as well. But that's okay. You create the components in your code editor and you configure them in the Unity editor, just like you would any other asset.</p>
+
+<h2>Inversion of Control</h2>
+
+<p>All of which is an introduction to my real reason for writing this article - a lot of developers new to Unity struggle with inversion of control, or more precisely the apparent lack of it. You may come from any programming background, but if you are used to having a dependency injection container or service locators you may well regard Unity as inferior and you may even decide to create <a href="http://strangeioc.github.io/strangeioc/">a dependency injection container for it</a>. Before you do, take a look at what Unity does out of the box.</p>
+
+<p>In common use inversion of control falls into three categories -</p>
+
+<ol>
+<li>Service locators</li>
+<li>Dependency injection</li>
+<li>Events</li>
+</ol>
+
+<p>Unity has tools for all of these. Some of them may not look like the tools you are accustomed to but they have much the same goals and produce similar results.</p>
+
+<h2>Service locators</h2>
+
+<p>Unity's service locator is the Find… methods of the Object class - <a href="https://docs.unity3d.com/ScriptReference/Object.FindObjectOfType.html">FindObjectOfType</a> and <a href="https://docs.unity3d.com/ScriptReference/Object.FindObjectsOfType.html">FindObjectsOfType</a>. These methods will find the components in the current scene that match a particular type, and if you followed my advice above then all of your code is inside components of some object or objects in the scene. So if, for example, you have a component called "ScoreService" that submits scores to your server, just call FindObjectOfType&lt;ScoreService&gt;() to locate it.</p>
+
+<p>Some developers complain that the find methods are slow, but</p>
+
+<ol>
+<li>They will rarely impact the performance of your game</li>
+<li>If they do impact performance, use dependency injection instead</li>
+</ol>
+
+<h2>Dependency injection</h2>
+
+<p>You know that thing in the Unity editor where you drag one game object onto a property of another to provide the component instance for that property. That's dependency injection. It may feel a bit strange configuring it in the editor, but it's a lot easier to understand than the pages of code or XML used to configure most dependency injection containers.</p>
+
+<p align="center"><img alt="" src="/images/unity/dependency_configure.png" width="395" height="274" /></p>
+
+<p>Unfortunately configuring dependencies in the Unity editor is so easy you won't feel as smart as you did when you used <a href="https://spring.io">Spring</a> or <a href="http://www.robotlegs.org">Robotlegs</a> - even your designers can configure this dependency injection.</p>
+
+<h2>Events</h2>
+
+<p>There's three ways to handle callbacks into an object.</p>
+
+<h3>1. SendMessage</h3>
+
+<p>Unity has had the <a href="https://docs.unity3d.com/ScriptReference/GameObject.SendMessage.html">SendMessage</a> method since the dawn of time. It works but is less than ideal because it requires matching a string in the caller to a method name in the callee, which requires setting global rules about the naming of methods (or losing any benefit of SendMessage over just calling the method directly).</p>
+
+<h3>2. Actions</h3>
+
+<p>If you code in C#, you get <a href="https://msdn.microsoft.com/en-us/library/system.action.aspx">Actions</a> for free as part of the language. Actions are delegates that don't return a value and as such are great for event dispatching. Unfortunately, the Unity editor doesn't understand them so they have to be configured in code, but that's what you thought you wanted anyway isn't it.</p>
+
+<h3>3. Events</h3>
+
+<p>Since the introduction of Unity's new GUI in version 4.6 Unity includes an <a href="https://docs.unity3d.com/ScriptReference/Events.UnityEvent.html">event system</a> that can be configured in the editor - so if a game object dispatches an event you can configure the listeners for that event inside the editor rather than in code. It feels odd at first, but if you embrace the idea of building your components in a code editor and configuring them in the Unity editor then, as with the dependency injection, this will make absolute sense. Try it.</p>
+
+<p align="center"><img alt="" src="/images/unity/event_configure.png" width="395" height="331" /></p>
+
+<h2>Conclusion</h2>
+
+<p>Unity has it's own tools for managing inversion of control. They are unlike the tools in most web frameworks but they do the same job and in some cases they are even easier to use.</p>
+
+<p>The first game I wrote in Unity was a struggle as we broke all of the above rules to code the game the way we did with other tools. With my second and subsequent games I follow the Unity patterns and I build games faster and have more fun doing it.</p>
+]]></content>
+</entry>
+
+<entry>
+<id>http://www.richardlord.net/freak-factory/blog/why-freak-factory.html</id>
+<title>Why Freak Factory?</title>
+<link rel="alternate" type="text/html" href="http://www.richardlord.net/freak-factory/blog/why-freak-factory.html" />
+<updated>2015-09-24T12:00:00Z</updated>
+<published>2015-09-24T12:00:00Z</published>
+<category scheme="http://www.richardlord.net" term="Freak Factory" />
+<summary type="text">You may be surprised if I tell you that Freak Factory is about life, but it is.
+
+Every time you play Freak Factory you lose, eventually. You may prolong the game, you may get a high score, but eventually you will lose. Losing is inevitable and every Freak you make reduces the space you have, reduces how much game you have left. While you play it the game doesn't get harder, it gets less. With every move you make you see the end approaching.</summary>
+<content type="html" xml:base="http://www.richardlord.net/freak-factory/blog/why-freak-factory.html"><![CDATA[
+<p>You may be surprised if I tell you that <a href="/freak-factory/">Freak Factory</a> is about life, but it is.</p>
+
+<p>Every time you play Freak Factory you lose, eventually. You may prolong the game, you may get a high score, but eventually you will lose. Losing is inevitable and every Freak you make reduces the space you have, reduces how much game you have left. While you play it the game doesn't get harder, it gets less. With every move you make you see the end approaching.<!--more--></p>
+
+<p>But the end doesn't matter. The game isn't about the end, just as it isn't about the start. It's about all the bits in between. What Freaks are you making? What score will you achieve? What inspired, lucky or surprising moves will you make? Will you remember this game?</p>
+
+<p align="center"><img alt="" src="/freak-factory/images/press/ss3.jpg" width="360" height="480" /></p>
+
+<p>And then there's the obvious stuff. After they are born in the machine, the Freaks do two things - they move and they grow. Life.</p>
+
+<p>A friend's son said he didn't like that they're called Freaks, because they're not Freaks, they're lovely. I said Freaks can be lovely too. I asked him which is his favourite Freak, he said "Archer, because sometimes he feels sad and he doesn't know why." Not just any Freak, a depressed one.</p>
+
+<p>Freak Factory appeals to all demographics. It has a 4.9 out of 5 rating on the iOS store. Some of our most avid players are seniors and some of our most avid players are young children. It's a game for generations to play together.</p>
+
+<p align="center"><img alt="" src="/freak-factory/images/press/boys_playing.jpg" width="480" height="360" /></p>
+
+<p>A friend tells me he loves it because he's better than his teenage children. It's the only game where he gives them tips. Another friend slugs it out with his teenage daughter. His best score is 88, her's is 93. For now. That'll change soon.</p>
+
+<p>Freak Factory doesn't require fast reactions, it requires planning, thought, a steady mind. It's hardest to play when you're distracted. So much can go wrong.</p>
+
+<p>Some shots in Freak Factory exhibit "sensitive dependence on initial conditions". Which means a small change in your shot will cause a big change in the outcome. Which also means "it's easy to mess up". The problem with many plans.</p>
+
+<p>You'll never get a perfect game. If you restart every time you make a mistake, every time your game doesn't go according to plan, then you will never finish a game. The theoretical maximum score is a few hundred, but the practical maximum is about 150. My best is 118.</p>
+
+<p align="center"><img alt="" src="/freak-factory/images/press/me118.jpg" width="360" height="480" /></p>
+
+<p>Getting a high score means accepting your mistakes, discovering the new opportunities they present, making a new plan. John Lennon sang "Life is what happens to you while you're busy making other plans". So is a big Freak in the middle of your factory.</p>
+
+<p>Sometimes you decide to be cautious, and sometimes you go for the big shot, the wild shot, the exciting shot, because it might just work. Because games exist to be explored, to be played. Because life should be interesting.</p>
+
+<p><a href="/freak-factory/">Play Freak Factory here.</a></p>
+]]></content>
+</entry>
+
+<entry>
+<id>http://www.richardlord.net/blog/choreography-games/seeing-whats-really-there.html</id>
+<title>Seeing what's really there</title>
+<link rel="alternate" type="text/html" href="http://www.richardlord.net/blog/choreography-games/seeing-whats-really-there.html" />
+<updated>2015-06-26T12:00:00Z</updated>
+<published>2015-06-26T12:00:00Z</published>
+<category scheme="http://www.richardlord.net" term="Lessons I Learnt as a Choreographer and Apply as a Game Designer" />
+<summary type="text">This blog post was originally published on the Develop:Brighton website on 26 June 2015.
+
+I remember as a choreographer at dance school showing my choreography teacher my first dance piece. I'd spent a term making this dance, working with three dancers who were studying with me. This was extra-curricular activity but I wanted to make this dance and I felt good about it. So, in search of praise I asked my choreography teacher, Ingegerd Lonnroth, to look at it.</summary>
+<content type="html" xml:base="http://www.richardlord.net/blog/choreography-games/seeing-whats-really-there.html"><![CDATA[
+<p><i>This blog post was originally published on the <a href="http://developconf.blogspot.co.uk/2015/06/seeing-whats-really-there.html">Develop:Brighton</a> website on 26 June 2015.</i></p>
+
+<p>I remember as a choreographer at dance school showing my choreography teacher my first dance piece. I'd spent a term making this dance, working with three dancers who were studying with me. This was extra-curricular activity but I wanted to make this dance and I felt good about it. So, in search of praise I asked my choreography teacher, Ingegerd Lonnroth, to look at it.</p>
+
+<p>We gathered in a dance studio. I started the music and the dancers danced. I watched the dance and I watched my choreography teacher, my gaze flicking between the two. Then, unexpectedly, my chest tightened and my stomach flipped. This dance was not good. Specifically, the section I was watching was not good. And I was acutely embarrassed. How had I not seen this before? I looked across at Ingegerd but she was impassive. Had she noticed?</p>
+
+<p>When the dancers finished Ingegerd said something supportive and encouraging, to them and to me. Then she said &quot;Show me again the section about a third of the way through, starting from the upstage right corner.&quot; Yes, she'd noticed.</p>
+
+<p>I learnt two things that day.</p>
+
+<ol>
+<li>That Ingegerd is a very perceptive critic, a skill I made full use of during my time at dance school.</li>
+<li>That it is very difficult to see what you have made the way the audience will see it.</li>
+</ol>
+
+<p>When I look at a dance I've choreographed or a game I've designed the tendency is to see what I want to see, to see the work as I intend it to be, not as it is. Faults are ignored as my imagination smooths them over and delivers to me the experience that I expect, because I expect it.</p>
+
+<p>My tool for overcoming this hazard is in that early experience with Ingegerd. Show it to someone whose opinion matters to you. Watch it with them. Imagine what it looks like for them. Imagine what they are thinking. Don't wait for them to tell you, don't rely on their feedback. Empathise and feel it for yourself.</p>
+
+<p>In theory you can do this without the other person there but it is hard. I find that their presence, watching the dance or playing the game, and my anxiety over their reaction helps me to empathise, to see the work as it really is.</p>
+
+<p>With my new game, <a href="/freak-factory/">Freak Factory</a>, I have shown it to numerous people. Family, friends, other developers. In many cases I watch the screen over their shoulder, imagining what they are thinking and feeling, and I smile as my chest tightens, my stomach flips, and I add another issue to my to-do list. It's not traditional user testing and for you it may not work, but it helps me a lot.</p>
+]]></content>
+</entry>
+
+<entry>
+<id>http://www.richardlord.net/blog/choreography-games/what-makes-a-good-collaboration.html</id>
+<title>What Makes a Good Collaboration?</title>
+<link rel="alternate" type="text/html" href="http://www.richardlord.net/blog/choreography-games/what-makes-a-good-collaboration.html" />
+<updated>2015-06-17T12:00:00Z</updated>
+<published>2015-06-17T12:00:00Z</published>
+<category scheme="http://www.richardlord.net" term="Lessons I Learnt as a Choreographer and Apply as a Game Designer" />
+<summary type="text">This blog post was originally published on Gamasutra on 17 June 2015.
+
+Before I became a game developer I was an independent contemporary dance choreographer with my own dance company. And in my 14 years creating dances, and a further 14 creating games, I've experienced all sorts of collaborations. For me, there are three key ingredients to a good collaboration.</summary>
+<content type="html" xml:base="http://www.richardlord.net/blog/choreography-games/what-makes-a-good-collaboration.html"><![CDATA[
+<p><i>This blog post was originally published on <a href="http://www.gamasutra.com/blogs/RichardLord/20150617/246365/What_Makes_a_Good_Collaboration.php">Gamasutra</a> on 17 June 2015.</i></p>
+
+<p>Before I became a game developer I was an independent contemporary dance choreographer with my own dance company. And in my 14 years creating dances, and a further 14 creating games, I've experienced all sorts of collaborations. For me, there are three key ingredients to a good collaboration.</p>
+
+<h2>Skill</h2>
+
+<p>All collaborators should bring skills to the project that wouldn't otherwise be present. There's no point collaborating with someone if you're better than them at everything. A collaborator is your equal. You respect and value each other's skills and by working together you make something better than either of you could make alone.</p>
+
+<h2>Understanding</h2>
+
+<p>All collaborators should understand what you are making. The game is the reason you are working together. You must agree on what the game is and who it is for so you can all focus your skills on delivering that experience to the players.</p>
+
+<h2>Trust</h2>
+
+<p>All collaborators must trust each other. Without trust there will be no collaboration - the untrusted collaborator will be watched and controlled and any influence they might have over the game will be blocked.</p>
+
+<p>I recall one dance production I created where the costume designer showed me designs that I hated. So I stopped working with her. It wasn't her fault, I should never have asked her to work with me because I didn't trust her.</p>
+
+<p>But there was another dance production where the costume designer showed me designs that I hated and I continued working with her. We even went with her designs that I hated, because I trusted her. And when I saw the finished costumes they were fantastic, perfect for the dance. That's why I needed a costume designer.</p>
+
+<h2>And now</h2>
+
+<p>These three ingredients, skill, understanding and trust, went through my mind back in March when <a href="http://www.prawnsoda.co.uk">Brian Roberts</a> sent me a visual design for my new game. I hadn't asked him to do this, I had planned for my first game as an indie to be small and manageable. Simple graphics, simple sounds, interesting gameplay. Build and learn, I thought, I'll find collaborators for the next project, after I've had time to get to know the indie scene in London. This would be my game.</p>
+
+<p><img alt="" height="482" src="/freak-factory/images/press/prototype.png" width="272" /></p>
+
+<p>But I showed a prototype of the game to some friends in the pub and Brian sent me an email later that night - &quot;Sorry I didn't say goodbye. Really like your new game so I thought I'd have a (slightly drunk) blast at some graphics.&quot; Attached was a picture of the main screen of the game, reinterpreted as an industrial space in which slightly cute, slightly scary creatures are created, and you, the player, are the one creating them. It was great.</p>
+
+<p><img alt="" src="/freak-factory/images/press/original.png" /></p>
+
+<p><i>(Here's a tip - if you see a game you want to work on, ask the team creating it - they may say yes.)</i></p>
+
+<p>So I spent a sleepless night deliberating.</p>
+
+<p>I have never created a piece of art without collaborating. In dance you usually have dancers, composers, costume &amp; set designers. Then as a game developer I've never made &quot;my&quot; game, I've always worked on other people's games. Which is why I quit my job - to make my games.</p>
+
+<p>I intended to make this game alone, and now Brian wanted to collaborate on it.</p>
+
+<p>Because I knew Brian, I knew he had the skills. From the graphics he sent me, he clearly understood the game. But collaboration works two ways - I would be giving Brian the power to influence my game. It wouldn't even be my game any more, it would be our game. That's why the trust has to be there.</p>
+
+<p>By the morning I had decided and I sent Brian an email - &quot;I like that a lot. Do you want to talk about doing all the graphics for the game?&quot; We got together, had a great conversation and Brian became the visual designer for the game. And it has been great working together. The game has benefited from his designs and from his feedback. It's a much richer visual experience and it'll be released soon.</p>
+
+<p>Here's the video trailer featuring the final graphics.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/M8Rtc-p30fk?rel=0" frameborder="0" allowfullscreen></iframe>
+<br />
+
+<p>So there we are, my ingredients for good collaboration - Skill, Understanding and Trust.</p>
+
+<p><a href="/freak-factory/">Freak Factory</a> will be out on 27th July on iOS &amp; Android, and in August on Windows Phone. You can read more about it on the game's <a href="/freak-factory/">website</a> and <a href="https://www.facebook.com/freakfactorygame">Facebook page</a>.</p>
+]]></content>
+</entry>
+
+<entry>
+<id>http://www.richardlord.net/freak-factory/blog/bubble-pack-becomes-freak-factory.html</id>
+<title>Bubble Pack becomes Freak Factory</title>
+<link rel="alternate" type="text/html" href="http://www.richardlord.net/freak-factory/blog/bubble-pack-becomes-freak-factory.html" />
+<updated>2015-06-10T12:00:00Z</updated>
+<published>2015-06-10T12:00:00Z</published>
+<category scheme="http://www.richardlord.net" term="Freak Factory" />
+<summary type="text">I've been heads down building stuff for Bubble Pack for a while now, which is why I haven't talked about it much. A lot of news has built up.
+
+A New Name
+
+The game now has its final name and art style. The name is Freak Factory. What were bubbles are now little critters called Freaks, and what was a simple box is now a factory in which you make these Freaks. And if you don't keep them contained they will escape and the game ends. Trust me, it all makes sense and looks wonderful.</summary>
+<content type="html" xml:base="http://www.richardlord.net/freak-factory/blog/bubble-pack-becomes-freak-factory.html"><![CDATA[
+<p>I've been heads down building stuff for Bubble Pack for a while now, which is why I haven't talked about it much. A lot of news has built up.</p>
+
+<h2>A New Name</h2>
+
+<p>The game now has its final name and art style. The name is <b>Freak Factory</b>. What were bubbles are now little critters called Freaks, and what was a simple box is now a factory in which you make these Freaks. And if you don't keep them contained they will escape and the game ends. Trust me, it all makes sense and looks wonderful.<!--more--></p>
+
+<p>I didn't design the graphics, that was <a href="http://www.prawnsoda.co.uk">Brian Roberts</a> who I used to work with at Stick Sports. There's a little story about how we ended up working together on Freak Factory, which I will tell you next time. For now suffice to say I'm very pleased to be collaborating with him. The graphics he has made are really excellent.</p>
+
+<h2>Trailer</h2>
+
+<p>The best place to see the new graphics is in the trailer for the game. Here it is.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/M8Rtc-p30fk?rel=0" frameborder="0" allowfullscreen></iframe>
+
+<br />
+<h2>Release Date</h2>
+
+<p>The game is nearing completion and we are planning to release it next month. I'll post more detailed information as the date approaches. In the meantime here's three links you may find interesting.</p>
+
+<h2>Facebook Page</h2>
+
+<p>Freak Factory has a <a href="https://www.facebook.com/freakfactorygame">Facebook Page</a>. This is a great place to keep up to date with the project and get the inside track on what we're up to, so why not <a href="https://www.facebook.com/freakfactorygame">head over there</a> and like the page so you can see the updates in your newsfeed. Hopefully we can have some conversations and bit of fun. Brian hangs out on the Facebook page too so if you want to talk about the graphics that's where to ask.</p>
+
+<h2>Twitter Account</h2>
+
+<p>We also have a <a href="https://twitter.com/FreakFactory1">Twitter account for the game</a>. I'll be posting news there too and various other items. It won't have the same content as the Facebook page but there will be some overlap.</p>
+
+<h2>Website</h2>
+
+<p>The game also has a <a href="/freak-factory/">website</a>. It's a central hub linking out to other sources of information for the game.</p>
+
+<h2>And what of the mailing list?</h2>
+
+<p>I'll still use the mailing list to tell you when the game is launched, but I won't use it for much else. Too much email is annoying for everyone so if you give me permission to email you I will use it very sparingly. And I will never share your details with anyone else or email you messages from anyone else.</p>
+
+<p>If you want to be on that mailing list, enter your email address here</p>
+
+<!-- Begin MailChimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+	/* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="//richardlord.us10.list-manage.com/subscribe/post?u=69a3984316810e969cbef57ba&amp;id=90a63ee67b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_69a3984316810e969cbef57ba_90a63ee67b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+<hr />
+]]></content>
+</entry>
+
+
+
+</feed>

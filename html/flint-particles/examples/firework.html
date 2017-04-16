@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Flint Particles Firework</title>
+<link rel="stylesheet" type="text/css" media="all" href="/style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/flint-particles/style.css" />
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9509078-6', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+<div id="page">
+<header role="banner">
+
+	<div id="branding"><img id="site-image" src="/flint-particles/images/core/logobig.gif" width="325" height="37" /></div>
+
+	<nav id="menu" role="navigation">
+	<div>
+		<ul>
+			<li><a href="/flint-particles/index.html">ABOUT</a></li>
+			<li><a href="/flint-particles/source-code.html">SOURCE CODE</a></li>
+			<li><a href="/flint-particles/documentation.html">DOCUMENTATION</a></li>
+			<li><a href="/flint-particles/examples/">EXAMPLES</a></li>
+			<li><a href="/flint-particles/blog/">BLOG</a></li>
+		</ul>
+	</div>
+	</nav>
+</header>
+
+<div id="main">
+<div id="content">
+
+
+<link type="text/css" href="/flint-particles/css/jquery-ui-1.8.2.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/flint-particles/javascript/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="/flint-particles/javascript/jquery-ui-1.8.2.custom.min.js"></script>
+
+<h1>Firework</h1>
+
+<div class="spaced center">
+  <object width="500" height="400" data="/flint-particles/source/examples2D/Firework/PureAS3/Firework.swf" type="application/x-shockwave-flash">
+    <param name="movie" value="/flint-particles/source/examples2D/Firework/PureAS3/Firework.swf" />
+    <param name="loop" value="false" />
+    <param name="quality" value="high" />
+    <param name="allowfullscreen" value="true" />
+  </object>
+</div>
+
+<h1>Firework</h1>
+      <div class="example"><div id="swf58bef5c4b9a4a">
+<p><b>Flash required:</b> You need version 10 or later of the free Flash player from Adobe to use this content. To download and install the free player from Adobe's web site <a href="http://get.adobe.com/flashplayer/">click here</a>.</p>
+</div>
+<script type="text/javascript">
+var params = {loop:"false",quality:"high",allowfullscreen:"true"};
+var flashvars = {};
+swfobject.embedSWF("/source/examples2D/Firework/PureAS3/Firework.swf", "swf58bef5c4b9a4a", "500", "400", "10.0.0", "/swf/expressInstall.swf", flashvars, params, {} );
+</script></div>
+
+<p>This example uses basic physics behaviour to create a firework. By listening for the empty event on the emitter we set off a new firework when the previous one has burnt out.</p>
+<script type="text/javascript">$(function() { $("#source").tabs(); });</script>
+<div id="source">
+  <ul><li><a href="#PureAS3">PureAS3</a></li>
+<li><a href="#Flash">Flash</a></li>
+<li><a href="#Flex">Flex</a></li>
+</ul><div id="PureAS3"><pre class="code">package
+{
+  import org.flintparticles.twoD.emitters.Emitter2D;
+  import org.flintparticles.twoD.renderers.BitmapRenderer;
+
+  import flash.display.Sprite;
+  import flash.filters.BlurFilter;
+  import flash.filters.ColorMatrixFilter;
+  import flash.geom.Rectangle;
+
+  [SWF(width='500', height='400', frameRate='60', backgroundColor='#000000')]
+  
+  
+
+  public class Main extends Sprite
+  {
+    private var emitter:Emitter2D;
+    
+    public function Main()
+    {
+      emitter = new Firework();
+      
+      var renderer:BitmapRenderer = new BitmapRenderer( new Rectangle( 0, 0, 500, 400 ) );
+      renderer.addFilter( new BlurFilter( 2, 2, 1 ) );
+      renderer.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.95,0 ] ) );
+      renderer.addEmitter( emitter );
+      addChild( renderer );
+      
+      emitter.x = 250;
+      emitter.y = 150;
+      emitter.start();
+    }
+  }
+}</pre><pre class="code">package
+{
+  import org.flintparticles.common.actions.Age;
+  import org.flintparticles.common.actions.Fade;
+  import org.flintparticles.common.counters.Blast;
+  import org.flintparticles.common.displayObjects.Dot;
+  import org.flintparticles.common.easing.Quadratic;
+  import org.flintparticles.common.events.EmitterEvent;
+  import org.flintparticles.common.initializers.ColorInit;
+  import org.flintparticles.common.initializers.Lifetime;
+  import org.flintparticles.common.initializers.SharedImage;
+  import org.flintparticles.twoD.actions.Accelerate;
+  import org.flintparticles.twoD.actions.LinearDrag;
+  import org.flintparticles.twoD.actions.Move;
+  import org.flintparticles.twoD.emitters.Emitter2D;
+  import org.flintparticles.twoD.initializers.Velocity;
+  import org.flintparticles.twoD.zones.DiscZone;
+
+  import flash.geom.Point;
+
+  public class Firework extends Emitter2D
+  {
+    public function Firework()
+    {
+      counter = new Blast( 700 );
+      
+      addInitializer( new SharedImage( new Dot( 2 ) ) );
+      addInitializer( new ColorInit( 0xFFFFFF00, 0xFFFF6600 ) );
+      addInitializer( new Velocity( new DiscZone( new Point( 0, 0 ), 200, 120 ) ) );
+      addInitializer( new Lifetime( 5 ) );
+      
+      addAction( new Age( Quadratic.easeIn ) );
+      addAction( new Move() );
+      addAction( new Fade() );
+      addAction( new Accelerate( 0, 50 ) );
+      addAction( new LinearDrag( 0.5 ) );
+      
+      addEventListener( EmitterEvent.EMITTER_EMPTY, restart, false, 0, true );
+    }
+    
+    public function restart( ev:EmitterEvent ):void
+    {
+      start();
+    }
+  }
+}</pre></div>
+<div id="Flash"><pre class="code">import org.flintparticles.common.actions.*;
+import org.flintparticles.common.counters.*;
+import org.flintparticles.common.displayObjects.Dot;
+import org.flintparticles.common.easing.Quadratic;
+import org.flintparticles.common.events.EmitterEvent;
+import org.flintparticles.common.initializers.*;
+import org.flintparticles.twoD.actions.*;
+import org.flintparticles.twoD.emitters.Emitter2D;
+import org.flintparticles.twoD.initializers.*;
+import org.flintparticles.twoD.renderers.*;
+import org.flintparticles.twoD.zones.*;  
+
+var emitter:Emitter2D = new Emitter2D();
+
+emitter.counter = new Blast( 700 );
+
+emitter.addInitializer( new SharedImage( new Dot( 2 ) ) );
+emitter.addInitializer( new ColorInit( 0xFFFFFF00, 0xFFFF6600 ) );
+emitter.addInitializer( new Velocity( new DiscZone( new Point( 0, 0 ), 200, 120 ) ) );
+emitter.addInitializer( new Lifetime( 5 ) );
+
+emitter.addAction( new Age( Quadratic.easeIn ) );
+emitter.addAction( new Move() );
+emitter.addAction( new Fade() );
+emitter.addAction( new Accelerate( 0, 50 ) );
+emitter.addAction( new LinearDrag( 0.5 ) );
+
+emitter.addEventListener( EmitterEvent.EMITTER_EMPTY, restart, false, 0, true );
+
+var renderer:BitmapRenderer = new BitmapRenderer( new Rectangle( 0, 0, 500, 400 ) );
+renderer.addFilter( new BlurFilter( 2, 2, 1 ) );
+renderer.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.95,0 ] ) );
+renderer.addEmitter( emitter );
+addChild( renderer );
+
+emitter.x = 250;
+emitter.y = 150;
+emitter.start();
+
+function restart( ev:EmitterEvent ):void
+{
+  Emitter2D( ev.target ).start();
+}</pre></div>
+<div id="Flex"><pre class="code">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;s:Application
+  xmlns:fx=&quot;http://ns.adobe.com/mxml/2009&quot; 
+  xmlns:s=&quot;library://ns.adobe.com/flex/spark&quot; 
+  xmlns:f=&quot;http://flintparticles.org/2009/flint2d&quot;
+  xmlns:filters=&quot;flash.filters.*&quot;
+  width=&quot;500&quot; height=&quot;400&quot;
+  backgroundColor=&quot;#000000&quot;&gt;
+  
+&lt;fx:Script&gt;
+  &lt;![CDATA[
+    import org.flintparticles.common.easing.Quadratic;
+  ]]&gt;
+&lt;/fx:Script&gt;
+  
+&lt;f:BitmapRenderer id=&quot;renderer&quot; width=&quot;500&quot; height=&quot;400&quot;&gt;
+  &lt;f:preFilters&gt;
+    &lt;filters:BlurFilter blurX=&quot;2&quot; blurY=&quot;2&quot; quality=&quot;1&quot;/&gt;
+    &lt;filters:ColorMatrixFilter matrix=&quot;{[ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.95,0 ]}&quot;/&gt;
+  &lt;/f:preFilters&gt;
+  &lt;f:emitters&gt;
+    &lt;f:Emitter id=&quot;emitter&quot; autoStart=&quot;true&quot; x=&quot;250&quot; y=&quot;150&quot; emitterEmpty=&quot;emitter.start()&quot;&gt;
+      &lt;f:counter&gt;
+        &lt;f:Blast startCount=&quot;700&quot;/&gt;
+      &lt;/f:counter&gt;
+      &lt;f:initializers&gt;
+        &lt;f:ColorInit minColor=&quot;0xFFFFFF00&quot; maxColor=&quot;0xFFFF6600&quot;/&gt;
+        &lt;f:Velocity&gt;
+          &lt;f:DiscZone centerX=&quot;0&quot; centerY=&quot;0&quot; innerRadius=&quot;120&quot; outerRadius=&quot;200&quot;/&gt;
+        &lt;/f:Velocity&gt;
+        &lt;f:SharedImage&gt;
+          &lt;f:Dot radius=&quot;2&quot;/&gt;
+        &lt;/f:SharedImage&gt;
+        &lt;f:Lifetime lifetime=&quot;5&quot;/&gt;
+      &lt;/f:initializers&gt;
+      &lt;f:actions&gt;
+        &lt;f:Move/&gt;
+        &lt;f:Age easing=&quot;{Quadratic.easeIn}&quot;/&gt;
+        &lt;f:Fade/&gt;
+        &lt;f:Accelerate x=&quot;0&quot; y=&quot;50&quot;/&gt;
+        &lt;f:LinearDrag drag=&quot;0.5&quot;/&gt;
+      &lt;/f:actions&gt;
+    &lt;/f:Emitter&gt;
+  &lt;/f:emitters&gt;
+&lt;/f:BitmapRenderer&gt;
+&lt;/s:Application&gt;</pre></div>
+
+
+</div>
+</div>
+
+<footer role="contentinfo">
+	<p>Richard Lord - Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+</footer>
+</div>
+</body>
+</html>

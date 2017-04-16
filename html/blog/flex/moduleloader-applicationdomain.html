@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>ModuleLoader ApplicationDomain</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" media="all" href="/style.css" />
+<link rel="alternate" type="application/rss+xml" title="Richard Lord's Feed" href="http://www.richardlord.net/feed.xml" />
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9509078-6', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+<div id="page">
+<header role="banner">
+	<div id="social">
+		<a href="https://twitter.com/richard_lord"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+		<a href="https://uk.linkedin.com/in/richardlord"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+		<a href="https://github.com/richardlord"><img src="/images/social/github_logo.png" width="36" height="36" /></a>
+		<a href="https://www.youtube.com/c/RichardLordNet"><img src="/images/social/youtube_logo.png" width="36" height="36" /></a>
+	</div>
+
+	<div id="branding">
+		<img id="site-image" src="/images/social/me.png" />
+		<div id="site-title"><a href="/" title="Richard Lord" rel="home">Richard Lord</a></div>
+		<div id="site-description">Game Developer</div>
+	</div>
+
+	<nav id="menu" role="navigation">
+	<div>
+		<ul>
+			<li><a href="/games.html">GAMES</a></li>
+			<li><a href="/consulting.html">CONSULTING</a></li>
+			<li><a href="/blog/">BLOG</a></li>
+			<li><a href="/presentations/">PRESENTATIONS</a></li>
+			<li><a href="/press.html">PRESS</a></li>
+			<li><a href="/about/">ABOUT</a></li>
+		</ul>
+	</div>
+	</nav>
+</header>
+
+<div id="main">
+<div id="content">
+<h1>ModuleLoader ApplicationDomain</h1>
+
+<div id="meta">Posted on <time datetime="2007-03-04T21:08:12Z">04 March 2007</time></div>
+
+
+
+
+<p>By default, the module loader loads modules in a new application domain. This means the classes in the module are not accessible to the main application, which can cause problems particularly when using reflection (I stumbled into this when using <a href="https://code.google.com/archive/p/smartypants-ioc/">SmartyPants</a> with modules).</p>
+
+<p>Fortunately, the ModuleLoader component has a property for setting the application domain of the module it loads - the unsurprisingly named applicationDomain property. Setting this to ApplicationDomain.currentContext before loading the module brings the module into the same domain as the main application, and all is well.</p>
+
+<p>Except, if you want to load the module immediately you may be tempted to do something like this.</p>
+
+<pre>&lt;mx:ModuleLoader url="module.swf"
+  applicationDomain="{ApplicationDomain.currentDomain}"/&gt;</pre>
+
+<p>Unfortunately, this won't work because the module loader will start loading the module before the application domain has been set - setting properties to static values (as for the url in this code) happens before setting properties to bound values (as for the applicationDomain in this code) so the url is set first and triggers the load before the applicationDomain is set.</p>
+
+<p>To solve this, you need either to load the module later or set the applicationDomain earlier.<p>
+
+<p>To load the module later:</p>
+
+<pre>&lt;mx:ModuleLoader id="modLoader"
+  applicationDomain="{ApplicationDomain.currentDomain}"
+  creationComplete="modLoader.loadModule('module.swf')"/&gt;</pre>
+
+<p>To set the applicationDomain sooner:</p>
+
+<pre>&lt;mx:ModuleLoader id="modLoader"
+  url="module.swf"
+  preinitialize="modLoader.applicationDomain=
+    ApplicationDomain.currentDomain"/&gt;</pre>
+
+
+
+
+<p>Share this post or a comment online -</p>
+<div id="share">
+<a href="https://twitter.com/intent/tweet?text=ModuleLoader+ApplicationDomain&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fflex%2Fmoduleloader-applicationdomain.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+<a href="https://www.facebook.com/dialog/share?app_id=206081586545847&amp;href=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fflex%2Fmoduleloader-applicationdomain.html" target="_blank" title="Facebook"><img src="/images/social/facebook_logo.png" width="36" height="36" /></a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=ModuleLoader+ApplicationDomain&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fflex%2Fmoduleloader-applicationdomain.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+</div>
+<hr />
+<p>Also in the collection <b><a href="./">Flex</a></b></p>
+<ul><li><a href="using-textfields-and-bitmaps-in-a-programmatic-skin.html">Using TextFields and Bitmaps in a programmatic skin</a></li>
+<li><a href="accessing-the-component-instance-from-a-flex-skin.html">Accessing the component instance from a Flex skin</a></li>
+<li><a href="asdoc-for-mxml-components.html">ASDoc for MXML components</a></li>
+</ul>
+
+</div>
+</div>
+
+<footer role="contentinfo">
+	<p>Richard Lord - Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+</footer>
+</div>
+</body>
+</html>

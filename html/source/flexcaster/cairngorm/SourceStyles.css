@@ -1,0 +1,123 @@
+body {
+	font-family: Courier New, Courier, monospace;
+	font-size: medium;
+}
+
+.ActionScriptASDoc {
+	color: #7f7f7f;
+}
+
+.ActionScriptBracket/Brace {
+}
+
+.ActionScriptComment {
+	color: #7f7f7f;
+}
+
+.ActionScriptDefault_Text {
+}
+
+.ActionScriptMetadata {
+	color: #cc0000;
+}
+
+.ActionScriptOperator {
+}
+
+.ActionScriptReserved {
+	color: #0000cc;
+}
+
+.ActionScriptString {
+	color: #007f00;
+}
+
+.ActionScriptclass {
+	color: #0000cc;
+}
+
+.ActionScriptfunction {
+	color: #0000cc;
+}
+
+.ActionScriptinterface {
+	color: #0000cc;
+}
+
+.ActionScriptpackage {
+	color: #0000cc;
+}
+
+.ActionScripttrace {
+	color: #0000cc;
+}
+
+.ActionScriptvar {
+	color: #0000cc;
+}
+
+.MXMLASDoc {
+	color: #3f5fbf;
+}
+
+.MXMLComment {
+	color: #7f7f7f;
+}
+
+.MXMLComponent_Tag {
+	color: #0000cc;
+}
+
+.MXMLDefault_Text {
+}
+
+.MXMLProcessing_Instruction {
+}
+
+.MXMLSpecial_Tag {
+	color: #0000cc;
+}
+
+.MXMLString {
+	color: #007f00;
+}
+
+.CSS@font-face {
+	color: #0000cc;
+}
+
+.CSS@import {
+	color: #0000cc;
+}
+
+.CSS@media {
+	color: #0000cc;
+}
+
+.CSS@namespace {
+	color: #923196;
+}
+
+.CSSComment {
+	color: #7f7f7f;
+}
+
+.CSSDefault_Text {
+}
+
+.CSSDelimiters {
+}
+
+.CSSProperty_Name {
+}
+
+.CSSProperty_Value {
+}
+
+.CSSSelector {
+}
+
+.CSSString {
+	color: #007f00;
+}
+

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Flint Particles Logo Tween</title>
+<link rel="stylesheet" type="text/css" media="all" href="/style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/flint-particles/style.css" />
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9509078-6', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+<div id="page">
+<header role="banner">
+
+	<div id="branding"><img id="site-image" src="/flint-particles/images/core/logobig.gif" width="325" height="37" /></div>
+
+	<nav id="menu" role="navigation">
+	<div>
+		<ul>
+			<li><a href="/flint-particles/index.html">ABOUT</a></li>
+			<li><a href="/flint-particles/source-code.html">SOURCE CODE</a></li>
+			<li><a href="/flint-particles/documentation.html">DOCUMENTATION</a></li>
+			<li><a href="/flint-particles/examples/">EXAMPLES</a></li>
+			<li><a href="/flint-particles/blog/">BLOG</a></li>
+		</ul>
+	</div>
+	</nav>
+</header>
+
+<div id="main">
+<div id="content">
+
+
+<link type="text/css" href="/flint-particles/css/jquery-ui-1.8.2.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/flint-particles/javascript/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="/flint-particles/javascript/jquery-ui-1.8.2.custom.min.js"></script>
+
+<h1>Logo Tween</h1>
+
+<div class="spaced center">
+  <object width="400" height="200" data="/flint-particles/source/examples2D/LogoTween/PureAS3/LogoTween.swf" type="application/x-shockwave-flash">
+    <param name="movie" value="/flint-particles/source/examples2D/LogoTween/PureAS3/LogoTween.swf" />
+    <param name="loop" value="false" />
+    <param name="quality" value="high" />
+    <param name="allowfullscreen" value="true" />
+  </object>
+</div>
+
+<p>This example uses the TweenToZone Action to move the particles from one shaped zone to the other and back again. It uses three emitters, one to create the particles, a second to move the particles from one zone to the other, and a third to move them back again. In the code we listen for the particle dead event on each emitter and revive the dying particle and add it to the next emitter.</p>
+
+<script type="text/javascript">$(function() { $("#source").tabs(); });</script>
+
+<div id="source">
+  <ul><li><a href="#PureAS3">PureAS3</a></li>
+<li><a href="#Flash">Flash</a></li>
+</ul><div id="PureAS3"><pre class="code">package
+{
+  import org.flintparticles.common.events.ParticleEvent;
+  import org.flintparticles.common.particles.Particle;
+  import org.flintparticles.twoD.emitters.Emitter2D;
+  import org.flintparticles.twoD.renderers.PixelRenderer;
+
+  import flash.display.Sprite;
+  import flash.filters.BlurFilter;
+  import flash.filters.ColorMatrixFilter;
+  import flash.geom.Rectangle;
+
+  [SWF(width='400', height='200', frameRate='60', backgroundColor='#000000')]
+  
+  public class Main extends Sprite
+  {
+    private var startEmitter:Emitter2D;
+    private var tween1Emitter:Emitter2D;
+    private var tween2Emitter:Emitter2D;
+    
+    public function Main()
+    {
+      startEmitter = new FirstEmitter();
+      tween1Emitter = new TweenToFlint();
+      tween2Emitter = new TweenToParticles();
+
+      var renderer:PixelRenderer = new PixelRenderer( new Rectangle( 0, 0, 400, 200 ) );
+      renderer.addFilter( new BlurFilter( 2, 2, 1 ) );
+      renderer.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.97,0 ] ) );
+      renderer.addEmitter( startEmitter );
+      renderer.addEmitter( tween1Emitter );
+      renderer.addEmitter( tween2Emitter );
+      addChild( renderer );
+      
+      startEmitter.addEventListener( ParticleEvent.PARTICLE_DEAD, moveToTween1 );
+      tween1Emitter.addEventListener( ParticleEvent.PARTICLE_DEAD, moveToTween2 );
+      tween2Emitter.addEventListener( ParticleEvent.PARTICLE_DEAD, moveToTween1 );
+      
+      startEmitter.start();
+      tween1Emitter.start();
+      tween2Emitter.start();
+    }
+
+    private function moveToTween1( event:ParticleEvent ):void
+    {
+      event.particle.revive();
+      tween1Emitter.addParticles( Vector.&lt;Particle&gt;( [ event.particle ] ), true );
+    }
+    
+    private function moveToTween2( event:ParticleEvent ):void
+    {
+      event.particle.revive();
+      tween2Emitter.addParticles( Vector.&lt;Particle&gt;( [ event.particle ] ), true );
+    }
+  }
+}</pre><pre class="code">package
+{
+  import org.flintparticles.common.actions.Age;
+  import org.flintparticles.common.counters.Blast;
+  import org.flintparticles.common.easing.Quadratic;
+  import org.flintparticles.common.initializers.ColorInit;
+  import org.flintparticles.common.initializers.Lifetime;
+  import org.flintparticles.twoD.actions.TweenToZone;
+  import org.flintparticles.twoD.emitters.Emitter2D;
+  import org.flintparticles.twoD.initializers.Position;
+  import org.flintparticles.twoD.zones.BitmapDataZone;
+
+  public class FirstEmitter extends Emitter2D
+  {
+    public function FirstEmitter()
+    {
+      counter = new Blast( 5000 );
+      
+      addInitializer( new ColorInit( 0xFFFFFF00, 0xCC6600 ) );
+      addInitializer( new Lifetime( 6 ) );
+      addInitializer( new Position( new BitmapDataZone( new FlintImage( 320, 80 ), 40, 60 ) ) );
+      
+      addAction( new Age( Quadratic.easeInOut ) );
+      addAction( new TweenToZone( new BitmapDataZone( new ParticlesImage( 320, 80 ), 40, 60 ) ) );
+    }
+  }
+}</pre><pre class="code">package
+{
+  import org.flintparticles.common.actions.Age;
+  import org.flintparticles.common.easing.Quadratic;
+  import org.flintparticles.common.initializers.Lifetime;
+  import org.flintparticles.twoD.actions.TweenToZone;
+  import org.flintparticles.twoD.emitters.Emitter2D;
+  import org.flintparticles.twoD.zones.BitmapDataZone;
+
+  public class TweenToFlint extends Emitter2D
+  {
+    public function TweenToFlint()
+    {
+      addInitializer( new Lifetime( 6 ) );
+      
+      addAction( new Age( Quadratic.easeInOut ) );
+      addAction( new TweenToZone( new BitmapDataZone( new FlintImage( 320, 80 ), 40, 60 ) ) );
+    }
+  }
+}</pre><pre class="code">package
+{
+  import org.flintparticles.common.actions.Age;
+  import org.flintparticles.common.easing.Quadratic;
+  import org.flintparticles.common.initializers.Lifetime;
+  import org.flintparticles.twoD.actions.TweenToZone;
+  import org.flintparticles.twoD.emitters.Emitter2D;
+  import org.flintparticles.twoD.zones.BitmapDataZone;
+
+  public class TweenToParticles extends Emitter2D
+  {
+    public function TweenToParticles()
+    {
+      addInitializer( new Lifetime( 6 ) );
+      
+      addAction( new Age( Quadratic.easeInOut ) );
+      addAction( new TweenToZone( new BitmapDataZone( new ParticlesImage( 320, 80 ), 40, 60 ) ) );
+    }
+  }
+}</pre></div>
+<div id="Flash"><pre class="code">﻿
+
+import org.flintparticles.common.actions.Age;
+import org.flintparticles.common.counters.Blast;
+import org.flintparticles.common.easing.Quadratic;
+import org.flintparticles.common.events.ParticleEvent;
+import org.flintparticles.common.initializers.ColorInit;
+import org.flintparticles.common.initializers.Lifetime;
+import org.flintparticles.common.particles.Particle;
+import org.flintparticles.twoD.actions.TweenToZone;
+import org.flintparticles.twoD.emitters.Emitter2D;
+import org.flintparticles.twoD.initializers.Position;
+import org.flintparticles.twoD.particles.Particle2D;
+import org.flintparticles.twoD.renderers.PixelRenderer;  
+import org.flintparticles.twoD.zones.BitmapDataZone;
+
+var flintImage:BitmapData = new FlintImage( 320, 80 );
+var particlesImage:BitmapData = new ParticlesImage( 320, 80 );
+
+var startEmitter:Emitter2D = new Emitter2D();
+startEmitter.counter = new Blast( 5000 );
+startEmitter.addInitializer( new ColorInit( 0xFFFFFF00, 0xCC6600 ) );
+startEmitter.addInitializer( new Lifetime( 6 ) );
+startEmitter.addInitializer( new Position( new BitmapDataZone( flintImage, 40, 60 ) ) );
+startEmitter.addAction( new Age( Quadratic.easeInOut ) );
+startEmitter.addAction( new TweenToZone( new BitmapDataZone( particlesImage, 40, 60 ) ) );
+
+var tween1Emitter:Emitter2D = new Emitter2D();
+tween1Emitter.addInitializer( new Lifetime( 6 ) );
+tween1Emitter.addAction( new Age( Quadratic.easeInOut ) );
+tween1Emitter.addAction( new TweenToZone( new BitmapDataZone( flintImage, 40, 60 ) ) );
+
+var tween2Emitter:Emitter2D = new Emitter2D();
+tween2Emitter.addInitializer( new Lifetime( 6 ) );
+tween2Emitter.addAction( new Age( Quadratic.easeInOut ) );
+tween2Emitter.addAction( new TweenToZone( new BitmapDataZone( particlesImage, 40, 60 ) ) );
+
+var renderer:PixelRenderer = new PixelRenderer( new Rectangle( 0, 0, 400, 200 ) );
+renderer.addFilter( new BlurFilter( 2, 2, 1 ) );
+renderer.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.97,0 ] ) );
+renderer.addEmitter( startEmitter );
+renderer.addEmitter( tween1Emitter );
+renderer.addEmitter( tween2Emitter );
+addChild( renderer );
+
+startEmitter.addEventListener( ParticleEvent.PARTICLE_DEAD, moveToTween1 );
+tween1Emitter.addEventListener( ParticleEvent.PARTICLE_DEAD, moveToTween2 );
+tween2Emitter.addEventListener( ParticleEvent.PARTICLE_DEAD, moveToTween1 );
+
+startEmitter.start();
+tween1Emitter.start();
+tween2Emitter.start();
+
+function moveToTween1( event:ParticleEvent ):void
+{
+  event.particle.revive();
+  tween1Emitter.addParticles( Vector.&lt;Particle&gt;( [ event.particle ] ), true );
+}
+
+function moveToTween2( event:ParticleEvent ):void
+{
+  event.particle.revive();
+  tween2Emitter.addParticles( Vector.&lt;Particle&gt;( [ event.particle ] ), true );
+}</pre></div>
+
+
+</div>
+</div>
+
+<footer role="contentinfo">
+	<p>Richard Lord - Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+</footer>
+</div>
+</body>
+</html>

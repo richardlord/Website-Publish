@@ -1,0 +1,34 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>StartupController.as</title>
+<link rel="stylesheet" type="text/css" href="../../../../../../../SourceStyles.css"/>
+</head>
+
+<body><pre><span class="ActionScriptpackage">package</span> <span class="ActionScriptDefault_Text">net</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">richardlord</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">flexcaster</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">smartysignals</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">controller</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">impl</span>
+<span class="ActionScriptBracket/Brace">{</span>
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">mx</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">core</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">IMXMLObject</span>;
+    
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">net</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">expantra</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">smartypants</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">Injector</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">net</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">expantra</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">smartypants</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">SmartyPants</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">net</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">richardlord</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">flexcaster</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">smartysignals</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">config</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">FlexcasterConfig</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">net</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">richardlord</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">flexcaster</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">smartysignals</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">controller</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">FeedsController</span>;
+    
+    <span class="ActionScriptReserved">public</span> <span class="ActionScriptclass">class</span> <span class="ActionScriptDefault_Text">StartupController</span> <span class="ActionScriptReserved">implements</span> <span class="ActionScriptDefault_Text">IMXMLObject</span>
+    <span class="ActionScriptBracket/Brace">{</span>
+        
+        <span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptMetadata">Inject</span><span class="ActionScriptBracket/Brace">]</span><span class="ActionScriptReserved">public</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">controller</span> : <span class="ActionScriptDefault_Text">FeedsController</span>;
+        
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">initialized</span><span class="ActionScriptBracket/Brace">(</span> <span class="ActionScriptDefault_Text">document</span> : <span class="ActionScriptDefault_Text">Object</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">id</span> : <span class="ActionScriptDefault_Text">String</span> <span class="ActionScriptBracket/Brace">)</span> : <span class="ActionScriptReserved">void</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">config</span> : <span class="ActionScriptDefault_Text">FlexcasterConfig</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">FlexcasterConfig</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">config</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">configure</span><span class="ActionScriptBracket/Brace">(</span> <span class="ActionScriptDefault_Text">document</span> <span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">injector</span> : <span class="ActionScriptDefault_Text">Injector</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">SmartyPants</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">getOrCreateInjectorFor</span><span class="ActionScriptBracket/Brace">(</span> <span class="ActionScriptDefault_Text">document</span> <span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">injector</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">injectInto</span><span class="ActionScriptBracket/Brace">(</span> <span class="ActionScriptReserved">this</span> <span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">controller</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">loadFeeds</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+    <span class="ActionScriptBracket/Brace">}</span>
+<span class="ActionScriptBracket/Brace">}</span></pre></body>
+</html>

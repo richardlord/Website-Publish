@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Flint Particles Explode Image</title>
+<link rel="stylesheet" type="text/css" media="all" href="/style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/flint-particles/style.css" />
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9509078-6', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+<div id="page">
+<header role="banner">
+
+	<div id="branding"><img id="site-image" src="/flint-particles/images/core/logobig.gif" width="325" height="37" /></div>
+
+	<nav id="menu" role="navigation">
+	<div>
+		<ul>
+			<li><a href="/flint-particles/index.html">ABOUT</a></li>
+			<li><a href="/flint-particles/source-code.html">SOURCE CODE</a></li>
+			<li><a href="/flint-particles/documentation.html">DOCUMENTATION</a></li>
+			<li><a href="/flint-particles/examples/">EXAMPLES</a></li>
+			<li><a href="/flint-particles/blog/">BLOG</a></li>
+		</ul>
+	</div>
+	</nav>
+</header>
+
+<div id="main">
+<div id="content">
+
+
+<link type="text/css" href="/flint-particles/css/jquery-ui-1.8.2.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/flint-particles/javascript/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="/flint-particles/javascript/jquery-ui-1.8.2.custom.min.js"></script>
+
+<h1>Explode Image</h1>
+
+<div class="spaced center">
+  <object width="500" height="350" data="/flint-particles/source/examples2D/ExplodeImage/PureAS3/ExplodeImage.swf" type="application/x-shockwave-flash">
+    <param name="movie" value="/flint-particles/source/examples2D/ExplodeImage/PureAS3/ExplodeImage.swf" />
+    <param name="loop" value="false" />
+    <param name="quality" value="high" />
+    <param name="allowfullscreen" value="true" />
+  </object>
+</div>
+
+<p>Here we use one of Flint&#8217;s utility functions to create many small particles from a single image. Then, by applying the Explode activity at the location of the mouse click, we blow the image apart.</p>
+
+<script type="text/javascript">$(function() { $("#source").tabs(); });</script>
+
+<div id="source">
+  <ul><li><a href="#PureAS3">PureAS3</a></li>
+<li><a href="#Flash">Flash</a></li>
+<li><a href="#Flex">Flex</a></li>
+</ul><div id="PureAS3"><pre class="code">package
+{
+  import org.flintparticles.common.events.EmitterEvent;
+  import org.flintparticles.common.particles.Particle;
+  import org.flintparticles.twoD.actions.DeathZone;
+  import org.flintparticles.twoD.actions.Explosion;
+  import org.flintparticles.twoD.actions.Move;
+  import org.flintparticles.twoD.emitters.Emitter2D;
+  import org.flintparticles.twoD.particles.Particle2DUtils;
+  import org.flintparticles.twoD.renderers.DisplayObjectRenderer;
+  import org.flintparticles.twoD.zones.RectangleZone;
+
+  import flash.display.BitmapData;
+  import flash.display.Sprite;
+  import flash.events.MouseEvent;
+  import flash.geom.Point;
+
+  [SWF(width='500', height='350', frameRate='60', backgroundColor='#000000')]
+  
+  public class Main extends Sprite
+  {
+    private var emitter:Emitter2D;
+    private var bitmap:BitmapData;
+    private var renderer:DisplayObjectRenderer;
+    private var explosion:Explosion;
+    
+    public function Main()
+    {
+      bitmap = new Image1( 384, 255 );
+      
+      emitter = new Emitter2D();
+      emitter.addAction( new DeathZone( new RectangleZone( -5, -5, 505, 355 ), true ) );
+      emitter.addAction( new Move() );
+      prepare();
+      
+      renderer = new DisplayObjectRenderer();
+      addChild( renderer );
+      renderer.addEmitter( emitter );
+      emitter.start();
+      
+      stage.addEventListener( MouseEvent.CLICK, explode, false, 0, true );
+      emitter.addEventListener( EmitterEvent.EMITTER_EMPTY, prepare );
+    }
+    
+    private function prepare( event:EmitterEvent = null ):void
+    {
+      if( explosion )
+      {
+        emitter.removeAction( explosion );
+        explosion = null;
+      }
+      var particles:Vector.&lt;Particle&gt; = Particle2DUtils.createRectangleParticlesFromBitmapData( bitmap, 8, emitter.particleFactory, 56, 47 );
+      emitter.addParticles( particles, false );
+    }
+    
+    private function explode( ev:MouseEvent ):void
+    {
+      if( !explosion )
+      {
+        var p:Point = renderer.globalToLocal( new Point( ev.stageX, ev.stageY ) );
+        explosion = new Explosion( 8, p.x, p.y, 500 );
+        emitter.addAction( explosion );
+      }
+    }
+  }
+}</pre></div>
+<div id="Flash"><pre class="code">import org.flintparticles.common.events.EmitterEvent;
+import org.flintparticles.common.particles.Particle;
+import org.flintparticles.twoD.actions.DeathZone;
+import org.flintparticles.twoD.actions.Explosion;
+import org.flintparticles.twoD.actions.Move;
+import org.flintparticles.twoD.emitters.Emitter2D;
+import org.flintparticles.twoD.particles.Particle2DUtils;
+import org.flintparticles.twoD.renderers.DisplayObjectRenderer;
+import org.flintparticles.twoD.zones.RectangleZone;
+
+var explosion:Explosion;
+var bitmap:BitmapData = new Image1( 384, 255 );
+
+var emitter:Emitter2D = new Emitter2D();
+emitter.addAction( new Move() );
+emitter.addAction( new DeathZone( new RectangleZone( -10, -10, 510, 360 ), true ) );
+prepare();
+
+var renderer:DisplayObjectRenderer = new DisplayObjectRenderer();
+addChild( renderer );
+renderer.addEmitter( emitter );
+emitter.start();
+
+stage.addEventListener( MouseEvent.CLICK, explode, false, 0, true );
+emitter.addEventListener( EmitterEvent.EMITTER_EMPTY, prepare );
+
+function prepare( event:EmitterEvent = null ):void
+{
+  if( explosion )
+  {
+    emitter.removeAction( explosion );
+    explosion = null;
+  }
+  var particles:Vector.&lt;Particle&gt; = Particle2DUtils.createRectangleParticlesFromBitmapData( bitmap, 8, emitter.particleFactory, 56, 47 );
+  emitter.addParticles( particles, false );
+}
+    
+function explode( ev:MouseEvent ):void
+{
+  if( !explosion )
+  {
+    var p:Point = renderer.globalToLocal( new Point( ev.stageX, ev.stageY ) );
+    explosion = new Explosion( 8, p.x, p.y, 500 );
+    emitter.addAction( explosion );
+  }
+}</pre></div>
+<div id="Flex"><pre class="code">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;s:Application
+  xmlns:fx=&quot;http://ns.adobe.com/mxml/2009&quot; 
+  xmlns:s=&quot;library://ns.adobe.com/flex/spark&quot; 
+  xmlns:f=&quot;http://flintparticles.org/2009/flint2d&quot;
+  width=&quot;500&quot; height=&quot;350&quot;
+  backgroundColor=&quot;#000000&quot; creationComplete=&quot;complete()&quot;&gt;
+  
+&lt;fx:Script&gt;
+  &lt;![CDATA[
+    import org.flintparticles.common.events.EmitterEvent;
+    import org.flintparticles.common.particles.Particle;
+    import org.flintparticles.twoD.actions.Explosion;
+    import org.flintparticles.twoD.particles.Particle2DUtils;
+    
+    private var explosion:Explosion;
+    private var bitmap:BitmapData;
+
+    private function complete():void
+    {
+      bitmap = new Image1( 384, 255 );
+      prepare();
+      addEventListener( MouseEvent.CLICK, explode, false, 0, true );
+      emitter.addEventListener( EmitterEvent.EMITTER_EMPTY, prepare );
+    }
+    
+    private function prepare( event:EmitterEvent = null ):void
+    {
+      if( explosion )
+      {
+        emitter.removeAction( explosion );
+        explosion = null;
+      }
+      var particles:Vector.&lt;Particle&gt; = Particle2DUtils.createRectangleParticlesFromBitmapData( bitmap, 8, emitter.particleFactory, 56, 47 );
+      emitter.addParticles( particles, false );
+    }
+
+    private function explode( ev:MouseEvent ):void
+    {
+      if( !explosion )
+      {
+        var p:Point = renderer.globalToLocal( new Point( ev.stageX, ev.stageY ) );
+        explosion = new Explosion( 8, p.x, p.y, 500 );
+        emitter.addAction( explosion );
+      }
+    }
+  ]]&gt;
+&lt;/fx:Script&gt;
+
+&lt;f:DisplayObjectRenderer id=&quot;renderer&quot; width=&quot;500&quot; height=&quot;350&quot;&gt;
+  &lt;f:emitters&gt;
+    &lt;f:Emitter id=&quot;emitter&quot; autoStart=&quot;true&quot;&gt;
+      &lt;f:actions&gt;
+        &lt;f:Move/&gt;
+        &lt;f:DeathZone zoneIsSafe=&quot;true&quot;&gt;
+          &lt;f:RectangleZone left=&quot;-5&quot; right=&quot;505&quot; top=&quot;-5&quot; bottom=&quot;355&quot;/&gt;
+        &lt;/f:DeathZone&gt;
+      &lt;/f:actions&gt;
+    &lt;/f:Emitter&gt;
+  &lt;/f:emitters&gt;
+&lt;/f:DisplayObjectRenderer&gt;
+&lt;/s:Application&gt;</pre></div>
+
+
+</div>
+</div>
+
+<footer role="contentinfo">
+	<p>Richard Lord - Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+</footer>
+</div>
+</body>
+</html>

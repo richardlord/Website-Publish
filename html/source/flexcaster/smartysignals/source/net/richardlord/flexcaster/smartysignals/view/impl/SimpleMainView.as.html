@@ -1,0 +1,52 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>SimpleMainView.as</title>
+<link rel="stylesheet" type="text/css" href="../../../../../../../SourceStyles.css"/>
+</head>
+
+<body><pre><span class="ActionScriptpackage">package</span> <span class="ActionScriptDefault_Text">net</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">richardlord</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">flexcaster</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">smartysignals</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">view</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">impl</span>
+<span class="ActionScriptBracket/Brace">{</span>
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">net</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">expantra</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">smartypants</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">Injector</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">net</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">richardlord</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">flexcaster</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">smartysignals</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">model</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">StateManager</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">net</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">richardlord</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">flexcaster</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">smartysignals</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">model</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">constant</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">FlexcasterStates</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">net</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">richardlord</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">flexcaster</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">smartysignals</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">view</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">MainView</span>;
+    
+    <span class="ActionScriptReserved">public</span> <span class="ActionScriptclass">class</span> <span class="ActionScriptDefault_Text">SimpleMainView</span> <span class="ActionScriptReserved">implements</span> <span class="ActionScriptDefault_Text">MainView</span>
+    <span class="ActionScriptBracket/Brace">{</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptReserved">static</span> <span class="ActionScriptReserved">const</span> <span class="ActionScriptDefault_Text">FEEDS_VIEW</span> : <span class="ActionScriptDefault_Text">int</span> <span class="ActionScriptOperator">=</span> 0;
+        
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptReserved">static</span> <span class="ActionScriptReserved">const</span> <span class="ActionScriptDefault_Text">FEED_VIEW</span> : <span class="ActionScriptDefault_Text">int</span> <span class="ActionScriptOperator">=</span> 1;
+        
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptReserved">static</span> <span class="ActionScriptReserved">const</span> <span class="ActionScriptDefault_Text">PODCAST_VIEW</span> : <span class="ActionScriptDefault_Text">int</span> <span class="ActionScriptOperator">=</span> 2;
+        
+        <span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptMetadata">Inject</span><span class="ActionScriptBracket/Brace">]</span><span class="ActionScriptReserved">public</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">stateManager</span> : <span class="ActionScriptDefault_Text">StateManager</span>;
+        
+        <span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptMetadata">Bindable</span><span class="ActionScriptBracket/Brace">]</span><span class="ActionScriptReserved">public</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">currentView</span> : <span class="ActionScriptDefault_Text">int</span>;
+        
+        <span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptMetadata">PostConstruct</span><span class="ActionScriptBracket/Brace">]</span><span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">postInjection</span><span class="ActionScriptBracket/Brace">(</span> <span class="ActionScriptDefault_Text">injector</span> : <span class="ActionScriptDefault_Text">Injector</span> <span class="ActionScriptBracket/Brace">)</span> : <span class="ActionScriptReserved">void</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptDefault_Text">stateManager</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">stateChangeSignal</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">add</span><span class="ActionScriptBracket/Brace">(</span> <span class="ActionScriptDefault_Text">stateChanged</span> <span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">stateChanged</span><span class="ActionScriptBracket/Brace">(</span> <span class="ActionScriptDefault_Text">stateManager</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">state</span> <span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">stateChanged</span><span class="ActionScriptBracket/Brace">(</span> <span class="ActionScriptDefault_Text">state</span> : <span class="ActionScriptDefault_Text">String</span> <span class="ActionScriptBracket/Brace">)</span> : <span class="ActionScriptReserved">void</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">switch</span> <span class="ActionScriptBracket/Brace">(</span> <span class="ActionScriptDefault_Text">state</span> <span class="ActionScriptBracket/Brace">)</span>
+            <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptReserved">case</span> <span class="ActionScriptDefault_Text">FlexcasterStates</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">SHOW_FEEDS_STATE</span>:
+                    <span class="ActionScriptDefault_Text">currentView</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">FEEDS_VIEW</span>;
+                    <span class="ActionScriptReserved">break</span>;
+                <span class="ActionScriptReserved">case</span> <span class="ActionScriptDefault_Text">FlexcasterStates</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">SHOW_FEED_STATE</span>:
+                    <span class="ActionScriptDefault_Text">currentView</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">FEED_VIEW</span>;
+                    <span class="ActionScriptReserved">break</span>;
+                <span class="ActionScriptReserved">case</span> <span class="ActionScriptDefault_Text">FlexcasterStates</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">SHOW_PODCAST_STATE</span>:
+                    <span class="ActionScriptDefault_Text">currentView</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">PODCAST_VIEW</span>;
+                    <span class="ActionScriptReserved">break</span>;
+            <span class="ActionScriptBracket/Brace">}</span>
+        <span class="ActionScriptBracket/Brace">}</span>
+    <span class="ActionScriptBracket/Brace">}</span>
+<span class="ActionScriptBracket/Brace">}</span></pre></body>
+</html>

@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Flint Particles Firework Display</title>
+<link rel="stylesheet" type="text/css" media="all" href="/style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/flint-particles/style.css" />
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9509078-6', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+<div id="page">
+<header role="banner">
+
+	<div id="branding"><img id="site-image" src="/flint-particles/images/core/logobig.gif" width="325" height="37" /></div>
+
+	<nav id="menu" role="navigation">
+	<div>
+		<ul>
+			<li><a href="/flint-particles/index.html">ABOUT</a></li>
+			<li><a href="/flint-particles/source-code.html">SOURCE CODE</a></li>
+			<li><a href="/flint-particles/documentation.html">DOCUMENTATION</a></li>
+			<li><a href="/flint-particles/examples/">EXAMPLES</a></li>
+			<li><a href="/flint-particles/blog/">BLOG</a></li>
+		</ul>
+	</div>
+	</nav>
+</header>
+
+<div id="main">
+<div id="content">
+
+
+<link type="text/css" href="/flint-particles/css/jquery-ui-1.8.2.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/flint-particles/javascript/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="/flint-particles/javascript/jquery-ui-1.8.2.custom.min.js"></script>
+
+<h1>Firework Display</h1>
+
+<div class="spaced center">
+  <object width="800" height="600" data="/flint-particles/source/examples3D/FireworkDisplay/PureAS3/FireworkDisplay.swf" type="application/x-shockwave-flash">
+    <param name="movie" value="/flint-particles/source/examples3D/FireworkDisplay/PureAS3/FireworkDisplay.swf" />
+    <param name="loop" value="false" />
+    <param name="quality" value="high" />
+    <param name="allowfullscreen" value="true" />
+  </object>
+</div>
+
+<p>This project combines a number of emitters into a single display.</p><script type="text/javascript">$(function() { $("#source").tabs(); });</script>
+<div id="source">
+  <ul><li><a href="#PureAS3">PureAS3</a></li>
+<li><a href="#Flash">Flash</a></li>
+<li><a href="#Flex">Flex</a></li>
+</ul><div id="PureAS3"><pre class="code">package
+{
+  import org.flintparticles.common.emitters.Emitter;
+  import org.flintparticles.common.events.EmitterEvent;
+  import org.flintparticles.common.events.ParticleEvent;
+  import org.flintparticles.threeD.emitters.Emitter3D;
+  import org.flintparticles.threeD.particles.Particle3D;
+  import org.flintparticles.threeD.renderers.BitmapRenderer;
+  import org.flintparticles.threeD.renderers.controllers.FirstPersonCamera;
+  import org.flintparticles.threeD.zones.LineZone;
+
+  import flash.display.Sprite;
+  import flash.filters.BlurFilter;
+  import flash.filters.ColorMatrixFilter;
+  import flash.geom.Rectangle;
+  import flash.geom.Vector3D;
+
+  [SWF(width='800', height='600', frameRate='60', backgroundColor='#000000')]
+  
+  public class Main extends Sprite
+  {
+    private var orbitter:FirstPersonCamera;
+    private var renderer:BitmapRenderer;
+    
+    public function Main()
+    {
+      renderer = new BitmapRenderer( new Rectangle( -400, -300, 800, 600 ), false );
+      renderer.x = 400;
+      renderer.y = 300;
+      renderer.addFilter( new BlurFilter( 2, 2, 1 ) );
+      renderer.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.95,0 ] ) );
+      addChild( renderer );
+
+      renderer.camera.position = new Vector3D( 0, -150, -400 );
+      renderer.camera.target = new Vector3D( 0, -150, 0 );
+      renderer.camera.projectionDistance = 400;
+      orbitter = new FirstPersonCamera( stage, renderer.camera );
+      orbitter.start();
+      
+      var emitter:Emitter3D = new Whizzer( new LineZone( new Vector3D( -200, 0, 0 ), new Vector3D( 200, 0, 0) ) );
+      renderer.addEmitter( emitter );
+      emitter.addEventListener( ParticleEvent.PARTICLE_DEAD, whizzBang, false, 0, true );
+      emitter.start();
+      
+      emitter = new Candle( new Vector3D( 150, 0, 150 ) );
+      renderer.addEmitter( emitter );
+      emitter.start();
+      
+      emitter = new Candle( new Vector3D( -150, 0, 150 ) );
+      renderer.addEmitter( emitter );
+      emitter.start();
+      
+      emitter = new Candle( new Vector3D( 150, 0, -150 ) );
+      renderer.addEmitter( emitter );
+      emitter.start();
+      
+      emitter = new Candle( new Vector3D( -150, 0, -150 ) );
+      renderer.addEmitter( emitter );
+      emitter.start();
+      
+      emitter = new CatherineWheel( new Vector3D( -200, -200, 50 ) );
+      renderer.addEmitter( emitter );
+      emitter.start();
+      
+      emitter = new CatherineWheel( new Vector3D( 0, -200, 50 ) );
+      renderer.addEmitter( emitter );
+      emitter.start();
+      
+      emitter = new CatherineWheel( new Vector3D( 200, -200, 50 ) );
+      renderer.addEmitter( emitter );
+      emitter.start();
+    }
+
+    public function whizzBang( ev:ParticleEvent ):void
+    {
+      var bang:Emitter3D = new SphereBang( Particle3D( ev.particle ).position );
+      bang.addEventListener( EmitterEvent.EMITTER_EMPTY, removeEmitter, false, 0, true );
+      renderer.addEmitter( bang );
+      bang.start();
+    }
+    
+    public function removeEmitter( ev:EmitterEvent ):void
+    {
+      Emitter3D( ev.target ).removeEventListener( EmitterEvent.EMITTER_EMPTY, removeEmitter );
+      renderer.removeEmitter( Emitter3D( ev.target ) );
+    }
+    
+    public function destroy():void
+    {
+      for each( var e:Emitter in renderer.emitters )
+      {
+        e.stop();
+      }
+    }
+  }
+}</pre><pre class="code">package
+{
+  import org.flintparticles.common.actions.Age;
+  import org.flintparticles.common.counters.Steady;
+  import org.flintparticles.common.displayObjects.Dot;
+  import org.flintparticles.common.initializers.ColorInit;
+  import org.flintparticles.common.initializers.Lifetime;
+  import org.flintparticles.common.initializers.SharedImage;
+  import org.flintparticles.threeD.actions.Accelerate;
+  import org.flintparticles.threeD.actions.Move;
+  import org.flintparticles.threeD.emitters.Emitter3D;
+  import org.flintparticles.threeD.initializers.Position;
+  import org.flintparticles.threeD.initializers.Velocity;
+  import org.flintparticles.threeD.zones.DiscZone;
+  import org.flintparticles.threeD.zones.PointZone;
+
+  import flash.geom.Vector3D;
+
+  public class Candle extends Emitter3D
+  {
+    public function Candle( position:Vector3D )
+    {
+      counter = new Steady( 30 );
+      
+      addInitializer( new SharedImage( new Dot( 1 ) ) );
+      addInitializer( new ColorInit( 0xFFFFFF00, 0xFFFF6600 ) );
+      addInitializer( new Position( new PointZone( position ) ) );
+      addInitializer( new Velocity( new DiscZone( new Vector3D( 0, -80, 0 ), new Vector3D( 0, 1, 0 ), 30 ) ) );
+      addInitializer( new Lifetime( 2 ) );
+      
+      addAction( new Move() );
+      addAction( new Accelerate( new Vector3D( 0, 50, 0 ) ) );
+      addAction( new Age() );
+    }
+  }
+}</pre><pre class="code">package
+{
+  import org.flintparticles.common.actions.Age;
+  import org.flintparticles.common.counters.Steady;
+  import org.flintparticles.common.displayObjects.Dot;
+  import org.flintparticles.common.initializers.ColorInit;
+  import org.flintparticles.common.initializers.Lifetime;
+  import org.flintparticles.common.initializers.SharedImage;
+  import org.flintparticles.threeD.actions.Accelerate;
+  import org.flintparticles.threeD.actions.Move;
+  import org.flintparticles.threeD.activities.RotateEmitter;
+  import org.flintparticles.threeD.emitters.Emitter3D;
+  import org.flintparticles.threeD.initializers.Velocity;
+  import org.flintparticles.threeD.zones.ConeZone;
+
+  import flash.geom.Vector3D;
+
+  public class CatherineWheel extends Emitter3D
+  {
+    public function CatherineWheel( position:Vector3D )
+    {
+      counter = new Steady( 80 );
+      
+      this.position = position;
+      
+      addActivity( new RotateEmitter( new Vector3D( 0, 0, 1 ), 10 ) );
+      
+      addInitializer( new SharedImage( new Dot( 1 ) ) );
+      addInitializer( new ColorInit( 0xFFFFFF00, 0xFFFF6600 ) );
+      addInitializer( new Velocity( new ConeZone( new Vector3D(), new Vector3D( 1, 0, 0 ), 0.5, 100, 80 ) ) );
+      addInitializer( new Lifetime( 0.5 ) );
+      
+      addAction( new Move() );
+      addAction( new Accelerate( new Vector3D( 0, 50, 0 ) ) );
+      addAction( new Age() );
+    }
+  }
+}</pre><pre class="code">package
+{
+  import org.flintparticles.common.actions.Age;
+  import org.flintparticles.common.actions.Fade;
+  import org.flintparticles.common.counters.Blast;
+  import org.flintparticles.common.displayObjects.Dot;
+  import org.flintparticles.common.easing.Quadratic;
+  import org.flintparticles.common.initializers.ColorInit;
+  import org.flintparticles.common.initializers.Lifetime;
+  import org.flintparticles.common.initializers.SharedImage;
+  import org.flintparticles.threeD.actions.Accelerate;
+  import org.flintparticles.threeD.actions.LinearDrag;
+  import org.flintparticles.threeD.actions.Move;
+  import org.flintparticles.threeD.emitters.Emitter3D;
+  import org.flintparticles.threeD.initializers.Position;
+  import org.flintparticles.threeD.initializers.Velocity;
+  import org.flintparticles.threeD.zones.PointZone;
+  import org.flintparticles.threeD.zones.SphereZone;
+
+  import flash.geom.Vector3D;
+
+  public class SphereBang extends Emitter3D
+  {
+    public function SphereBang( position:Vector3D )
+    {
+      counter = new Blast( 200 );
+      
+      addInitializer( new SharedImage( new Dot( 1 ) ) );
+      addInitializer( new ColorInit( 0xFFFFFF00, 0xFFFF6600 ) );
+      addInitializer( new Position( new PointZone( position ) ) );
+      addInitializer( new Velocity( new SphereZone( new Vector3D(), 100 ) ) );
+      addInitializer( new Lifetime( 3 ) );
+      
+      addAction( new Age( Quadratic.easeIn ) );
+      addAction( new Move() );
+      addAction( new Fade() );
+      addAction( new Accelerate( new Vector3D( 0, 50, 0 ) ) );
+      addAction( new LinearDrag( 0.5 ) );
+    }
+  }
+}</pre><pre class="code">package
+{
+  import org.flintparticles.common.actions.Age;
+  import org.flintparticles.common.counters.Steady;
+  import org.flintparticles.common.displayObjects.Dot;
+  import org.flintparticles.common.initializers.ColorInit;
+  import org.flintparticles.common.initializers.Lifetime;
+  import org.flintparticles.common.initializers.SharedImage;
+  import org.flintparticles.threeD.actions.Accelerate;
+  import org.flintparticles.threeD.actions.LinearDrag;
+  import org.flintparticles.threeD.actions.Move;
+  import org.flintparticles.threeD.actions.RandomDrift;
+  import org.flintparticles.threeD.emitters.Emitter3D;
+  import org.flintparticles.threeD.initializers.Position;
+  import org.flintparticles.threeD.initializers.Velocity;
+  import org.flintparticles.threeD.zones.ConeZone;
+  import org.flintparticles.threeD.zones.Zone3D;
+
+  import flash.geom.Vector3D;
+
+  public class Whizzer extends Emitter3D
+  {
+    public function Whizzer( zone:Zone3D )
+    {
+      counter = new Steady( 0.5 );
+      
+      addInitializer( new SharedImage( new Dot( 4 ) ) );
+      addInitializer( new ColorInit( 0xFFFFFF00, 0xFFFF6600 ) );
+      addInitializer( new Position( zone ) );
+      addInitializer( new Velocity( new ConeZone( new Vector3D(), new Vector3D( 0, -1, 0 ), 0.1, 350, 330 ) ) );
+      addInitializer( new Lifetime( 3.3 ) );
+      
+      addAction( new Age() );
+      addAction( new Move() );
+      addAction( new Accelerate( new Vector3D( 0, 50, 0 ) ) );
+      addAction( new LinearDrag( 0.5 ) );
+      addAction( new RandomDrift( 10, 10, 10 ) );
+    }
+  }
+}</pre></div>
+<div id="Flash"><pre class="code">import org.flintparticles.common.events.EmitterEvent;
+import org.flintparticles.common.events.ParticleEvent;
+import org.flintparticles.threeD.emitters.Emitter3D;
+import org.flintparticles.threeD.particles.Particle3D;
+import org.flintparticles.threeD.renderers.*;
+import org.flintparticles.threeD.renderers.controllers.FirstPersonCamera;
+import org.flintparticles.threeD.zones.LineZone;  
+
+var renderer:BitmapRenderer = new BitmapRenderer( new Rectangle( -400, -300, 800, 600 ), false );
+renderer.x = 400;
+renderer.y = 300;
+renderer.addFilter( new BlurFilter( 2, 2, 1 ) );
+renderer.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.95,0 ] ) );
+addChild( renderer );
+
+renderer.camera.position = new Vector3D( 0, -150, -400 );
+renderer.camera.target = new Vector3D( 0, -150, 0 );
+renderer.camera.projectionDistance = 400;
+var orbitter:FirstPersonCamera = new FirstPersonCamera( stage, renderer.camera );
+orbitter.start();
+
+var emitter:Emitter3D = new Whizzer( new LineZone( new Vector3D( -200, 0, 0 ), new Vector3D( 200, 0, 0) ) );
+renderer.addEmitter( emitter );
+emitter.addEventListener( ParticleEvent.PARTICLE_DEAD, whizzBang, false, 0, true );
+emitter.start();
+
+emitter = new Candle( new Vector3D( 150, 0, 150 ) );
+renderer.addEmitter( emitter );
+emitter.start();
+
+emitter = new Candle( new Vector3D( -150, 0, 150 ) );
+renderer.addEmitter( emitter );
+emitter.start();
+
+emitter = new Candle( new Vector3D( 150, 0, -150 ) );
+renderer.addEmitter( emitter );
+emitter.start();
+
+emitter = new Candle( new Vector3D( -150, 0, -150 ) );
+renderer.addEmitter( emitter );
+emitter.start();
+      
+emitter = new CatherineWheel( new Vector3D( -200, -200, 50 ) );
+renderer.addEmitter( emitter );
+emitter.start();
+
+emitter = new CatherineWheel( new Vector3D( 0, -200, 50 ) );
+renderer.addEmitter( emitter );
+emitter.start();
+
+emitter = new CatherineWheel( new Vector3D( 200, -200, 50 ) );
+renderer.addEmitter( emitter );
+emitter.start();
+
+function whizzBang( ev:ParticleEvent ):void
+{
+  var bang:Emitter3D = new SphereBang( Particle3D( ev.particle ).position );
+  bang.addEventListener( EmitterEvent.EMITTER_EMPTY, removeEmitter, false, 0, true );
+  renderer.addEmitter( bang );
+  bang.start();
+}
+
+function removeEmitter( ev:EmitterEvent ):void
+{
+  ev.target.removeEventListener( EmitterEvent.EMITTER_EMPTY, removeEmitter );
+  renderer.removeEmitter( Emitter3D( ev.target ) );
+}</pre><pre class="code">package
+{
+  import org.flintparticles.common.actions.*;
+  import org.flintparticles.common.counters.*;
+  import org.flintparticles.common.displayObjects.Dot;
+  import org.flintparticles.common.initializers.*;
+  import org.flintparticles.threeD.actions.*;
+  import org.flintparticles.threeD.emitters.Emitter3D;
+  import org.flintparticles.threeD.initializers.*;
+  import org.flintparticles.threeD.zones.*;  
+
+  import flash.geom.Vector3D;
+
+  public class Candle extends Emitter3D
+  {
+    public function Candle( position:Vector3D )
+    {
+      counter = new Steady( 30 );
+      
+      addInitializer( new SharedImage( new Dot( 1 ) ) );
+      addInitializer( new ColorInit( 0xFFFFFF00, 0xFFFF6600 ) );
+      addInitializer( new Position( new PointZone( position ) ) );
+      addInitializer( new Velocity( new DiscZone( new Vector3D( 0, -80, 0 ), new Vector3D( 0, 1, 0 ), 30 ) ) );
+      addInitializer( new Lifetime( 2 ) );
+      
+      addAction( new Move() );
+      addAction( new Accelerate( new Vector3D( 0, 50, 0 ) ) );
+      addAction( new Age() );
+    }
+  }
+}</pre><pre class="code">package
+{
+  import org.flintparticles.common.actions.Age;
+  import org.flintparticles.common.counters.Steady;
+  import org.flintparticles.common.displayObjects.Dot;
+  import org.flintparticles.common.initializers.ColorInit;
+  import org.flintparticles.common.initializers.Lifetime;
+  import org.flintparticles.common.initializers.SharedImage;
+  import org.flintparticles.threeD.actions.Accelerate;
+  import org.flintparticles.threeD.actions.Move;
+  import org.flintparticles.threeD.activities.RotateEmitter;
+  import org.flintparticles.threeD.emitters.Emitter3D;
+  import org.flintparticles.threeD.initializers.Velocity;
+  import org.flintparticles.threeD.zones.ConeZone;
+
+  import flash.geom.Vector3D;
+
+  public class CatherineWheel extends Emitter3D
+  {
+    public function CatherineWheel( position:Vector3D )
+    {
+      counter = new Steady( 80 );
+      
+      this.position = position;
+      
+      addActivity( new RotateEmitter( new Vector3D( 0, 0, 1 ), 10 ) );
+      
+      addInitializer( new SharedImage( new Dot( 1 ) ) );
+      addInitializer( new ColorInit( 0xFFFFFF00, 0xFFFF6600 ) );
+      addInitializer( new Velocity( new ConeZone( new Vector3D(), new Vector3D( 1, 0, 0 ), 0.5, 100, 80 ) ) );
+      addInitializer( new Lifetime( 0.5 ) );
+      
+      addAction( new Move() );
+      addAction( new Accelerate( new Vector3D( 0, 50, 0 ) ) );
+      addAction( new Age() );
+    }
+  }
+}</pre><pre class="code">package
+{
+  import org.flintparticles.common.actions.*;
+  import org.flintparticles.common.counters.*;
+  import org.flintparticles.common.displayObjects.Dot;
+  import org.flintparticles.common.easing.Quadratic;
+  import org.flintparticles.common.initializers.*;
+  import org.flintparticles.threeD.actions.*;
+  import org.flintparticles.threeD.emitters.Emitter3D;
+  import org.flintparticles.threeD.initializers.*;
+  import org.flintparticles.threeD.zones.*;  
+
+  import flash.geom.Vector3D;
+
+  public class SphereBang extends Emitter3D
+  {
+    public function SphereBang( position:Vector3D )
+    {
+      counter = new Blast( 200 );
+      
+      addInitializer( new SharedImage( new Dot( 1 ) ) );
+      addInitializer( new ColorInit( 0xFFFFFF00, 0xFFFF6600 ) );
+      addInitializer( new Position( new PointZone( position ) ) );
+      addInitializer( new Velocity( new SphereZone( new Vector3D(), 100 ) ) );
+      addInitializer( new Lifetime( 3 ) );
+      
+      addAction( new Age( Quadratic.easeIn ) );
+      addAction( new Move() );
+      addAction( new Fade() );
+      addAction( new Accelerate( new Vector3D( 0, 50, 0 ) ) );
+      addAction( new LinearDrag( 0.5 ) );
+    }
+  }
+}</pre><pre class="code">package
+{
+  import org.flintparticles.common.actions.*;
+  import org.flintparticles.common.counters.*;
+  import org.flintparticles.common.displayObjects.Dot;
+  import org.flintparticles.common.initializers.*;
+  import org.flintparticles.threeD.actions.*;
+  import org.flintparticles.threeD.emitters.Emitter3D;
+  import org.flintparticles.threeD.initializers.*;
+  import org.flintparticles.threeD.zones.*;
+  
+  import flash.geom.Vector3D;
+
+  public class Whizzer extends Emitter3D
+  {
+    public function Whizzer( zone:Zone3D )
+    {
+      counter = new Steady( 0.5 );
+      
+      addInitializer( new SharedImage( new Dot( 4 ) ) );
+      addInitializer( new ColorInit( 0xFFFFFF00, 0xFFFF6600 ) );
+      addInitializer( new Position( zone ) );
+      addInitializer( new Velocity( new ConeZone( new Vector3D(), new Vector3D( 0, -1, 0 ), 0.1, 350, 330 ) ) );
+      addInitializer( new Lifetime( 3.3 ) );
+      
+      addAction( new Age() );
+      addAction( new Move() );
+      addAction( new Accelerate( new Vector3D( 0, 50, 0 ) ) );
+      addAction( new LinearDrag( 0.5 ) );
+      addAction( new RandomDrift( 10, 10, 10 ) );
+    }
+  }
+}</pre></div>
+<div id="Flex"><pre class="code">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;s:Application
+  xmlns:fx=&quot;http://ns.adobe.com/mxml/2009&quot;
+  xmlns:s=&quot;library://ns.adobe.com/flex/spark&quot;
+  xmlns:f=&quot;http://flintparticles.org/2009/flint3d&quot;
+  xmlns:geom=&quot;flash.geom.*&quot;
+  xmlns:filters=&quot;flash.filters.*&quot;
+  xmlns=&quot;*&quot;
+  width=&quot;800&quot; height=&quot;600&quot;
+  backgroundColor=&quot;#000000&quot; creationComplete=&quot;created()&quot;&gt;
+
+&lt;fx:Script&gt;
+  &lt;![CDATA[
+    import org.flintparticles.common.events.EmitterEvent;
+    import org.flintparticles.threeD.particles.Particle3D;
+    import org.flintparticles.common.events.ParticleEvent;
+    
+    private function created():void
+    {
+      whizzer.addEventListener( ParticleEvent.PARTICLE_DEAD, whizzBang, false, 0, true );
+    }
+
+    public function whizzBang( ev:ParticleEvent ):void
+    {
+      var bang:SphereBang = new SphereBang();
+      bang.position = Particle3D( ev.particle ).position;
+      bang.addEventListener( EmitterEvent.EMITTER_EMPTY, removeEmitter, false, 0, true );
+      renderer.addEmitter( bang );
+      bang.start();
+    }
+
+    public function removeEmitter( ev:EmitterEvent ):void
+    {
+      SphereBang( ev.target ).removeEventListener( EmitterEvent.EMITTER_EMPTY, removeEmitter );
+      renderer.removeEmitter( SphereBang( ev.target ) );
+    }
+  ]]&gt;
+&lt;/fx:Script&gt;
+
+&lt;f:BitmapRenderer x=&quot;0&quot; y=&quot;0&quot; id=&quot;renderer&quot; width=&quot;800&quot; height=&quot;600&quot;&gt;
+  &lt;f:camera&gt;
+    &lt;f:Camera id=&quot;camera&quot; projectionDistance=&quot;400&quot;&gt;
+      &lt;f:position&gt;
+        &lt;geom:Vector3D x=&quot;0&quot; y=&quot;-150&quot; z=&quot;-400&quot;/&gt;
+      &lt;/f:position&gt;
+      &lt;f:target&gt;
+        &lt;geom:Vector3D x=&quot;0&quot; y=&quot;-150&quot; z=&quot;0&quot;/&gt;
+      &lt;/f:target&gt;
+      &lt;f:controller&gt;
+        &lt;f:FirstPersonCamera/&gt;
+      &lt;/f:controller&gt;
+    &lt;/f:Camera&gt;
+  &lt;/f:camera&gt;
+  &lt;f:preFilters&gt;
+    &lt;filters:BlurFilter blurX=&quot;2&quot; blurY=&quot;2&quot; quality=&quot;1&quot;/&gt;
+    &lt;filters:ColorMatrixFilter matrix=&quot;{[ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.95,0 ]}&quot;/&gt;
+  &lt;/f:preFilters&gt;
+  &lt;f:emitters&gt;
+    &lt;Whizzer id=&quot;whizzer&quot; autoStart=&quot;true&quot;&gt;
+      &lt;zone&gt;
+        &lt;f:LineZone&gt;
+          &lt;f:start&gt;
+            &lt;geom:Vector3D x=&quot;-200&quot; y=&quot;0&quot; z=&quot;0&quot;/&gt;
+          &lt;/f:start&gt;
+          &lt;f:end&gt;
+            &lt;geom:Vector3D x=&quot;200&quot; y=&quot;0&quot; z=&quot;0&quot;/&gt;
+          &lt;/f:end&gt;
+        &lt;/f:LineZone&gt;
+      &lt;/zone&gt;
+    &lt;/Whizzer&gt;
+    &lt;CatherineWheel autoStart=&quot;true&quot;&gt;
+      &lt;position&gt;
+        &lt;geom:Vector3D x=&quot;-200&quot; y=&quot;-200&quot; z=&quot;50&quot;/&gt;
+      &lt;/position&gt;
+    &lt;/CatherineWheel&gt;
+    &lt;CatherineWheel autoStart=&quot;true&quot;&gt;
+      &lt;position&gt;
+        &lt;geom:Vector3D x=&quot;0&quot; y=&quot;-200&quot; z=&quot;50&quot;/&gt;
+      &lt;/position&gt;
+    &lt;/CatherineWheel&gt;
+    &lt;CatherineWheel autoStart=&quot;true&quot;&gt;
+      &lt;position&gt;
+        &lt;geom:Vector3D x=&quot;200&quot; y=&quot;-200&quot; z=&quot;50&quot;/&gt;
+      &lt;/position&gt;
+    &lt;/CatherineWheel&gt;
+    &lt;Candle autoStart=&quot;true&quot;&gt;
+      &lt;position&gt;
+        &lt;geom:Vector3D x=&quot;150&quot; y=&quot;0&quot; z=&quot;150&quot;/&gt;
+      &lt;/position&gt;
+    &lt;/Candle&gt;
+    &lt;Candle autoStart=&quot;true&quot;&gt;
+      &lt;position&gt;
+        &lt;geom:Vector3D x=&quot;-150&quot; y=&quot;0&quot; z=&quot;150&quot;/&gt;
+      &lt;/position&gt;
+    &lt;/Candle&gt;
+    &lt;Candle autoStart=&quot;true&quot;&gt;
+      &lt;position&gt;
+        &lt;geom:Vector3D x=&quot;150&quot; y=&quot;0&quot; z=&quot;-150&quot;/&gt;
+      &lt;/position&gt;
+    &lt;/Candle&gt;
+    &lt;Candle autoStart=&quot;true&quot;&gt;
+      &lt;position&gt;
+        &lt;geom:Vector3D x=&quot;-150&quot; y=&quot;0&quot; z=&quot;-150&quot;/&gt;
+      &lt;/position&gt;
+    &lt;/Candle&gt;
+    
+  &lt;/f:emitters&gt;
+&lt;/f:BitmapRenderer&gt;
+&lt;/s:Application&gt;</pre><pre class="code">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;f:Emitter
+  xmlns:fx=&quot;http://ns.adobe.com/mxml/2009&quot;
+  xmlns:f=&quot;http://flintparticles.org/2009/flint3d&quot;
+  xmlns:geom=&quot;flash.geom.*&quot;&gt;
+
+  &lt;f:counter&gt;
+    &lt;f:Steady rate=&quot;30&quot;/&gt;
+  &lt;/f:counter&gt;
+  &lt;f:initializers&gt;
+    &lt;f:SharedImage&gt;
+      &lt;f:Dot radius=&quot;1&quot;/&gt;
+    &lt;/f:SharedImage&gt;
+    &lt;f:ColorInit minColor=&quot;0xFFFF6600&quot; maxColor=&quot;0xFFFFFF00&quot;/&gt;
+    &lt;f:Velocity&gt;
+      &lt;f:DiscZone outerRadius=&quot;30&quot;&gt;
+        &lt;f:normal&gt;
+          &lt;geom:Vector3D x=&quot;0&quot; y=&quot;1&quot; z=&quot;0&quot;/&gt;
+        &lt;/f:normal&gt;
+        &lt;f:center&gt;
+          &lt;geom:Vector3D x=&quot;0&quot; y=&quot;-80&quot; z=&quot;0&quot;/&gt;
+        &lt;/f:center&gt;
+      &lt;/f:DiscZone&gt;
+    &lt;/f:Velocity&gt;
+    &lt;f:Lifetime lifetime=&quot;2&quot;/&gt;
+  &lt;/f:initializers&gt;
+  &lt;f:actions&gt;
+    &lt;f:Move/&gt;
+    &lt;f:Age/&gt;
+    &lt;f:Accelerate x=&quot;0&quot; y=&quot;50&quot; z=&quot;0&quot;/&gt;
+  &lt;/f:actions&gt;
+&lt;/f:Emitter&gt;</pre><pre class="code">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;f:Emitter
+  xmlns:fx=&quot;http://ns.adobe.com/mxml/2009&quot;
+  xmlns:f=&quot;http://flintparticles.org/2009/flint3d&quot;
+  xmlns:geom=&quot;flash.geom.*&quot;&gt;
+
+  &lt;f:counter&gt;
+    &lt;f:Steady rate=&quot;80&quot;/&gt;
+  &lt;/f:counter&gt;
+  &lt;f:activities&gt;
+    &lt;f:RotateEmitter rotateSpeed=&quot;10&quot;&gt;
+      &lt;f:axis&gt;
+        &lt;geom:Vector3D x=&quot;0&quot; y=&quot;0&quot; z=&quot;1&quot;/&gt;
+      &lt;/f:axis&gt;
+    &lt;/f:RotateEmitter&gt;
+  &lt;/f:activities&gt;
+  &lt;f:initializers&gt;
+    &lt;f:SharedImage&gt;
+      &lt;f:Dot radius=&quot;1&quot;/&gt;
+    &lt;/f:SharedImage&gt;
+    &lt;f:ColorInit minColor=&quot;0xFFFF6600&quot; maxColor=&quot;0xFFFFFF00&quot;/&gt;
+    &lt;f:Velocity&gt;
+      &lt;f:ConeZone angle=&quot;0.5&quot; height=&quot;100&quot; truncatedHeight=&quot;80&quot;&gt;
+        &lt;f:axis&gt;
+          &lt;geom:Vector3D x=&quot;1&quot; y=&quot;0&quot; z=&quot;0&quot;/&gt;
+        &lt;/f:axis&gt;
+      &lt;/f:ConeZone&gt;
+    &lt;/f:Velocity&gt;
+    &lt;f:Lifetime lifetime=&quot;0.5&quot;/&gt;
+  &lt;/f:initializers&gt;
+  &lt;f:actions&gt;
+    &lt;f:Move/&gt;
+    &lt;f:Age/&gt;
+    &lt;f:Accelerate x=&quot;0&quot; y=&quot;50&quot; z=&quot;0&quot;/&gt;
+  &lt;/f:actions&gt;
+&lt;/f:Emitter&gt;</pre><pre class="code">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;f:Emitter
+  xmlns:fx=&quot;http://ns.adobe.com/mxml/2009&quot;
+  xmlns:f=&quot;http://flintparticles.org/2009/flint3d&quot;
+  xmlns:geom=&quot;flash.geom.*&quot;&gt;
+
+  &lt;fx:Script&gt;
+    &lt;![CDATA[
+      import org.flintparticles.common.easing.Quadratic;
+    ]]&gt;
+  &lt;/fx:Script&gt;
+
+  &lt;f:counter&gt;
+    &lt;f:Blast startCount=&quot;200&quot;/&gt;
+  &lt;/f:counter&gt;
+  &lt;f:initializers&gt;
+    &lt;f:SharedImage&gt;
+      &lt;f:Dot radius=&quot;1&quot;/&gt;
+    &lt;/f:SharedImage&gt;
+    &lt;f:ColorInit minColor=&quot;0xFFFF6600&quot; maxColor=&quot;0xFFFFFF00&quot;/&gt;
+    &lt;f:Velocity&gt;
+      &lt;f:SphereZone outerRadius=&quot;100&quot;/&gt;
+    &lt;/f:Velocity&gt;
+    &lt;f:Lifetime lifetime=&quot;3&quot;/&gt;
+  &lt;/f:initializers&gt;
+  &lt;f:actions&gt;
+    &lt;f:Move/&gt;
+    &lt;f:Fade/&gt;
+    &lt;f:Age easing=&quot;{Quadratic.easeIn}&quot;/&gt;
+    &lt;f:Accelerate x=&quot;0&quot; y=&quot;50&quot; z=&quot;0&quot;/&gt;
+    &lt;f:LinearDrag drag=&quot;0.5&quot;/&gt;
+  &lt;/f:actions&gt;
+&lt;/f:Emitter&gt;</pre><pre class="code">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;f:Emitter
+  xmlns:fx=&quot;http://ns.adobe.com/mxml/2009&quot;
+  xmlns:f=&quot;http://flintparticles.org/2009/flint3d&quot;
+  xmlns:geom=&quot;flash.geom.*&quot;&gt;
+  
+  &lt;fx:Script&gt;
+    &lt;![CDATA[
+      import org.flintparticles.threeD.zones.Zone3D;
+      [Bindable]
+      public var zone:Zone3D;
+    ]]&gt;
+  &lt;/fx:Script&gt;
+
+  &lt;f:counter&gt;
+    &lt;f:Steady rate=&quot;0.5&quot;/&gt;
+  &lt;/f:counter&gt;
+  &lt;f:initializers&gt;
+    &lt;f:SharedImage&gt;
+      &lt;f:Dot radius=&quot;4&quot;/&gt;
+    &lt;/f:SharedImage&gt;
+    &lt;f:ColorInit minColor=&quot;0xFFFF6600&quot; maxColor=&quot;0xFFFFFF00&quot;/&gt;
+    &lt;f:Position zone=&quot;{zone}&quot;/&gt;
+    &lt;f:Velocity&gt;
+      &lt;f:ConeZone angle=&quot;0.1&quot; height=&quot;350&quot; truncatedHeight=&quot;330&quot;&gt;
+        &lt;f:axis&gt;
+          &lt;geom:Vector3D x=&quot;0&quot; y=&quot;-1&quot; z=&quot;0&quot;/&gt;
+        &lt;/f:axis&gt;
+      &lt;/f:ConeZone&gt;
+    &lt;/f:Velocity&gt;
+    &lt;f:Lifetime lifetime=&quot;3.3&quot;/&gt;
+  &lt;/f:initializers&gt;
+  &lt;f:actions&gt;
+    &lt;f:Move/&gt;
+    &lt;f:Age/&gt;
+    &lt;f:Accelerate x=&quot;0&quot; y=&quot;50&quot; z=&quot;0&quot;/&gt;
+    &lt;f:LinearDrag drag=&quot;0.5&quot;/&gt;
+    &lt;f:RandomDrift driftX=&quot;10&quot; driftY=&quot;10&quot; driftZ=&quot;10&quot;/&gt;
+  &lt;/f:actions&gt;
+&lt;/f:Emitter&gt;</pre></div>
+
+
+</div>
+</div>
+
+<footer role="contentinfo">
+	<p>Richard Lord - Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+</footer>
+</div>
+</body>
+</html>

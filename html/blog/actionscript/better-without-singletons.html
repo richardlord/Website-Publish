@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Singletons - we're better off without them</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" media="all" href="/style.css" />
+<link rel="alternate" type="application/rss+xml" title="Richard Lord's Feed" href="http://www.richardlord.net/feed.xml" />
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9509078-6', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+<div id="page">
+<header role="banner">
+	<div id="social">
+		<a href="https://twitter.com/richard_lord"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+		<a href="https://uk.linkedin.com/in/richardlord"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+		<a href="https://github.com/richardlord"><img src="/images/social/github_logo.png" width="36" height="36" /></a>
+		<a href="https://www.youtube.com/c/RichardLordNet"><img src="/images/social/youtube_logo.png" width="36" height="36" /></a>
+	</div>
+
+	<div id="branding">
+		<img id="site-image" src="/images/social/me.png" />
+		<div id="site-title"><a href="/" title="Richard Lord" rel="home">Richard Lord</a></div>
+		<div id="site-description">Game Developer</div>
+	</div>
+
+	<nav id="menu" role="navigation">
+	<div>
+		<ul>
+			<li><a href="/games.html">GAMES</a></li>
+			<li><a href="/consulting.html">CONSULTING</a></li>
+			<li><a href="/blog/">BLOG</a></li>
+			<li><a href="/presentations/">PRESENTATIONS</a></li>
+			<li><a href="/press.html">PRESS</a></li>
+			<li><a href="/about/">ABOUT</a></li>
+		</ul>
+	</div>
+	</nav>
+</header>
+
+<div id="main">
+<div id="content">
+<h1>Singletons - we're better off without them</h1>
+
+<div id="meta">Posted on <time datetime="2007-03-04T21:08:12Z">04 March 2007</time></div>
+
+
+
+
+<h2>Singletons in AS3</h2>
+
+<p>With the introduction of Actionscript 3 there was a lot of discussion about how to implement the singleton design pattern. This happened because Actionscript 3 doesn't allow private or protected constructors and this prevents the most common implementation technique for singletons. A number of solutions have been proposed, just do a search on Google to find them, or check out <a href="http://blog.gskinner.com/archives/2006/07/as3_singletons.html">Grant Skinner's website</a> for two good examples.</p>
+
+<p>At the time, this seemed to be a major faux pas by Adobe and considering the noise generated one would have been forgiven for thinking it's not possible to write software these days without using singletons. But singletons are never actually needed and are rarely a good idea.</p>
+
+
+<h2>Bad Singletons</h2>
+
+<p>The singleton pattern was described in the book "Design Patterns, Elements of Reusable Object-Oriented Software", commonly called the Gang of Four book. In this book the intent of the singleton pattern is described as to "ensure a class only has one instance, and provide a global point to access it".</p>
+
+<p>I was first introduced to the singleton pattern as an alternative to global variables ("global variables are bad, use a singleton instead"). But this is one instance where singletons emphatically should not be used. Replacing a global variable with a singleton is just a lazy way of avoiding global variables without avoiding any of the problems inherent in global variables.</p>
+
+<p>To summarise some of the problems global variables cause -</p>
+
+<ul>
+<li><b>Inadvertent changes can occur</b> - You may change the value of a global variable in one place and then think that it has remained unchanged elsewhere.</li>
+
+<li><b>Multiple references to the one object</b> - You may refer to the same value by two names and not realise they're the same variable. For example, if you pass the global into a function the one variable now has two ways to reference it, by the argument name and by the global name. Your function may assume the two are different.</li>
+
+<li><b>Inhibit code reuse</b> - Classes that depend on the global variable can only be used in applications where the global variable exists (and uses the same variable name).</li>
+
+<li><b>Break modularity</b> - All classes that use the global data are inherently tightly coupled since they all depend on what the other classes do with the global data.</li>
+
+<li><b>Make testing difficult</b> - Try persuading a class to use a mock object instead of the global without changing the code in the class.</li>
+</ul>
+
+<p>What may be surprising is that all these problems exist with singletons as well because the singleton has a "global point of access". While the first two problems can be avoided by being very careful, the others are inherent in the use of globals and singletons and so can't be avoided.</p>
+
+
+<h2>Alternatives to Singletons</h2>
+
+<p>A singleton is responsible for both its behaviour and for ensuring that only one instance of it exists. In other words, it is responsible for two unconnected activities. This should usually be avoided and the unconnected activities should be implemented in different classes.</p>
+
+<p>In many cases where singletons are used, there's nothing inherent in the singleton class that means only one instance should exist. Rather, it's a requirement (or merely a useful feature) for the application that only one instance should exist. If the application wants there to be only one instance, then the application should enforce this behaviour not the class. This way the class itself can be used in other applications where multiple instances are desirable.</p>
+
+<p>To accomplish this, create the class as a normal, non-singleton, class and enforce the single-instance only behaviour elsewhere in the application. If you want a global point of access (the problems with globals described above will still occur), then you could use a factory to create the instance and reuse it in any code that requests it. If you don't want the global point of access then you could create a single instance and pass it as an argument to all the classes and methods that need it.</p>
+
+<p>But what if it is an inherent feature of the class that only one instance should exist? For example, if multiple instances would break the functionality. Then the class should be responsible for ensuring the single instance behaviour. But even then the best answer may not be the singleton pattern.</p>
+
+<p>Sometimes the single instance requirement is because there's one or more properties within the class that shouldn't be duplicated. In this case, the particular properties could be created as static class properties and used by all instances of the class. This is an example of the monostate pattern.</p>
+
+<pre>package
+{
+    public class Monostate
+    {
+        private static var _mono:SomeClass = null;
+
+        public function get mono():SomeObj
+        {
+            if( _mono == null )
+            {
+                _mono = new SomeClass();
+            }
+            return _mono;
+        }
+    }
+}</pre>
+
+<p>In general, the monostate pattern uses private static properties to ensure that every instance of the class has the same state and uses public accessors to those properties. In some cases only some properties will need to be the same across instances while in others all properties need to be the same. Either way, the singular properties are created as static variables within the class.</p>
+
+<p>The class is instantiated and used as normal, and may be extended via inheritance. Importantly, the client classes that use this class don't need to know that state is shared across all instances - this behaviour and the knowledge about it is internal to the class only.</p>
+
+
+<h2>Good Singletons</h2>
+
+<p>There may still be some circumstances where it is important that one and only one instance of a class should exist and this behaviour is inherent to the class itself rather than being a feature of the application being developed. In such cases the singleton pattern is appropriate, but they are few and you should bear in mind the potential problems outlined above.</p>
+
+<p>Consider also that some of these problems with the singleton (and other globals) can be reduced or eliminated if the client classes using the singleton do so in such a way that they can not be affected by the actions of other classes in relation to the singleton, in particular if the singleton is designed for write access only (e.g. a logging class) or for read access only (e.g. a configuration data class) then the classes using the singleton are not coupled to each other since they are unaffected by each others use of the singleton. They are, obviously, still coupled to the singleton itself.</p>
+
+
+<h2>Conclusion</h2>
+
+<ul>
+<li>The singleton pattern <em>should not</em> be used when it's merely important for the application to have only one instance of the class (the application should simply create only one instance).</li>
+<li>The singleton pattern <em>should not</em> be used when it's important for the class to have only one instance of one or more properties within it (the class should use static properties as in the monostate state pattern).</li>
+<li>The singleton pattern <em>should not</em> be used when it's important for an instance to be globally accessible (use a factory to manage access to the one (or more) instances of the class).</li>
+<li>The singleton pattern <em>should</em> be used when it's important for the class to have exactly one instance.</li>
+</ul>
+
+<p>The singleton pattern is often one of the first design patterns that a developer learns. I think this is a mistake since the pattern is so easily and frequently abused. Since deciding to consider the alternatives before using singletons in my code I find I've not used any singletons in over a year and my code has been more modular, more reusable and easier to test as a result.</p>
+
+<p>Related links</p>
+<ul>
+<li><a href="https://www.ibm.com/developerworks/library/co-single/">Use your singletons wisely</a></li>
+<li><a href="https://blogs.msdn.microsoft.com/scottdensmore/archive/2004/05/25/140827.aspx">Why Singletons are Evil</a></li>
+</ul>
+
+
+<p>Share this post or a comment online -</p>
+<div id="share">
+<a href="https://twitter.com/intent/tweet?text=Singletons+-+we%27re+better+off+without+them&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Factionscript%2Fbetter-without-singletons.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+<a href="https://www.facebook.com/dialog/share?app_id=206081586545847&amp;href=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Factionscript%2Fbetter-without-singletons.html" target="_blank" title="Facebook"><img src="/images/social/facebook_logo.png" width="36" height="36" /></a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=Singletons+-+we%27re+better+off+without+them&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Factionscript%2Fbetter-without-singletons.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+</div>
+<hr />
+<p>Also in the collection <b><a href="./">Actionscript</a></b></p>
+<ul><li><a href="finite-state-machines-for-ai-in-actionscript.html">Finite State Machines for AI in Actionscript</a></li>
+<li><a href="simple-example-of-acceleration.html">Simple example of acceleration</a></li>
+<li><a href="list-loader-for-actionscript-2.html">List Loader for Actionscript 2</a></li>
+<li><a href="singleton-factory.html">Singleton Factory</a></li>
+<li><a href="events-in-actionscript-2.html">Events in Actionscript 2</a></li>
+<li><a href="events-in-actionscript-3.html">Events in Actionscript 3</a></li>
+<li><a href="different-types-of-weak-references.html">Different types of weak references</a></li>
+<li><a href="create-your-own-weak-references-in-actionscript-3.html">Creating weak references in Actionscript 3</a></li>
+<li><a href="polling-the-keyboard-in-actionscript-3.html">Polling the keyboard in Actionscript 3</a></li>
+<li><a href="radial-perlin-noise.html">Radial Perlin Noise</a></li>
+<li><a href="the-parentheses-operator.html">The parentheses operator</a></li>
+<li><a href="object-pool-class.html">Object Pool class</a></li>
+<li><a href="the-i-in-interface.html">The I in Interface</a></li>
+</ul>
+
+</div>
+</div>
+
+<footer role="contentinfo">
+	<p>Richard Lord - Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+</footer>
+</div>
+</body>
+</html>

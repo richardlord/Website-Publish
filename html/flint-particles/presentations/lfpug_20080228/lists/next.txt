@@ -1,0 +1,6 @@
+What's next
+1.0 release
+More behaviours
+Sound
+More inter-particle actions
+3D

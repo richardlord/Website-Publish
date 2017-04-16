@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Finite State Machines for AI in Actionscript</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" media="all" href="/style.css" />
+<link rel="alternate" type="application/rss+xml" title="Richard Lord's Feed" href="http://www.richardlord.net/feed.xml" />
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9509078-6', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+<div id="page">
+<header role="banner">
+	<div id="social">
+		<a href="https://twitter.com/richard_lord"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+		<a href="https://uk.linkedin.com/in/richardlord"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+		<a href="https://github.com/richardlord"><img src="/images/social/github_logo.png" width="36" height="36" /></a>
+		<a href="https://www.youtube.com/c/RichardLordNet"><img src="/images/social/youtube_logo.png" width="36" height="36" /></a>
+	</div>
+
+	<div id="branding">
+		<img id="site-image" src="/images/social/me.png" />
+		<div id="site-title"><a href="/" title="Richard Lord" rel="home">Richard Lord</a></div>
+		<div id="site-description">Game Developer</div>
+	</div>
+
+	<nav id="menu" role="navigation">
+	<div>
+		<ul>
+			<li><a href="/games.html">GAMES</a></li>
+			<li><a href="/consulting.html">CONSULTING</a></li>
+			<li><a href="/blog/">BLOG</a></li>
+			<li><a href="/presentations/">PRESENTATIONS</a></li>
+			<li><a href="/press.html">PRESS</a></li>
+			<li><a href="/about/">ABOUT</a></li>
+		</ul>
+	</div>
+	</nav>
+</header>
+
+<div id="main">
+<div id="content">
+<h1>Finite State Machines for AI in Actionscript</h1>
+
+<div id="meta">Posted on <time datetime="2007-03-04T21:08:12Z">04 March 2007</time></div>
+
+
+
+
+<p>A few months ago <a href="/blog/web-games/best-soccer-game.html">I said</a> I'd post about the AI in <a href="http://www.sticksports.com/game/stick-football/world-domination/">Stick Sports Soccer</a>. Here, at last, is the first such post looking at the code used to implement the Finite State Machines in this and other games I've developed.</p>
+
+<p>(For an introduction to Finite State Machines, try <a href="https://en.wikipedia.org/wiki/Finite_state_machine">Wikipedia</a> and <a href="http://ai-depot.com/FiniteStateMachines/">AI-Depot</a>.)</p>
+
+<p>Often finite state machines are implemented (in real projects and tutorials) as a mass of code in a single class, usually a giant switch statement hundreds or (in one instance I've seen) thousands of lines long. A simple switch statement is great for a simple agent with two or three states, but the more complex the agent gets, both in the number and complexity of the states, the more complex the code gets. Using a switch statement also offers very little opportunity to reuse code across different agents and different projects (other than by cutting and pasting).</p>
+
+<p>The solution I've used in a number of projects is to implement each state as a separate class. The class will contain all the code necessary for entering, updating and exiting that state and nothing else. This way, the code for each state is separate and the agent code isn't cluttered by it.</p>
+
+<p>In this solution, each state implements the State interface, which looks like this.</p>
+
+<pre>interface State
+{
+    public function Enter():Void; // called on entering the state
+    public function Exit():Void; // called on leaving the state
+    public function Update( time:Number ):Void;
+                   // called every frame while in the state
+}</pre>
+
+<p>Each state implements Entry and Exit methods for one-off actions that the agent takes when entering and leaving the state, in addition to the Update method which is run repeatedly while in the state. The time paramater in the Update method is the duration of the frame we're executing.</p>
+
+<p>A couple of states for a patrolling guard in a shoot 'em up might look like this.</p>
+
+<pre>// patrolling the area
+class Patrol implements State
+{
+    private var fsm:StateMachine;
+    private var guard:Guard;
+    
+    public function Patrol( g:Guard )
+    {
+        guard = g;
+        fsm = guard.GetStateMachine();
+    }
+    
+    public function Enter():Void
+    {
+        // check the gun is loaded
+        guard.Reload();
+    }
+    
+    public function Exit():Void
+    {
+    }
+    
+    public function Update( time:Number ):Void
+    {
+        guard.FollowPatrolPath( time );
+        var threat:Soldier = guard.Threatened();
+                               // returns null if no threat
+        if( threat )
+        {
+            fsm.ChangeState( new Attack( guard, threat ) );
+        }
+    }
+}</pre>
+
+<pre>// attacking an enemy
+class Attack implements State
+{
+    private var fsm:StateMachine;
+    private var guard:Guard;
+    private var enemy:Soldier;
+    
+    public function Attack( g:Guard, e:Soldier )
+    {
+        guard = g;
+        fsm = guard.GetStateMachine();
+        enemy = e;
+    }
+    
+    public function Enter():Void
+    {
+    }
+    
+    public function Exit():Void
+    {
+    }
+    
+    public function Update( time:Number ):Void
+    {
+        guard.ShootAt( enemy );
+        if( enemy.IsDead() )
+        {
+            fsm.ChangeState( new Patrol( guard ) );
+        }
+    }
+}</pre>
+
+<p>I then create the Finite State Machine as a class that is responsible for managing the current state. A simple state machine looks like this.</p>
+
+<pre>class StateMachine
+{
+    private var currentState:State;
+    
+    public function StateMachine()
+    {
+        currentState = null;
+    }
+    
+    // Update the FSM. Parameter is the frametime for this frame.
+    public function Update( time:Number ):Void
+    {
+        if( currentState )
+        {
+            currentState.Update( time );
+        }
+    }
+    
+    // Change to another state
+    public function ChangeState( s:State ):Void
+    {
+        if( currentState )
+        {
+            currentState.Exit();
+        }
+        currentState = s;
+        currentState.Enter();
+    }
+}</pre>
+
+<p>The agent then uses an instance of the StateMachine class to handle its AI.</p>
+
+<pre>class Agent
+{
+    private var fsm:StateMachine;
+    
+    public function Agent()
+    {
+        fsm = new StateMachine();
+    }
+    
+    public function Update( time:Number ):Void
+    {
+        fsm.Update( time );
+    }
+    
+    public function GetStateMachine():StateMachine
+    {
+        return fsm;
+    }
+}</pre>
+
+<p>The agent class is a lot more manageable without the state machine implementation and all the states inside it, and I have a single StateMachine class that can be used by all agents. I can even share states across agents too.</p>
+
+<p>Finally, I add a number of features to the StateMachine class to allow chaining of states and returning to previous states.</p>
+
+<pre>class StateMachine
+{
+    private var currentState:State;
+    private var previousState:State;
+    private var nextState:State;
+    
+    public function StateMachine()
+    {
+        currentState = null;
+        previousState = null;
+        nextState = null;
+    }
+    
+    // prepare a state for use after the current state
+    public function SetNextState( s:State ):Void
+    {
+        nextState = s;
+    }
+    
+    // Update the FSM. Parameter is the frametime for this frame.
+    public function Update( time:Number ):Void
+    {
+        if( currentState )
+        {
+            currentState.Update( time );
+        }
+    }
+    
+    // Change to another state
+    public function ChangeState( s:State ):Void
+    {
+        currentState.Exit();
+        previousState = currentState;
+        currentState = s;
+        currentState.Enter();
+    }
+    
+    // Change back to the previous state
+    public function GoToPreviousState():Void
+    {
+        ChangeState( previousState );
+    }
+    
+    // Go to the next state
+    public function GoToNextState():Void
+    {
+        ChangeState( nextState );
+    }
+}</pre>
+
+<p>Which leads to modified and new classes like the following.</p>
+
+<pre>class Soldier extends Agent
+{
+    ...
+}</pre>
+
+<pre>class Guard extends Soldier
+{
+    ...
+}</pre>
+
+<pre>// attacking an enemy
+class Attack implements State
+{
+    private var fsm:StateMachine;
+    private var self:Soldier;
+    private var enemy:Soldier;
+    
+    public function Attack( s:Soldier, e:Soldier )
+    {
+        self = s;
+        fsm = self.GetStateMachine();
+        enemy = e;
+    }
+    
+    public function Enter():Void
+    {
+    }
+    
+    public function Exit():Void
+    {
+    }
+    
+    public function Update( time:Number ):Void
+    {
+        self.ShootAt( enemy );
+        if( enemy.IsDead() )
+        {
+            fsm.GoToPreviousState();
+        }
+    }
+}</pre>
+
+<pre>// wait for a given period of time then go to next state
+class Wait implements State
+{
+    private var fsm:StateMachine;
+    private var self:Agent;
+    private var waitTime:Number;
+    private var timeRemaining:Number;
+
+    public function Wait( s:Agent, t:Number )
+    {
+        self = s;
+        fsm = self.GetStateMachine();
+        waitTime = t;
+    }
+    
+    public function Enter():Void
+    {
+        timeRemaining = waitTime;
+    }
+    
+    public function Exit():Void
+    {
+    }
+
+    public function Update( time:Number ):Void
+    {
+        timeRemaining -= time;
+        if( timeRemaining < 0 )
+        {
+            fsm.GoToNextState();
+        }
+    }
+}</pre>
+
+<p>Having used this solution for a couple of years I can't imagine returning to the mess of giant switch statements, even for the simplest projects. And I use the same state machine, agent base class and many of the states themselves across multiple projects, which speeds up development time.</p>
+
+<h2>Addendum 2011</h2>
+
+<p>There's an <a href="https://github.com/richardlord/Actionscript-Toolkit/tree/master/src/net/richardlord/fsm">Actionscript 3 version</a> of this in <a href="https://github.com/richardlord/Actionscript-Toolkit/tree/master/src/net/richardlord/fsm">my Github repository</a>.</p>
+
+
+<p>Share this post or a comment online -</p>
+<div id="share">
+<a href="https://twitter.com/intent/tweet?text=Finite+State+Machines+for+AI+in+Actionscript&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Factionscript%2Ffinite-state-machines-for-ai-in-actionscript.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+<a href="https://www.facebook.com/dialog/share?app_id=206081586545847&amp;href=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Factionscript%2Ffinite-state-machines-for-ai-in-actionscript.html" target="_blank" title="Facebook"><img src="/images/social/facebook_logo.png" width="36" height="36" /></a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=Finite+State+Machines+for+AI+in+Actionscript&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Factionscript%2Ffinite-state-machines-for-ai-in-actionscript.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+</div>
+<hr />
+<p>Also in the collection <b><a href="./">Actionscript</a></b></p>
+<ul><li><a href="better-without-singletons.html">Singletons - we're better off without them</a></li>
+<li><a href="simple-example-of-acceleration.html">Simple example of acceleration</a></li>
+<li><a href="list-loader-for-actionscript-2.html">List Loader for Actionscript 2</a></li>
+<li><a href="singleton-factory.html">Singleton Factory</a></li>
+<li><a href="events-in-actionscript-2.html">Events in Actionscript 2</a></li>
+<li><a href="events-in-actionscript-3.html">Events in Actionscript 3</a></li>
+<li><a href="different-types-of-weak-references.html">Different types of weak references</a></li>
+<li><a href="create-your-own-weak-references-in-actionscript-3.html">Creating weak references in Actionscript 3</a></li>
+<li><a href="polling-the-keyboard-in-actionscript-3.html">Polling the keyboard in Actionscript 3</a></li>
+<li><a href="radial-perlin-noise.html">Radial Perlin Noise</a></li>
+<li><a href="the-parentheses-operator.html">The parentheses operator</a></li>
+<li><a href="object-pool-class.html">Object Pool class</a></li>
+<li><a href="the-i-in-interface.html">The I in Interface</a></li>
+</ul>
+
+</div>
+</div>
+
+<footer role="contentinfo">
+	<p>Richard Lord - Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+</footer>
+</div>
+</body>
+</html>

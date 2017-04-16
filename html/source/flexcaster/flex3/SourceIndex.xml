@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+	<title>Source of Flexcaster_Flex3</title>
+	<nodes>
+		<node label="libs">
+		</node>
+		<node label="src">
+			<node label="net.richardlord.flexcaster.flex3.data" icon="packageIcon" expanded="true">
+				<node label="Feed.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/flex3/data/Feed.as.html"/>
+				<node label="Podcast.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/flex3/data/Podcast.as.html"/>
+			</node>
+			<node label="net.richardlord.flexcaster.flex3.events" icon="packageIcon" expanded="true">
+				<node label="FeedEvent.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/flex3/events/FeedEvent.as.html"/>
+				<node label="PodcastEvent.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/flex3/events/PodcastEvent.as.html"/>
+				<node label="SimpleEvent.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/flex3/events/SimpleEvent.as.html"/>
+			</node>
+			<node label="net.richardlord.flexcaster.flex3.media" icon="packageIcon" expanded="true">
+				<node label="Mp3Player.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/flex3/media/Mp3Player.as.html"/>
+			</node>
+			<node label="net.richardlord.flexcaster.flex3.views" icon="packageIcon" expanded="true">
+				<node label="FeedRenderer.mxml" icon="mxmlIcon" url="source/net/richardlord/flexcaster/flex3/views/FeedRenderer.mxml.html"/>
+				<node label="FeedsView.mxml" icon="mxmlIcon" url="source/net/richardlord/flexcaster/flex3/views/FeedsView.mxml.html"/>
+				<node label="FeedView.mxml" icon="mxmlIcon" url="source/net/richardlord/flexcaster/flex3/views/FeedView.mxml.html"/>
+				<node label="PodcastRenderer.mxml" icon="mxmlIcon" url="source/net/richardlord/flexcaster/flex3/views/PodcastRenderer.mxml.html"/>
+				<node label="PodcastView.mxml" icon="mxmlIcon" url="source/net/richardlord/flexcaster/flex3/views/PodcastView.mxml.html"/>
+			</node>
+			<node label="feeds.opml" url="source/feeds.opml"/>
+			<node selected="true" label="Flexcaster.mxml" icon="mxmlAppIcon" url="source/Flexcaster.mxml.html"/>
+			<node label="licence.txt" url="source/licence.txt"/>
+		</node>
+	</nodes>
+</index>

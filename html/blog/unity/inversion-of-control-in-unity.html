@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Inversion of Control in Unity</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" media="all" href="/style.css" />
+<link rel="alternate" type="application/rss+xml" title="Richard Lord's Feed" href="http://www.richardlord.net/feed.xml" />
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9509078-6', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+<div id="page">
+<header role="banner">
+	<div id="social">
+		<a href="https://twitter.com/richard_lord"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+		<a href="https://uk.linkedin.com/in/richardlord"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+		<a href="https://github.com/richardlord"><img src="/images/social/github_logo.png" width="36" height="36" /></a>
+		<a href="https://www.youtube.com/c/RichardLordNet"><img src="/images/social/youtube_logo.png" width="36" height="36" /></a>
+	</div>
+
+	<div id="branding">
+		<img id="site-image" src="/images/social/me.png" />
+		<div id="site-title"><a href="/" title="Richard Lord" rel="home">Richard Lord</a></div>
+		<div id="site-description">Game Developer</div>
+	</div>
+
+	<nav id="menu" role="navigation">
+	<div>
+		<ul>
+			<li><a href="/games.html">GAMES</a></li>
+			<li><a href="/consulting.html">CONSULTING</a></li>
+			<li><a href="/blog/">BLOG</a></li>
+			<li><a href="/presentations/">PRESENTATIONS</a></li>
+			<li><a href="/press.html">PRESS</a></li>
+			<li><a href="/about/">ABOUT</a></li>
+		</ul>
+	</div>
+	</nav>
+</header>
+
+<div id="main">
+<div id="content">
+<h1>Inversion of Control in Unity</h1>
+
+<div id="meta">Posted on <time datetime="2007-03-04T21:08:12Z">04 March 2007</time></div>
+
+
+
+
+<p>Many developers come to <a href="https://unity3d.com/">Unity</a> from a background in object-oriented programming and look to use the same patterns in Unity that they used elsewhere. You don't neglect what you have learnt elsewhere just because you are using a different tool but sometimes you have to apply those lessons differently with the new tool. Unity has its own idea about how you should architect a game and before you start fighting against this it is best to try working with it - you will be a lot more productive if you do.</p>
+
+<h2>Everything is a MonoBehaviour</h2>
+
+<p>The first principle of working with Unity's architecture is that everything should be a <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html">MonoBehaviour</a>. Which means everything should be a component on a game object. Even the stuff that doesn't represent a feature of a specific game object, like code that initialises the scene or code that saves the current game state - just create an empty game object, call it something sensible like "scene controller" or "services" and add these components there.</p>
+
+<p>If your code is a MonoBehaviour then Unity knows about it, the Unity editor knows about it, and the tools that Unity provides will work with it. If your code is not a MonoBehaviour then it sits outside of Unity's knowledge and ability to manage it and you can't configure it in the Unity editor.</p>
+
+<p>(Scriptable Object is an exception to this but you probably don't need that.)</p>
+
+<h2>The editor</h2>
+
+<p>There is one disadvantage to making everything a MonoBehaviour - you have to work with two IDEs. The first is your coding tool - usually MonoDevelop or Visual Studio - and the second is the Unity editor. You can't spend your day entirely inside your coding tool of choice, you have to mess with the Unity editor as well. But that's okay. You create the components in your code editor and you configure them in the Unity editor, just like you would any other asset.</p>
+
+<h2>Inversion of Control</h2>
+
+<p>All of which is an introduction to my real reason for writing this article - a lot of developers new to Unity struggle with inversion of control, or more precisely the apparent lack of it. You may come from any programming background, but if you are used to having a dependency injection container or service locators you may well regard Unity as inferior and you may even decide to create <a href="http://strangeioc.github.io/strangeioc/">a dependency injection container for it</a>. Before you do, take a look at what Unity does out of the box.</p>
+
+<p>In common use inversion of control falls into three categories -</p>
+
+<ol>
+<li>Service locators</li>
+<li>Dependency injection</li>
+<li>Events</li>
+</ol>
+
+<p>Unity has tools for all of these. Some of them may not look like the tools you are accustomed to but they have much the same goals and produce similar results.</p>
+
+<h2>Service locators</h2>
+
+<p>Unity's service locator is the Find… methods of the Object class - <a href="https://docs.unity3d.com/ScriptReference/Object.FindObjectOfType.html">FindObjectOfType</a> and <a href="https://docs.unity3d.com/ScriptReference/Object.FindObjectsOfType.html">FindObjectsOfType</a>. These methods will find the components in the current scene that match a particular type, and if you followed my advice above then all of your code is inside components of some object or objects in the scene. So if, for example, you have a component called "ScoreService" that submits scores to your server, just call FindObjectOfType&lt;ScoreService&gt;() to locate it.</p>
+
+<p>Some developers complain that the find methods are slow, but</p>
+
+<ol>
+<li>They will rarely impact the performance of your game</li>
+<li>If they do impact performance, use dependency injection instead</li>
+</ol>
+
+<h2>Dependency injection</h2>
+
+<p>You know that thing in the Unity editor where you drag one game object onto a property of another to provide the component instance for that property. That's dependency injection. It may feel a bit strange configuring it in the editor, but it's a lot easier to understand than the pages of code or XML used to configure most dependency injection containers.</p>
+
+<p align="center"><img alt="" src="/images/unity/dependency_configure.png" width="395" height="274" /></p>
+
+<p>Unfortunately configuring dependencies in the Unity editor is so easy you won't feel as smart as you did when you used <a href="https://spring.io">Spring</a> or <a href="http://www.robotlegs.org">Robotlegs</a> - even your designers can configure this dependency injection.</p>
+
+<h2>Events</h2>
+
+<p>There's three ways to handle callbacks into an object.</p>
+
+<h3>1. SendMessage</h3>
+
+<p>Unity has had the <a href="https://docs.unity3d.com/ScriptReference/GameObject.SendMessage.html">SendMessage</a> method since the dawn of time. It works but is less than ideal because it requires matching a string in the caller to a method name in the callee, which requires setting global rules about the naming of methods (or losing any benefit of SendMessage over just calling the method directly).</p>
+
+<h3>2. Actions</h3>
+
+<p>If you code in C#, you get <a href="https://msdn.microsoft.com/en-us/library/system.action.aspx">Actions</a> for free as part of the language. Actions are delegates that don't return a value and as such are great for event dispatching. Unfortunately, the Unity editor doesn't understand them so they have to be configured in code, but that's what you thought you wanted anyway isn't it.</p>
+
+<h3>3. Events</h3>
+
+<p>Since the introduction of Unity's new GUI in version 4.6 Unity includes an <a href="https://docs.unity3d.com/ScriptReference/Events.UnityEvent.html">event system</a> that can be configured in the editor - so if a game object dispatches an event you can configure the listeners for that event inside the editor rather than in code. It feels odd at first, but if you embrace the idea of building your components in a code editor and configuring them in the Unity editor then, as with the dependency injection, this will make absolute sense. Try it.</p>
+
+<p align="center"><img alt="" src="/images/unity/event_configure.png" width="395" height="331" /></p>
+
+<h2>Conclusion</h2>
+
+<p>Unity has it's own tools for managing inversion of control. They are unlike the tools in most web frameworks but they do the same job and in some cases they are even easier to use.</p>
+
+<p>The first game I wrote in Unity was a struggle as we broke all of the above rules to code the game the way we did with other tools. With my second and subsequent games I follow the Unity patterns and I build games faster and have more fun doing it.</p>
+
+
+<p>Share this post or a comment online -</p>
+<div id="share">
+<a href="https://twitter.com/intent/tweet?text=Inversion+of+Control+in+Unity&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Funity%2Finversion-of-control-in-unity.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+<a href="https://www.facebook.com/dialog/share?app_id=206081586545847&amp;href=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Funity%2Finversion-of-control-in-unity.html" target="_blank" title="Facebook"><img src="/images/social/facebook_logo.png" width="36" height="36" /></a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=Inversion+of+Control+in+Unity&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Funity%2Finversion-of-control-in-unity.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+</div>
+<hr />
+<p>Also in the collection <b><a href="./">Unity Game Engine</a></b></p>
+<ul><li><a href="creating-scriptableobjects-in-unity.html">Creating ScriptableObjects in Unity</a></li>
+</ul>
+
+</div>
+</div>
+
+<footer role="contentinfo">
+	<p>Richard Lord - Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+</footer>
+</div>
+</body>
+</html>

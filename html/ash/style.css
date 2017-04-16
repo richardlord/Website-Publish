@@ -1,0 +1,65 @@
+body {
+	color: #666;
+	background-color: #e2e2e2;
+}
+
+/* =Header
+----------------------------------------------- */
+
+header {
+    margin: 5px 0 0 0;
+}
+
+#branding {
+	margin-left: 7.6%;
+}
+
+#site-image {
+    float: left;
+    padding: 0 15px 5px 0;
+}
+
+/* =Menu
+-------------------------------------------------------------- */
+
+#menu {
+	background: #444; /* Show a solid color for older browsers */
+	background: -moz-linear-gradient(#666, #333);
+	background: -o-linear-gradient(#666, #333);
+	background: -webkit-linear-gradient(#666, #333);
+	-webkit-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
+	box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
+}
+
+#menu a {
+	color: #eee;
+}
+#menu li:hover > a,
+#menu a:focus {
+	background: #f9f9f9; /* Show a solid color for older browsers */
+	background: -moz-linear-gradient(#ddd, #bbb);
+	background: -o-linear-gradient(#ddd, #bbb);
+	background: -webkit-linear-gradient(#ddd, #bbb);
+	color: #373737;
+}
+
+/* =Common
+----------------------------------------------- */
+
+h1, h2, h1 a, h1 a:visited, h2 a, h2 a:visited {
+	color: #609;
+}
+
+h1 a:hover, h2 a:hover {
+	color: #c00;
+}
+
+a {
+	color: #c00;
+}
+
+a:visited {
+	color: #66c;
+}
+

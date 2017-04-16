@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>SWFEncrypt from Flash using JSFL</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" media="all" href="/style.css" />
+<link rel="alternate" type="application/rss+xml" title="Richard Lord's Feed" href="http://www.richardlord.net/feed.xml" />
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9509078-6', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+<div id="page">
+<header role="banner">
+	<div id="social">
+		<a href="https://twitter.com/richard_lord"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+		<a href="https://uk.linkedin.com/in/richardlord"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+		<a href="https://github.com/richardlord"><img src="/images/social/github_logo.png" width="36" height="36" /></a>
+		<a href="https://www.youtube.com/c/RichardLordNet"><img src="/images/social/youtube_logo.png" width="36" height="36" /></a>
+	</div>
+
+	<div id="branding">
+		<img id="site-image" src="/images/social/me.png" />
+		<div id="site-title"><a href="/" title="Richard Lord" rel="home">Richard Lord</a></div>
+		<div id="site-description">Game Developer</div>
+	</div>
+
+	<nav id="menu" role="navigation">
+	<div>
+		<ul>
+			<li><a href="/games.html">GAMES</a></li>
+			<li><a href="/consulting.html">CONSULTING</a></li>
+			<li><a href="/blog/">BLOG</a></li>
+			<li><a href="/presentations/">PRESENTATIONS</a></li>
+			<li><a href="/press.html">PRESS</a></li>
+			<li><a href="/about/">ABOUT</a></li>
+		</ul>
+	</div>
+	</nav>
+</header>
+
+<div id="main">
+<div id="content">
+<h1>SWFEncrypt from Flash using JSFL</h1>
+
+<div id="meta">Posted on <time datetime="2007-03-04T21:08:12Z">04 March 2007</time></div>
+
+
+
+
+<p>At the weekend I wrote a couple of JSFL scripts to automate <a href="http://www.amayeta.com/software/swfencrypt/">SWFEncrypt</a> and <a href="http://www.amayeta.com/software/swcencrypt/">SWCEncrypt</a> encryption from within Flash.</p>
+
+<p>The first publishes the current flash movie and encrypts the resulting .swf using SWFEncrypt.</p>
+
+<p>The second exports one or more components as SWC files and encrypts the results using SWCEncrypt.</p>
+
+<p>I've only used them in Flash CS3 for Windows, but the scripts should work in Flash 8 too. They will not work on MacOS.</p>
+
+<p>The scripts use a couple of undocumented features of the FLFile object. They're published under the MIT licence, so you are free to use them. The first line of code (actually line 36 because of the comments above it) in each script is the path to your installation of SWFEncrypt or SWCEncrypt. You will need to edit these if you didn't install SWFEncrypt/SWCEncrypt in the default location.</p>
+
+<p><b><a href="/files/AutoSWFEncrypt.mxp">Download the JSFL scripts</a></b>.</p>
+
+<p>Double click the .mxp file to install them using <a href="http://www.adobe.com/exchange/em_download/">Adobe Extension Manager</a>.</p>
+
+
+<p>Share this post or a comment online -</p>
+<div id="share">
+<a href="https://twitter.com/intent/tweet?text=SWFEncrypt+from+Flash+using+JSFL&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fflash%2Fswfencrypt-from-flash-using-jsfl.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+<a href="https://www.facebook.com/dialog/share?app_id=206081586545847&amp;href=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fflash%2Fswfencrypt-from-flash-using-jsfl.html" target="_blank" title="Facebook"><img src="/images/social/facebook_logo.png" width="36" height="36" /></a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=SWFEncrypt+from+Flash+using+JSFL&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fflash%2Fswfencrypt-from-flash-using-jsfl.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+</div>
+<hr />
+<p>Also in the collection <b><a href="./">Flash</a></b></p>
+<ul><li><a href="flash-player-full-screen.html">Flash player update adds full-screen support</a></li>
+<li><a href="custom-context-menu-with-keyboard-shortcuts-in-flash.html">Custom context menu with keyboard shortcuts in Flash</a></li>
+<li><a href="free-flash-preloader-components.html">Free flash preloader components</a></li>
+<li><a href="protecting-a-swf.html">Protecting a swf</a></li>
+<li><a href="showing-dhtml-content-on-top-of-flash-content.html">Showing DHTML content on top of flash content</a></li>
+<li><a href="so-what-are-adobe-up-to-with-flash.html">So what are Adobe up to with Flash?</a></li>
+</ul>
+
+</div>
+</div>
+
+<footer role="contentinfo">
+	<p>Richard Lord - Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+</footer>
+</div>
+</body>
+</html>

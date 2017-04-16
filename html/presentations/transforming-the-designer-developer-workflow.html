@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Re-architecting the designer-developer workflow</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" media="all" href="/style.css" />
+<link rel="alternate" type="application/rss+xml" title="Richard Lord's Feed" href="http://www.richardlord.net/feed.xml" />
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9509078-6', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+<div id="page">
+<header role="banner">
+	<div id="social">
+		<a href="https://twitter.com/richard_lord"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+		<a href="https://uk.linkedin.com/in/richardlord"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+		<a href="https://github.com/richardlord"><img src="/images/social/github_logo.png" width="36" height="36" /></a>
+		<a href="https://www.youtube.com/c/RichardLordNet"><img src="/images/social/youtube_logo.png" width="36" height="36" /></a>
+	</div>
+
+	<div id="branding">
+		<img id="site-image" src="/images/social/me.png" />
+		<div id="site-title"><a href="/" title="Richard Lord" rel="home">Richard Lord</a></div>
+		<div id="site-description">Game Developer</div>
+	</div>
+
+	<nav id="menu" role="navigation">
+	<div>
+		<ul>
+			<li><a href="/games.html">GAMES</a></li>
+			<li><a href="/consulting.html">CONSULTING</a></li>
+			<li><a href="/blog/">BLOG</a></li>
+			<li><a href="/presentations/">PRESENTATIONS</a></li>
+			<li><a href="/press.html">PRESS</a></li>
+			<li><a href="/about/">ABOUT</a></li>
+		</ul>
+	</div>
+	</nav>
+</header>
+
+<div id="main">
+<div id="content">
+
+<h1>Re-architecting the designer-developer workflow</h1>
+
+<p>Presented at</p>
+<ul>
+<li>360|Flex San Jose, 8 March 2010</li>
+<li>London Flash Platform User Group, 29 July 2010</li>
+<li>360|Flex DC, 21 September 2010</li>
+</ul>
+
+<p>In this session, I discussed and showed a new Flex application architecture that we are using at <a href="https://www.brighttalk.com">BrightTALK</a> to enable the rapid development of new projects based on previously designed features. This was specifically devised to serve two purposes</p>
+
+<ol>
+<li>To enable us to rapidly and easily create new, custom designed, webcast players for clients</li>
+<li>To enable our designers to do this work without the need for developer involvement</li>
+</ol>
+
+<p>Here are the slides from the presentation at 360|Flex DC on 21 September 2010.</p>
+
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/resNzSU1EpFlDr" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+
+<h2>Download the example code</h2>
+<p>The example code is a set of smart components implementing this architecture and designed for building a Twitter client. Also included is an example of their use. This code was used during the presentation.</p>
+
+<p>There are four versions of the code, implemented using different popular dependency injection containers and different event bus architectures. All four examples implement the same functionality.</p>
+
+<ul>
+<li><a href="/files/smartypants_smart_components.zip">Example code using SmartyPants-IOC</a></li>
+<li><a href="/files/signals_smart_components.zip">Example code using SmartyPants-IOC and AS3-Signals</a></li>
+<li><a href="/files/robotlegs_smart_components.zip">Example code using Robotlegs framework</a></li>
+<li><a href="/files/swiz_smart_components.zip">Example code using Swiz framework</a></li>
+</ul>
+
+<h2>Links:</h2>
+<ul>
+<li><a href="https://github.com/sophistifunk/SmartyPants-IOC">SmartyPants-IOC</a></li>
+<li><a href="https://github.com/robertpenner/as3-signals">As3-Signals</a></li>
+<li><a href="https://github.com/srohde/Twitter">AS3 OAuth Twitter Library</li>
+<li><a href="http://www.robotlegs.org">Robotlegs framework</a></li>
+<li><a href="http://swizframework.org">Swiz framework</a></li>
+</ul>
+
+</div>
+</div>
+
+<footer role="contentinfo">
+	<p>Richard Lord - Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+</footer>
+</div>
+</body>
+</html>

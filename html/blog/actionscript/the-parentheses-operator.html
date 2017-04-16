@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>The parentheses operator</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" media="all" href="/style.css" />
+<link rel="alternate" type="application/rss+xml" title="Richard Lord's Feed" href="http://www.richardlord.net/feed.xml" />
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9509078-6', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+<div id="page">
+<header role="banner">
+	<div id="social">
+		<a href="https://twitter.com/richard_lord"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+		<a href="https://uk.linkedin.com/in/richardlord"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+		<a href="https://github.com/richardlord"><img src="/images/social/github_logo.png" width="36" height="36" /></a>
+		<a href="https://www.youtube.com/c/RichardLordNet"><img src="/images/social/youtube_logo.png" width="36" height="36" /></a>
+	</div>
+
+	<div id="branding">
+		<img id="site-image" src="/images/social/me.png" />
+		<div id="site-title"><a href="/" title="Richard Lord" rel="home">Richard Lord</a></div>
+		<div id="site-description">Game Developer</div>
+	</div>
+
+	<nav id="menu" role="navigation">
+	<div>
+		<ul>
+			<li><a href="/games.html">GAMES</a></li>
+			<li><a href="/consulting.html">CONSULTING</a></li>
+			<li><a href="/blog/">BLOG</a></li>
+			<li><a href="/presentations/">PRESENTATIONS</a></li>
+			<li><a href="/press.html">PRESS</a></li>
+			<li><a href="/about/">ABOUT</a></li>
+		</ul>
+	</div>
+	</nav>
+</header>
+
+<div id="main">
+<div id="content">
+<h1>The parentheses operator</h1>
+
+<div id="meta">Posted on <time datetime="2007-03-04T21:08:12Z">04 March 2007</time></div>
+
+
+
+
+<p>It's not uncommon for less experienced Actionscript developers, particularly self-taught developers, to be a little confused about the purpose of the parentheses you put after a function name when calling the function. The most common question is why aren't the parentheses used when assigning a function as an event handler? i.e. Why are there no parentheses after clickHandler in the first line of
+this code?</p>
+
+<pre>addEventListener( MouseEvent.CLICK, clickHandler );
+
+function clickHandler( event:MouseEvent ):void
+{
+	// function body here
+}</pre>
+
+<h2>What the documentation says</h2>
+
+<p>The (usually excellent) Flash and Flex help isn't much help here. In the Actionscript 3 language reference, it states that the parentheses &quot;Surrounds one or more parameters and passes them to the function that precedes the parentheses&quot;, which doesn't explain why (or even if) the parentheses are necessary when no parameters are passed to the function.</p>
+
+<p>Elsewhere in the help, it states that &quot;If you are calling a function with no parameters, you must use an empty pair of parentheses&quot;. No explanation - just do it. Which inevitably leads to developers wondering why they mustn't do it when assigning event handlers.</p> 
+
+<p>Colin Moock's Essential Actionscript 3 (also usually excellent) takes a similar approach, simply stating &quot;Notice the important and mandatory use of the parentheses operator following the method name&quot;.</p>
+
+<p>People learn things better if they understand them, so here's my attempt at an explanation. If you're confused about when to use the parentheses operator this should help. If not, come back tomorrow when I'll post something a lot more advanced about programmatic skins in Flex.</p>
+
+<h2>What the parentheses operator does</h2>
+
+<p>A function is a portion of code that performs a specific task or set of tasks within your application. The function may be something you have defined, or it may be an intrinsic function (a function built-in to the flash player, like the trace function). When a function is a property of an object, it's usually called a method. Here's a trivial example function definition.</p>
+
+<pre>function sayHello():void
+{
+	someTextField.text = "Hello";
+}</pre>
+
+<p>The code inside the function is run by calling the function, like this.</p>
+
+<pre>sayHello();</pre>
+
+<p>The parentheses could perhaps be better named as the function calling operator since that is what they do. We use the function's name to refer to the function, and then we use the parentheses to run the function we have identified.</p>
+
+<p>If the function needs some additional information in order to run (the parameters) then that information goes inside the parentheses.</p>
+
+<pre>function saySomething( thingToSay:String ):void
+{
+	someTextField.text = thingToSay;
+}
+
+saySomething( "This is a boring example" );</pre>
+
+<p>But the parentheses, with or without parameters, are the operator that calls the function.</p>
+
+<h2>What happens without the parentheses</h2>
+
+<p>If that's what the parentheses are for, what happens if we leave them out? Like this</p>
+
+<pre>sayHello;</pre>
+
+<p>Well, first of all, you won't get an error. sayHello exists (it's defined above) so the code is valid. But, it doesn't do anything. We have used the name of the function ("sayHello") to refer to the function, then we've done nothing with it. When you put the parenthesis after the function you are indicating that you want to call the function now. Without the parenthesis, you're not running the function. But calling a function is not the only thing we can do with it.</p>
+
+<p>For example, we can assign it to a variable, like this</p>
+
+<pre>var myFunction:Function = sayHello;</pre>
+
+<p>Now we can refer to the function via the variable. So if we used the parenthesis operator on the variable, it would call the function, like this</p>
+
+<pre>myFunction();</pre>
+
+<p>Or we could continue to use it's original name, like this</p>
+
+<pre>sayHello();</pre>
+
+<h2>Event handlers</h2>
+
+<p>When we set up an event handler, we don't want to call the function straight away, we want the event handler to call the function later, when the event happens. So, we define an appropriate function</p>
+
+<pre>function clickHandler( event:MouseEvent ):void
+{
+	someTextField.text = "The mouse was clicked";
+}</pre>
+
+<p>Then we assign the function as a listener for the event</p>
+
+<pre>addEventListener( MouseEvent.CLICK, clickHandler );</pre>
+
+<p>When we assign the function as a listener, we don't want to call the function, so we don't use the parentheses operator. Later, when the event actually happens, the flash player will call the function for us. There's some code inside the EventDispatcher class that uses the parentheses operator to call the function when the event happens.</p>
+
+<p>If you make the mistake of using the parentheses operator when assigning the event handler, like this</p>
+
+<pre>addEventListener( MouseEvent.CLICK, clickHandler() );</pre>
+
+<p>then the event handler will be called immediately (you've told it to do so by using the parentheses). This will usually generate an error since you haven't assigned a parameter for the event argument.</p>
+
+<p>So that's the parenthesis operator. Personally, I like the way that C++ names the parentheses operator the &quot;function operator&quot; - it's the operator that calls a function.</p>
+
+
+<p>Share this post or a comment online -</p>
+<div id="share">
+<a href="https://twitter.com/intent/tweet?text=The+parentheses+operator&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Factionscript%2Fthe-parentheses-operator.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+<a href="https://www.facebook.com/dialog/share?app_id=206081586545847&amp;href=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Factionscript%2Fthe-parentheses-operator.html" target="_blank" title="Facebook"><img src="/images/social/facebook_logo.png" width="36" height="36" /></a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=The+parentheses+operator&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Factionscript%2Fthe-parentheses-operator.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+</div>
+<hr />
+<p>Also in the collection <b><a href="./">Actionscript</a></b></p>
+<ul><li><a href="finite-state-machines-for-ai-in-actionscript.html">Finite State Machines for AI in Actionscript</a></li>
+<li><a href="better-without-singletons.html">Singletons - we're better off without them</a></li>
+<li><a href="simple-example-of-acceleration.html">Simple example of acceleration</a></li>
+<li><a href="list-loader-for-actionscript-2.html">List Loader for Actionscript 2</a></li>
+<li><a href="singleton-factory.html">Singleton Factory</a></li>
+<li><a href="events-in-actionscript-2.html">Events in Actionscript 2</a></li>
+<li><a href="events-in-actionscript-3.html">Events in Actionscript 3</a></li>
+<li><a href="different-types-of-weak-references.html">Different types of weak references</a></li>
+<li><a href="create-your-own-weak-references-in-actionscript-3.html">Creating weak references in Actionscript 3</a></li>
+<li><a href="polling-the-keyboard-in-actionscript-3.html">Polling the keyboard in Actionscript 3</a></li>
+<li><a href="radial-perlin-noise.html">Radial Perlin Noise</a></li>
+<li><a href="object-pool-class.html">Object Pool class</a></li>
+<li><a href="the-i-in-interface.html">The I in Interface</a></li>
+</ul>
+
+</div>
+</div>
+
+<footer role="contentinfo">
+	<p>Richard Lord - Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+</footer>
+</div>
+</body>
+</html>

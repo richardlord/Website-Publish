@@ -1,0 +1,280 @@
+body {
+	border: 0;
+	padding: 0;
+	margin: 0;
+	font-family: "Avenir Next", Avenir, "Trebuchet MS", Helvetica, Arial, Sans-Serif;
+	font-size: 0.92em;
+	color: #333;
+	line-height: 1.8;
+	background-color: #e2e2e2;
+}
+
+#page {
+	border-top: 1px solid #bbb;
+	margin: 2em auto;
+	background-color: #fff;
+	max-width: 66em;
+}
+
+/* =Header
+----------------------------------------------- */
+
+header {
+    margin: 40px 0 1em 0;
+	text-align: left;
+}
+
+#branding {
+	margin-left: 7.6%;
+}
+
+#site-image {
+    float: left;
+    padding: 0 15px 30px 0;
+}
+
+#site-title {
+	font-size: 30px;
+	font-weight: bold;
+	line-height: 30px;
+	clear: none;
+	padding-top: 10px;
+}
+#site-title a {
+	color: #333;
+	text-decoration: none;
+}
+#site-title a:hover,
+#site-title a:focus,
+#site-title a:active {
+	color: #1982d1;
+}
+
+#site-description {
+	color: #000;
+	font-size: 16px;
+    line-height: 14px;
+    clear: none;
+}
+
+#social {
+    float: right;;
+    text-align: right;
+	margin: 10px 7.6% 30px 0;
+}
+
+#social img {
+    padding: 0 0.5em;
+}
+
+/* =Menu
+-------------------------------------------------------------- */
+
+#menu {
+	background: #444; /* Show a solid color for older browsers */
+	background: -moz-linear-gradient(#666, #333);
+	background: -o-linear-gradient(#666, #333);
+	background: -webkit-linear-gradient(#666, #333);
+	-webkit-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
+	box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
+	margin: 0 0 1em 0;
+	width: 100%;
+	clear: both;
+}
+
+#menu div {
+	margin: 0 7.6%;
+}
+
+#menu ul {
+	font-size: 1em;
+    text-transform: uppercase;
+	list-style: none;
+	margin: 0 -1.2em;
+	padding-left: 0;
+	text-align: left;
+}
+#menu li {
+	margin 0;
+	display: inline-block;
+}
+#menu a {
+	color: #eee;
+	display: inline-block;
+	line-height: 3.2em;
+	padding: 0 1.2em;
+	text-decoration: none;
+}
+#menu li:hover > a,
+#menu a:focus {
+	background: #f9f9f9; /* Show a solid color for older browsers */
+	background: -moz-linear-gradient(#ddd, #bbb);
+	background: -o-linear-gradient(#ddd, #bbb);
+	background: -webkit-linear-gradient(#ddd, #bbb);
+	color: #373737;
+}
+#menu ul li:hover > ul {
+	display: block;
+}
+#menu .current > a {
+	font-weight: bold;
+}
+
+/* =Main
+-------------------------------------------------------------- */
+
+#main {
+	clear: both;
+	padding: 0;
+	margin: 0 7.6%;
+	width: auto;
+}
+
+#content, #home {
+	max-width: 44em;
+	margin: 0 auto;
+}
+
+/* =Footer
+----------------------------------------------- */
+
+footer {
+	clear: both;
+	margin: 6em 0 0 0;
+	border-top: 2px solid #ddd;
+	padding: 1.5em 7.6%;
+	font-size: 0.8em;
+	text-align: center;
+}
+
+footer p {
+	margin: 0;
+}
+
+/* =Blog
+----------------------------------------------- */
+
+#meta {
+	margin: 0;
+	font-size: 0.8em;
+}
+
+#meta time {
+	font-weight: bold;
+}
+
+.back {
+	font-size: 0.8em;
+	float: left;
+}
+
+.forward {
+	font-size: 0.8em;
+	float: right;
+}
+
+.tag {
+	font-size: 0.8em;
+}
+
+.back a, .forward a, .tag a {
+	font-weight: bold;
+}
+
+hr {
+	background-color: #ccc;
+	border: 0;
+	height: 1px;
+	margin: 1.625em 0;
+}
+
+pre {
+	white-space: pre;
+	background: #f4f4f4;
+	border: 1px solid #ccc;
+	font-size: 0.9em;
+	font-family: Consolas, Monaco, "DejaVu Sans Mono", Courier, monospace;
+	overflow: auto;
+	padding: 0.75em 1.25em;
+}
+
+code {
+	font-size: 0.9em;
+	font-family: Consolas, Monaco, "DejaVu Sans Mono", Courier, monospace;
+}
+
+#share img {
+    padding: 0 0.5em;
+}
+
+/* =Common
+----------------------------------------------- */
+
+img.banner {
+    height: auto;
+    display: block;
+    width: 100%;
+}
+
+h1 {
+	margin: 2em 0 0;
+	padding: 0;
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #333;
+}
+
+h1.home {
+	text-align: center;
+}
+
+h2 {
+	margin: 1.5em 0 0;
+	padding: 0;
+	font-size: 1.5em;
+	font-weight: bold;
+	color: #333;
+}
+
+h1 a, h1 a:visited, h2 a, h2 a:visited {
+	color: #333;
+}
+
+h1 a:hover, h2 a:hover {
+	color: #09f;
+}
+
+p {
+	margin: 1em 0;
+}
+
+input {
+	font-family: "Avenir Next", Avenir, "Trebuchet MS", Helvetica, Arial, Sans-Serif;
+	font-size: 1em;
+}
+
+a {
+	color: #00f;
+	text-decoration: none;
+}
+
+a:visited {
+	color: #09f;
+}
+
+.center {
+	text-align: center;
+}
+
+.right {
+    float: right;
+}
+
+.left {
+    float: left;
+}
+
+table td, table td * {
+    vertical-align: top;
+}

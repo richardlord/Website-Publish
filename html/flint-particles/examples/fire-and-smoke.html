@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Flint Particles Fire and Smoke</title>
+<link rel="stylesheet" type="text/css" media="all" href="/style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/flint-particles/style.css" />
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9509078-6', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+<div id="page">
+<header role="banner">
+
+	<div id="branding"><img id="site-image" src="/flint-particles/images/core/logobig.gif" width="325" height="37" /></div>
+
+	<nav id="menu" role="navigation">
+	<div>
+		<ul>
+			<li><a href="/flint-particles/index.html">ABOUT</a></li>
+			<li><a href="/flint-particles/source-code.html">SOURCE CODE</a></li>
+			<li><a href="/flint-particles/documentation.html">DOCUMENTATION</a></li>
+			<li><a href="/flint-particles/examples/">EXAMPLES</a></li>
+			<li><a href="/flint-particles/blog/">BLOG</a></li>
+		</ul>
+	</div>
+	</nav>
+</header>
+
+<div id="main">
+<div id="content">
+
+
+<link type="text/css" href="/flint-particles/css/jquery-ui-1.8.2.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/flint-particles/javascript/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="/flint-particles/javascript/jquery-ui-1.8.2.custom.min.js"></script>
+
+<h1>Fire and Smoke</h1>
+
+<div class="spaced center">
+  <object width="300" height="400" data="/flint-particles/source/examples2D/FireAndSmoke/PureAS3/FireAndSmoke.swf" type="application/x-shockwave-flash">
+    <param name="movie" value="/flint-particles/source/examples2D/FireAndSmoke/PureAS3/FireAndSmoke.swf" />
+    <param name="loop" value="false" />
+    <param name="quality" value="high" />
+    <param name="allowfullscreen" value="true" />
+  </object>
+</div>
+
+<p>This project uses two emitters, one to create the fire and the other to create the smoke. The smoke is created from a number of circular particles at very low alpha which overlap to create the random smoke distribution. The fire is created from elliptical particles that are orientated so their pointy end points in the direction they&#8217;re traveling.</p>
+
+<script type="text/javascript">$(function() { $("#source").tabs(); });</script>
+
+<div id="source">
+  <ul><li><a href="#PureAS3">PureAS3</a></li>
+<li><a href="#Flash">Flash</a></li>
+<li><a href="#Flex">Flex</a></li>
+</ul><div id="PureAS3"><pre class="code">package
+{
+  import org.flintparticles.twoD.emitters.Emitter2D;
+  import org.flintparticles.twoD.renderers.BitmapRenderer;
+
+  import flash.display.Sprite;
+  import flash.geom.Rectangle;
+
+  [SWF(width='300', height='400', frameRate='60', backgroundColor='#000000')]
+  
+  
+
+  public class Main extends Sprite
+  {
+    private var smoke:Emitter2D;
+    private var fire:Emitter2D;
+    
+    public function Main()
+    {
+      smoke = new Smoke();
+      smoke.x = 150;
+      smoke.y = 380;
+      smoke.start();
+      
+      fire = new Fire();
+      fire.x = 150;
+      fire.y = 380;
+      fire.start();
+      
+      var renderer:BitmapRenderer = new BitmapRenderer( new Rectangle( 0, 0, 300, 400 ) );
+      renderer.addEmitter( smoke );
+      renderer.addEmitter( fire );
+      addChild( renderer );
+    }
+  }
+}</pre><pre class="code">package
+{
+  import org.flintparticles.common.actions.Age;
+  import org.flintparticles.common.actions.ColorChange;
+  import org.flintparticles.common.actions.ScaleImage;
+  import org.flintparticles.common.counters.Steady;
+  import org.flintparticles.common.initializers.Lifetime;
+  import org.flintparticles.common.initializers.SharedImage;
+  import org.flintparticles.twoD.actions.Accelerate;
+  import org.flintparticles.twoD.actions.LinearDrag;
+  import org.flintparticles.twoD.actions.Move;
+  import org.flintparticles.twoD.actions.RotateToDirection;
+  import org.flintparticles.twoD.emitters.Emitter2D;
+  import org.flintparticles.twoD.initializers.Position;
+  import org.flintparticles.twoD.initializers.Velocity;
+  import org.flintparticles.twoD.zones.DiscSectorZone;
+  import org.flintparticles.twoD.zones.DiscZone;
+
+  import flash.geom.Point;
+
+  public class Fire extends Emitter2D
+  {
+    public function Fire()
+    {
+      counter = new Steady( 60 );
+
+      addInitializer( new Lifetime( 2, 3 ) );
+      addInitializer( new Velocity( new DiscSectorZone( new Point( 0, 0 ), 20, 10, -Math.PI, 0 ) ) );
+      addInitializer( new Position( new DiscZone( new Point( 0, 0 ), 3 ) ) );
+      addInitializer( new SharedImage( new FireBlob() ) );
+
+      addAction( new Age( ) );
+      addAction( new Move( ) );
+      addAction( new LinearDrag( 1 ) );
+      addAction( new Accelerate( 0, -40 ) );
+      addAction( new ColorChange( 0xFFFFCC00, 0x00CC0000 ) );
+      addAction( new ScaleImage( 1, 1.5 ) );
+      addAction( new RotateToDirection() );
+    }
+  }
+}</pre><pre class="code">package
+{
+  import org.flintparticles.common.actions.Age;
+  import org.flintparticles.common.actions.Fade;
+  import org.flintparticles.common.actions.ScaleImage;
+  import org.flintparticles.common.counters.Steady;
+  import org.flintparticles.common.displayObjects.RadialDot;
+  import org.flintparticles.common.initializers.Lifetime;
+  import org.flintparticles.common.initializers.SharedImage;
+  import org.flintparticles.twoD.actions.LinearDrag;
+  import org.flintparticles.twoD.actions.Move;
+  import org.flintparticles.twoD.actions.RandomDrift;
+  import org.flintparticles.twoD.emitters.Emitter2D;
+  import org.flintparticles.twoD.initializers.Velocity;
+  import org.flintparticles.twoD.zones.DiscSectorZone;
+
+  import flash.geom.Point;
+
+  public class Smoke extends Emitter2D
+  {
+    public function Smoke()
+    {
+      counter = new Steady( 10 );
+      
+      addInitializer( new Lifetime( 11, 12 ) );
+      addInitializer( new Velocity( new DiscSectorZone( new Point( 0, 0 ), 40, 30, -4 * Math.PI / 7, -3 * Math.PI / 7 ) ) );
+      addInitializer( new SharedImage( new RadialDot( 6 ) ) );
+      
+      addAction( new Age( ) );
+      addAction( new Move( ) );
+      addAction( new LinearDrag( 0.01 ) );
+      addAction( new ScaleImage( 1, 15 ) );
+      addAction( new Fade( 0.15, 0 ) );
+      addAction( new RandomDrift( 15, 15 ) );
+    }
+  }
+}</pre></div>
+<div id="Flash"><pre class="code">import org.flintparticles.common.actions.*;
+import org.flintparticles.common.counters.*;
+import org.flintparticles.common.displayObjects.RadialDot;
+import org.flintparticles.common.initializers.*;
+import org.flintparticles.twoD.actions.*;
+import org.flintparticles.twoD.emitters.Emitter2D;
+import org.flintparticles.twoD.initializers.*;
+import org.flintparticles.twoD.renderers.*;
+import org.flintparticles.twoD.zones.*;
+
+var smoke:Emitter2D = new Emitter2D();
+smoke.counter = new Steady( 10 );
+
+smoke.addInitializer( new Lifetime( 11, 12 ) );
+smoke.addInitializer( new Velocity( new DiscSectorZone( new Point( 0, 0 ), 40, 30, -4 * Math.PI / 7, -3 * Math.PI / 7 ) ) );
+smoke.addInitializer( new SharedImage( new RadialDot( 6 ) ) );
+  
+smoke.addAction( new Age( ) );
+smoke.addAction( new Move( ) );
+smoke.addAction( new LinearDrag( 0.01 ) );
+smoke.addAction( new ScaleImage( 1, 15 ) );
+smoke.addAction( new Fade( 0.15, 0 ) );
+smoke.addAction( new RandomDrift( 15, 15 ) );
+
+smoke.x = 150;
+smoke.y = 380;
+smoke.start( );
+
+var fire:Emitter2D = new Emitter2D();
+fire.counter = new Steady( 60 );
+
+fire.addInitializer( new Lifetime( 2, 3 ) );
+fire.addInitializer( new Velocity( new DiscSectorZone( new Point( 0, 0 ), 20, 10, -Math.PI, 0 ) ) );
+fire.addInitializer( new Position( new DiscZone( new Point( 0, 0 ), 3 ) ) );
+fire.addInitializer( new SharedImage( new FireBlob() ) );
+
+fire.addAction( new Age( ) );
+fire.addAction( new Move( ) );
+fire.addAction( new LinearDrag( 1 ) );
+fire.addAction( new Accelerate( 0, -40 ) );
+fire.addAction( new ColorChange( 0xFFFFCC00, 0x00CC0000 ) );
+fire.addAction( new ScaleImage( 1, 1.5 ) );
+fire.addAction( new RotateToDirection() );
+
+fire.x = 150;
+fire.y = 380;
+fire.start( );
+
+var renderer:BitmapRenderer = new BitmapRenderer( new Rectangle( 0, 0, 300, 400 ) );
+renderer.addEmitter( fire );
+renderer.addEmitter( smoke );
+addChild( renderer );</pre></div>
+<div id="Flex"><pre class="code">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;s:Application
+  xmlns:fx=&quot;http://ns.adobe.com/mxml/2009&quot; 
+  xmlns:s=&quot;library://ns.adobe.com/flex/spark&quot; 
+  xmlns:f=&quot;http://flintparticles.org/2009/flint2d&quot;
+  width=&quot;300&quot; height=&quot;400&quot;
+  backgroundColor=&quot;#000000&quot;&gt;
+  
+&lt;f:BitmapRenderer id=&quot;renderer&quot; width=&quot;300&quot; height=&quot;400&quot;&gt;
+  &lt;f:emitters&gt;
+    &lt;f:Emitter id=&quot;smoke&quot; autoStart=&quot;true&quot; x=&quot;150&quot; y=&quot;380&quot;&gt;
+      &lt;f:counter&gt;
+        &lt;f:Steady rate=&quot;10&quot;/&gt;
+      &lt;/f:counter&gt;
+      &lt;f:initializers&gt;
+        &lt;f:Lifetime minLifetime=&quot;11&quot; maxLifetime=&quot;12&quot;/&gt;
+        &lt;f:Velocity&gt;
+          &lt;f:DiscSectorZone centerX=&quot;0&quot; centerY=&quot;0&quot; innerRadius=&quot;30&quot; outerRadius=&quot;40&quot; minAngle=&quot;{-4 * Math.PI / 7}&quot; maxAngle=&quot;{-3 * Math.PI / 7}&quot;/&gt;
+        &lt;/f:Velocity&gt;
+        &lt;f:SharedImage&gt;
+          &lt;f:RadialDot radius=&quot;6&quot;/&gt;
+        &lt;/f:SharedImage&gt;
+      &lt;/f:initializers&gt;
+      &lt;f:actions&gt;
+        &lt;f:Move/&gt;
+        &lt;f:Age/&gt;
+        &lt;f:LinearDrag drag=&quot;0.04&quot;/&gt;
+        &lt;f:Fade startAlpha=&quot;0.15&quot; endAlpha=&quot;0&quot;/&gt;
+        &lt;f:ScaleImage startScale=&quot;1&quot; endScale=&quot;15&quot;/&gt;
+        &lt;f:RandomDrift driftX=&quot;15&quot; driftY=&quot;15&quot;/&gt;
+      &lt;/f:actions&gt;
+    &lt;/f:Emitter&gt;
+    &lt;f:Emitter id=&quot;fire&quot; autoStart=&quot;true&quot; x=&quot;150&quot; y=&quot;380&quot;&gt;
+      &lt;f:counter&gt;
+        &lt;f:Steady rate=&quot;60&quot;/&gt;
+      &lt;/f:counter&gt;
+      &lt;f:initializers&gt;
+        &lt;f:Lifetime minLifetime=&quot;2&quot; maxLifetime=&quot;3&quot;/&gt;
+        &lt;f:Position&gt;
+          &lt;f:DiscZone centerX=&quot;0&quot; centerY=&quot;0&quot; outerRadius=&quot;3&quot;/&gt;
+        &lt;/f:Position&gt;
+        &lt;f:Velocity&gt;
+          &lt;f:DiscSectorZone centerX=&quot;0&quot; centerY=&quot;0&quot; innerRadius=&quot;10&quot; outerRadius=&quot;20&quot; minAngle=&quot;{-Math.PI}&quot; maxAngle=&quot;0&quot;/&gt;
+        &lt;/f:Velocity&gt;
+        &lt;f:SharedImage image=&quot;{new FireBlob()}&quot;/&gt;
+      &lt;/f:initializers&gt;
+      &lt;f:actions&gt;
+        &lt;f:Move/&gt;
+        &lt;f:RotateToDirection/&gt;
+        &lt;f:Age/&gt;
+        &lt;f:LinearDrag drag=&quot;1&quot;/&gt;
+        &lt;f:Accelerate x=&quot;0&quot; y=&quot;-40&quot;/&gt;
+        &lt;f:ColorChange startColor=&quot;0xFFFFCC00&quot; endColor=&quot;0x00CC0000&quot;/&gt;
+        &lt;f:ScaleImage startScale=&quot;1&quot; endScale=&quot;1.5&quot;/&gt;
+      &lt;/f:actions&gt;
+    &lt;/f:Emitter&gt;
+  &lt;/f:emitters&gt;
+&lt;/f:BitmapRenderer&gt;
+&lt;/s:Application&gt;</pre></div>
+
+
+</div>
+</div>
+
+<footer role="contentinfo">
+	<p>Richard Lord - Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+</footer>
+</div>
+</body>
+</html>

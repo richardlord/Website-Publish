@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Introducing Coral, an Actionscript library for 3D Math</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" media="all" href="/style.css" />
+<link rel="alternate" type="application/rss+xml" title="Richard Lord's Feed" href="http://www.richardlord.net/feed.xml" />
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9509078-6', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+<div id="page">
+<header role="banner">
+	<div id="social">
+		<a href="https://twitter.com/richard_lord"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+		<a href="https://uk.linkedin.com/in/richardlord"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+		<a href="https://github.com/richardlord"><img src="/images/social/github_logo.png" width="36" height="36" /></a>
+		<a href="https://www.youtube.com/c/RichardLordNet"><img src="/images/social/youtube_logo.png" width="36" height="36" /></a>
+	</div>
+
+	<div id="branding">
+		<img id="site-image" src="/images/social/me.png" />
+		<div id="site-title"><a href="/" title="Richard Lord" rel="home">Richard Lord</a></div>
+		<div id="site-description">Game Developer</div>
+	</div>
+
+	<nav id="menu" role="navigation">
+	<div>
+		<ul>
+			<li><a href="/games.html">GAMES</a></li>
+			<li><a href="/consulting.html">CONSULTING</a></li>
+			<li><a href="/blog/">BLOG</a></li>
+			<li><a href="/presentations/">PRESENTATIONS</a></li>
+			<li><a href="/press.html">PRESS</a></li>
+			<li><a href="/about/">ABOUT</a></li>
+		</ul>
+	</div>
+	</nav>
+</header>
+
+<div id="main">
+<div id="content">
+<h1>Introducing Coral, an Actionscript library for 3D Math</h1>
+
+<div id="meta">Posted on <time datetime="2007-03-04T21:08:12Z">04 March 2007</time></div>
+
+
+
+
+<h2>The experience of Flint</h2>
+
+<p>I started work on <a href="/flint-particles/">Flint Particles</a> before Flash 10 was launched, so back then I created my own 3D mathematics classes for Flint. At the time this was not unusual - <a href="http://away3d.com/">Away3D</a> and <a href="http://blog.papervision3d.org/">Papervision3D</a> had their own Number3D and Matrix3D classes, for example.</p>
+
+<p>Since the release of Flash 10, open-source projects have gradually switched to use the native <a href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/geom/Vector3D.html">Vector3D</a> and <a href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/geom/Matrix3D.html">Matrix3D</a> classes found in the flash.geom package and recently I decided it was time for Flint to also make this change, hence the release of Flint 3.0 a few weeks ago which uses those native 3D math classes.</p>
+
+<p>Converting Flint to use the native classes was an interesting experience. For one thing, I think the architecture of Flint's classes was better than the native classes. That wasn't sufficient reason to stick with Flint's own classes; using it's own 3D math classes was a barrier to entry for users who were familiar with the native classes and resulted in many questions from confused new users. (For much the same reason, I don't use the excellent <a href="https://github.com/robertpenner/as3-signals">As3-Signals</a> library by Robert Penner in Flint, even though I use it in all my other work.)</p>
+
+<p>So I set about converting Flint to use the native 3D classes. The initial conversion was mostly straightforward, only complicated by a lack of functionality in the native classes that sometimes meant <a href="https://twitter.com/richard_lord/status/2269097639288832">one line of code using Flint's classes had to be replaced with 3 or 4 lines of code using the native classes</a>.</p>
+
+<p>Having made the change, however, I was surprised to find two significant issues with the new code. The first was a couple of bugs in the native classes, which were not too serious since I could find a way to work around them. The second, and far more troubling issue, was a very large drop in performance - the code using the native 3D classes ran at about one quarter of the rate of the code using Flint's own 3D classes.</p>
+
+<p>I was eventually able to fix the performance loss, mostly by inlining some critical and slow methods including, for example, the code to transform every particle's position from global coordinate space to camera coordinate space, where instead of a simple</p>
+
+<pre>pp = camera.transform.transformVector( p );</pre>
+
+<p>Flint now does</p>
+
+<pre>var raw:Vector.<Number> = camera.transform.rawData;
+pp.x = raw[0] * p.x + raw[4] * p.y + raw[8] * p.z + raw[12] * p.w;
+pp.y = raw[1] * p.x + raw[5] * p.y + raw[9] * p.z + raw[13] * p.w;
+pp.z = raw[2] * p.x + raw[6] * p.y + raw[10] * p.z + raw[14] * p.w;
+pp.w = raw[3] * p.x + raw[7] * p.y + raw[11] * p.z + raw[15] * p.w;</pre>
+
+<p>for a massive performance improvement.</p>
+
+<h2>Coral</h2>
+
+<p>In light of the issues I encountered I have decided to release the 3D math classes that were formerly part of Flint as a separate open source project. I continue to use these classes in my own work (with the exception of Flint) and others may want to do so too.</p>
+
+<p>I am calling the project "Coral" - apparently small pieces of coral are sometimes found inside larger pieces of flint. <a href="https://github.com/richardlord/Coral">Coral is available on Github</a>, including unit tests and performance tests. Please feel free to use it, fork it and improve it.</p>
+
+<p>Since releasing Flint 3.0, I modified the unit tests and performance tests in Coral to also apply to the native 3D math classes, Vector3D and Matrix3D. This was out of curiosity mainly, but it revealed a number of bugs in the native classes and where the major performance weaknesses in these classes are.</p>
+
+<p>In the following posts I'll look at the results of these tests, with posts <a href="/blog/coral/bugs-in-vector3d-and-matrix3d.html">about the bugs I found</a> and <a href="/blog/coral/performance-of-coral-vs-vector3d-and-matrix3d.html">a performance comparison of Coral and the native classes</a>. But first, if you'll indulge me, here's a post <a href="/blog/coral/architecture-of-coral-vs-vector3d-and-matrix3d.html">comparing the architecture of Coral and the architecture of Flash's native 3D classes</a>.</p>
+
+
+<p>Share this post or a comment online -</p>
+<div id="share">
+<a href="https://twitter.com/intent/tweet?text=Introducing+Coral%2C+an+Actionscript+library+for+3D+Math&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fcoral%2Fintroducing-coral-an-actionscript-library-for-3d-math.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+<a href="https://www.facebook.com/dialog/share?app_id=206081586545847&amp;href=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fcoral%2Fintroducing-coral-an-actionscript-library-for-3d-math.html" target="_blank" title="Facebook"><img src="/images/social/facebook_logo.png" width="36" height="36" /></a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=Introducing+Coral%2C+an+Actionscript+library+for+3D+Math&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fcoral%2Fintroducing-coral-an-actionscript-library-for-3d-math.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+</div>
+<hr />
+<p>Also in the collection <b><a href="./">Coral, an Actionscript library for 3D Math</a></b></p>
+<ul><li><a href="architecture-of-coral-vs-vector3d-and-matrix3d.html">Architecture of Coral vs Vector3D and Matrix3D</a></li>
+<li><a href="performance-of-coral-vs-vector3d-and-matrix3d.html">Performance of Coral vs Vector3D and Matrix3D</a></li>
+<li><a href="bugs-in-vector3d-and-matrix3d.html">Bugs in Vector3D and Matrix3D</a></li>
+</ul>
+
+</div>
+</div>
+
+<footer role="contentinfo">
+	<p>Richard Lord - Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+</footer>
+</div>
+</body>
+</html>

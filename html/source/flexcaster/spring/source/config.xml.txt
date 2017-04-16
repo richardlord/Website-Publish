@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<objects
+	xmlns="http://www.springactionscript.org/schema/objects"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springactionscript.org/schema/objects
+		http://www.springactionscript.org/schema/objects/spring-actionscript-objects-1.0.xsd">
+	
+	<object id="autowiringStageProcessor" class="org.springextensions.actionscript.stage.DefaultAutowiringStageProcessor"/>
+	<object id="eventhandlerProcessor" class="org.springextensions.actionscript.ioc.factory.config.EventHandlerMetaDataPostProcessor"/>
+	<object id="routeEventsProcessor" class="org.springextensions.actionscript.ioc.factory.config.RouteEventsMetaDataPostProcessor"/>
+          
+    <object id="feeds" class="mx.collections.ArrayCollection"/>
+    <object id="feed" class="net.richardlord.flexcaster.spring.model.Feed"/>
+    <object id="podcast" class="net.richardlord.flexcaster.spring.model.Podcast"/>
+
+    <object id="feedsController" class="net.richardlord.flexcaster.spring.controllers.FeedsController">
+    	<property name="feeds" ref="feeds"/>
+    	<property name="feedsDelegate" ref="loadFeedsDelegate"/>
+    </object>
+
+    <object id="feedController" class="net.richardlord.flexcaster.spring.controllers.FeedController">
+    	<property name="feed" ref="feed"/>
+    	<property name="feedDelegate" ref="loadFeedDelegate"/>
+    </object>
+
+    <object id="podcastController" class="net.richardlord.flexcaster.spring.controllers.PodcastController">
+    	<property name="podcast" ref="podcast"/>
+    </object>
+    
+    <object id="loadFeedsDelegate" class="net.richardlord.flexcaster.spring.delegates.LoadFeedsDelegate">
+    	<property name="service" ref="feedsService"/>
+    </object>
+    
+    <object id="loadFeedDelegate" class="net.richardlord.flexcaster.spring.delegates.LoadFeedDelegate">
+    	<property name="service" ref="feedService"/>
+    </object>
+
+    <object id="feedsService" class="mx.rpc.http.HTTPService">
+    	<property name="resultFormat" value="e4x"/>
+    	<property name="url" value="feeds.opml"/>
+    </object>
+
+    <object id="feedService" class="mx.rpc.http.HTTPService">
+    	<property name="resultFormat" value="e4x"/>
+    </object>
+</objects>
+
+
+
+
+

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Ash - a new entity system framework for Actionscript games</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" media="all" href="/style.css" />
+<link rel="alternate" type="application/rss+xml" title="Richard Lord's Feed" href="http://www.richardlord.net/feed.xml" />
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9509078-6', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+<div id="page">
+<header role="banner">
+	<div id="social">
+		<a href="https://twitter.com/richard_lord"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+		<a href="https://uk.linkedin.com/in/richardlord"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+		<a href="https://github.com/richardlord"><img src="/images/social/github_logo.png" width="36" height="36" /></a>
+		<a href="https://www.youtube.com/c/RichardLordNet"><img src="/images/social/youtube_logo.png" width="36" height="36" /></a>
+	</div>
+
+	<div id="branding">
+		<img id="site-image" src="/images/social/me.png" />
+		<div id="site-title"><a href="/" title="Richard Lord" rel="home">Richard Lord</a></div>
+		<div id="site-description">Game Developer</div>
+	</div>
+
+	<nav id="menu" role="navigation">
+	<div>
+		<ul>
+			<li><a href="/games.html">GAMES</a></li>
+			<li><a href="/consulting.html">CONSULTING</a></li>
+			<li><a href="/blog/">BLOG</a></li>
+			<li><a href="/presentations/">PRESENTATIONS</a></li>
+			<li><a href="/press.html">PRESS</a></li>
+			<li><a href="/about/">ABOUT</a></li>
+		</ul>
+	</div>
+	</nav>
+</header>
+
+<div id="main">
+<div id="content">
+<h1>Ash - a new entity system framework for Actionscript games</h1>
+
+<div id="meta">Posted on <time datetime="2007-03-04T21:08:12Z">04 March 2007</time></div>
+
+
+
+
+<p>I've been doing a lot of stuff with entity systems recently. At <a href="http://www.tryharder.org.uk/">try{harder}</a> I gave <a href="/presentations/game-architecture-is-different.html">a presentation about entity systems</a>, which was warmly received and led to many interesting conversations. I also created example projects with the <a href="https://github.com/tdavies/Ember">Ember</a> and <a href="https://github.com/alecmce/xember">Xember</a> frameworks and had fruitful conversations with <a href="http://www.tomseysdavies.com/">Tom</a> and <a href="http://alecmce.com/">Alec</a> about their projects, even contributing a few minor bits of code to them.</p>
+
+<p>But now I've written an entity system framework of my own. It's called <a href="https://github.com/richardlord/Ash">Ash</a> and you can <a href="https://github.com/richardlord/Ash">find it on Github</a>.</p>
+
+<p>A few of the features of Ash are</p>
+
+<ul>
+<li>Uses the most performant linked list format <a href="/blog/ecs/linked-list-performance-test.html">from my tests here</a>.</li>
+<li>Optional, but not required, integration with <a href="https://github.com/tschneidereit/SwiftSuspenders">SwiftSuspenders</a> and <a href="http://www.robotlegs.org/">Robotlegs</a>.</li>
+<li>The process manager is a core part of the framework.</li>
+</ul>
+
+<p>I plan to build a game with Ash, so more features will come as I need them, and more posts on this blog. Meanwhile, if you're building an actionscript game why not <a href="https://github.com/richardlord/Ash">take Ash for a spin</a>. And for comparison, check out <a href="https://github.com/tdavies/Ember2">Ember2</a> and <a href="https://github.com/alecmce/xember">Xember</a>.</p>
+
+<p><a href="http://www.tomseysdavies.com/">Tom</a> in particular has done a lot of work to develop the ideas behind entity systems on the Flash platform. Without that work to feed my ideas machine I wouldn't have built Ash, so thank you Tom.</p>
+
+<p>And thank you to Till who added a feature to <a href="https://github.com/tschneidereit/SwiftSuspenders">SwiftSuspenders</a> to enable me to inject linked lists based on their content type.</p>
+
+<h2>Update</h2>
+
+<p>Here is <a href="/blog/ecs/what-is-an-entity-framework.html">a follow-up post</a> explaining entity system frameworks and <a href="/blog/ecs/why-use-an-entity-framework.html">a further post</a> explaining some of the reasons why I like using an entity system framework for my game development projects.</p>
+
+
+
+<p>Share this post or a comment online -</p>
+<div id="share">
+<a href="https://twitter.com/intent/tweet?text=Ash+-+a+new+entity+system+framework+for+Actionscript+games&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fecs%2Fintroducing-ash.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+<a href="https://www.facebook.com/dialog/share?app_id=206081586545847&amp;href=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fecs%2Fintroducing-ash.html" target="_blank" title="Facebook"><img src="/images/social/facebook_logo.png" width="36" height="36" /></a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=Ash+-+a+new+entity+system+framework+for+Actionscript+games&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fecs%2Fintroducing-ash.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+</div>
+<hr />
+<p>Also in the collection <b><a href="./">Entity-Component-System architecture</a></b></p>
+<ul><li><a href="linked-list-performance-test.html">Four ways to link a list (a performance test on linked list architectures)</a></li>
+<li><a href="what-is-an-entity-framework.html">What is an entity system framework for game development?</a></li>
+<li><a href="why-use-an-entity-framework.html">Why use an entity system framework for game development?</a></li>
+<li><a href="finite-state-machines-with-ash.html">Finite State Machines with Ash entity system framework</a></li>
+</ul>
+
+</div>
+</div>
+
+<footer role="contentinfo">
+	<p>Richard Lord - Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+</footer>
+</div>
+</body>
+</html>

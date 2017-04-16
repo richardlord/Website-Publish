@@ -1,0 +1,140 @@
+body {
+	color: #fff;
+	background-color: #000;
+}
+
+#page {
+	border-top: 1px solid #000;
+	background-color: #282828;
+}
+
+/* =Header
+----------------------------------------------- */
+
+header {
+    margin: 15px 0 0 0;
+}
+
+#branding {
+	margin-left: 7.6%;
+}
+
+#site-image {
+    float: left;
+    padding: 0 15px 10px 0;
+}
+
+#social {
+    float: right;;
+    text-align: right;
+	margin: 15px 7.6% 0 0;
+}
+
+#social img {
+    padding: 0.1em 0.5em;
+}
+
+
+/* =Menu
+-------------------------------------------------------------- */
+
+#menu {
+	border-top: 1px solid #3fa9f6;
+	border-bottom: 1px solid #3fa9f6;
+	background: #2a2a2a; /* Show a solid color for older browsers */
+	background: -moz-linear-gradient(#3c3c3c, #181818);
+	background: -o-linear-gradient(#3c3c3c, #181818);
+	background: -webkit-linear-gradient(#3c3c3c, #181818);
+	-webkit-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
+	box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
+}
+
+#menu a {
+	color: #abda4d;
+}
+#menu li:hover > a,
+#menu a:focus {
+	background: #f9f9f9; /* Show a solid color for older browsers */
+	background: -moz-linear-gradient(#ddd, #bbb);
+	background: -o-linear-gradient(#ddd, #bbb);
+	background: -webkit-linear-gradient(#ddd, #bbb);
+	color: #373737;
+}
+
+/* =Footer
+----------------------------------------------- */
+
+footer {
+	border-top: 1px solid #3fa9f6;
+}
+
+/* =Mail Chimp
+----------------------------------------------- */
+
+#mc_embed_signup input {
+	border:1px solid #666;
+	background-color: #000;
+	color: #FFFFFF;
+	-webkit-appearance:none;
+}
+#mc_embed_signup input:focus {
+	border-color:#3FA9F5;
+}
+#mc_embed_signup .button {
+	clear:both;
+	background-color: #333;
+	background: linear-gradient( #3c3c3c, #191919 );
+	border: 1px solid #3FA9F5;
+	border-radius:4px;
+	color: #FFFFFF;
+	cursor: pointer;
+	display: block;
+	font-weight: bold;
+	height: 2em;
+	line-height: 2em;
+	margin: 0;
+	padding:0;
+	text-align: center;
+	text-decoration: none;
+	vertical-align: top;
+	white-space: nowrap;
+	width:35%;
+	min-width:10em;
+}
+#mc_embed_signup .button:hover {
+	background-color:#777;
+}
+
+#mc_embed_signup input.email {
+    display: block;
+    padding: 8px 0;
+    margin: 0 4% 10px 0;
+    text-indent: 5px;
+    width: 35%;
+    min-width: 20em;
+}
+
+/* =Common
+----------------------------------------------- */
+
+h1, h2, h1 a, h1 a:visited, h2 a, h2 a:visited {
+	color: #abda4d;
+}
+
+h1 a:hover, h2 a:hover {
+	color: #ff9;
+}
+
+a {
+	color: #ff9;
+}
+
+a:visited {
+	color: #ffc;
+}
+
+hr {
+	background-color: #666;
+}
+

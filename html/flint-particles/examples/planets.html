@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Flint Particles Planets</title>
+<link rel="stylesheet" type="text/css" media="all" href="/style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/flint-particles/style.css" />
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9509078-6', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+<div id="page">
+<header role="banner">
+
+	<div id="branding"><img id="site-image" src="/flint-particles/images/core/logobig.gif" width="325" height="37" /></div>
+
+	<nav id="menu" role="navigation">
+	<div>
+		<ul>
+			<li><a href="/flint-particles/index.html">ABOUT</a></li>
+			<li><a href="/flint-particles/source-code.html">SOURCE CODE</a></li>
+			<li><a href="/flint-particles/documentation.html">DOCUMENTATION</a></li>
+			<li><a href="/flint-particles/examples/">EXAMPLES</a></li>
+			<li><a href="/flint-particles/blog/">BLOG</a></li>
+		</ul>
+	</div>
+	</nav>
+</header>
+
+<div id="main">
+<div id="content">
+
+
+<link type="text/css" href="/flint-particles/css/jquery-ui-1.8.2.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/flint-particles/javascript/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="/flint-particles/javascript/jquery-ui-1.8.2.custom.min.js"></script>
+
+<h1>Planets</h1>
+
+<div class="spaced center">
+  <object width="500" height="500" data="/flint-particles/source/examples3D/Planets/Away3d4/Planets.swf" type="application/x-shockwave-flash">
+    <param name="movie" value="/flint-particles/source/examples3D/Planets/Away3d4/Planets.swf" />
+    <param name="loop" value="false" />
+    <param name="quality" value="high" />
+    <param name="allowfullscreen" value="true" />
+    <param name="wmode" value="direct" />
+  </object>
+</div>
+
+<p>This example shows Flint using true 3d objects as particles rendered using Stage3D. The particles are spheres, with a green/blue texture.</p>
+
+<script type="text/javascript">$(function() { $("#source").tabs(); });</script>
+
+<div id="source">
+  <ul><li><a href="#Away3d-4">Away3d-4</a></li>
+<li><a href="#Flare3d">Flare3d</a></li>
+<li><a href="#Alternativa3d">Alternativa3d</a></li>
+</ul><div id="Away3d-4"><pre class="code">package
+{
+  import away3d.containers.ObjectContainer3D;
+  import away3d.containers.View3D;
+
+  import org.flintparticles.integration.away3d.v4.A3D4Renderer;
+  import org.flintparticles.threeD.emitters.Emitter3D;
+
+  import flash.display.Sprite;
+  import flash.events.Event;
+
+  [SWF(width='500', height='500', frameRate='60', backgroundColor='#000000')]
+  
+  public class Main extends Sprite
+  {
+    private var emitter:Emitter3D;
+    private var view:View3D;
+    private var renderer:A3D4Renderer;
+    
+    public function Main()
+    {
+      emitter = new Planets();
+
+      view = new View3D();
+      view.width = 500;
+      view.height = 500;
+      addChild( view );
+      
+      var particleContainer:ObjectContainer3D = new ObjectContainer3D();
+      view.scene.addChild( particleContainer );
+      particleContainer.z = -400;
+      
+      renderer = new A3D4Renderer( particleContainer );
+      renderer.addEmitter( emitter );
+
+      emitter.start();
+      
+      addEventListener( Event.ENTER_FRAME, render, false, 0, true );
+    }
+    
+    private function render( ev:Event ):void
+    {
+      // render the view
+      view.render();
+    }
+  }
+}</pre><pre class="code">package
+{
+  import away3d.materials.BitmapMaterial;
+  import away3d.primitives.Sphere;
+
+  import org.flintparticles.common.actions.Age;
+  import org.flintparticles.common.counters.Steady;
+  import org.flintparticles.common.initializers.Lifetime;
+  import org.flintparticles.integration.away3d.v4.initializers.A3D4CloneObject;
+  import org.flintparticles.threeD.actions.Move;
+  import org.flintparticles.threeD.actions.Rotate;
+  import org.flintparticles.threeD.emitters.Emitter3D;
+  import org.flintparticles.threeD.initializers.Position;
+  import org.flintparticles.threeD.initializers.RotateVelocity;
+  import org.flintparticles.threeD.initializers.Rotation;
+  import org.flintparticles.threeD.initializers.Velocity;
+  import org.flintparticles.threeD.zones.ParallelogramZone;
+  import org.flintparticles.threeD.zones.PointZone;
+
+  import flash.display.BitmapData;
+  import flash.display.BitmapDataChannel;
+  import flash.geom.Vector3D;
+
+  public class Planets extends Emitter3D
+  {
+    public function Planets()
+    {
+      counter = new Steady( 70 );
+      
+      var bdata:BitmapData = new BitmapData( 128, 128 );
+      bdata.perlinNoise( 128, 128, 12, Math.floor( Math.random() * int.MAX_VALUE ), true, true, BitmapDataChannel.BLUE | BitmapDataChannel.GREEN );
+      var mat:BitmapMaterial = new BitmapMaterial( bdata, true, true, true );
+      var sphere:Sphere = new Sphere( mat, 10, 12, 12 );
+      addInitializer( new A3D4CloneObject( sphere, true, 400 ) );
+
+      addInitializer( new Position( new ParallelogramZone( new Vector3D( -500, -500, 1500 ), new Vector3D( 1000, 0, 0 ), new Vector3D( 0, 1000, 0 ) ) ) );
+      addInitializer( new Velocity( new PointZone( new Vector3D( 0, 0, -400 ) ) ) );
+      addInitializer( new Rotation( new Vector3D(1, 1, 1), 0, 2 * Math.PI ) );
+        addInitializer(new RotateVelocity( new Vector3D( 1, 0, 0 ), 0.1, 2 ) );
+      addInitializer(new Lifetime( 5 ));
+      
+      addAction( new Move() );
+      addAction( new Age() );
+      addAction( new Rotate() );
+    }
+  }
+}</pre></div>
+<div id="Flare3d"><pre class="code">package
+{
+  import flare.basic.Scene3D;
+  import flare.basic.Viewer3D;
+  import flare.core.Pivot3D;
+
+  import org.flintparticles.integration.flare3d.F3DRenderer;
+  import org.flintparticles.threeD.emitters.Emitter3D;
+
+  import flash.display.Sprite;
+  import flash.geom.Vector3D;
+
+  [SWF(width='500', height='500', frameRate='60', backgroundColor='#000000')]
+  
+  public class Main extends Sprite
+  {
+    private var emitter:Emitter3D;
+    private var scene:Scene3D;
+    private var renderer:F3DRenderer;
+    
+    public function Main()
+    {
+      scene = new Viewer3D( this );
+      scene.clearColor = new Vector3D( 0, 0, 0 );
+
+      var particleContainer:Pivot3D = new Pivot3D();
+      scene.addChild( particleContainer );
+      particleContainer.z = -400;
+      
+      emitter = new Planets();
+      renderer = new F3DRenderer( particleContainer );
+      renderer.addEmitter( emitter );
+
+      emitter.start();
+    }
+  }
+}</pre><pre class="code">package
+{
+  import flare.core.Texture3D;
+  import flare.materials.Shader3D;
+  import flare.materials.filters.TextureFilter;
+  import flare.primitives.Sphere;
+
+  import org.flintparticles.common.actions.Age;
+  import org.flintparticles.common.counters.Steady;
+  import org.flintparticles.common.initializers.Lifetime;
+  import org.flintparticles.integration.flare3d.initializers.F3DCloneObject;
+  import org.flintparticles.threeD.actions.Move;
+  import org.flintparticles.threeD.actions.Rotate;
+  import org.flintparticles.threeD.emitters.Emitter3D;
+  import org.flintparticles.threeD.initializers.Position;
+  import org.flintparticles.threeD.initializers.RotateVelocity;
+  import org.flintparticles.threeD.initializers.Rotation;
+  import org.flintparticles.threeD.initializers.Velocity;
+  import org.flintparticles.threeD.zones.ParallelogramZone;
+  import org.flintparticles.threeD.zones.PointZone;
+
+  import flash.display.BitmapData;
+  import flash.display.BitmapDataChannel;
+  import flash.display.BlendMode;
+  import flash.geom.Vector3D;
+
+  public class Planets extends Emitter3D
+  {
+    public function Planets()
+    {
+      counter = new Steady( 100 );
+      
+      var bdata:BitmapData = new BitmapData( 128, 128 );
+      bdata.perlinNoise( 128, 128, 12, Math.floor( Math.random() * int.MAX_VALUE ), true, true, BitmapDataChannel.BLUE | BitmapDataChannel.GREEN );
+      var texture:Texture3D = new Texture3D( bdata );
+      var shader : Shader3D = new Shader3D( &quot;particleFilter&quot;, [ new TextureFilter( texture, 0, BlendMode.ADD ) ], false );
+      shader.build();
+      var sphere:Sphere = new Sphere( 'sphere', 10, 24, shader );
+      addInitializer( new F3DCloneObject( sphere, true, 400 ) );
+      
+      addInitializer( new Position( new ParallelogramZone( new Vector3D( -500, -500, 1500 ), new Vector3D( 1000, 0, 0 ), new Vector3D( 0, 1000, 0 ) ) ) );
+      addInitializer( new Velocity( new PointZone( new Vector3D( 0, 0, -400 ) ) ) );
+      addInitializer( new Rotation( new Vector3D(1, 1, 1), 0, 2 * Math.PI ) );
+        addInitializer( new RotateVelocity( new Vector3D( 1, 0, 0 ), 0.1, 2 ) );
+      addInitializer( new Lifetime( 4 ) );
+      
+      addAction( new Move() );
+      addAction( new Age() );
+      addAction( new Rotate() );
+    }
+  }
+}</pre></div>
+<div id="Alternativa3d"><pre class="code">package
+{
+  import alternativa.engine3d.core.Camera3D;
+  import alternativa.engine3d.core.Object3D;
+  import alternativa.engine3d.core.Resource;
+  import alternativa.engine3d.core.View;
+
+  import org.flintparticles.integration.alternativa3d.Alt3DRenderer;
+  import org.flintparticles.threeD.emitters.Emitter3D;
+
+  import flash.display.Sprite;
+  import flash.display.Stage3D;
+  import flash.events.Event;
+
+  [SWF(width='500', height='500', frameRate='60', backgroundColor='#000000')]
+  
+  public class Main extends Sprite
+  {
+    private var emitter : Emitter3D;
+    private var particleContainer : Object3D;
+    private var camera : Camera3D;
+    private var stage3D : Stage3D;
+    private var renderer : Alt3DRenderer;
+
+    public function Main()
+    {
+      camera = new Camera3D( 0.1, 10000 );
+      camera.view = new View( stage.stageWidth, stage.stageHeight );
+      camera.view.backgroundColor = 0x000000;
+      camera.view.hideLogo();
+      addChild( camera.view );
+      addChild( camera.diagram );
+      
+      camera.rotationX = 0;
+      camera.y = 0;
+      camera.z = -360;
+
+      stage3D = stage.stage3Ds[0];
+      stage3D.addEventListener( Event.CONTEXT3D_CREATE, onContextCreate );
+      stage3D.requestContext3D();
+    }
+
+    private function onContextCreate( event : Event ) : void
+    {
+      particleContainer = new Object3D();
+      particleContainer.addChild( camera );
+      renderer = new Alt3DRenderer( particleContainer );
+      
+      emitter = new Planets();
+      renderer.addEmitter( emitter );
+
+      emitter.start();
+
+      addEventListener( Event.ENTER_FRAME, render, false, 0, true );
+    }
+
+    private function render( ev : Event ) : void
+    {
+      // render the view
+      camera.view.width = stage.stageWidth;
+      camera.view.height = stage.stageHeight;
+      camera.render( stage3D );
+      for each ( var resource:Resource in particleContainer.getResources( true ) )
+      {
+        resource.upload( stage3D.context3D );
+      }
+    }
+  }
+}</pre><pre class="code">package
+{
+  import alternativa.engine3d.materials.TextureMaterial;
+  import alternativa.engine3d.primitives.GeoSphere;
+  import alternativa.engine3d.resources.BitmapTextureResource;
+
+  import org.flintparticles.common.actions.Age;
+  import org.flintparticles.common.counters.Steady;
+  import org.flintparticles.common.initializers.Lifetime;
+  import org.flintparticles.integration.alternativa3d.initializers.Alt3DCloneObject;
+  import org.flintparticles.threeD.actions.Move;
+  import org.flintparticles.threeD.actions.Rotate;
+  import org.flintparticles.threeD.emitters.Emitter3D;
+  import org.flintparticles.threeD.initializers.Position;
+  import org.flintparticles.threeD.initializers.RotateVelocity;
+  import org.flintparticles.threeD.initializers.Rotation;
+  import org.flintparticles.threeD.initializers.Velocity;
+  import org.flintparticles.threeD.zones.ParallelogramZone;
+  import org.flintparticles.threeD.zones.PointZone;
+
+  import flash.display.BitmapData;
+  import flash.display.BitmapDataChannel;
+  import flash.geom.Vector3D;
+
+  public class Planets extends Emitter3D
+  {
+    public function Planets()
+    {
+      counter = new Steady( 70 );
+
+      var bitmapData : BitmapData = new BitmapData( 128, 128 );
+      bitmapData.perlinNoise( 128, 128, 12, Math.floor( Math.random() * int.MAX_VALUE ), true, true, BitmapDataChannel.BLUE | BitmapDataChannel.GREEN );
+      var mat : TextureMaterial = new TextureMaterial( new BitmapTextureResource( bitmapData ) );
+      var sphere : GeoSphere = new GeoSphere( 10, 12, false, mat );
+      addInitializer( new Alt3DCloneObject( sphere ) );
+
+      addInitializer( new Position( new ParallelogramZone( new Vector3D( -500, -500, 1500 ), new Vector3D( 1000, 0, 0 ), new Vector3D( 0, 1000, 0 ) ) ) );
+      addInitializer( new Velocity( new PointZone( new Vector3D( 0, 0, -400 ) ) ) );
+      addInitializer( new Rotation( new Vector3D( 1, 1, 1 ), 0, 2 * Math.PI ) );
+      addInitializer( new RotateVelocity( new Vector3D( 1, 0, 0 ), 0.1, 2 ) );
+      addInitializer( new Lifetime( 5 ) );
+
+      addAction( new Move() );
+      addAction( new Age() );
+      addAction( new Rotate() );
+    }
+  }
+}</pre></div>
+
+
+</div>
+</div>
+
+<footer role="contentinfo">
+	<p>Richard Lord - Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>FlexcasterFrontController.as</title>
+<link rel="stylesheet" type="text/css" href="../../../../../../SourceStyles.css"/>
+</head>
+
+<body><pre><span class="ActionScriptpackage">package</span> <span class="ActionScriptDefault_Text">net</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">richardlord</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">flexcaster</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">cairngorm</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">control</span>
+<span class="ActionScriptBracket/Brace">{</span>
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">adobe</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">cairngorm</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">control</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">FrontController</span>;
+    
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">net</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">richardlord</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">flexcaster</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">cairngorm</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">events</span><span class="ActionScriptOperator">.</span><span class="ActionScriptOperator">*</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">net</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">richardlord</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">flexcaster</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">cairngorm</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">commands</span><span class="ActionScriptOperator">.</span><span class="ActionScriptOperator">*</span>;
+    
+    <span class="ActionScriptReserved">public</span> <span class="ActionScriptclass">class</span> <span class="ActionScriptDefault_Text">FlexcasterFrontController</span> <span class="ActionScriptReserved">extends</span> <span class="ActionScriptDefault_Text">FrontController</span>
+    <span class="ActionScriptBracket/Brace">{</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">FlexcasterFrontController</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">super</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">addCommand</span><span class="ActionScriptBracket/Brace">(</span> <span class="ActionScriptDefault_Text">SimpleEvent</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">SHOW_FEEDS</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">ShowFeeds</span> <span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">addCommand</span><span class="ActionScriptBracket/Brace">(</span> <span class="ActionScriptDefault_Text">SimpleEvent</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">SHOW_FEED</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">ShowFeed</span> <span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">addCommand</span><span class="ActionScriptBracket/Brace">(</span> <span class="ActionScriptDefault_Text">SimpleEvent</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">SHOW_PODCAST</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">ShowPodcast</span> <span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">addCommand</span><span class="ActionScriptBracket/Brace">(</span> <span class="ActionScriptDefault_Text">AlertEvent</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">ALERT</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">ShowAlert</span> <span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+    <span class="ActionScriptBracket/Brace">}</span>
+<span class="ActionScriptBracket/Brace">}</span></pre></body>
+</html>

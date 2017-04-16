@@ -1,0 +1,12 @@
+Zones
+PointZone
+LineZone
+RectangleZone
+
+DiscZone
+DiscSectorZone
+
+BitmapDataZone
+DisplayObjectZone
+
+MultiZone

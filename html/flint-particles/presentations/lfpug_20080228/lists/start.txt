@@ -1,0 +1,12 @@
+Practical Particle Effects with Flint
+London Flash Platform User Group
+28 February 2008
+Presented by Richard Lord
+Based on Flint version 0.9.3
+
+This presentation is keyboard controlled
+Click anywhere on this page to activate then
+Right arrow for the next slide
+Left arrow for the previous slide
+Down arrow to scroll text down (in the code views)
+Up arrow to scroll text up (in the code views)

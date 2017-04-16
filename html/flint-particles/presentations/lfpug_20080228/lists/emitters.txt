@@ -1,0 +1,4 @@
+Emitters
+DisplayObjectEmitter
+BitmapEmitter
+PixelEmitter

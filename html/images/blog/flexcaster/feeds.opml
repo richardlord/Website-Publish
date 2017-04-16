@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="1.0">
+<head>
+	<title>iTunes Subscribed Feeds</title>
+	<dateCreated>Wed, 09 Sep 2009 18:08:36 GMT</dateCreated>
+	<dateModified>Wed, 09 Sep 2009 18:08:36 GMT</dateModified>
+</head>
+<body>
+	<outline text="WNYC's Radiolab" type="rss" xmlUrl="http://feeds.wnyc.org/radiolab?format=xml" htmlUrl="http://pipes.yahoo.com/pipes/pipe.info?_id=d71dbccf7f09a3d9e519fb4c1864ce91" />
+	<outline text="The Flex Show - Audio Only" type="rss" xmlUrl="http://feeds.feedburner.com/TheFlexShow-AudioOnly?format=xml" htmlUrl="http://www.theflexshow.com/blog/index.cfm" />
+	<outline text="RIApodcast - a ColdFusion, Flex and Flash Podcast" type="rss" xmlUrl="http://feeds.feedburner.com/riapodcast?format=xml" htmlUrl="http://www.riapodcast.com/" />
+	<outline text="Elegant Code » CodeCast" type="rss" xmlUrl="http://feeds.feedburner.com/elegantcodecast?format=xml" htmlUrl="http://elegantcode.com" />
+	<outline text="The Thirsty Developer - Podcast" type="rss" xmlUrl="http://feeds.feedburner.com/ThirstyDeveloperPodcast?format=xml" htmlUrl="http://thirstydeveloper.com/" />
+	<outline text="Lean Agile Straight Talk podcast" type="rss" xmlUrl="http://feeds.feedburner.com/NetObjectivesPodcast_LAST?format=xml" htmlUrl="http://www.netobjectives.com/LAST_view/feed" />
+	<outline text="Hanselminutes" type="rss" xmlUrl="http://feeds.feedburner.com/Hanselminutes?format=xml" htmlUrl="http://www.hanselminutes.com" />
+	<outline text="Deep Fried Bytes" type="rss" xmlUrl="http://feeds.feedburner.com/deepfriedbytes?format=xml" htmlUrl="http://deepfriedbytes.com/" />
+	<outline text="Agile Toolkit Podcast" type="rss" xmlUrl="http://agiletoolkit.libsyn.com/rss" htmlUrl="http://agiletoolkit.libsyn.com" />
+</body>
+</opml>

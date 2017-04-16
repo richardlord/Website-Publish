@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+	<title>Source of Flexcaster_Mate</title>
+	<nodes>
+		<node label="libs">
+			<node label="Mate_08_8_1.swc" url="source/libs/Mate_08_8_1.swc"/>
+		</node>
+		<node label="src">
+			<node label="net.richardlord.flexcaster.mate.events" icon="packageIcon" expanded="true">
+				<node label="AlertEvent.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/mate/events/AlertEvent.as.html"/>
+				<node label="FeedEvent.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/mate/events/FeedEvent.as.html"/>
+				<node label="PodcastEvent.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/mate/events/PodcastEvent.as.html"/>
+				<node label="SimpleEvent.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/mate/events/SimpleEvent.as.html"/>
+			</node>
+			<node label="net.richardlord.flexcaster.mate.maps" icon="packageIcon" expanded="true">
+				<node label="MainEventMap.mxml" icon="mxmlIcon" url="source/net/richardlord/flexcaster/mate/maps/MainEventMap.mxml.html"/>
+			</node>
+			<node label="net.richardlord.flexcaster.mate.media" icon="packageIcon" expanded="true">
+				<node label="Mp3Player.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/mate/media/Mp3Player.as.html"/>
+			</node>
+			<node label="net.richardlord.flexcaster.mate.model" icon="packageIcon" expanded="true">
+				<node label="Feed.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/mate/model/Feed.as.html"/>
+				<node label="ModelManager.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/mate/model/ModelManager.as.html"/>
+				<node label="Podcast.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/mate/model/Podcast.as.html"/>
+			</node>
+			<node label="net.richardlord.flexcaster.mate.services" icon="packageIcon" expanded="true">
+				<node label="ServiceHelper.as" icon="actionScriptIcon" url="source/net/richardlord/flexcaster/mate/services/ServiceHelper.as.html"/>
+			</node>
+			<node label="net.richardlord.flexcaster.mate.views" icon="packageIcon" expanded="true">
+				<node label="FeedRenderer.mxml" icon="mxmlIcon" url="source/net/richardlord/flexcaster/mate/views/FeedRenderer.mxml.html"/>
+				<node label="FeedsView.mxml" icon="mxmlIcon" url="source/net/richardlord/flexcaster/mate/views/FeedsView.mxml.html"/>
+				<node label="FeedView.mxml" icon="mxmlIcon" url="source/net/richardlord/flexcaster/mate/views/FeedView.mxml.html"/>
+				<node label="MainView.mxml" icon="mxmlIcon" url="source/net/richardlord/flexcaster/mate/views/MainView.mxml.html"/>
+				<node label="PodcastRenderer.mxml" icon="mxmlIcon" url="source/net/richardlord/flexcaster/mate/views/PodcastRenderer.mxml.html"/>
+				<node label="PodcastView.mxml" icon="mxmlIcon" url="source/net/richardlord/flexcaster/mate/views/PodcastView.mxml.html"/>
+			</node>
+			<node label="feeds.opml" url="source/feeds.opml"/>
+			<node selected="true" label="Flexcaster.mxml" icon="mxmlAppIcon" url="source/Flexcaster.mxml.html"/>
+			<node label="licence.txt" url="source/licence.txt"/>
+		</node>
+	</nodes>
+</index>

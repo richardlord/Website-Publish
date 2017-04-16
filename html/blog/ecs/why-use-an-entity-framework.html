@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Why use an entity system framework for game development?</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" media="all" href="/style.css" />
+<link rel="alternate" type="application/rss+xml" title="Richard Lord's Feed" href="http://www.richardlord.net/feed.xml" />
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9509078-6', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+<div id="page">
+<header role="banner">
+	<div id="social">
+		<a href="https://twitter.com/richard_lord"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+		<a href="https://uk.linkedin.com/in/richardlord"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+		<a href="https://github.com/richardlord"><img src="/images/social/github_logo.png" width="36" height="36" /></a>
+		<a href="https://www.youtube.com/c/RichardLordNet"><img src="/images/social/youtube_logo.png" width="36" height="36" /></a>
+	</div>
+
+	<div id="branding">
+		<img id="site-image" src="/images/social/me.png" />
+		<div id="site-title"><a href="/" title="Richard Lord" rel="home">Richard Lord</a></div>
+		<div id="site-description">Game Developer</div>
+	</div>
+
+	<nav id="menu" role="navigation">
+	<div>
+		<ul>
+			<li><a href="/games.html">GAMES</a></li>
+			<li><a href="/consulting.html">CONSULTING</a></li>
+			<li><a href="/blog/">BLOG</a></li>
+			<li><a href="/presentations/">PRESENTATIONS</a></li>
+			<li><a href="/press.html">PRESS</a></li>
+			<li><a href="/about/">ABOUT</a></li>
+		</ul>
+	</div>
+	</nav>
+</header>
+
+<div id="main">
+<div id="content">
+<h1>Why use an entity system framework for game development?</h1>
+
+<div id="meta">Posted on <time datetime="2007-03-04T21:08:12Z">04 March 2007</time></div>
+
+
+
+
+<p>Following my <a href="/blog/ecs/what-is-an-entity-framework.html">previous post</a> on entity systems for game development I received a number of good questions from developers. I answered many of them directly to the questioners but one question stands out. It's all very well explaining what an entity system framework is, and even <a href="/blog/ecs/introducing-ash.html">building one</a>, but why would you want to use one? In particular, why use the later component/system architecture I described and that I implement in <a href="/ash/">Ash</a> rather than the earlier object-oriented entity architecture as used, for example, in PushButton Engine.</p>
+
+<p>So, in this post I will look more at what the final architecture is, what it gives us that other architectures don't, and why I personally prefer this architecture.</p>
+
+<h2>The core of the architecture</h2>
+
+<img src="/images/blog/entity5.png" alt="" width="459" height="251" />
+
+<p>First, it's worth noting that the core of this architecture is the components and the systems. Components are value-objects that contain the state of the game, and systems are the logic that operates on that state, changing it as the game progresses. The other elements of the architecture are purely incidental, designed to make life easier.</p>
+
+<p>The entity object is present to collect related components together. The relation between components is encapsulated by the concept of an entity and that is vital to the architecture, but it isn't necessary to use an explicit Entity object for this. There are some frameworks that simply use an id to represent the entity, adding the entity id to every component to indicate which entity it belongs to. In this scenario there is no requirement for an entity object at all and entity based operations are performed through an entity manager, using the id to indicate which entity they are operating on.</p>
+
+<p>As a concept, the entity is vital to the architecture. But as a code construct it is entirely optional. I include it because, when using an object-oriented language, the entity object makes life easier. In particular, it enables us to create the methods that operate on the entity as methods of an entity object and to track and manage the entity through this object, removing the need to track ids throughout the code.</p>
+
+<p>While the concept of an entity is vital to the architecture, the concept of node objects is entirely incidental. The nodes are used as the objects in the collections of components supplied to the systems. We could instead provide each system with a collection of the relevant entities and let the systems pull the components they want to operate on out of the entities, using the get() method of the entity.</p>
+
+<p>In Ash, the nodes serve two purposes. First they enable us to use a more efficient data structure in which the node objects that the systems receive are nodes in a linked list. This improves the execution speed of the framework.</p>
+
+<p>Second, using the node objects enables us to apply strong, static typing throughout our code. The method to fetch a component from an entity necessarily returns an untyped object, which must then be cast to the correct component type for use in the game code. The properties on the node are already statically typed to the components' data types, so no casting is necessary.</p>
+
+<p>So, fundamentally, the entity architecture is about components and systems.</p>
+
+<h2>This is not object-oriented programming</h2>
+
+<p>We can build our entity architecture using an object-oriented language but, on a fundamental level, this is not object-oriented programming. The architecture is not about objects, it's about data (components) and sub-routines that operate on that data (systems).</p>
+
+<p>For many object-oriented programmers this is the hardest part of working with an entity system framework. Our tendency is to fall back to what we know and as an object-oriented programmer using an object-oriented language that means encapsulating data and operations together into objects. If you do this with a framework like Ash you will fail.</p>
+
+<h2>Data-Oriented Programming</h2>
+
+<p>Games tend to be about lots of fast changing state, with players, non-player characters, game objects like bullets and lasers, bats and balls, tables and chairs, and levels, scores, lives and more all having state that might include position, rotation, speed, acceleration, weight, colour, intention, goals, desires, friendships, enemies and more.</p>
+
+<p>The state of the game can be encapsulated in this large mass of constantly changing data, and on a technical level the game is entirely about what this data is and how this data changes.</p>
+
+<p>In a game a single little piece of this data may have many operations acting on it. Take, for example, a player character that has a position property that represents the character's position in the game world. This single piece of data may be used by</p>
+
+<ul>
+<li>The render system, to draw the player in the world.</li>
+<li>The camera system, to position the camera relative to the player.</li>
+<li>The AI systems of all non-player characters, to decide how they should react to the player.</li>
+<li>The input system, which alters the player's position based on user input.</li>
+<li>The physics system, which alters the player's position based on the physics of the game world.</li>
+<li>The collision system, which tests whether the player is colliding with other objects and resolves those collisions.</li>
+</ul>
+
+<p>and probably many more systems besides. If we try to build our game using objects that encapsulate data with the operations that act on that data, then we will build dependencies between all these different systems as they all want to be encapsulated with the player's position data. This can't be done unless we code the game as one single, massive class, so inevitably we break some parts of the game into separate systems and provide data to those systems - the physics system, the graphics system - while including other elements of the game logic within the entity objects themselves.</p>
+
+<p>An entity architecture based on components and systems takes the idea of discrete systems to its logical conclusion. All operations are programmed as independent systems, and all game state is stored separately in a set of data components, which are provided to the systems according to their need.</p>
+
+<p>The systems are decoupled form each other. Each system knows only about itself and the data it operates on. It knows and cares nothing at all about the other systems and how they may have affected by or used the data before or after this system gets to work with it.</p>
+
+<p>Also, by embracing the system as the core logic of the architecture, we are encouraged to make many smaller and simpler systems rather than a few large complex ones, which again leads to simpler code and looser coupling.</p>
+
+<p>This decoupling makes building your game much easier. It is why I enjoy working with this form of entity system so much, and why I built Ash.</p>
+
+<h2>Storing the game state</h2>
+
+<p>Another benefit of the component/system architecture is apparent when you want to save and restore the game state. Because the game state is contained entirely in the components, and because these are simple value objects, saving the game state is a relatively simple matter of serialising out the components, and restoring the game state involves just deserialising the data back in again.</p>
+
+<p>In most cases, serialising a value-object is straightforward, and one could simply json-encode each component, with additional data to indicate its entity owner (an id) and its component type (a string), to save the game state.</p>
+
+<p><a href="http://t-machine.org/">Adam Martin</a> wrote about <a href="http://t-machine.org/index.php/2011/08/22/entity-system-rdbms-beta-a-new-example-with-source/">comparing components in an entity system framework to data in a relational database</a> (there's lots of interesting entity related stuff on <a href="http://t-machine.org/">Adam's blog</a>), and emphasising that conversion between a relational database for long-term storage and components for game play doesn't require any object/relational mapping, because components are simple copies of the relational database's data structure rather than complex objects.</p>
+
+<p>This leads further to the conclusion that a component/system architecture is ideal for an MMO game, since state will be stored in a relational database on the game servers, and much of the processing of that state will occur on the servers, where using a set of discrete, independent systems to process the data as the game unfolds is an excellent fit to both the data storage requirements of the state and the parallelism available on the servers.</p>
+
+<h2>Concurrency</h2>
+
+<p>Indeed, a component/system architecture is well suited to applying concurrency to a game. In most games, some of the systems are entirely independent of each other, including being independent of the order in which they are applied. This makes it easy to run these systems in parallel.</p>
+
+<p>Further, most systems consist of a loop in which all nodes are processed sequentially. In many cases, the loop can be parallelised since the nodes can be updated independently of each other.</p>
+
+<p>This gives us two places in the code where concurrency can be applied without altering the core logic of the game, which is inside the loop in the systems, or the core state of the game, which is in the components.</p>
+
+<p>This makes adding concurrency to the game relatively simple.</p>
+
+<h2>We don't need object-orientation</h2>
+
+<p>Finally, because the component/system architecture is not object-oriented, it lends itself to other programming languages that implement different programming paradigms like functional programming and procedural programming. While I created Ash as an Actionscript framework, this architecture would be well suited to Javascript for client side development or any of the many functional languages used for highly concurrent server side development.</p>
+
+<h2>Update: In-game editors</h2>
+
+<p><a href="http://www.tomseysdavies.com/">Tom Davies</a> has pointed out that a very valuable benefit to him is how easy it is to create an in-game level editor when developing with an entity system framework like <a href="https://github.com/tdavies/Ember2">Ember</a> or <a href="/ash/">Ash</a>. You can see <a href="http://www.tomseysdavies.com/2012/02/07/samphire/">his example here</a>.</p>
+
+<p>I agree with Tom, this is a very useful benefit of these frameworks. The complete separation of the game state and the game logic in an entity system framework makes it easy to create an editor that lets you alter the state (configuration, level design, AI, etc.) while playing the game. Add to this the easier saving and loading of state and you have a framework that is very well suited to in-game editing.</p>
+
+
+<p>Share this post or a comment online -</p>
+<div id="share">
+<a href="https://twitter.com/intent/tweet?text=Why+use+an+entity+system+framework+for+game+development%3F&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fecs%2Fwhy-use-an-entity-framework.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+<a href="https://www.facebook.com/dialog/share?app_id=206081586545847&amp;href=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fecs%2Fwhy-use-an-entity-framework.html" target="_blank" title="Facebook"><img src="/images/social/facebook_logo.png" width="36" height="36" /></a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=Why+use+an+entity+system+framework+for+game+development%3F&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fecs%2Fwhy-use-an-entity-framework.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+</div>
+<hr />
+<p>Also in the collection <b><a href="./">Entity-Component-System architecture</a></b></p>
+<ul><li><a href="linked-list-performance-test.html">Four ways to link a list (a performance test on linked list architectures)</a></li>
+<li><a href="introducing-ash.html">Ash - a new entity system framework for Actionscript games</a></li>
+<li><a href="what-is-an-entity-framework.html">What is an entity system framework for game development?</a></li>
+<li><a href="finite-state-machines-with-ash.html">Finite State Machines with Ash entity system framework</a></li>
+</ul>
+
+</div>
+</div>
+
+<footer role="contentinfo">
+	<p>Richard Lord - Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+</footer>
+</div>
+</body>
+</html>

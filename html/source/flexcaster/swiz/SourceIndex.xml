@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+	<title>Source of Flexcaster_Swiz</title>
+	<nodes>
+		<node label="libs">
+			<node label="swiz-framework-1.0.0-RC1.swc" url="source/libs/swiz-framework-1.0.0-RC1.swc"/>
+		</node>
+		<node label="src">
+			<node icon="packageIcon" label="net.richardlord.flexcaster.swiz.config" expanded="true">
+				<node icon="mxmlIcon" label="Beans.mxml" url="source/net/richardlord/flexcaster/swiz/config/Beans.mxml.html"/>
+			</node>
+			<node icon="packageIcon" label="net.richardlord.flexcaster.swiz.controllers" expanded="true">
+				<node icon="actionScriptIcon" label="FeedController.as" url="source/net/richardlord/flexcaster/swiz/controllers/FeedController.as.html"/>
+				<node icon="actionScriptIcon" label="FeedsController.as" url="source/net/richardlord/flexcaster/swiz/controllers/FeedsController.as.html"/>
+				<node icon="actionScriptIcon" label="PodcastController.as" url="source/net/richardlord/flexcaster/swiz/controllers/PodcastController.as.html"/>
+			</node>
+			<node icon="packageIcon" label="net.richardlord.flexcaster.swiz.delegates" expanded="true">
+				<node icon="actionScriptIcon" label="LoadFeedDelegate.as" url="source/net/richardlord/flexcaster/swiz/delegates/LoadFeedDelegate.as.html"/>
+				<node icon="actionScriptIcon" label="LoadFeedsDelegate.as" url="source/net/richardlord/flexcaster/swiz/delegates/LoadFeedsDelegate.as.html"/>
+			</node>
+			<node icon="packageIcon" label="net.richardlord.flexcaster.swiz.events" expanded="true">
+				<node icon="actionScriptIcon" label="AlertEvent.as" url="source/net/richardlord/flexcaster/swiz/events/AlertEvent.as.html"/>
+				<node icon="actionScriptIcon" label="FeedEvent.as" url="source/net/richardlord/flexcaster/swiz/events/FeedEvent.as.html"/>
+				<node icon="actionScriptIcon" label="PodcastEvent.as" url="source/net/richardlord/flexcaster/swiz/events/PodcastEvent.as.html"/>
+				<node icon="actionScriptIcon" label="SimpleEvent.as" url="source/net/richardlord/flexcaster/swiz/events/SimpleEvent.as.html"/>
+			</node>
+			<node icon="packageIcon" label="net.richardlord.flexcaster.swiz.media" expanded="true">
+				<node icon="actionScriptIcon" label="Mp3Player.as" url="source/net/richardlord/flexcaster/swiz/media/Mp3Player.as.html"/>
+			</node>
+			<node icon="packageIcon" label="net.richardlord.flexcaster.swiz.model" expanded="true">
+				<node icon="actionScriptIcon" label="Feed.as" url="source/net/richardlord/flexcaster/swiz/model/Feed.as.html"/>
+				<node icon="actionScriptIcon" label="Podcast.as" url="source/net/richardlord/flexcaster/swiz/model/Podcast.as.html"/>
+			</node>
+			<node icon="packageIcon" label="net.richardlord.flexcaster.swiz.view" expanded="true">
+				<node icon="mxmlIcon" label="FeedRenderer.mxml" url="source/net/richardlord/flexcaster/swiz/view/FeedRenderer.mxml.html"/>
+				<node icon="mxmlIcon" label="FeedsView.mxml" url="source/net/richardlord/flexcaster/swiz/view/FeedsView.mxml.html"/>
+				<node icon="mxmlIcon" label="FeedView.mxml" url="source/net/richardlord/flexcaster/swiz/view/FeedView.mxml.html"/>
+				<node icon="mxmlIcon" label="MainView.mxml" url="source/net/richardlord/flexcaster/swiz/view/MainView.mxml.html"/>
+				<node icon="mxmlIcon" label="PodcastRenderer.mxml" url="source/net/richardlord/flexcaster/swiz/view/PodcastRenderer.mxml.html"/>
+				<node icon="mxmlIcon" label="PodcastView.mxml" url="source/net/richardlord/flexcaster/swiz/view/PodcastView.mxml.html"/>
+			</node>
+			<node label="feeds.opml" url="source/feeds.opml"/>
+			<node icon="mxmlAppIcon" selected="true" label="Flexcaster.mxml" url="source/Flexcaster.mxml.html"/>
+			<node label="licence.txt" url="source/licence.txt"/>
+		</node>
+	</nodes>
+</index>

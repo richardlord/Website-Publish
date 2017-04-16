@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Flint Particles Fire and Smoke</title>
+<link rel="stylesheet" type="text/css" media="all" href="/style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/flint-particles/style.css" />
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9509078-6', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+<div id="page">
+<header role="banner">
+
+	<div id="branding"><img id="site-image" src="/flint-particles/images/core/logobig.gif" width="325" height="37" /></div>
+
+	<nav id="menu" role="navigation">
+	<div>
+		<ul>
+			<li><a href="/flint-particles/index.html">ABOUT</a></li>
+			<li><a href="/flint-particles/source-code.html">SOURCE CODE</a></li>
+			<li><a href="/flint-particles/documentation.html">DOCUMENTATION</a></li>
+			<li><a href="/flint-particles/examples/">EXAMPLES</a></li>
+			<li><a href="/flint-particles/blog/">BLOG</a></li>
+		</ul>
+	</div>
+	</nav>
+</header>
+
+<div id="main">
+<div id="content">
+
+
+<link type="text/css" href="/flint-particles/css/jquery-ui-1.8.2.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/flint-particles/javascript/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="/flint-particles/javascript/jquery-ui-1.8.2.custom.min.js"></script>
+
+<h1>Fire and Smoke</h1>
+
+<div class="spaced center">
+  <object width="400" height="400" data="/flint-particles/source/examples3D/FireAndSmoke/PureAS3/FireAndSmoke.swf" type="application/x-shockwave-flash">
+    <param name="movie" value="/flint-particles/source/examples3D/FireAndSmoke/PureAS3/FireAndSmoke.swf" />
+    <param name="loop" value="false" />
+    <param name="quality" value="high" />
+    <param name="allowfullscreen" value="true" />
+  </object>
+</div>
+
+<p>This project uses two emitters, one to create the fire and the other to create the smoke. The smoke is created from a number of circular particles at very low alpha which overlap to create the random smoke distribution. The fire is created from elliptical particles that are orientated so their pointy end points in the direction they&#8217;re traveling.</p>
+
+<script type="text/javascript">$(function() { $("#source").tabs(); });</script>
+
+<div id="source">
+  <ul><li><a href="#PureAS3">PureAS3</a></li>
+<li><a href="#Flash">Flash</a></li>
+<li><a href="#Flex">Flex</a></li>
+<li><a href="#Away3d-4">Away3d-4</a></li>
+<li><a href="#Alternativa3d">Alternativa3d</a></li>
+<li><a href="#Away3d-3">Away3d-3</a></li>
+<li><a href="#Papervision3d">Papervision3d</a></li>
+</ul><div id="PureAS3"><pre class="code">package
+{
+  import org.flintparticles.threeD.emitters.Emitter3D;
+  import org.flintparticles.threeD.renderers.BitmapRenderer;
+  import org.flintparticles.threeD.renderers.controllers.OrbitCamera;
+
+  import flash.display.Sprite;
+  import flash.geom.Rectangle;
+  import flash.geom.Vector3D;
+
+  [SWF(width='400', height='400', frameRate='60', backgroundColor='#000000')]
+  
+  public class Main extends Sprite
+  {
+    private var smoke:Emitter3D;
+    private var fire:Emitter3D;
+    private var orbitter:OrbitCamera;
+    
+    public function Main()
+    {
+      smoke = new Smoke();      
+      smoke.start( );
+      
+      fire = new Fire();
+      fire.start( );
+      
+      var renderer:BitmapRenderer = new BitmapRenderer( new Rectangle( -200, -200, 400, 400 ) );
+      renderer.x = 200;
+      renderer.y = 200;
+      renderer.addEmitter( smoke );
+      renderer.addEmitter( fire );
+      addChild( renderer );
+      
+      renderer.camera.position = new Vector3D( 0, -150, -400 );
+      renderer.camera.target = new Vector3D( 0, -150, 0 );
+      renderer.camera.projectionDistance = 400;
+      orbitter = new OrbitCamera( stage, renderer.camera );
+      orbitter.start();
+    }
+  }
+}</pre><pre class="code">package
+{
+  import org.flintparticles.common.actions.Age;
+  import org.flintparticles.common.actions.ColorChange;
+  import org.flintparticles.common.actions.ScaleImage;
+  import org.flintparticles.common.counters.Steady;
+  import org.flintparticles.common.initializers.Lifetime;
+  import org.flintparticles.common.initializers.SharedImage;
+  import org.flintparticles.threeD.actions.Accelerate;
+  import org.flintparticles.threeD.actions.LinearDrag;
+  import org.flintparticles.threeD.actions.Move;
+  import org.flintparticles.threeD.actions.RotateToDirection;
+  import org.flintparticles.threeD.emitters.Emitter3D;
+  import org.flintparticles.threeD.initializers.Position;
+  import org.flintparticles.threeD.initializers.Velocity;
+  import org.flintparticles.threeD.zones.DiscZone;
+
+  import flash.geom.Vector3D;
+
+  public class Fire extends Emitter3D
+  {
+    public function Fire()
+    {
+      counter = new Steady( 60 );
+
+      addInitializer( new Lifetime( 2, 3 ) );
+      addInitializer( new Velocity( new DiscZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 20 ) ) );
+      addInitializer( new Position( new DiscZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 3 ) ) );
+      addInitializer( new SharedImage( new FireBlob() ) );
+
+      addAction( new Age( ) );
+      addAction( new Move( ) );
+      addAction( new LinearDrag( 1 ) );
+      addAction( new Accelerate( new Vector3D( 0, -40, 0 ) ) );
+      addAction( new ColorChange( 0xFFFFCC00, 0x00CC0000 ) );
+      addAction( new ScaleImage( 1, 1.5 ) );
+      addAction( new RotateToDirection() );
+    }
+  }
+}</pre><pre class="code">package
+{
+  import org.flintparticles.common.actions.Age;
+  import org.flintparticles.common.actions.Fade;
+  import org.flintparticles.common.actions.ScaleImage;
+  import org.flintparticles.common.counters.Steady;
+  import org.flintparticles.common.displayObjects.RadialDot;
+  import org.flintparticles.common.initializers.Lifetime;
+  import org.flintparticles.common.initializers.SharedImage;
+  import org.flintparticles.threeD.actions.LinearDrag;
+  import org.flintparticles.threeD.actions.Move;
+  import org.flintparticles.threeD.actions.RandomDrift;
+  import org.flintparticles.threeD.emitters.Emitter3D;
+  import org.flintparticles.threeD.initializers.Velocity;
+  import org.flintparticles.threeD.zones.ConeZone;
+
+  import flash.geom.Vector3D;
+
+  public class Smoke extends Emitter3D
+  {
+    public function Smoke()
+    {
+      counter = new Steady( 10 );
+      
+      addInitializer( new Lifetime( 11, 12 ) );
+      addInitializer( new Velocity( new ConeZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, -1, 0 ), 0.5, 40, 30 ) ) );
+      addInitializer( new SharedImage( new RadialDot( 6 ) ) );
+      
+      addAction( new Age( ) );
+      addAction( new Move( ) );
+      addAction( new LinearDrag( 0.01 ) );
+      addAction( new ScaleImage( 1, 15 ) );
+      addAction( new Fade( 0.15, 0 ) );
+      addAction( new RandomDrift( 15, 15, 15 ) );
+    }
+  }
+}</pre></div>
+<div id="Flash"><pre class="code">import org.flintparticles.common.actions.*;
+import org.flintparticles.common.counters.*;
+import org.flintparticles.common.displayObjects.RadialDot;
+import org.flintparticles.common.initializers.*;
+import org.flintparticles.threeD.actions.*;
+import org.flintparticles.threeD.emitters.Emitter3D;
+import org.flintparticles.threeD.initializers.*;
+import org.flintparticles.threeD.renderers.BitmapRenderer;
+import org.flintparticles.threeD.renderers.controllers.OrbitCamera;
+import org.flintparticles.threeD.zones.*;
+
+var smoke:Emitter3D = new Emitter3D();
+smoke.counter = new Steady( 10 );
+  
+smoke.addInitializer( new Lifetime( 11, 12 ) );
+smoke.addInitializer( new Velocity( new ConeZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, -1, 0 ), 0.5, 40, 30 ) ) );
+smoke.addInitializer( new SharedImage( new RadialDot( 6 ) ) );
+  
+smoke.addAction( new Age( ) );
+smoke.addAction( new Move( ) );
+smoke.addAction( new LinearDrag( 0.01 ) );
+smoke.addAction( new ScaleImage( 1, 15 ) );
+smoke.addAction( new Fade( 0.15, 0 ) );
+smoke.addAction( new RandomDrift( 15, 15, 15 ) );
+
+smoke.start( );
+
+var fire:Emitter3D = new Emitter3D();
+fire.counter = new Steady( 60 );
+
+fire.addInitializer( new Lifetime( 2, 3 ) );
+fire.addInitializer( new Velocity( new DiscZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 20 ) ) );
+fire.addInitializer( new Position( new DiscZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 3 ) ) );
+fire.addInitializer( new SharedImage( new FireBlob() ) );
+
+fire.addAction( new Age( ) );
+fire.addAction( new Move( ) );
+fire.addAction( new LinearDrag( 1 ) );
+fire.addAction( new Accelerate( new Vector3D( 0, -40, 0 ) ) );
+fire.addAction( new ColorChange( 0xFFFFCC00, 0x00CC0000 ) );
+fire.addAction( new ScaleImage( 1, 1.5 ) );
+fire.addAction( new RotateToDirection() );
+
+fire.start( );
+
+var renderer:BitmapRenderer = new BitmapRenderer( new Rectangle( -200, -200, 400, 400 ) );
+renderer.x = 200;
+renderer.y = 200;
+renderer.addEmitter( smoke );
+renderer.addEmitter( fire );
+addChild( renderer );
+
+renderer.camera.position = new Vector3D( 0, -150, -400 );
+renderer.camera.target = new Vector3D( 0, -150, 0 );
+renderer.camera.projectionDistance = 400;
+var orbitter:OrbitCamera = new OrbitCamera( stage, renderer.camera );
+orbitter.start();</pre></div>
+<div id="Flex"><pre class="code">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;s:Application
+  xmlns:fx=&quot;http://ns.adobe.com/mxml/2009&quot; 
+  xmlns:s=&quot;library://ns.adobe.com/flex/spark&quot;
+  xmlns:f=&quot;http://flintparticles.org/2009/flint3d&quot;
+  xmlns:geom=&quot;flash.geom.*&quot;
+  xmlns:filters=&quot;flash.filters.*&quot;
+  width=&quot;400&quot; height=&quot;400&quot;
+  backgroundColor=&quot;#000000&quot;&gt;
+
+&lt;f:BitmapRenderer id=&quot;renderer&quot; width=&quot;400&quot; height=&quot;400&quot;&gt;
+  &lt;f:camera&gt;
+    &lt;f:Camera projectionDistance=&quot;400&quot;&gt;
+      &lt;f:position&gt;
+        &lt;geom:Vector3D x=&quot;0&quot; y=&quot;-150&quot; z=&quot;-400&quot;/&gt;
+      &lt;/f:position&gt;
+      &lt;f:target&gt;
+        &lt;geom:Vector3D x=&quot;0&quot; y=&quot;-150&quot; z=&quot;0&quot;/&gt;
+      &lt;/f:target&gt;
+      &lt;f:controller&gt;
+        &lt;f:OrbitCamera/&gt;
+      &lt;/f:controller&gt;
+    &lt;/f:Camera&gt;
+  &lt;/f:camera&gt;
+  &lt;f:emitters&gt;
+    &lt;f:Emitter id=&quot;smoke&quot; autoStart=&quot;true&quot;&gt;
+      &lt;f:counter&gt;
+        &lt;f:Steady rate=&quot;10&quot;/&gt;
+      &lt;/f:counter&gt;
+      &lt;f:initializers&gt;
+        &lt;f:Velocity&gt;
+          &lt;f:ConeZone angle=&quot;0.5&quot; height=&quot;40&quot; truncatedHeight=&quot;30&quot;&gt;
+            &lt;f:axis&gt;
+              &lt;geom:Vector3D x=&quot;0&quot; y=&quot;-1&quot; z=&quot;0&quot;/&gt;
+            &lt;/f:axis&gt;
+          &lt;/f:ConeZone&gt;
+        &lt;/f:Velocity&gt;
+        &lt;f:SharedImage&gt;
+          &lt;f:RadialDot radius=&quot;6&quot;/&gt;
+        &lt;/f:SharedImage&gt;
+        &lt;f:Lifetime minLifetime=&quot;11&quot; maxLifetime=&quot;12&quot;/&gt;
+      &lt;/f:initializers&gt;
+      &lt;f:actions&gt;
+        &lt;f:Move/&gt;
+        &lt;f:Age/&gt;
+        &lt;f:LinearDrag drag=&quot;0.01&quot;/&gt;
+        &lt;f:ScaleImage startScale=&quot;1&quot; endScale=&quot;15&quot;/&gt;
+        &lt;f:Fade startAlpha=&quot;0.15&quot; endAlpha=&quot;0&quot;/&gt;
+        &lt;f:RandomDrift driftX=&quot;15&quot; driftY=&quot;15&quot; driftZ=&quot;15&quot;/&gt;
+      &lt;/f:actions&gt;
+    &lt;/f:Emitter&gt;
+    &lt;f:Emitter id=&quot;fire&quot; autoStart=&quot;true&quot;&gt;
+      &lt;f:counter&gt;
+        &lt;f:Steady rate=&quot;60&quot;/&gt;
+      &lt;/f:counter&gt;
+      &lt;f:initializers&gt;
+        &lt;f:Position&gt;
+          &lt;f:DiscZone outerRadius=&quot;3&quot;&gt;
+            &lt;f:normal&gt;
+              &lt;geom:Vector3D x=&quot;0&quot; y=&quot;1&quot; z=&quot;0&quot;/&gt;
+            &lt;/f:normal&gt;
+          &lt;/f:DiscZone&gt;
+        &lt;/f:Position&gt;
+        &lt;f:Velocity&gt;
+          &lt;f:DiscZone outerRadius=&quot;20&quot;&gt;
+            &lt;f:normal&gt;
+              &lt;geom:Vector3D x=&quot;0&quot; y=&quot;1&quot; z=&quot;0&quot;/&gt;
+            &lt;/f:normal&gt;
+          &lt;/f:DiscZone&gt;
+        &lt;/f:Velocity&gt;
+        &lt;f:SharedImage image=&quot;{new FireBlob()}&quot;/&gt;
+        &lt;f:Lifetime minLifetime=&quot;2&quot; maxLifetime=&quot;3&quot;/&gt;
+      &lt;/f:initializers&gt;
+      &lt;f:actions&gt;
+        &lt;f:Move/&gt;
+        &lt;f:RotateToDirection/&gt;
+        &lt;f:Age/&gt;
+        &lt;f:LinearDrag drag=&quot;1&quot;/&gt;
+        &lt;f:Accelerate x=&quot;0&quot; y=&quot;-40&quot; z=&quot;0&quot;/&gt;
+        &lt;f:ScaleImage startScale=&quot;1&quot; endScale=&quot;1.5&quot;/&gt;
+        &lt;f:ColorChange startColor=&quot;{0xFFFFCC00}&quot; endColor=&quot;0x00CC0000&quot;/&gt;
+      &lt;/f:actions&gt;
+    &lt;/f:Emitter&gt;
+  &lt;/f:emitters&gt;
+&lt;/f:BitmapRenderer&gt;
+&lt;/s:Application&gt;</pre></div>
+<div id="Away3d-4"><pre class="code">package
+{
+  import away3d.containers.ObjectContainer3D;
+  import away3d.containers.View3D;
+
+  import org.flintparticles.integration.away3d.v4.A3D4Renderer;
+  import org.flintparticles.threeD.emitters.Emitter3D;
+
+  import flash.display.Sprite;
+  import flash.events.Event;
+  import flash.geom.Vector3D;
+
+  [SWF(width='400', height='400', frameRate='61', backgroundColor='#000000')]
+  
+  public class Main extends Sprite
+  {
+    private var smoke:Emitter3D;
+    private var fire:Emitter3D;
+    private var view:View3D;
+    private var renderer:A3D4Renderer;
+    
+    public function Main()
+    {
+      smoke = new Smoke();
+      smoke.start( );
+      
+      fire = new Fire();
+      fire.start( );
+      
+      view = new View3D();
+      view.width = 400;
+      view.height = 400;
+      view.camera.y = 150;
+      view.camera.z = 320;
+      view.camera.lookAt( new Vector3D( 0, 150, 0 ) );
+      addChild(view);
+
+      var particleContainer:ObjectContainer3D = new ObjectContainer3D();
+      view.scene.addChild( particleContainer );
+      
+      renderer = new A3D4Renderer( particleContainer );
+      renderer.addEmitter( smoke );
+      renderer.addEmitter( fire );
+      
+      addEventListener( Event.ENTER_FRAME, render, false, 0, true );
+    }
+    
+    private function render( ev:Event ):void
+    {
+      // render the view
+      view.render();
+    }
+  }
+}</pre><pre class="code">package
+{
+  import org.flintparticles.common.actions.Age;
+  import org.flintparticles.common.actions.ColorChange;
+  import org.flintparticles.common.actions.ScaleImage;
+  import org.flintparticles.common.counters.Steady;
+  import org.flintparticles.common.initializers.Lifetime;
+  import org.flintparticles.integration.away3d.v4.initializers.A3D4DisplayObject;
+  import org.flintparticles.threeD.actions.Accelerate;
+  import org.flintparticles.threeD.actions.LinearDrag;
+  import org.flintparticles.threeD.actions.Move;
+  import org.flintparticles.threeD.actions.RotateToDirection;
+  import org.flintparticles.threeD.emitters.Emitter3D;
+  import org.flintparticles.threeD.initializers.Position;
+  import org.flintparticles.threeD.initializers.Velocity;
+  import org.flintparticles.threeD.zones.DiscZone;
+
+  import flash.geom.Vector3D;
+
+  public class Fire extends Emitter3D
+  {
+    public function Fire()
+    {
+      counter = new Steady( 60 );
+
+      addInitializer( new Lifetime( 2, 3 ) );
+      addInitializer( new Velocity( new DiscZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 20 ) ) );
+      addInitializer( new Position( new DiscZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 3 ) ) );
+      addInitializer( new A3D4DisplayObject( new FireBlob(), true ) );
+
+      addAction( new Age( ) );
+      addAction( new Move( ) );
+      addAction( new LinearDrag( 1 ) );
+      addAction( new Accelerate( new Vector3D( 0, 40, 0 ) ) );
+      addAction( new ColorChange( 0xFEFFCC00, 0x00CC0000 ) );
+      addAction( new ScaleImage( 1, 1.5 ) );
+      addAction( new RotateToDirection() );
+    }
+  }
+}</pre><pre class="code">package
+{
+  import org.flintparticles.common.actions.Age;
+  import org.flintparticles.common.actions.Fade;
+  import org.flintparticles.common.actions.ScaleImage;
+  import org.flintparticles.common.counters.Steady;
+  import org.flintparticles.common.displayObjects.RadialDot;
+  import org.flintparticles.common.initializers.Lifetime;
+  import org.flintparticles.integration.away3d.v4.initializers.A3D4DisplayObject;
+  import org.flintparticles.threeD.actions.LinearDrag;
+  import org.flintparticles.threeD.actions.Move;
+  import org.flintparticles.threeD.actions.RandomDrift;
+  import org.flintparticles.threeD.emitters.Emitter3D;
+  import org.flintparticles.threeD.initializers.Velocity;
+  import org.flintparticles.threeD.zones.ConeZone;
+
+  import flash.geom.Vector3D;
+
+  public class Smoke extends Emitter3D
+  {
+    public function Smoke()
+    {
+      counter = new Steady( 10 );
+      
+      addInitializer( new Lifetime( 11, 12 ) );
+      addInitializer( new Velocity( new ConeZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 0.5, 40, 30 ) ) );
+      addInitializer( new A3D4DisplayObject( new RadialDot( 6 ), true ) );
+      
+      addAction( new Age( ) );
+      addAction( new Move( ) );
+      addAction( new LinearDrag( 0.01 ) );
+      addAction( new ScaleImage( 1, 15 ) );
+      addAction( new Fade( 0.15, 0 ) );
+      addAction( new RandomDrift( 15, 15, 15 ) );
+    }
+  }
+}</pre></div>
+<div id="Alternativa3d"><pre class="code">package
+{
+  import alternativa.engine3d.core.Camera3D;
+  import alternativa.engine3d.core.Object3D;
+  import alternativa.engine3d.core.Resource;
+  import alternativa.engine3d.core.View;
+
+  import org.flintparticles.integration.alternativa3d.Alt3DRenderer;
+  import org.flintparticles.threeD.emitters.Emitter3D;
+
+  import flash.display.Sprite;
+  import flash.display.Stage3D;
+  import flash.events.Event;
+
+  [SWF(width='400', height='400', frameRate='61', backgroundColor='#000000')]
+  
+  public class Main extends Sprite
+  {
+    private var smoke:Emitter3D;
+    private var fire:Emitter3D;
+    private var particleContainer : Object3D;
+    private var camera : Camera3D;
+    private var stage3D : Stage3D;
+    private var renderer : Alt3DRenderer;
+    
+    public function Main()
+    {
+      camera = new Camera3D( 0.1, 10000 );
+      camera.view = new View( stage.stageWidth, stage.stageHeight );
+      camera.view.backgroundColor = 0x000000;
+      camera.view.hideLogo();
+      addChild( camera.view );
+      addChild( camera.diagram );
+      
+      camera.rotationX = 0;
+      camera.y = -150;
+      camera.z = -300;
+
+      stage3D = stage.stage3Ds[0];
+      stage3D.addEventListener( Event.CONTEXT3D_CREATE, onContextCreate );
+      stage3D.requestContext3D();
+    }
+
+    private function onContextCreate( event : Event ) : void
+    {
+      particleContainer = new Object3D();
+      particleContainer.addChild( camera );
+      renderer = new Alt3DRenderer( particleContainer );
+      
+      smoke = new Smoke();
+      renderer.addEmitter( smoke );
+      smoke.start( );
+      
+      fire = new Fire();
+      renderer.addEmitter( fire );
+      fire.start( );
+      
+      addEventListener( Event.ENTER_FRAME, render, false, 0, true );
+    }
+    
+    private function render( ev:Event ):void
+    {
+      // render the view
+      camera.view.width = stage.stageWidth;
+      camera.view.height = stage.stageHeight;
+      camera.render( stage3D );
+      for each ( var resource:Resource in particleContainer.getResources( true ) )
+      {
+        resource.upload( stage3D.context3D );
+      }
+    }
+  }
+}</pre><pre class="code">package
+{
+  import org.flintparticles.common.actions.Age;
+  import org.flintparticles.common.actions.Fade;
+  import org.flintparticles.common.actions.ScaleImage;
+  import org.flintparticles.common.counters.Steady;
+  import org.flintparticles.common.initializers.Lifetime;
+  import org.flintparticles.integration.alternativa3d.initializers.Alt3DDisplayObject;
+  import org.flintparticles.threeD.actions.Accelerate;
+  import org.flintparticles.threeD.actions.LinearDrag;
+  import org.flintparticles.threeD.actions.Move;
+  import org.flintparticles.threeD.actions.RotateToDirection;
+  import org.flintparticles.threeD.emitters.Emitter3D;
+  import org.flintparticles.threeD.initializers.Position;
+  import org.flintparticles.threeD.initializers.Velocity;
+  import org.flintparticles.threeD.zones.DiscZone;
+
+  import flash.geom.Vector3D;
+
+  public class Fire extends Emitter3D
+  {
+    public function Fire()
+    {
+      counter = new Steady( 60 );
+
+      addInitializer( new Lifetime( 2, 3 ) );
+      addInitializer( new Velocity( new DiscZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 20 ) ) );
+      addInitializer( new Position( new DiscZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 3 ) ) );
+      addInitializer( new Alt3DDisplayObject( new FireBlob() ) );
+
+      addAction( new Age( ) );
+      addAction( new Move( ) );
+      addAction( new LinearDrag( 1 ) );
+      addAction( new Accelerate( new Vector3D( 0, -40, 0 ) ) );
+      addAction( new Fade( 1, 0 ) );
+      addAction( new ScaleImage( 1.5, 2.2 ) );
+      addAction( new RotateToDirection() );
+    }
+  }
+}</pre><pre class="code">package
+{
+  import org.flintparticles.common.actions.Age;
+  import org.flintparticles.common.actions.Fade;
+  import org.flintparticles.common.actions.ScaleImage;
+  import org.flintparticles.common.counters.Steady;
+  import org.flintparticles.common.displayObjects.RadialDot;
+  import org.flintparticles.common.initializers.Lifetime;
+  import org.flintparticles.integration.alternativa3d.initializers.Alt3DDisplayObject;
+  import org.flintparticles.threeD.actions.LinearDrag;
+  import org.flintparticles.threeD.actions.Move;
+  import org.flintparticles.threeD.actions.RandomDrift;
+  import org.flintparticles.threeD.emitters.Emitter3D;
+  import org.flintparticles.threeD.initializers.Velocity;
+  import org.flintparticles.threeD.zones.ConeZone;
+
+  import flash.geom.Vector3D;
+
+  public class Smoke extends Emitter3D
+  {
+    public function Smoke()
+    {
+      counter = new Steady( 9 );
+      
+      addInitializer( new Lifetime( 11, 12 ) );
+      addInitializer( new Velocity( new ConeZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, -1, 0 ), 0.5, 40, 30 ) ) );
+      addInitializer( new Alt3DDisplayObject( new RadialDot( 8 ) ) );
+      
+      addAction( new Age( ) );
+      addAction( new Move( ) );
+      addAction( new LinearDrag( 0.01 ) );
+      addAction( new ScaleImage( 1, 15 ) );
+      addAction( new Fade( 0.15, 0 ) );
+      addAction( new RandomDrift( 15, 15, 15 ) );
+    }
+  }
+}</pre></div>
+<div id="Away3d-3"><pre class="code">package
+{
+  import away3d.containers.View3D;
+
+  import org.flintparticles.integration.away3d.v3.A3D3Renderer;
+  import org.flintparticles.threeD.emitters.Emitter3D;
+
+  import flash.display.Sprite;
+  import flash.events.Event;
+  import flash.geom.Vector3D;
+
+  [SWF(width='400', height='400', frameRate='61', backgroundColor='#000000')]
+  
+  public class Main extends Sprite
+  {
+    private var smoke:Emitter3D;
+    private var fire:Emitter3D;
+    private var view:View3D;
+    private var renderer:A3D3Renderer;
+    
+    public function Main()
+    {
+      smoke = new Smoke();
+      smoke.start( );
+      
+      fire = new Fire();
+      fire.start( );
+      
+      view = new View3D({x:200,y:200});
+      view.camera.y = 150;
+      view.camera.z = 750;
+      view.camera.lookAt( new Vector3D( 0, 150, 0 ) );
+      addChild(view);
+      renderer = new A3D3Renderer( view.scene );
+      renderer.addEmitter( smoke );
+      renderer.addEmitter( fire );
+      
+      addEventListener( Event.ENTER_FRAME, render, false, 0, true );
+    }
+    
+    private function render( ev:Event ):void
+    {
+      // render the view
+      view.render();
+    }
+  }
+}</pre><pre class="code">package
+{
+  import org.flintparticles.common.actions.Age;
+  import org.flintparticles.common.actions.ColorChange;
+  import org.flintparticles.common.actions.ScaleImage;
+  import org.flintparticles.common.counters.Steady;
+  import org.flintparticles.common.initializers.Lifetime;
+  import org.flintparticles.integration.away3d.v3.initializers.A3D3DisplayObjectClass;
+  import org.flintparticles.threeD.actions.Accelerate;
+  import org.flintparticles.threeD.actions.LinearDrag;
+  import org.flintparticles.threeD.actions.Move;
+  import org.flintparticles.threeD.actions.RotateToDirection;
+  import org.flintparticles.threeD.emitters.Emitter3D;
+  import org.flintparticles.threeD.initializers.Position;
+  import org.flintparticles.threeD.initializers.Velocity;
+  import org.flintparticles.threeD.zones.DiscZone;
+
+  import flash.geom.Vector3D;
+
+  public class Fire extends Emitter3D
+  {
+    public function Fire()
+    {
+      counter = new Steady( 60 );
+
+      addInitializer( new Lifetime( 2, 3 ) );
+      addInitializer( new Velocity( new DiscZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 20 ) ) );
+      addInitializer( new Position( new DiscZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 3 ) ) );
+      addInitializer( new A3D3DisplayObjectClass( FireBlob ) );
+
+      addAction( new Age( ) );
+      addAction( new Move( ) );
+      addAction( new LinearDrag( 1 ) );
+      addAction( new Accelerate( new Vector3D( 0, 40, 0 ) ) );
+      addAction( new ColorChange( 0xFFFFCC00, 0x00CC0000 ) );
+      addAction( new ScaleImage( 1, 1.5 ) );
+      addAction( new RotateToDirection() );
+    }
+  }
+}</pre><pre class="code">package
+{
+  import org.flintparticles.common.actions.Age;
+  import org.flintparticles.common.actions.Fade;
+  import org.flintparticles.common.actions.ScaleImage;
+  import org.flintparticles.common.counters.Steady;
+  import org.flintparticles.common.displayObjects.RadialDot;
+  import org.flintparticles.common.initializers.Lifetime;
+  import org.flintparticles.integration.away3d.v3.initializers.A3D3DisplayObjectClass;
+  import org.flintparticles.threeD.actions.LinearDrag;
+  import org.flintparticles.threeD.actions.Move;
+  import org.flintparticles.threeD.actions.RandomDrift;
+  import org.flintparticles.threeD.emitters.Emitter3D;
+  import org.flintparticles.threeD.initializers.Velocity;
+  import org.flintparticles.threeD.zones.ConeZone;
+
+  import flash.geom.Vector3D;
+
+  public class Smoke extends Emitter3D
+  {
+    public function Smoke()
+    {
+      counter = new Steady( 9 );
+      
+      addInitializer( new Lifetime( 11, 12 ) );
+      addInitializer( new Velocity( new ConeZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 0.5, 40, 30 ) ) );
+      addInitializer( new A3D3DisplayObjectClass( RadialDot, [6] ) );
+      
+      addAction( new Age( ) );
+      addAction( new Move( ) );
+      addAction( new LinearDrag( 0.01 ) );
+      addAction( new ScaleImage( 1, 15 ) );
+      addAction( new Fade( 0.15, 0 ) );
+      addAction( new RandomDrift( 15, 15, 15 ) );
+    }
+  }
+}</pre></div>
+<div id="Papervision3d"><pre class="code">package
+{
+  import org.flintparticles.integration.papervision3d.PV3DRenderer;
+  import org.flintparticles.threeD.emitters.Emitter3D;
+  import org.papervision3d.cameras.Camera3D;
+  import org.papervision3d.render.BasicRenderEngine;
+  import org.papervision3d.scenes.Scene3D;
+  import org.papervision3d.view.Viewport3D;
+
+  import flash.display.Sprite;
+  import flash.events.Event;
+
+  [SWF(width='400', height='400', frameRate='61', backgroundColor='#000000')]
+  
+  public class Main extends Sprite
+  {
+    private var viewport:Viewport3D;
+    private var smoke:Emitter3D;
+    private var fire:Emitter3D;
+    private var renderer:BasicRenderEngine;
+    private var flintRenderer:PV3DRenderer;
+    private var scene:Scene3D;
+    private var camera:Camera3D;
+
+    public function Main()
+    {
+      smoke = new Smoke();
+      smoke.start( );
+      
+      fire = new Fire();
+      fire.start( );
+      
+      viewport = new Viewport3D( 400, 400 );
+      addChild( viewport );
+      
+      renderer = new BasicRenderEngine();
+      scene = new Scene3D();
+      camera = new Camera3D();
+      camera.z = -400;
+      camera.y = 150;
+      
+      flintRenderer = new PV3DRenderer( scene );
+      flintRenderer.addEmitter( smoke );
+      flintRenderer.addEmitter( fire );
+      
+      addEventListener( Event.ENTER_FRAME, render, false, 0, true );
+    }
+    
+    private function render( ev:Event ):void
+    {
+      // render the view
+      renderer.renderScene( scene, camera, viewport);
+    }
+  }
+}</pre><pre class="code">package
+{
+  import org.flintparticles.common.actions.Age;
+  import org.flintparticles.common.actions.ColorChange;
+  import org.flintparticles.common.actions.ScaleImage;
+  import org.flintparticles.common.counters.Steady;
+  import org.flintparticles.common.initializers.Lifetime;
+  import org.flintparticles.integration.papervision3d.initializers.PV3DDisplayObjectClass;
+  import org.flintparticles.threeD.actions.Accelerate;
+  import org.flintparticles.threeD.actions.LinearDrag;
+  import org.flintparticles.threeD.actions.Move;
+  import org.flintparticles.threeD.actions.RotateToDirection;
+  import org.flintparticles.threeD.emitters.Emitter3D;
+  import org.flintparticles.threeD.initializers.Position;
+  import org.flintparticles.threeD.initializers.Velocity;
+  import org.flintparticles.threeD.zones.DiscZone;
+
+  import flash.geom.Vector3D;
+
+  public class Fire extends Emitter3D
+  {
+    public function Fire()
+    {
+      counter = new Steady( 60 );
+
+      addInitializer( new Lifetime( 2, 3 ) );
+      addInitializer( new Velocity( new DiscZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 20 ) ) );
+      addInitializer( new Position( new DiscZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 3 ) ) );
+      addInitializer( new PV3DDisplayObjectClass( FireBlob ) );
+
+      addAction( new Age( ) );
+      addAction( new Move( ) );
+      addAction( new LinearDrag( 1 ) );
+      addAction( new Accelerate( new Vector3D( 0, 40, 0 ) ) );
+      addAction( new ColorChange( 0xFFFFCC00, 0x00CC0000 ) );
+      addAction( new ScaleImage( 1, 1.5 ) );
+      addAction( new RotateToDirection() );
+    }
+  }
+}</pre><pre class="code">package
+{
+  import org.flintparticles.common.actions.Age;
+  import org.flintparticles.common.actions.Fade;
+  import org.flintparticles.common.actions.ScaleImage;
+  import org.flintparticles.common.counters.Steady;
+  import org.flintparticles.common.displayObjects.RadialDot;
+  import org.flintparticles.common.initializers.Lifetime;
+  import org.flintparticles.integration.papervision3d.initializers.PV3DDisplayObjectClass;
+  import org.flintparticles.threeD.actions.LinearDrag;
+  import org.flintparticles.threeD.actions.Move;
+  import org.flintparticles.threeD.actions.RandomDrift;
+  import org.flintparticles.threeD.emitters.Emitter3D;
+  import org.flintparticles.threeD.initializers.Velocity;
+  import org.flintparticles.threeD.zones.ConeZone;
+
+  import flash.geom.Vector3D;
+
+  public class Smoke extends Emitter3D
+  {
+    public function Smoke()
+    {
+      counter = new Steady( 7 );
+      
+      addInitializer( new Lifetime( 11, 12 ) );
+      addInitializer( new Velocity( new ConeZone( new Vector3D( 0, 0, 0 ), new Vector3D( 0, 1, 0 ), 0.5, 40, 30 ) ) );
+      addInitializer( new PV3DDisplayObjectClass( RadialDot, 6 ) );
+      
+      addAction( new Age( ) );
+      addAction( new Move( ) );
+      addAction( new LinearDrag( 0.01 ) );
+      addAction( new ScaleImage( 1, 15 ) );
+      addAction( new Fade( 0.15, 0 ) );
+      addAction( new RandomDrift( 15, 15, 15 ) );
+    }
+  }
+}</pre></div>
+
+
+</div>
+</div>
+
+<footer role="contentinfo">
+	<p>Richard Lord - Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+</footer>
+</div>
+</body>
+</html>
