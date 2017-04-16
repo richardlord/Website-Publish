@@ -93,7 +93,7 @@ Redirect 301 /blog/a-whiff-of-christmas /blog/web-games/a-whiff-of-christmas.htm
 Redirect 301 /blog/best-soccer-game /blog/web-games/best-soccer-game.html
 Redirect 301 /blog/finite-state-machines-with-ash /blog/ecs/finite-state-machines-with-ash.html
 Redirect 301 /blog/introducing-ash /blog/ecs/introducing-ash.html
-Redirect 301 /blog/linked-list-performance-test /blog/ecs/linked-list-performance-test.html
+Redirect 301 /blog/linked-list-performance-test /blog/actionscript/linked-list-performance-test.html
 Redirect 301 /blog/what-is-an-entity-framework /blog/ecs/what-is-an-entity-framework.html
 Redirect 301 /blog/why-use-an-entity-framework /blog/ecs/why-use-an-entity-framework.html
 Redirect 301 /blog/bubble-pack-becomes-freak-factory /freak-factory/blog/bubble-pack-becomes-freak-factory.html
