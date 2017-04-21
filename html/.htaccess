@@ -2,7 +2,6 @@ Redirect 301 /feed /feed.xml
 Redirect 301 /consulting /consulting.html
 Redirect 301 /games /games.html
 Redirect 301 /free-code /open-source.html
-Redirect 301 /press /press.html
 Redirect 301 /about/richardlord /about/richardlord.html
 Redirect 301 /dance/progressive /dance/progressive.html
 Redirect 301 /dance/waterfall /dance/waterfall.html
@@ -103,3 +102,5 @@ Redirect 301 /blog/bubble-pack-update-monetisation /freak-factory/blog/bubble-pa
 Redirect 301 /blog/why-freak-factory /freak-factory/blog/why-freak-factory.html
 Redirect 301 /blog/refactoring-the-meta-game-in-intergalactic-delivery-driver /intergalactic-delivery-driver/blog/refactoring-the-meta-game-in-intergalactic-delivery-driver.html
 Redirect 301 /blog/taking-a-break /intergalactic-delivery-driver/blog/taking-a-break.html
+Redirect 301 /blog/tag/entity-systems /blog/ecs/
+Redirect 301 /blog/what-project-will-replace-the-flex-framework /blog/flex/
