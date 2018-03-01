@@ -294,3 +294,8 @@ a:visited {
 table td, table td * {
     vertical-align: top;
 }
+
+dt {
+	font-weight: bold;
+	clear: both;
+}
