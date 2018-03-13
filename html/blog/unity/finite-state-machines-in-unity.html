@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Finite State Machines in Unity</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" media="all" href="/style.css" />
+<link rel="alternate" type="application/rss+xml" title="Richard Lord's Feed" href="http://www.richardlord.net/feed.xml" />
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9509078-6', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+<div id="page">
+<header role="banner">
+	<div id="social">
+		<a href="https://twitter.com/richard_lord"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+		<a href="https://uk.linkedin.com/in/richardlord"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+		<a href="https://github.com/richardlord"><img src="/images/social/github_logo.png" width="36" height="36" /></a>
+		<a href="https://www.youtube.com/c/RichardLordNet"><img src="/images/social/youtube_logo.png" width="36" height="36" /></a>
+	</div>
+
+	<div id="branding">
+		<img id="site-image" src="/images/social/me.png" />
+		<div id="site-title"><a href="/" title="Richard Lord" rel="home">Richard&nbsp;Lord</a></div>
+		<div id="site-description">Game&nbsp;Developer</div>
+	</div>
+
+	<nav id="menu" role="navigation">
+	<div>
+		<ul>
+			<li><a href="/games.html">GAMES</a></li>
+			<li><a href="/consulting.html">CONSULTING</a></li>
+			<li><a href="/blog/">BLOG</a></li>
+			<li><a href="/presentations/">PRESENTATIONS</a></li>
+			<li><a href="/press.html">PRESS</a></li>
+			<li><a href="/about/">ABOUT</a></li>
+		</ul>
+	</div>
+	</nav>
+</header>
+
+<div id="main">
+<div id="content">
+<h1>Finite State Machines in Unity</h1>
+
+<div id="meta">Posted on <time datetime="2018-03-13T20:20:00Z">13 March 2018</time></div>
+
+
+
+
+<p>There are many different solutions to managing finite state machines in Unity. I don’t intend to comment here on the goodness of any other solutions — the best solution is the one that works for you. I just want to tell you about how I manage state machines. If you find it useful please go ahead and copy me and if you have any suggestions for how to improve on this technique please tell me.</p>
+<p>There’s two parts to this, what I do and how I do it. All the code is <a href="https://github.com/richardlord/Unity-State-Machine">available on Github</a> if you would like to use it.</p>
+<h2>Components as States</h2>
+<p>The basic principle in my approach to state machines is to encapsulate each state in one or more components on the game object. There are two reasons for this</p>
+<ol>
+  <li>As a component, each state has full access to all the standard messages and other features of Unity’s API.</li>
+  <li>The state of a game object exists intrinsically in its components, so the natural way to change a game object’s state is to change its components.</li>
+</ol>
+<p>I started off with the idea that each state is a component of the game object that the state machine exists on, which is clean and simple, but more recently I wanted more flexibility so now each state can comprise multiple components, and the components don’t have to be on the same game object as the state machine (although usually they are either there or on a child game object).</p>
+<p>To implement this I have a single custom state machine component which manages the states, adding and removing components when entering and exiting states, and not much else.</p>
+<h2>Why it’s not straightforward</h2>
+<p>There was always a little wrinkle in this plan — components can’t exist outside of the game object on which they are created, so you can’t remove a component from a game object and then add it back later, removing it destroys it. It’s often desirable to maintain the internal data of a state when exiting it and re-entering it later so destroying the state component when exiting the state and creating a new one when re-entering it won’t work on it’s own. Over time I’ve used two different solutions for this.</p>
+<p>When I first used components as states I was using Unity 3.5 and to keep things simple I would disable and enable components when changing state. The components for all the states existed on the game object all the time, and all but the current state were disabled. This works in most cases — the update methods don’t run on disabled components, and the <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnEnable.html">OnEnable</a> and <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnDisable.html">OnDisable</a> methods will be called when entering and leaving the state. However some specific messages are still received on disabled components - <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnCollisionEnter.htmlhttps://docs.unity3d.com/ScriptReference/MonoBehaviour.OnCollisionEnter.html">OnCollisionEnter</a> for example - so I had to be a bit careful with this technique.</p>
+<p>When Unity 5.3 was released it included the new <a href="https://docs.unity3d.com/ScriptReference/JsonUtility.html">JsonUtility</a> class which provides a standard way to serialise objects, so since then I have serialised and removed components when leaving a state and deserialised and added them back when entering a state.</p>
+<p>There is still a slight annoyance with this technique - it’s not possible to deserialise a component when creating it, instead you have to create a new instance and deserialise the old data into the new component. Because of this you have to avoid using the <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Awake.html">Awake</a> and <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnEnable.html">OnEnable</a> methods in the state components because these methods are called before the deserialisation. The only initialisation method you can use in each state is the <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Start.html">Start</a> method, but I can work with that.</p>
+<h2>The Implementation</h2>
+<p class="center"><img src="/images/blog/StateMachine.png" width="414" height="481" alt="" /></p>
+<p>The implementation is quite simple, consisting of a single <a href="https://github.com/richardlord/Unity-State-Machine/blob/master/Assets/StateMachine/StateMachine.cs">StateMachine</a> component and a <a href="https://github.com/richardlord/Unity-State-Machine/blob/master/Assets/StateMachine/Editor/StateMachineEditor.cs">custom inspector</a> to make it easier to use. The code and a simple example is available <a href="https://github.com/richardlord/Unity-State-Machine">on my Github repository</a>.</p>
+<p>The <a href="https://github.com/richardlord/Unity-State-Machine/blob/master/Assets/StateMachine/StateMachine.cs">StateMachine</a> component has two configurable public properties, an array of states and the name of the initial state. Each state in the array has a name and an array of components for that state.</p>
+<p>There is another public property which is the name of the current state, and a public method ChangeState(string) which takes the name of the new state as the parameter. On the surface there’s not much more to it than that. You could add more features but I’ve never needed them.</p>
+<p>The StateMachine component also contains a bunch of private methods to handle the serializing and deserializing of the components and, like I said, there is a custom inspector for the class to help with the configuration.</p>
+<p>To use it</p>
+<ol>
+  <li>Drop the StateMachine class on a game object.</li>
+  <li>Add all the components for all the states into the scene and configure them how you wish.</li>
+  <li>Configure the states in the StateMachine instance with the names of the states and references to the component instances for each state.</li>
+</ol>
+<p>When you enter the scene the components for all the states will be serialized and those not associated with the initial state will be removed. If you call ChangeState on the state machine then the components for the old state will be removed and the components for the new state will be added.</p>
+<p>A component can be used in multiple states. If a component is in both the old and new states it is unchanged, it is not removed and re-added.</p>
+<p>That’s all. If this is useful for you do let me know, and if you implement any improvements to it I would like to see them.</p>
+<p>Have fun making your games.</p>
+
+
+<p>Share this post or a comment online -</p>
+<div id="share">
+
+<a href="https://www.facebook.com/dialog/share?app_id=206081586545847&amp;href=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Funity%2Ffinite-state-machines-in-unity.html" target="_blank" title="Facebook"><img src="/images/social/facebook_logo.png" width="36" height="36" /></a>
+
+<a href="https://twitter.com/intent/tweet?text=Finite%20State%20Machines%20in%20Unity&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Funity%2Ffinite-state-machines-in-unity.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+
+<a href="mailto:?subject=Finite%20State%20Machines%20in%20Unity&amp;body=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Funity%2Ffinite-state-machines-in-unity.html" target="_blank" title="Email"><img src="/images/social/email_logo.png" width="36" height="36" /></a>
+
+<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=Finite%20State%20Machines%20in%20Unity&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Funity%2Ffinite-state-machines-in-unity.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+
+</div>
+<hr />
+<p>Also in the collection <b><a href="./">Unity Game Engine</a></b></p>
+<ul><li><a href="inversion-of-control-in-unity.html">Inversion of Control in Unity</a></li>
+<li><a href="creating-scriptableobjects-in-unity.html">Creating ScriptableObjects in Unity</a></li>
+</ul>
+
+</div>
+</div>
+
+<footer role="contentinfo">
+	<p>Richard Lord - Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+</footer>
+</div>
+</body>
+</html>

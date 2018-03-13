@@ -3,7 +3,7 @@
 <id>http://www.richardlord.net</id>
 <title type="text">Richard Lord</title>
 <subtitle type="text">Game Developer</subtitle>
-<updated>2018-03-11T11:45:52Z</updated>
+<updated>2018-03-13T20:44:38Z</updated>
 <link rel="alternate" type="text/html" href="http://www.richardlord.net" />
 <link rel="self" type="application/atom+xml" href="http://www.richardlord.net/feed.xml" />
 <author>
@@ -11,6 +11,49 @@
   <uri>http://www.richardlord.net</uri>
 </author>
 <rights>©1996-2018 Richard Lord</rights>
+
+<entry>
+<id>http://www.richardlord.net/blog/unity/finite-state-machines-in-unity.html</id>
+<title>Finite State Machines in Unity</title>
+<link rel="alternate" type="text/html" href="http://www.richardlord.net/blog/unity/finite-state-machines-in-unity.html" />
+<updated>2018-03-13T20:20:00Z</updated>
+<published>2018-03-13T20:20:00Z</published>
+<category scheme="http://www.richardlord.net" term="Unity Game Engine" />
+<summary type="text">There are many different solutions to managing finite state machines in Unity. I don’t intend to comment here on the goodness of any other solutions - the best solution is the one that works for you. I just want to tell you about how I manage state machines. If you find it useful please go ahead and copy me and if you have any suggestions for how to improve on this technique please tell me.</summary>
+<content type="html" xml:base="http://www.richardlord.net/blog/unity/finite-state-machines-in-unity.html"><![CDATA[
+<p>There are many different solutions to managing finite state machines in Unity. I don’t intend to comment here on the goodness of any other solutions — the best solution is the one that works for you. I just want to tell you about how I manage state machines. If you find it useful please go ahead and copy me and if you have any suggestions for how to improve on this technique please tell me.</p>
+<p>There’s two parts to this, what I do and how I do it. All the code is <a href="https://github.com/richardlord/Unity-State-Machine">available on Github</a> if you would like to use it.</p>
+<h2>Components as States</h2>
+<p>The basic principle in my approach to state machines is to encapsulate each state in one or more components on the game object. There are two reasons for this</p>
+<ol>
+  <li>As a component, each state has full access to all the standard messages and other features of Unity’s API.</li>
+  <li>The state of a game object exists intrinsically in its components, so the natural way to change a game object’s state is to change its components.</li>
+</ol>
+<p>I started off with the idea that each state is a component of the game object that the state machine exists on, which is clean and simple, but more recently I wanted more flexibility so now each state can comprise multiple components, and the components don’t have to be on the same game object as the state machine (although usually they are either there or on a child game object).</p>
+<p>To implement this I have a single custom state machine component which manages the states, adding and removing components when entering and exiting states, and not much else.</p>
+<h2>Why it’s not straightforward</h2>
+<p>There was always a little wrinkle in this plan — components can’t exist outside of the game object on which they are created, so you can’t remove a component from a game object and then add it back later, removing it destroys it. It’s often desirable to maintain the internal data of a state when exiting it and re-entering it later so destroying the state component when exiting the state and creating a new one when re-entering it won’t work on it’s own. Over time I’ve used two different solutions for this.</p>
+<p>When I first used components as states I was using Unity 3.5 and to keep things simple I would disable and enable components when changing state. The components for all the states existed on the game object all the time, and all but the current state were disabled. This works in most cases — the update methods don’t run on disabled components, and the <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnEnable.html">OnEnable</a> and <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnDisable.html">OnDisable</a> methods will be called when entering and leaving the state. However some specific messages are still received on disabled components - <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnCollisionEnter.htmlhttps://docs.unity3d.com/ScriptReference/MonoBehaviour.OnCollisionEnter.html">OnCollisionEnter</a> for example - so I had to be a bit careful with this technique.</p>
+<p>When Unity 5.3 was released it included the new <a href="https://docs.unity3d.com/ScriptReference/JsonUtility.html">JsonUtility</a> class which provides a standard way to serialise objects, so since then I have serialised and removed components when leaving a state and deserialised and added them back when entering a state.</p>
+<p>There is still a slight annoyance with this technique - it’s not possible to deserialise a component when creating it, instead you have to create a new instance and deserialise the old data into the new component. Because of this you have to avoid using the <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Awake.html">Awake</a> and <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnEnable.html">OnEnable</a> methods in the state components because these methods are called before the deserialisation. The only initialisation method you can use in each state is the <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Start.html">Start</a> method, but I can work with that.</p>
+<h2>The Implementation</h2>
+<p class="center"><img src="/images/blog/StateMachine.png" width="414" height="481" alt="" /></p>
+<p>The implementation is quite simple, consisting of a single <a href="https://github.com/richardlord/Unity-State-Machine/blob/master/Assets/StateMachine/StateMachine.cs">StateMachine</a> component and a <a href="https://github.com/richardlord/Unity-State-Machine/blob/master/Assets/StateMachine/Editor/StateMachineEditor.cs">custom inspector</a> to make it easier to use. The code and a simple example is available <a href="https://github.com/richardlord/Unity-State-Machine">on my Github repository</a>.</p>
+<p>The <a href="https://github.com/richardlord/Unity-State-Machine/blob/master/Assets/StateMachine/StateMachine.cs">StateMachine</a> component has two configurable public properties, an array of states and the name of the initial state. Each state in the array has a name and an array of components for that state.</p>
+<p>There is another public property which is the name of the current state, and a public method ChangeState(string) which takes the name of the new state as the parameter. On the surface there’s not much more to it than that. You could add more features but I’ve never needed them.</p>
+<p>The StateMachine component also contains a bunch of private methods to handle the serializing and deserializing of the components and, like I said, there is a custom inspector for the class to help with the configuration.</p>
+<p>To use it</p>
+<ol>
+  <li>Drop the StateMachine class on a game object.</li>
+  <li>Add all the components for all the states into the scene and configure them how you wish.</li>
+  <li>Configure the states in the StateMachine instance with the names of the states and references to the component instances for each state.</li>
+</ol>
+<p>When you enter the scene the components for all the states will be serialized and those not associated with the initial state will be removed. If you call ChangeState on the state machine then the components for the old state will be removed and the components for the new state will be added.</p>
+<p>A component can be used in multiple states. If a component is in both the old and new states it is unchanged, it is not removed and re-added.</p>
+<p>That’s all. If this is useful for you do let me know, and if you implement any improvements to it I would like to see them.</p>
+<p>Have fun making your games.</p>
+]]></content>
+</entry>
 
 <entry>
 <id>http://www.richardlord.net/intergalactic-delivery-driver/blog/taking-a-break.html</id>
@@ -441,67 +484,6 @@ Before I became a game developer I was an independent contemporary dance choreog
 <p>So there we are, my ingredients for good collaboration - Skill, Understanding and Trust.</p>
 
 <p><a href="/freak-factory/">Freak Factory</a> will be out on 27th July 2015 on iOS &amp; Android. You can read more about it on the game's <a href="/freak-factory/">website</a>.</p>
-]]></content>
-</entry>
-
-<entry>
-<id>http://www.richardlord.net/freak-factory/blog/bubble-pack-becomes-freak-factory.html</id>
-<title>Bubble Pack becomes Freak Factory</title>
-<link rel="alternate" type="text/html" href="http://www.richardlord.net/freak-factory/blog/bubble-pack-becomes-freak-factory.html" />
-<updated>2015-06-10T12:00:00Z</updated>
-<published>2015-06-10T12:00:00Z</published>
-<category scheme="http://www.richardlord.net" term="Freak Factory" />
-<summary type="text">I've been heads down building stuff for Bubble Pack for a while now, which is why I haven't talked about it much. A lot of news has built up.
-
-A New Name
-
-The game now has its final name and art style. The name is Freak Factory. What were bubbles are now little critters called Freaks, and what was a simple box is now a factory in which you make these Freaks. And if you don't keep them contained they will escape and the game ends. Trust me, it all makes sense and looks wonderful.</summary>
-<content type="html" xml:base="http://www.richardlord.net/freak-factory/blog/bubble-pack-becomes-freak-factory.html"><![CDATA[
-<p>I've been heads down building stuff for Bubble Pack for a while now, which is why I haven't talked about it much. A lot of news has built up.</p>
-
-<h2>A New Name</h2>
-
-<p>The game now has its final name and art style. The name is <b>Freak Factory</b>. What were bubbles are now little critters called Freaks, and what was a simple box is now a factory in which you make these Freaks. And if you don't keep them contained they will escape and the game ends. Trust me, it all makes sense and looks wonderful.<!--more--></p>
-
-<p>I didn't design the graphics, that was <a href="http://www.prawnsoda.co.uk">Brian Roberts</a> who I used to work with at Stick Sports. There's a little story about how we ended up working together on Freak Factory, which I will tell you next time. For now suffice to say I'm very pleased to be collaborating with him. The graphics he has made are really excellent.</p>
-
-<h2>Trailer</h2>
-
-<p>The best place to see the new graphics is in the trailer for the game. Here it is.</p>
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/M8Rtc-p30fk?rel=0" frameborder="0" allowfullscreen></iframe>
-
-<br />
-<h2>Release Date</h2>
-
-<p>The game is nearing completion and we are planning to release it next month. I'll post more detailed information as the date approaches.</p>
-
-<p>I'll use the mailing list to tell you when the game is launched, but I won't use it for much else. Too much email is annoying for everyone so if you give me permission to email you I will use it very sparingly. And I will never share your details with anyone else or email you messages from anyone else.</p>
-
-<p>If you want to be on that mailing list, enter your email address here</p>
-
-<!-- Begin MailChimp Signup Form -->
-<link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
-<style type="text/css">
-	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
-	/* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
-	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
-</style>
-<div id="mc_embed_signup">
-<form action="//richardlord.us10.list-manage.com/subscribe/post?u=69a3984316810e969cbef57ba&amp;id=90a63ee67b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-    <div id="mc_embed_signup_scroll">
-	
-	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
-    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-    <div style="position: absolute; left: -5000px;"><input type="text" name="b_69a3984316810e969cbef57ba_90a63ee67b" tabindex="-1" value=""></div>
-    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
-    </div>
-</form>
-</div>
-
-<!--End mc_embed_signup-->
-
-<hr />
 ]]></content>
 </entry>
 
