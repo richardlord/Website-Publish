@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<title>Why use an entity-component-system framework for game development?</title>
+<title>Why use an Entity Component System architecture for game development?</title>
 <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" type="text/css" media="all" href="/style.css" />
@@ -54,14 +54,14 @@
 
 <div id="main">
 <div id="content">
-<h1>Why use an entity-component-system framework for game development?</h1>
+<h1>Why use an Entity Component System architecture for game development?</h1>
 
 <div id="meta">Posted on <time datetime="2012-02-16T12:00:00Z">16 February 2012</time></div>
 
 
 
 
-<p>Following my <a href="/blog/ecs/what-is-an-entity-framework.html">previous post</a> on entity systems for game development I received a number of good questions from developers. I answered many of them directly to the questioners but one question stands out. It's all very well explaining what an entity system framework is, and even <a href="/blog/ecs/introducing-ash.html">building one</a>, but why would you want to use one? In particular, why use the later component/system architecture I described and that I implement in <a href="/ash/">Ash</a> rather than the earlier object-oriented entity architecture as used, for example, in PushButton Engine.</p>
+<p>Following my <a href="/blog/ecs/what-is-an-entity-framework.html">previous post</a> on entity systems for game development I received a number of good questions from developers. I answered many of them directly to the questioners but one question stands out. It's all very well explaining what an entity component system framework is, and even <a href="/blog/ecs/introducing-ash.html">building one</a>, but why would you want to use one? In particular, why use the later component/system architecture I described and that I implement in <a href="/ash/">Ash</a> rather than the earlier object-oriented entity architecture as used, for example, in PushButton Engine.</p>
 
 <p>So, in this post I will look more at what the final architecture is, what it gives us that other architectures don't, and why I personally prefer this architecture.</p>
 
@@ -71,7 +71,7 @@
 
 <p>First, it's worth noting that the core of this architecture is the components and the systems. Components are value-objects that contain the state of the game, and systems are the logic that operates on that state, changing it as the game progresses. The other elements of the architecture are purely incidental, designed to make life easier.</p>
 
-<p>The entity object is present to collect related components together. The relation between components is encapsulated by the concept of an entity and that is vital to the architecture, but it isn't necessary to use an explicit Entity object for this. There are some frameworks that simply use an id to represent the entity, adding the entity id to every component to indicate which entity it belongs to. In this scenario there is no requirement for an entity object at all and entity based operations are performed through an entity manager, using the id to indicate which entity they are operating on.</p>
+<p>The entity object is present to collect related components together. The relation between components is encapsulated by the concept of an entity and that is vital to the architecture, but it isn't necessary to use an explicit Entity object for this. There are some frameworks that simply use an id to represent the entity, adding the entity id to every component to indicate which entity it belongs to.</p>
 
 <p>As a concept, the entity is vital to the architecture. But as a code construct it is entirely optional. I include it because, when using an object-oriented language, the entity object makes life easier. In particular, it enables us to create the methods that operate on the entity as methods of an entity object and to track and manage the entity through this object, removing the need to track ids throughout the code.</p>
 
@@ -106,11 +106,11 @@
 <li>The collision system, which tests whether the player is colliding with other objects and resolves those collisions.</li>
 </ul>
 
-<p>and probably many more systems besides. If we try to build our game using objects that encapsulate data with the operations that act on that data, then we will build dependencies between all these different systems as they all want to be encapsulated with the player's position data. This can't be done unless we code the game as one single, massive class, so inevitably we break some parts of the game into separate systems and provide data to those systems - the physics system, the graphics system - while including other elements of the game logic within the entity objects themselves.</p>
+<p>and probably many more systems besides. If we try to build our game using objects that encapsulate data with the operations that act on that data, then we will build dependencies between all these different systems as they all want to be encapsulated with the player's position data. This can't be done unless we code the game as one single, massive class, so inevitably we break some parts of the game into separate systems and provide data to those systems - the physics system, the graphics system - while including other elements of the game logic within the game objects themselves.</p>
 
 <p>An entity architecture based on components and systems takes the idea of discrete systems to its logical conclusion. All operations are programmed as independent systems, and all game state is stored separately in a set of data components, which are provided to the systems according to their need.</p>
 
-<p>The systems are decoupled form each other. Each system knows only about itself and the data it operates on. It knows and cares nothing at all about the other systems and how they may have affected by or used the data before or after this system gets to work with it.</p>
+<p>The systems are decoupled from each other. Each system knows only about itself and the data it operates on. It knows and cares nothing at all about the other systems and how they be affected by or use the data before or after this system gets to work with it.</p>
 
 <p>Also, by embracing the system as the core logic of the architecture, we are encouraged to make many smaller and simpler systems rather than a few large complex ones, which again leads to simpler code and looser coupling.</p>
 
@@ -144,7 +144,7 @@
 
 <p><a href="http://www.tomseysdavies.com/">Tom Davies</a> has pointed out that a very valuable benefit to him is how easy it is to create an in-game level editor when developing with an entity system framework like <a href="https://github.com/tdavies/Ember2">Ember</a> or <a href="/ash/">Ash</a>. You can see <a href="http://www.tomseysdavies.com/2012/02/07/samphire/">his example here</a>.</p>
 
-<p>I agree with Tom, this is a very useful benefit of these frameworks. The complete separation of the game state and the game logic in an entity system framework makes it easy to create an editor that lets you alter the state (configuration, level design, AI, etc.) while playing the game. Add to this the easier saving and loading of state and you have a framework that is very well suited to in-game editing.</p>
+<p>The complete separation of the game state and the game logic in an entity system framework makes it easy to create an editor that lets you alter the state (configuration, level design, AI, etc.) while playing the game. Add to this the easier saving and loading of state and you have a framework that is very well suited to in-game editing.</p>
 
 
 <p>Share this post or a comment online -</p>
@@ -152,18 +152,18 @@
 
 <a href="https://www.facebook.com/dialog/share?app_id=206081586545847&amp;href=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fecs%2Fwhy-use-an-entity-framework.html" target="_blank" title="Facebook"><img src="/images/social/facebook_logo.png" width="36" height="36" /></a>
 
-<a href="https://twitter.com/intent/tweet?text=Why%20use%20an%20entity-component-system%20framework%20for%20game%20development%3F&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fecs%2Fwhy-use-an-entity-framework.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+<a href="https://twitter.com/intent/tweet?text=Why%20use%20an%20Entity%20Component%20System%20architecture%20for%20game%20development%3F&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fecs%2Fwhy-use-an-entity-framework.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
 
-<a href="mailto:?subject=Why%20use%20an%20entity-component-system%20framework%20for%20game%20development%3F&amp;body=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fecs%2Fwhy-use-an-entity-framework.html" target="_blank" title="Email"><img src="/images/social/email_logo.png" width="36" height="36" /></a>
+<a href="mailto:?subject=Why%20use%20an%20Entity%20Component%20System%20architecture%20for%20game%20development%3F&amp;body=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fecs%2Fwhy-use-an-entity-framework.html" target="_blank" title="Email"><img src="/images/social/email_logo.png" width="36" height="36" /></a>
 
-<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=Why%20use%20an%20entity-component-system%20framework%20for%20game%20development%3F&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fecs%2Fwhy-use-an-entity-framework.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=Why%20use%20an%20Entity%20Component%20System%20architecture%20for%20game%20development%3F&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fecs%2Fwhy-use-an-entity-framework.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
 
 </div>
 <hr />
 <p>Also in the collection <b><a href="./">Entity-Component-System architecture</a></b></p>
 <ul><li><a href="introducing-ash.html">Ash - a new entity system framework for Actionscript games</a></li>
-<li><a href="what-is-an-entity-framework.html">What is an entity-component-system framework for game development?</a></li>
-<li><a href="finite-state-machines-with-ash.html">Finite State Machines with Ash entity-component-system framework</a></li>
+<li><a href="what-is-an-entity-framework.html">What is an Entity Component System architecture for game development?</a></li>
+<li><a href="finite-state-machines-with-ash.html">Finite State Machines with Ash entity component system framework</a></li>
 </ul>
 
 </div>

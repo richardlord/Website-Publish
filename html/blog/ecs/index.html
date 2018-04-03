@@ -56,28 +56,28 @@
 <div id="content">
 <h1>Entity-Component-System architecture</h1>
 
-<h2><a href="finite-state-machines-with-ash.html">Finite State Machines with Ash entity-component-system framework</a></h2>
+<h2><a href="finite-state-machines-with-ash.html">Finite State Machines with Ash entity component system framework</a></h2>
 <div id="meta">Posted on <time datetime="2012-12-05T12:00:00Z">05 December 2012</time></div>
 
 <p>Finite state machines are one of the staple constructs in game development. During the course of a game, game objects may pass through many states and managing those states effectively is important.
 
 The difficulty with finite state machines in an entity system framework like Ash can be summed up in one sentence - the state pattern doesn’t work with an entity system framework. Entity system frameworks use a data-oriented paradigm in which game objects are not self-contained OOP objects. So you can’t use the state pattern, or any variation of it. All the data is in the components, all the logic is in the systems. <a href="finite-state-machines-with-ash.html">Continue reading &rarr;</a></p><hr />
 
-<h2><a href="why-use-an-entity-framework.html">Why use an entity-component-system framework for game development?</a></h2>
+<h2><a href="why-use-an-entity-framework.html">Why use an Entity Component System architecture for game development?</a></h2>
 <div id="meta">Posted on <time datetime="2012-02-16T12:00:00Z">16 February 2012</time></div>
 
-<p>Following my previous post on entity systems for game development I received a number of good questions from developers. I answered many of them in the comments on that post, but one question stands out. It's all very well explaining what an entity system framework is, and even building one, but why would you want to use one? In particular, why use the later component/system architecture I described and that I implement in Ash rather than the earlier object-oriented entity architecture as used, for example, in PushButton Engine.
+<p>Following my previous post on entity systems for game development I received a number of good questions from developers. I answered many of them in the comments on that post, but one question stands out. It's all very well explaining what an entity component system framework is, and even building one, but why would you want to use one? In particular, why use the later component/system architecture I described and that I implement in Ash rather than the earlier object-oriented entity architecture as used, for example, in PushButton Engine.
 
 So, in this post I will look more at what the final architecture is, what it gives us that other architectures don't, and why I personally prefer this architecture. <a href="why-use-an-entity-framework.html">Continue reading &rarr;</a></p><hr />
 
-<h2><a href="what-is-an-entity-framework.html">What is an entity-component-system framework for game development?</a></h2>
+<h2><a href="what-is-an-entity-framework.html">What is an Entity Component System architecture for game development?</a></h2>
 <div id="meta">Posted on <time datetime="2012-01-19T12:00:00Z">19 January 2012</time></div>
 
-<p>Last week I released Ash, an entity system framework for Actionscript game development, and a number of people have asked me the question "What is an entity system framework?". This is my rather long answer.
+<p>Last week I released Ash, an entity component system framework for Actionscript game development, and a number of people have asked me the question "What is an entity component system framework?". This is my rather long answer.
 
 Entity systems are growing in popularity, with well-known examples like Unity, and lesser known frameworks like Actionscript frameworks Ember2, Xember and my own Ash. There's a very good reason for this; they simplify game architecture, encourage clean separation of responsibilities in your code, and are fun to use.
 
-In this post I will walk you through how an entity based architecture evolves from the old fashioned game loop. This may take a while. The examples will be in Actionscript because that happens to be what I'm using at the moment, but the architecture applies to all programming language. <a href="what-is-an-entity-framework.html">Continue reading &rarr;</a></p><hr />
+In this post I will walk you through how an entity based architecture evolves from the old fashioned game loop. This may take a while. The examples will be in Actionscript because that happens to be what I'm using at the moment, but the architecture applies to all programming languages. <a href="what-is-an-entity-framework.html">Continue reading &rarr;</a></p><hr />
 
 <h2><a href="introducing-ash.html">Ash - a new entity system framework for Actionscript games</a></h2>
 <div id="meta">Posted on <time datetime="2012-01-11T12:00:00Z">11 January 2012</time></div>

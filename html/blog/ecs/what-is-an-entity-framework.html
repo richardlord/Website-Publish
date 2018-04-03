@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<title>What is an entity-component-system framework for game development?</title>
+<title>What is an Entity Component System architecture for game development?</title>
 <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" type="text/css" media="all" href="/style.css" />
@@ -54,18 +54,27 @@
 
 <div id="main">
 <div id="content">
-<h1>What is an entity-component-system framework for game development?</h1>
+<h1>What is an Entity Component System architecture for game development?</h1>
 
 <div id="meta">Posted on <time datetime="2012-01-19T12:00:00Z">19 January 2012</time></div>
 
 
 
 
-<p>Last week I released <a href="/ash/">Ash</a>, an entity system framework for Actionscript game development, and a number of people have asked me the question "What is an entity system framework?". This is my rather long answer.</p>
+<p>Last week I released <a href="/ash/">Ash</a>, an entity component system framework for Actionscript game development, and a number of people have asked me the question "What is an entity component system framework?". This is my rather long answer.</p>
 
 <p>Entity systems are growing in popularity, with well-known examples like <a href="https://unity3d.com/">Unity</a>, and lesser known frameworks like Actionscript frameworks <a href="https://github.com/tdavies/Ember2">Ember2</a>, <a href="https://github.com/alecmce/xember">Xember</a> and my own <a href="/ash/">Ash</a>. There's a very good reason for this; they simplify game architecture, encourage clean separation of responsibilities in your code, and are fun to use.</p>
 
 <p>In this post I will walk you through how an entity based architecture evolves from the old fashioned game loop. This may take a while. The examples will be in Actionscript because that happens to be what I'm using at the moment, but the architecture applies to all programming language.</p>
+
+<p>Note that the naming of things within this post is based on</p>
+
+<ul>
+  <li>How they were named as I discovered these archtectures over the past twenty years of my game development life</li>
+  <li>How they are usually named in modern entity component system architectures</li>
+</ul>
+
+<p>This is different, for example, to how they are named in Unity, which is an entity architecture but is not an entity component system architecture.</p>
 
 <p>This is based on <a href="/presentations/game-architecture-is-different.html">a presentation</a> I gave at <a href="http://www.tryharder.org.uk/">try{harder}</a> in 2011.</p>
 
@@ -953,9 +962,9 @@
   }
 }</pre>
 
-<p>This will be enhanced and will sit at the heart of our entity system framework. We'll add to it the functionality mentioned above to dynamically create nodes for the systems.</p>
+<p>This will be enhanced and will sit at the heart of our entity component system framework. We'll add to it the functionality mentioned above to dynamically create nodes for the systems.</p>
 
-<p>The entities only care about components, and the systems only care about nodes. So to complete the entity system framework, we need code to watch the entities and, as they change, add and remove their components to the node collections used by the systems. Because this is the one bit of code that knows about both entities and systems, we might consider it central to the game. In Ash, I call this the Engine class, and it is an enhanced version of the system manager.</p>
+<p>The entities only care about components, and the systems only care about nodes. So to complete the entity component system framework, we need code to watch the entities and, as they change, add and remove their components to the node collections used by the systems. Because this is the one bit of code that knows about both entities and systems, we might consider it central to the game. In Ash, I call this the Engine class, and it is an enhanced version of the system manager.</p>
 
 <p>Every entity and every system is added to and removed from the Engine class when you start using it and stop using it. The Engine class keeps track of the components on the entities and creates and destroys nodes as necessary, adding those nodes to the node collections. The Engine class also provides a way for the systems to get the collections they require.</p>
 
@@ -1014,17 +1023,25 @@
 
 <p>To see one implementation of this architecture, <a href="/ash/">checkout the Ash entity system framework</a>, and see <a href="https://github.com/richardlord/Asteroids">the example Asteroids implementation there</a> too.</p>
 
+<h2>A step further</h2>
+
+<p>In Actionscript, the Node and Entity classes are necessary for efficiently managing the Components and passing them to the Systems. But note that these classes are just glue, the game is defined in the Systems and the Components. The Entity class provides a means to find and manage the components for each entity and the Node classes provide a means to group components into collections for use in the Systems. In other languages and runtime environments it may be more efficient to manage this glue differently.</p>
+
+<p>For example, in a large server-based game we might store the components in a database - they are just data after all - with each record (i.e. each component) having a field for the unique id of the entity it belongs to along with fields for the other component data. Then we pull the components for an entity directly from the database when needed, using the entity id to find it, and we create collections of data for the systems to operate on by doing joined queries across the appropriate databases. For example, for the move system we would pull records from the postion components table and the movement components table where entity ids match and a record exists in both tables (i.e. the entity has both a position and a movement component). In this instance the Entity and Node classes are not required and the only presence for the entity is the unique id that is used in the data tables.</p>
+
+<p>Similarly, if you have control over the memory allocation for your game it is often more efficient to take a similar approach for local game code too, creating components in native arrays of data and looking-up the components for an entity based on an id. Some aspects of the game code become more complex and slower (e.g. finding the components for a specific entity) but others become much faster (e.g. iterating through the component data collections inside a system) because the data is efficiently laid out in memory to minimise cache misses and maximise speed.</p>
+
+<p>The important elements of this architecture are the components and the systems. Everything else is configuration and glue. And note that components are data and systems are functions, so we don't even need object oriented code to do this.</p>
+
 <h2>Conclusion</h2>
 
-<p>So, to summarise, entity systems originate from a desire to simplify the game loop. From that comes an architecture of entities, which represent the state of the game, and systems, which operate on the state of the game. Systems are updated every frame - this is the game loop. Entities are made up of components, and systems operate on the entities that have the components they are interested in. The engine monitors the systems and the entities and ensures each system has access to a collection of all the entities that have the appropriate components.</p>
+<p>So, to summarise, entity component systems originate from a desire to simplify the game loop. From that comes an architecture of components, which represent the state of the game, and systems, which operate on the state of the game. Systems are updated every frame - this is the game loop. Components are combined into entities, and systems operate on the entities that have all the components they are interested in. The engine monitors the systems and the components and ensures each system has access to a collection of all the components it needs.</p>
 
-<p>However, systems don't generally care about the entity as a whole, just the specific components they require. So, to optimise the architecture and provide additional clarity, the systems operate on statically typed node objects that contain the appropriate components, where those components all belong to the same entity.</p>
+<p>An <b>entity component system framework</b> like Ash provides the basic scaffolding and core management for this architecture, without providing any actual component or system classes. You create your game by creating the appropriate components and systems.</p>
 
-<p>An <b>entity system framework</b> provides the basic scaffolding and core management for this architecture, without providing any actual entity or system classes. You create your game by creating the appropriate entities and systems.</p>
+<p>An <b>entity component system game engine</b> will provide many standard systems and components on top of the basic framework.</p>
 
-<p>An <b>entity based game engine</b> will provide many standard systems and entities on top of the basic framework.</p>
-
-<p>Three entity system frameworks for Actionscript are my own <a href="/ash/">Ash</a>, <a href="https://github.com/tdavies/Ember2">Ember2</a> by <a href="http://www.tomseysdavies.com/">Tom Davies</a> and <a href="https://github.com/alecmce/xember">Xember</a> by <a href="http://alecmce.com/">Alec McEachran</a>. <a href="http://gamadu.com/artemis/">Artemis</a> is an entity system framework for Java, that has also been ported to <a href="https://github.com/thelinuxlich/artemis_CSharp">C#</a>.</p>
+<p>Three entity component system frameworks for Actionscript are my own <a href="/ash/">Ash</a>, <a href="https://github.com/tdavies/Ember2">Ember2</a> by <a href="http://www.tomseysdavies.com/">Tom Davies</a> and <a href="https://github.com/alecmce/xember">Xember</a> by <a href="http://alecmce.com/">Alec McEachran</a>. <a href="http://gamadu.com/artemis/">Artemis</a> is an entity system framework for Java, that has also been ported to <a href="https://github.com/thelinuxlich/artemis_CSharp">C#</a>.</p>
 
 <p>My <a href="/blog/ecs/why-use-an-entity-framework.html">next post</a> covers some of the reasons why I like using an entity system framework for my game development projects.</p>
 
@@ -1034,18 +1051,18 @@
 
 <a href="https://www.facebook.com/dialog/share?app_id=206081586545847&amp;href=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fecs%2Fwhat-is-an-entity-framework.html" target="_blank" title="Facebook"><img src="/images/social/facebook_logo.png" width="36" height="36" /></a>
 
-<a href="https://twitter.com/intent/tweet?text=What%20is%20an%20entity-component-system%20framework%20for%20game%20development%3F&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fecs%2Fwhat-is-an-entity-framework.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+<a href="https://twitter.com/intent/tweet?text=What%20is%20an%20Entity%20Component%20System%20architecture%20for%20game%20development%3F&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fecs%2Fwhat-is-an-entity-framework.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
 
-<a href="mailto:?subject=What%20is%20an%20entity-component-system%20framework%20for%20game%20development%3F&amp;body=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fecs%2Fwhat-is-an-entity-framework.html" target="_blank" title="Email"><img src="/images/social/email_logo.png" width="36" height="36" /></a>
+<a href="mailto:?subject=What%20is%20an%20Entity%20Component%20System%20architecture%20for%20game%20development%3F&amp;body=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fecs%2Fwhat-is-an-entity-framework.html" target="_blank" title="Email"><img src="/images/social/email_logo.png" width="36" height="36" /></a>
 
-<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=What%20is%20an%20entity-component-system%20framework%20for%20game%20development%3F&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fecs%2Fwhat-is-an-entity-framework.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=What%20is%20an%20Entity%20Component%20System%20architecture%20for%20game%20development%3F&amp;url=http%3A%2F%2Fwww.richardlord.net%2Fblog%2Fecs%2Fwhat-is-an-entity-framework.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
 
 </div>
 <hr />
 <p>Also in the collection <b><a href="./">Entity-Component-System architecture</a></b></p>
 <ul><li><a href="introducing-ash.html">Ash - a new entity system framework for Actionscript games</a></li>
-<li><a href="why-use-an-entity-framework.html">Why use an entity-component-system framework for game development?</a></li>
-<li><a href="finite-state-machines-with-ash.html">Finite State Machines with Ash entity-component-system framework</a></li>
+<li><a href="why-use-an-entity-framework.html">Why use an Entity Component System architecture for game development?</a></li>
+<li><a href="finite-state-machines-with-ash.html">Finite State Machines with Ash entity component system framework</a></li>
 </ul>
 
 </div>
