@@ -7,7 +7,8 @@
 
 /about/richardlord /about/richardlord.html 301
 /dance/progressive /dance/progressive.html 301
-/dance/waterfall /dance/waterfall.html 301
+/dance/waterfall /waterfall/ 301
+/dance/waterfall.html /waterfall/ 301
 
 /presentations/application-frameworks-the-good-the-bad-and-the-ugly /presentations/application-frameworks-the-good-the-bad-and-the-ugly.html 301
 /presentations/application-frameworks-the-new-kids-on-the-block /presentations/application-frameworks-the-new-kids-on-the-block.html 301
@@ -127,11 +128,10 @@
 /blog/tag/finite-state-machine /blog/actionscript/finite-state-machines-for-ai-in-actionscript.html 301
 /blog/tag/ /blog/ 301
 
-/consumers/webdances.php /dance/ 301
-/edances/* /dance/ 301
-/dance/web-dances /dance/ 301
-/waterfall/ /dance/waterfall.html 301
-/browserdance/opener.html /dance/ 301
+/consumers/webdances.php /waterfall/ 301
+/edances/* /waterfall/ 301
+/dance/web-dances /waterfall/ 301
+/browserdance/opener.html /waterfall/ 301
 
 /blog/flint-particle-system-version-10-released /flint-particles/blog/version-100-released.html 301
 /about/training/ /about/ 301

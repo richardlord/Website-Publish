@@ -209,6 +209,53 @@ code {
     padding: 0 0.5em;
 }
 
+/* =Mail Chimp
+----------------------------------------------- */
+
+#mc_embed_signup input {
+	border:1px solid #999;
+	background-color: #fff;
+	color: #333;
+	-webkit-appearance:none;
+}
+#mc_embed_signup input:focus {
+	border-color:#3FA9F5;
+}
+#mc_embed_signup .button {
+	clear:both;
+	background-color: #ccc;
+	background: linear-gradient( #ddd, #bbb );
+	border: 1px solid #3FA9F5;
+	border-radius:4px;
+	color: #666;
+	cursor: pointer;
+	display: block;
+	font-weight: bold;
+	height: 2em;
+	line-height: 2em;
+	margin: 0;
+	padding:0;
+	text-align: center;
+	text-decoration: none;
+	vertical-align: top;
+	white-space: nowrap;
+	width:35%;
+	min-width:10em;
+}
+#mc_embed_signup .button:hover {
+	background-color:#ccf;
+	background: linear-gradient( #ddf, #bbf );
+}
+
+#mc_embed_signup input.email {
+    display: block;
+    padding: 8px 0;
+    margin: 0 4% 10px 0;
+    text-indent: 5px;
+    width: 35%;
+    min-width: 20em;
+}
+
 /* =Common
 ----------------------------------------------- */
 

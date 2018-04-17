@@ -1,0 +1,23 @@
+
+/* =Menu
+-------------------------------------------------------------- */
+
+header {
+    margin: 0 0 1em 0;
+	text-align: left;
+}
+
+#branding {
+	position: relative;
+	background-image: url("images/headerbg.jpg");
+	min-height: 150px;
+	width: 100%;
+	margin: 0 0;
+}
+
+#branding-content {
+	position: absolute;
+	bottom: 0;
+	left: 7.6%;
+}
+
