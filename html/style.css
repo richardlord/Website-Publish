@@ -122,6 +122,38 @@ header {
 	font-weight: bold;
 }
 
+/* =Submenu
+-------------------------------------------------------------- */
+
+.submenu {
+	background: #444; /* Show a solid color for older browsers */
+	background: -moz-linear-gradient(#666, #333);
+	background: -o-linear-gradient(#666, #333);
+	background: -webkit-linear-gradient(#666, #333);
+	-webkit-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
+	box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
+	float: right;
+	margin: 1em 0 1em 1em;
+	padding: 1.2em 1.7em;
+	border: 1px solid #888;
+	border-radius: 5px;
+	text-transform: uppercase;
+	font-size: 0.8em;
+	line-height: 2;
+	color: #eee;
+}
+
+.submenu a,
+.submenu a:visited {
+	color: #eee;
+	text-decoration: none;
+}
+.submenu a:hover,
+#menu a:focus {
+	color: #fff;
+}
+
 /* =Main
 -------------------------------------------------------------- */
 
