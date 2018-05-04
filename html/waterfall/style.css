@@ -9,7 +9,7 @@ header {
 
 #branding {
 	position: relative;
-	background-image: url("images/headerbg.jpg");
+	background-image: url("/waterfall/images/headerbg.jpg");
 	min-height: 150px;
 	width: 100%;
 	margin: 0 0;

@@ -1,0 +1,44 @@
+
+/* =Menu
+-------------------------------------------------------------- */
+
+header {
+    margin: 0;
+	text-align: left;
+}
+
+#branding {
+	position: relative;
+	background-color: #2c5c7d;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+#branding img {
+	display: block;
+}
+
+#branding-content {
+	position: absolute;
+	bottom: 0;
+	left: 7.6%;
+}
+
+#menu {
+	background: #2C2E70; /* Show a solid color for older browsers */
+	background: -moz-linear-gradient(#3B3E96, #1E204D);
+	background: -o-linear-gradient(#3B3E96, #1E204D);
+	background: -webkit-linear-gradient(#3B3E96, #1E204D);
+	-webkit-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
+	box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
+	margin: 0 0 1em 0;
+	width: 100%;
+	clear: both;
+}
+
+.words {
+	float: right;
+	margin: 0 30px 0 0;
+}

@@ -7,7 +7,8 @@
 
 /about/richardlord /about/resume.html 301
 /about/richardlord.html /about/resume.html 301
-/dance/progressive /dance/progressive.html 301
+/dance/progressive /progressive.html 301
+/dance/progressive.html /progressive.html 301
 /dance/waterfall /waterfall/ 301
 /dance/waterfall.html /waterfall/ 301
 
@@ -39,7 +40,7 @@
 /blog/flint-particles-2-2-0-released /flint-particles/blog/version-2-2-0-released.html 301
 /blog/3d-version-of-flint-particle-system /flint-particles/blog/version-20-alpha.html 301
 
-/blog/dance-on-the-web /dance/dance-on-the-web.html 301
+/blog/dance-on-the-web /waterfall/ 301
 /blog/better-without-singletons /blog/actionscript/better-without-singletons.html 301
 /blog/create-your-own-weak-references-in-actionscript-3 /blog/actionscript/create-your-own-weak-references-in-actionscript-3.html 301
 /blog/different-types-of-weak-references /blog/actionscript/different-types-of-weak-references.html 301
@@ -133,10 +134,11 @@
 /edances/* /waterfall/ 301
 /dance/web-dances /waterfall/ 301
 /browserdance/opener.html /waterfall/ 301
+/dance/* /waterfall/ 301
 
 /blog/flint-particle-system-version-10-released /flint-particles/blog/version-100-released.html 301
 /about/training/ /about/ 301
 /tag/learning /blog/ 301
 /freakfactory/ /freak-factory/ 301
 /blog/application-frameworks-at-fotb /presentations/application-frameworks-the-good-the-bad-and-the-ugly.html 301
-/contact /about/ 301
+/contact /about/contact.html 301
