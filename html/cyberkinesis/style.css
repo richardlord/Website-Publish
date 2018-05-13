@@ -1,0 +1,51 @@
+
+/* =Menu
+-------------------------------------------------------------- */
+
+header {
+    margin: 0 0 1em 0;
+	text-align: left;
+}
+
+#branding {
+	position: relative;
+	background-image: url("/cyberkinesis/images/header.jpg");
+	background-repeat: no-repeat;
+	background-position: center bottom;
+	background-color: #001F3D;
+	min-height: 110px;
+	width: 100%;
+	margin: 0 0;
+}
+
+#branding-content {
+	position: absolute;
+	bottom: 0;
+	left: 7.6%;
+}
+
+#site-image {
+    padding: 0 15px 20px 0;
+    display: block;
+    max-width: 100%;
+}
+
+#menu {
+	background: #f9f9f9; /* Show a solid color for older browsers */
+	background: -moz-linear-gradient(#ddd, #bbb);
+	background: -o-linear-gradient(#ddd, #bbb);
+	background: -webkit-linear-gradient(#ddd, #bbb);
+	color: #373737;
+}
+
+#menu a {
+	color: #373737;
+}
+#menu li:hover > a,
+#menu a:focus {
+	background: #444; /* Show a solid color for older browsers */
+	background: -moz-linear-gradient(#666, #333);
+	background: -o-linear-gradient(#666, #333);
+	background: -webkit-linear-gradient(#666, #333);
+	color: #eee;
+}
