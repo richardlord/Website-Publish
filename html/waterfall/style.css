@@ -21,3 +21,8 @@ header {
 	left: 7.6%;
 }
 
+#site-image {
+    padding: 0 15px 10px 0;
+    display: block;
+    max-width: 100%;
+}
