@@ -371,6 +371,11 @@ a:visited {
     float: left;
 }
 
+img.right {
+	float: right;
+	margin: 10px 0 10px 20px;
+}
+
 table td, table td * {
     vertical-align: top;
 }
