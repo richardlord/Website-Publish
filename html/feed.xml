@@ -3,7 +3,7 @@
 <id>http://www.richardlord.net</id>
 <title type="text">Richard Lord</title>
 <subtitle type="text">Game Developer</subtitle>
-<updated>2018-08-10T10:41:52Z</updated>
+<updated>2018-08-10T10:45:57Z</updated>
 <link rel="alternate" type="text/html" href="http://www.richardlord.net" />
 <link rel="self" type="application/atom+xml" href="http://www.richardlord.net/feed.xml" />
 <author>
@@ -13,14 +13,14 @@
 <rights>©1996-2018 Richard Lord</rights>
 
 <entry>
-<id>http://www.richardlord.net/blog/unity/finite-state-machines-in-unity.html</id>
+<id>https://www.richardlord.net/blog/unity/finite-state-machines-in-unity.html</id>
 <title>Finite State Machines in Unity</title>
-<link rel="alternate" type="text/html" href="http://www.richardlord.net/blog/unity/finite-state-machines-in-unity.html" />
+<link rel="alternate" type="text/html" href="https://www.richardlord.net/blog/unity/finite-state-machines-in-unity.html" />
 <updated>2018-03-13T20:20:00Z</updated>
 <published>2018-03-13T20:20:00Z</published>
-<category scheme="http://www.richardlord.net" term="Unity Game Engine" />
+<category scheme="https://www.richardlord.net" term="Unity Game Engine" />
 <summary type="text">There are many different solutions to managing finite state machines in Unity. I don’t intend to comment here on the goodness of any other solutions - the best solution is the one that works for you. I just want to tell you about how I manage state machines. If you find it useful please go ahead and copy me and if you have any suggestions for how to improve on this technique please tell me.</summary>
-<content type="html" xml:base="http://www.richardlord.net/blog/unity/finite-state-machines-in-unity.html"><![CDATA[
+<content type="html" xml:base="https://www.richardlord.net/blog/unity/finite-state-machines-in-unity.html"><![CDATA[
 <p>There are many different solutions to managing finite state machines in Unity. I don’t intend to comment here on the goodness of any other solutions — the best solution is the one that works for you. I just want to tell you about how I manage state machines. If you find it useful please go ahead and copy me and if you have any suggestions for how to improve on this technique please tell me.</p>
 <p>There’s two parts to this, what I do and how I do it. All the code is <a href="https://github.com/richardlord/Unity-State-Machine">available on Github</a> if you would like to use it.</p>
 <h2>Components as States</h2>
@@ -56,14 +56,14 @@
 </entry>
 
 <entry>
-<id>http://www.richardlord.net/intergalactic-delivery-driver/blog/taking-a-break.html</id>
+<id>https://www.richardlord.net/intergalactic-delivery-driver/blog/taking-a-break.html</id>
 <title>Taking A Break</title>
-<link rel="alternate" type="text/html" href="http://www.richardlord.net/intergalactic-delivery-driver/blog/taking-a-break.html" />
+<link rel="alternate" type="text/html" href="https://www.richardlord.net/intergalactic-delivery-driver/blog/taking-a-break.html" />
 <updated>2016-09-12T12:00:00Z</updated>
 <published>2016-09-12T12:00:00Z</published>
-<category scheme="http://www.richardlord.net" term="Intergalactic Delivery Driver" />
+<category scheme="https://www.richardlord.net" term="Intergalactic Delivery Driver" />
 <summary type="text">Working on a long project is hard. I’ve been working on and off on Intergalactic Delivery Driver for ten months now. There were some gaps in that time, particularly the three months I spent working at King when I got almost nothing done on the game.</summary>
-<content type="html" xml:base="http://www.richardlord.net/intergalactic-delivery-driver/blog/taking-a-break.html"><![CDATA[
+<content type="html" xml:base="https://www.richardlord.net/intergalactic-delivery-driver/blog/taking-a-break.html"><![CDATA[
 <p>Working on a long project is hard. I’ve been working on and off on <a href="/intergalactic-delivery-driver/">Intergalactic Delivery Driver</a> for ten months now. There were some gaps in that time, particularly the three months I spent working at <a href="https://king.com">King</a> when I got almost nothing done on the game. Even so, the project is ten months old and sometimes my enthusiasm for it wanes. Not because I think any less of the project, I still believe it will be a great game, but because it’s hard to get up every morning and find the energy and enthusiasm to work on the same project day in and day out, particularly when there is no-one else to enthuse you. One week I may sprint along, getting lots done and making enormous progress. Another week I may crawl, achieving very little.</p>
 
 <p>So I have a new plan. When my enthusiasm wanes I will allow myself a break. This break will be deliberate and will involve me working on something different. I may be a small project, a prototype, or some writing. Whatever, it will involve not working on my main project for a short while.</p>
@@ -77,14 +77,14 @@
 </entry>
 
 <entry>
-<id>http://www.richardlord.net/blog/general/most-people-are-good-people.html</id>
+<id>https://www.richardlord.net/blog/general/most-people-are-good-people.html</id>
 <title>Most people are good people</title>
-<link rel="alternate" type="text/html" href="http://www.richardlord.net/blog/general/most-people-are-good-people.html" />
+<link rel="alternate" type="text/html" href="https://www.richardlord.net/blog/general/most-people-are-good-people.html" />
 <updated>2016-06-22T12:00:00Z</updated>
 <published>2016-06-22T12:00:00Z</published>
-<category scheme="http://www.richardlord.net" term="General Stuff" />
+<category scheme="https://www.richardlord.net" term="General Stuff" />
 <summary type="text">Most of us trust most of our friends. We trust them not to cheat and lie to us for their own gain. We trust them not to steal from us or to assault us. But how about strangers? Not a specific stranger but strangers in general. Do you trust them? Do you trust the other people in your country not to cheat, lie, steal, and assault others for their own gain? Maybe you think like me that most people are okay but there’s a few bad apples. Or maybe not. Maybe there’s a group of people you particularly don’t trust.</summary>
-<content type="html" xml:base="http://www.richardlord.net/blog/general/most-people-are-good-people.html"><![CDATA[
+<content type="html" xml:base="https://www.richardlord.net/blog/general/most-people-are-good-people.html"><![CDATA[
 <p>Most of us trust most of our friends. We trust them not to cheat and lie to us for their own gain. We trust them not to steal from us or to assault us. But how about strangers? Not a specific stranger but strangers in general. Do you trust them? Do you trust the other people in your country not to cheat, lie, steal, and assault others for their own gain? Maybe you think like me that most people are okay but there’s a few bad apples. Or maybe not. Maybe there’s a group of people you particularly don’t trust. A group that you think has more than a few bad apples. Like maybe politicians, or bankers, or immigrants, or muslims, or christians, or atheists, or women, or men, etc.</p>
 
 <p>How much we trust strangers has a very significant impact on politics, economics and the well being of our country. Trust is the social glue that enables us to live and work together. For example, those who trust others tend to be more accepting of higher taxes. They trust their politicians to spend the money sensibly. They trust other people to use the social welfare system appropriately, not to abuse it. They trust successful people, all of whom have been helped by social policies like education and infrastructure, to give back through the tax system. Socialism is built on trust.</p>
@@ -111,14 +111,14 @@
 </entry>
 
 <entry>
-<id>http://www.richardlord.net/intergalactic-delivery-driver/blog/refactoring-the-meta-game-in-intergalactic-delivery-driver.html</id>
+<id>https://www.richardlord.net/intergalactic-delivery-driver/blog/refactoring-the-meta-game-in-intergalactic-delivery-driver.html</id>
 <title>Refactoring the meta-game in Intergalactic Delivery Driver</title>
-<link rel="alternate" type="text/html" href="http://www.richardlord.net/intergalactic-delivery-driver/blog/refactoring-the-meta-game-in-intergalactic-delivery-driver.html" />
+<link rel="alternate" type="text/html" href="https://www.richardlord.net/intergalactic-delivery-driver/blog/refactoring-the-meta-game-in-intergalactic-delivery-driver.html" />
 <updated>2016-05-18T12:00:00Z</updated>
 <published>2016-05-18T12:00:00Z</published>
-<category scheme="http://www.richardlord.net" term="Intergalactic Delivery Driver" />
+<category scheme="https://www.richardlord.net" term="Intergalactic Delivery Driver" />
 <summary type="text">Last week was an interesting week for Intergalactic Delivery Driver, the game I'm currently developing. The week started with a crisis in confidence as I debated whether the meta-game would work and ended with a number of changes and much greater confidence in the quality of the game in general and the meta-game in particular.</summary>
-<content type="html" xml:base="http://www.richardlord.net/intergalactic-delivery-driver/blog/refactoring-the-meta-game-in-intergalactic-delivery-driver.html"><![CDATA[
+<content type="html" xml:base="https://www.richardlord.net/intergalactic-delivery-driver/blog/refactoring-the-meta-game-in-intergalactic-delivery-driver.html"><![CDATA[
 <p>Last week was an interesting week for <a href="/intergalactic-delivery-driver/">Intergalactic Delivery Driver</a>, the game I'm currently developing. The week started with a crisis in confidence as I debated whether the meta-game would work and ended with a number of changes and much greater confidence in the quality of the game in general and the meta-game in particular.</p>
 
 <p>The meta-game has always been a difficulty within the project. The core-loop was easy, it barely feels like I designed it at all. It was born of inspiration and has felt right since the start. Yes, sometimes I do wonder how many players want to play a game that involves tilting your phone, but it works so well that it's always been worth the risk. The meta-game on the other hand is all hard graft and design. I have thought about it so much and tried so many permutations in my head, on paper and in prototypes that I am bored with it, while still trying hard to make it better. Maybe this time I am there.</p>
@@ -151,14 +151,14 @@
 </entry>
 
 <entry>
-<id>http://www.richardlord.net/blog/game-design/the-choreography-of-monument-valley.html</id>
+<id>https://www.richardlord.net/blog/game-design/the-choreography-of-monument-valley.html</id>
 <title>The Choreography of Monument Valley</title>
-<link rel="alternate" type="text/html" href="http://www.richardlord.net/blog/game-design/the-choreography-of-monument-valley.html" />
+<link rel="alternate" type="text/html" href="https://www.richardlord.net/blog/game-design/the-choreography-of-monument-valley.html" />
 <updated>2016-03-31T12:00:00Z</updated>
 <published>2016-03-31T12:00:00Z</published>
-<category scheme="http://www.richardlord.net" term="Game Design" />
+<category scheme="https://www.richardlord.net" term="Game Design" />
 <summary type="text">The brilliant Critical Distance have proposed "Choreography" as the topic for their March collection of Blogs of the Round Table and I think, as a choreographer turned game developer, I should have something to say on this. I pondered what to write and eventually decided to write about just one game, the wonderful Monument Valley by ustwo.</summary>
-<content type="html" xml:base="http://www.richardlord.net/blog/game-design/the-choreography-of-monument-valley.html"><![CDATA[
+<content type="html" xml:base="https://www.richardlord.net/blog/game-design/the-choreography-of-monument-valley.html"><![CDATA[
 <p>The brilliant <a href="http://www.critical-distance.com/">Critical Distance</a> have proposed <a href="http://www.critical-distance.com/2016/03/05/march-2016-choreography/">"Choreography"</a> as the topic for their March collection of Blogs of the Round Table and I think, as a choreographer turned game developer, I should have something to say on this. I pondered what to write and eventually decided to write about just one game, the wonderful <a href="http://www.monumentvalleygame.com">Monument Valley</a> by <a href="https://ustwo.com">ustwo</a>.</p>
 
 <p>Launch Monument Valley and the first thing you see is a temple with the number one inside it. The symmetry of the view gives it stability, a calm beginning to the game. But there is far more going on than this screen-shot can reveal.</p>
@@ -195,14 +195,14 @@
 </entry>
 
 <entry>
-<id>http://www.richardlord.net/blog/unity/creating-scriptableobjects-in-unity.html</id>
+<id>https://www.richardlord.net/blog/unity/creating-scriptableobjects-in-unity.html</id>
 <title>Creating ScriptableObjects in Unity</title>
-<link rel="alternate" type="text/html" href="http://www.richardlord.net/blog/unity/creating-scriptableobjects-in-unity.html" />
+<link rel="alternate" type="text/html" href="https://www.richardlord.net/blog/unity/creating-scriptableobjects-in-unity.html" />
 <updated>2015-11-03T12:00:00Z</updated>
 <published>2015-11-03T12:00:00Z</published>
-<category scheme="http://www.richardlord.net" term="Unity Game Engine" />
+<category scheme="https://www.richardlord.net" term="Unity Game Engine" />
 <summary type="text">This is a short editor script that I use for creating instances of ScriptableObject classes in the Unity editor. Most scripts that create ScriptableObjects require you to add new code for each object type. This script does not. Select any class that extends ScriptableObject and choose Create->Instance to create an instance of that class.</summary>
-<content type="html" xml:base="http://www.richardlord.net/blog/unity/creating-scriptableobjects-in-unity.html"><![CDATA[
+<content type="html" xml:base="https://www.richardlord.net/blog/unity/creating-scriptableobjects-in-unity.html"><![CDATA[
 <p>This is a short editor script that I use for creating instances of ScriptableObject classes in the Unity editor. Most scripts that create ScriptableObjects require you to add new code for each object type. This script does not. Select any class that extends ScriptableObject and choose Create->Instance to create an instance of that class.</p>
 
 <pre>using UnityEngine;
@@ -261,14 +261,14 @@ public static class ScriptableObjectCreator {
 </entry>
 
 <entry>
-<id>http://www.richardlord.net/blog/unity/inversion-of-control-in-unity.html</id>
+<id>https://www.richardlord.net/blog/unity/inversion-of-control-in-unity.html</id>
 <title>Inversion of Control in Unity</title>
-<link rel="alternate" type="text/html" href="http://www.richardlord.net/blog/unity/inversion-of-control-in-unity.html" />
+<link rel="alternate" type="text/html" href="https://www.richardlord.net/blog/unity/inversion-of-control-in-unity.html" />
 <updated>2015-10-22T12:00:00Z</updated>
 <published>2015-10-22T12:00:00Z</published>
-<category scheme="http://www.richardlord.net" term="Unity Game Engine" />
+<category scheme="https://www.richardlord.net" term="Unity Game Engine" />
 <summary type="text">Many developers come to Unity from a background in object-oriented programming and look to use the same patterns in Unity that they used elsewhere. You don't neglect what you have learnt elsewhere just because you are using a different tool but sometimes you have to apply those lessons differently with the new tool. Unity has its own idea about how you should architect a game and before you start fighting against this it is best to try working with it - you will be a lot more productive if you do.</summary>
-<content type="html" xml:base="http://www.richardlord.net/blog/unity/inversion-of-control-in-unity.html"><![CDATA[
+<content type="html" xml:base="https://www.richardlord.net/blog/unity/inversion-of-control-in-unity.html"><![CDATA[
 <p>Many developers come to <a href="https://unity3d.com/">Unity</a> from a background in object-oriented programming and look to use the same patterns in Unity that they used elsewhere. You don't neglect what you have learnt elsewhere just because you are using a different tool but sometimes you have to apply those lessons differently with the new tool. Unity has its own idea about how you should architect a game and before you start fighting against this it is best to try working with it - you will be a lot more productive if you do.</p>
 
 <h2>Everything is a MonoBehaviour</h2>
@@ -343,16 +343,16 @@ public static class ScriptableObjectCreator {
 </entry>
 
 <entry>
-<id>http://www.richardlord.net/freak-factory/blog/why-freak-factory.html</id>
+<id>https://www.richardlord.net/freak-factory/blog/why-freak-factory.html</id>
 <title>Why Freak Factory?</title>
-<link rel="alternate" type="text/html" href="http://www.richardlord.net/freak-factory/blog/why-freak-factory.html" />
+<link rel="alternate" type="text/html" href="https://www.richardlord.net/freak-factory/blog/why-freak-factory.html" />
 <updated>2015-09-24T12:00:00Z</updated>
 <published>2015-09-24T12:00:00Z</published>
-<category scheme="http://www.richardlord.net" term="Freak Factory" />
+<category scheme="https://www.richardlord.net" term="Freak Factory" />
 <summary type="text">You may be surprised if I tell you that Freak Factory is about life, but it is.
 
 Every time you play Freak Factory you lose, eventually. You may prolong the game, you may get a high score, but eventually you will lose. Losing is inevitable and every Freak you make reduces the space you have, reduces how much game you have left. While you play it the game doesn't get harder, it gets less. With every move you make you see the end approaching.</summary>
-<content type="html" xml:base="http://www.richardlord.net/freak-factory/blog/why-freak-factory.html"><![CDATA[
+<content type="html" xml:base="https://www.richardlord.net/freak-factory/blog/why-freak-factory.html"><![CDATA[
 <p>You may be surprised if I tell you that <a href="/freak-factory/">Freak Factory</a> is about life, but it is.</p>
 
 <p>Every time you play Freak Factory you lose, eventually. You may prolong the game, you may get a high score, but eventually you will lose. Losing is inevitable and every Freak you make reduces the space you have, reduces how much game you have left. While you play it the game doesn't get harder, it gets less. With every move you make you see the end approaching.<!--more--></p>
@@ -388,16 +388,16 @@ Every time you play Freak Factory you lose, eventually. You may prolong the game
 </entry>
 
 <entry>
-<id>http://www.richardlord.net/blog/choreography-games/seeing-whats-really-there.html</id>
+<id>https://www.richardlord.net/blog/choreography-games/seeing-whats-really-there.html</id>
 <title>Seeing what's really there</title>
-<link rel="alternate" type="text/html" href="http://www.richardlord.net/blog/choreography-games/seeing-whats-really-there.html" />
+<link rel="alternate" type="text/html" href="https://www.richardlord.net/blog/choreography-games/seeing-whats-really-there.html" />
 <updated>2015-06-26T12:00:00Z</updated>
 <published>2015-06-26T12:00:00Z</published>
-<category scheme="http://www.richardlord.net" term="Lessons I Learnt as a Choreographer and Apply as a Game Designer" />
+<category scheme="https://www.richardlord.net" term="Lessons I Learnt as a Choreographer and Apply as a Game Designer" />
 <summary type="text">This blog post was originally published on the Develop:Brighton website on 26 June 2015.
 
 I remember as a choreographer at dance school showing my choreography teacher my first dance piece. I'd spent a term making this dance, working with three dancers who were studying with me. This was extra-curricular activity but I wanted to make this dance and I felt good about it. So, in search of praise I asked my choreography teacher, Ingegerd Lonnroth, to look at it.</summary>
-<content type="html" xml:base="http://www.richardlord.net/blog/choreography-games/seeing-whats-really-there.html"><![CDATA[
+<content type="html" xml:base="https://www.richardlord.net/blog/choreography-games/seeing-whats-really-there.html"><![CDATA[
 <p><i>This blog post was originally published on the <a href="http://developconf.blogspot.co.uk/2015/06/seeing-whats-really-there.html">Develop:Brighton</a> website on 26 June 2015.</i></p>
 
 <p>I remember as a choreographer at dance school showing my choreography teacher my first dance piece. I'd spent a term making this dance, working with three dancers who were studying with me. This was extra-curricular activity but I wanted to make this dance and I felt good about it. So, in search of praise I asked my choreography teacher, Ingegerd Lonnroth, to look at it.</p>
@@ -424,16 +424,16 @@ I remember as a choreographer at dance school showing my choreography teacher my
 </entry>
 
 <entry>
-<id>http://www.richardlord.net/blog/choreography-games/what-makes-a-good-collaboration.html</id>
+<id>https://www.richardlord.net/blog/choreography-games/what-makes-a-good-collaboration.html</id>
 <title>What Makes a Good Collaboration?</title>
-<link rel="alternate" type="text/html" href="http://www.richardlord.net/blog/choreography-games/what-makes-a-good-collaboration.html" />
+<link rel="alternate" type="text/html" href="https://www.richardlord.net/blog/choreography-games/what-makes-a-good-collaboration.html" />
 <updated>2015-06-17T12:00:00Z</updated>
 <published>2015-06-17T12:00:00Z</published>
-<category scheme="http://www.richardlord.net" term="Lessons I Learnt as a Choreographer and Apply as a Game Designer" />
+<category scheme="https://www.richardlord.net" term="Lessons I Learnt as a Choreographer and Apply as a Game Designer" />
 <summary type="text">This blog post was originally published on Gamasutra on 17 June 2015.
 
 Before I became a game developer I was an independent contemporary dance choreographer with my own dance company. And in my 14 years creating dances, and a further 14 creating games, I've experienced all sorts of collaborations. For me, there are three key ingredients to a good collaboration.</summary>
-<content type="html" xml:base="http://www.richardlord.net/blog/choreography-games/what-makes-a-good-collaboration.html"><![CDATA[
+<content type="html" xml:base="https://www.richardlord.net/blog/choreography-games/what-makes-a-good-collaboration.html"><![CDATA[
 <p><i>This blog post was originally published on <a href="http://www.gamasutra.com/blogs/RichardLord/20150617/246365/What_Makes_a_Good_Collaboration.php">Gamasutra</a> on 17 June 2015.</i></p>
 
 <p>Before I became a game developer I was an independent contemporary dance choreographer with my own dance company. And in my 14 years creating dances, and a further 14 creating games, I've experienced all sorts of collaborations. For me, there are three key ingredients to a good collaboration.</p>
