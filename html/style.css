@@ -351,12 +351,16 @@ input {
 }
 
 a {
-	color: #00f;
+	color: #059;
 	text-decoration: none;
 }
 
 a:visited {
-	color: #09f;
+	color: #009;
+}
+
+a:hover {
+	text-decoration: underline;
 }
 
 .center {
