@@ -3,8 +3,7 @@
 
 /consulting /games/ 301
 /consulting.html /games/ 301
-/games /games/resume.html 301
-/games.html /games/resume.html 301
+/games.html /games/ 301
 /gamesiplay.html /games/ 301
 /free-code https://github.com/richardlord 301
 /open-source.html https://github.com/richardlord 301
