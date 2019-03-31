@@ -18,25 +18,25 @@
 		<a href="https://twitter.com/richard_lord"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
 		<a href="https://uk.linkedin.com/in/richardlord"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
 		<a href="https://github.com/richardlord"><img src="/images/social/github_logo.png" width="36" height="36" /></a>
-		<a href="https://www.youtube.com/c/RichardLordNet"><img src="/images/social/youtube_logo.png" width="36" height="36" /></a>
+		<a href="https://vimeo.com/richardlord1"><img src="/images/social/vimeo_logo.png" width="36" height="36" /></a>
 		<a href="/feed.xml"><img src="/images/social/rss_logo.png" width="36" height="36" /></a>
 	</div>
 
 	<div id="branding">
-		<img id="site-image" src="/images/social/me.png" />
+		<a href="/" title="Richard Lord" rel="home"><img id="site-image" src="/images/social/me.png" /></a>
 		<div id="site-title"><a href="/" title="Richard Lord" rel="home">Richard&nbsp;Lord</a></div>
-		<div id="site-description">Game&nbsp;Designer, Programmer, Choreographer</div>
+		<div id="site-description">Screenwriter, Choreographer, Game&nbsp;Developer</div>
 	</div>
 
 	<nav id="menu" role="navigation">
 	<div>
 		<ul>
-			<li><a href="/games.html">GAMES</a></li>
-			<li><a href="/consulting.html">CONSULTING</a></li>
+			<li><a href="/writing/">WRITING</a></li>
+			<li><a href="/dance/">CHOREOGRAPHY</a></li>
+			<li><a href="/games/">GAME&nbsp;DEVELOPMENT</a></li>
 			<li><a href="/blog/">BLOG</a></li>
-			<li><a href="/presentations/">PRESENTATIONS</a></li>
-			<li><a href="/press.html">PRESS</a></li>
-			<li><a href="/about/">ABOUT</a></li>
+			<li><a href="/">ABOUT</a></li>
+			<li><a href="/contact.html">CONTACT</a></li>
 		</ul>
 	</div>
 	</nav>
@@ -46,80 +46,80 @@
 <div id="content">
 
 
-<h2><a href="/flint-particles/blog/more-3d-zones.html">More 3D Zones in Flint</a></h2>
-<div id="meta">Posted on <time datetime="2008-09-22T12:00:00Z">22 September 2008</time></div>
+<h2><a href="/flint-particles/blog/whats-in-development.html">What's in development for Flint</a></h2>
+<div id="meta">Posted on <time datetime="2009-01-27T12:00:00Z">27 January 2009</time></div>
 
-<p>I've added four new 3D zones to Flint. FrustrumZone - lets you use the camera frustrum as a zone. Particularly useful for removing particles when they leave the view. <a href="/flint-particles/blog/more-3d-zones.html">Continue reading &rarr;</a></p>
+<p>Apologies for the silence. I've been very busy with client work, but have still found small slices of time to work on Flint. <a href="/flint-particles/blog/whats-in-development.html">Continue reading &rarr;</a></p>
 <p class="tag">Collection: <a href="/flint-particles/blog/">Flint Particles</a></p>
 
 <hr />
 
 
 
-<h2><a href="/flint-particles/blog/flint-does-papervision3d-and-away3d.html">Flint does Papervision3D and Away3D</a></h2>
-<div id="meta">Posted on <time datetime="2008-09-17T12:00:00Z">17 September 2008</time></div>
+<h2><a href="/flint-particles/blog/version-20-released.html">Version 2.0 of Flint released</a></h2>
+<div id="meta">Posted on <time datetime="2008-10-27T12:00:00Z">27 October 2008</time></div>
 
-<p>Today I released a new alpha of version 2 of the Flint particle system. This version adds renderers for Papervision3D and Away3D to the library, so that particle effects can be integrated with a 3D scene in these libraries. <a href="/flint-particles/blog/flint-does-papervision3d-and-away3d.html">Continue reading &rarr;</a></p>
+<p>Version 2.0 is out. The final version is in the downloads, including the full source code, an SWC for Flex, and an MXP for Flash. <a href="/flint-particles/blog/version-20-released.html">Continue reading &rarr;</a></p>
 <p class="tag">Collection: <a href="/flint-particles/blog/">Flint Particles</a></p>
 
 <hr />
 
 
 
-<h2><a href="/flint-particles/blog/papervision-pixel-renderer.html">Papervision pixel renderer for Flint</a></h2>
-<div id="meta">Posted on <time datetime="2008-09-16T12:00:00Z">16 September 2008</time></div>
+<h2><a href="/flint-particles/blog/speed-improvements.html">Performance improvements in Flint</a></h2>
+<div id="meta">Posted on <time datetime="2008-10-14T12:00:00Z">14 October 2008</time></div>
 
-<p>I added a pixel renderer for papaervision this afternoon. It uses Papervision's effects layer with a Pixels object. In doing so, I found a bug in Papervision. The code doesn't work without the bug fix, in as much as removing one particle removes all particles unless you fix the bug in your copy of Papervision. The bug report and fix are here. <a href="/flint-particles/blog/papervision-pixel-renderer.html">Continue reading &rarr;</a></p>
+<p>I checked in a number of minor changes today. These are mostly minor performance improvements which collectively will add up to a significant improvement for some effects. Most of the changes are to reduce the number of objects that are created and destroyed in the 3D Actions. <a href="/flint-particles/blog/speed-improvements.html">Continue reading &rarr;</a></p>
 <p class="tag">Collection: <a href="/flint-particles/blog/">Flint Particles</a></p>
 
 <hr />
 
 
 
-<h2><a href="/flint-particles/blog/improved-papervision3d-rendering.html">Improved Papervision3D rendering in Flint</a></h2>
-<div id="meta">Posted on <time datetime="2008-09-15T12:00:00Z">15 September 2008</time></div>
+<h2><a href="/blog/actionscript/object-pool-class.html">Object Pool class</a></h2>
+<div id="meta">Posted on <time datetime="2008-10-08T12:00:00Z">08 October 2008</time></div>
 
-<p>I added some improvements to the papervision3D rendering to the SVN repository this morning. Rotation now works on DisplayObject3D particles, the materials are managed in a similar way to the Away3D material management, and various other changes too. I'll update the docs and get an Alpha 2 out soon. <a href="/flint-particles/blog/improved-papervision3d-rendering.html">Continue reading &rarr;</a></p>
+<p>Two of the slow operations in the Flash player are object creation and garbage collection. If we pool objects - save objects when they're no longer needed and reuse them later when another object of the same type is required - then object creation is kept to a minimum and garbage collection is reduced to zero. <a href="/blog/actionscript/object-pool-class.html">Continue reading &rarr;</a></p>
+<p class="tag">Collection: <a href="/blog/actionscript/">Actionscript</a></p>
+
+<hr />
+
+
+
+<h2><a href="/blog/presentations/particle-effects-with-flint.html">Particle Effects with Flint</a></h2>
+<div id="meta">Posted on <time datetime="2008-10-04T12:00:00Z">04 October 2008</time></div>
+
+<p>In which I introduced viewers to the open source Flint particle system that I develop. <a href="/blog/presentations/particle-effects-with-flint.html">Continue reading &rarr;</a></p>
+<p class="tag">Collection: <a href="/blog/presentations/">Presentations</a></p>
+
+<hr />
+
+
+
+<h2><a href="/blog/conferences/back-from-flash-on-the-beach.html">Back from Flash on the Beach</a></h2>
+<div id="meta">Posted on <time datetime="2008-10-02T12:00:00Z">02 October 2008</time></div>
+
+<p>Flash on the Beach was fantastic. Once again John organised a very friendly, relaxed and social conference, with some truly inspirational speakers. Being a speaker myself added an extra excitement to this year's conference. <a href="/blog/conferences/back-from-flash-on-the-beach.html">Continue reading &rarr;</a></p>
+<p class="tag">Collection: <a href="/blog/conferences/">Conferences</a></p>
+
+<hr />
+
+
+
+<h2><a href="/flint-particles/blog/version-20-beta-released.html">Version 2.0 beta of Flint released</a></h2>
+<div id="meta">Posted on <time datetime="2008-10-02T12:00:00Z">02 October 2008</time></div>
+
+<p>I added version 2.0 beta to the downloads yesterday. <a href="/flint-particles/blog/version-20-beta-released.html">Continue reading &rarr;</a></p>
 <p class="tag">Collection: <a href="/flint-particles/blog/">Flint Particles</a></p>
 
 <hr />
 
 
 
-<h2><a href="/flint-particles/blog/more-away3d-and-papervision3d-renderer-development.html">More Away3D and Papervision3D renderer development in Flint</a></h2>
-<div id="meta">Posted on <time datetime="2008-09-08T12:00:00Z">08 September 2008</time></div>
+<h2><a href="/flint-particles/blog/updated-examples.html">Updated Flint examples</a></h2>
+<div id="meta">Posted on <time datetime="2008-09-25T12:00:00Z">25 September 2008</time></div>
 
-<p>Today I added to the Away3D renderer implementation. It will now render particles using an Away3D Object3D or a Flash DisplayObject. In the later case, an Away3D Billboard is used, in the form of a MovieClipSprite. I also started work on Papervision3D renderers, with two basic renderers. One uses Papervision's DisplayObject3D type for the particles, and the other uses Papervision's Particle type. <a href="/flint-particles/blog/more-away3d-and-papervision3d-renderer-development.html">Continue reading &rarr;</a></p>
-<p class="tag">Collection: <a href="/flint-particles/blog/">Flint Particles</a></p>
-
-<hr />
-
-
-
-<h2><a href="/flint-particles/blog/away3d-started.html">Away3D renderers for Flint started</a></h2>
-<div id="meta">Posted on <time datetime="2008-09-05T12:00:00Z">05 September 2008</time></div>
-
-<p>I was planning to spend a significant amount of time on Away3D and Papervision3D renderers this week, but unfortunately work got in the way of that. I have, however, just uploaded a simple Away3D renderer and a very basic example to test it. I only had an hour to work on this so it's very crude at the moment. I'll hopefully get some more time next week to work on it and other renderers. <a href="/flint-particles/blog/away3d-started.html">Continue reading &rarr;</a></p>
-<p class="tag">Collection: <a href="/flint-particles/blog/">Flint Particles</a></p>
-
-<hr />
-
-
-
-<h2><a href="/flint-particles/blog/developer-diary.html">Developer diary</a></h2>
-<div id="meta">Posted on <time datetime="2008-09-02T12:00:00Z">02 September 2008</time></div>
-
-<p>I've decided to make this blog more like a developer diary than an announcements page - the blog had become a double to the announcements category in the forum. Also, by making this a developer diary I can keep you all updated on progress with new features and what has been checked into the code repository. Expect the first diary entry very soon. <a href="/flint-particles/blog/developer-diary.html">Continue reading &rarr;</a></p>
-<p class="tag">Collection: <a href="/flint-particles/blog/">Flint Particles</a></p>
-
-<hr />
-
-
-
-<h2><a href="/flint-particles/blog/more-physics.html">More physics in Flint</a></h2>
-<div id="meta">Posted on <time datetime="2008-09-02T12:00:00Z">02 September 2008</time></div>
-
-<p>Today, I added some key features for improving the physics in Flint. Primary among these is the addition of mass and radius properties to the particle class. The mass property represents the mass of the particle. By default, particles have a mass of 1. <a href="/flint-particles/blog/more-physics.html">Continue reading &rarr;</a></p>
+<p>I updated the examples with code for version 2 of Flint. I added a few more examples at the same time. I really believe version 2 is now better and just as stable as version 1 for 2D development. 3D is also very stable - I just need to finalise a few features before going to beta. <a href="/flint-particles/blog/updated-examples.html">Continue reading &rarr;</a></p>
 <p class="tag">Collection: <a href="/flint-particles/blog/">Flint Particles</a></p>
 
 <hr />
@@ -132,7 +132,7 @@
 </div>
 
 <footer role="contentinfo">
-	<p>Richard Lord - Game Designer, Programmer, Choreographer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+	<p>Richard Lord - Screenwriter, Choreographer, Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
 </footer>
 </div>
 </body>

@@ -1,30 +1,57 @@
 /feed /feed.xml 301
 /blog/feed/ /feed.xml 301
 
-/consulting /consulting.html 301
-/games /games.html 301
-/free-code /open-source.html 301
+/consulting /games/ 301
+/consulting.html /games/ 301
+/games /games/resume.html 301
+/games.html /games/resume.html 301
+/gamesiplay.html /games/ 301
+/free-code https://github.com/richardlord 301
+/open-source.html https://github.com/richardlord 301
 
-/about/richardlord /about/resume.html 301
-/about/richardlord.html /about/resume.html 301
+/about/richardlord / 301
+/about/richardlord.html / 301
+/contact /contact.html 301
+/about/contact.html /contact.html 301
+/resume.html /games/resume.html 301
+/about/resume.html /games/resume.html 301
+/works.html /dance/works.html 301
+/about/works.html /dance/works.html 301
+/about/index.html / 301
+/about/ / 301
+/about / 301
+
 /dance/progressive /progressive.html 301
-/dance/progressive.html /progressive.html 301
+/progressive.html /dance/progressive.html 301
 /dance/waterfall /waterfall/ 301
 /dance/waterfall.html /waterfall/ 301
 
-/presentations/application-frameworks-the-good-the-bad-and-the-ugly /presentations/application-frameworks-the-good-the-bad-and-the-ugly.html 301
-/presentations/application-frameworks-the-new-kids-on-the-block /presentations/application-frameworks-the-new-kids-on-the-block.html 301
-/presentations/choreographer-game-designer /presentations/choreographer-game-designer.html 301
-/presentations/game-architecture-is-different /presentations/game-architecture-is-different.html 301
-/presentations/open-source-is-for-life-not-just-for-christmas /presentations/open-source-is-for-life-not-just-for-christmas.html 301
-/presentations/particle-effects-with-flint /presentations/particle-effects-with-flint.html 301
-/presentations/physics-for-flash-games /presentations/physics-for-flash-games.html 301
-/presentations/so-many-frameworks-so-little-time /presentations/so-many-frameworks-so-little-time.html 301
-/presentations/transforming-the-designer-developer-workflow /presentations/transforming-the-designer-developer-workflow.html 301
+/presentations/application-frameworks-the-good-the-bad-and-the-ugly.html /blog/presentations/application-frameworks-the-good-the-bad-and-the-ugly.html 301
+/presentations/application-frameworks-the-new-kids-on-the-block.html /blog/presentations/application-frameworks-the-new-kids-on-the-block.html 301
+/presentations/choreographer-game-designer.html /blog/presentations/choreographer-game-designer.html 301
+/presentations/game-architecture-is-different.html /blog/presentations/game-architecture-is-different.html 301
+/presentations/open-source-is-for-life-not-just-for-christmas.html /blog/presentations/open-source-is-for-life-not-just-for-christmas.html 301
+/presentations/particle-effects-with-flint.html /blog/presentations/particle-effects-with-flint.html 301
+/presentations/physics-for-flash-games.html /blog/presentations/physics-for-flash-games.html 301
+/presentations/so-many-frameworks-so-little-time.html /blog/presentations/so-many-frameworks-so-little-time.html 301
+/presentations/transforming-the-designer-developer-workflow.html /blog/presentations/transforming-the-designer-developer-workflow.html 301
+
+/presentations/application-frameworks-the-good-the-bad-and-the-ugly /blog/presentations/application-frameworks-the-good-the-bad-and-the-ugly.html 301
+/presentations/application-frameworks-the-new-kids-on-the-block /blog/presentations/application-frameworks-the-new-kids-on-the-block.html 301
+/presentations/choreographer-game-designer /blog/presentations/choreographer-game-designer.html 301
+/presentations/game-architecture-is-different /blog/presentations/game-architecture-is-different.html 301
+/presentations/open-source-is-for-life-not-just-for-christmas /blog/presentations/open-source-is-for-life-not-just-for-christmas.html 301
+/presentations/particle-effects-with-flint /blog/presentations/particle-effects-with-flint.html 301
+/presentations/physics-for-flash-games /blog/presentations/physics-for-flash-games.html 301
+/presentations/so-many-frameworks-so-little-time /blog/presentations/so-many-frameworks-so-little-time.html 301
+/presentations/transforming-the-designer-developer-workflow /blog/presentations/transforming-the-designer-developer-workflow.html 301
+
+/presentations /blog/presentations
 
 /press/freak-factory /freak-factory/press.html 301
 /press/intergalactic-delivery-driver /intergalactic-delivery-driver/press.html 301
-/press /press.html 301
+/press /contact.html 301
+/press.html /contact.html 301
 
 /blog/bubble-pack-becomes-freak-factory /freak-factory/blog/bubble-pack-becomes-freak-factory.html 301
 /blog/bubble-pack-my-first-indie-game /freak-factory/blog/bubble-pack-my-first-indie-game.html 301
@@ -141,4 +168,3 @@
 /tag/learning /blog/ 301
 /freakfactory/ /freak-factory/ 301
 /blog/application-frameworks-at-fotb /presentations/application-frameworks-the-good-the-bad-and-the-ugly.html 301
-/contact /about/contact.html 301

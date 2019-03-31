@@ -53,7 +53,7 @@ header {
 #site-description {
 	color: #000;
 	font-size: 16px;
-    line-height: 14px;
+    line-height: 19px;
     clear: none;
     padding-bottom: 20px;
 }
@@ -383,6 +383,8 @@ img.right {
 table td, table td * {
     vertical-align: top;
 }
+
+.indent { margin-left: 4em; }
 
 dt {
 	font-weight: bold;

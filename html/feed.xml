@@ -3,14 +3,14 @@
 <id>http://www.richardlord.net</id>
 <title type="text">Richard Lord</title>
 <subtitle type="text">Game Developer</subtitle>
-<updated>2018-10-28T17:26:39Z</updated>
+<updated>2019-03-31T18:31:55Z</updated>
 <link rel="alternate" type="text/html" href="https://www.richardlord.net" />
 <link rel="self" type="application/atom+xml" href="https://www.richardlord.net/feed.xml" />
 <author>
   <name>Richard Lord</name>
   <uri>https://www.richardlord.net</uri>
 </author>
-<rights>©1996-2018 Richard Lord</rights>
+<rights>©1996-2019 Richard Lord</rights>
 
 <entry>
 <id>https://www.richardlord.net/blog/unity/finite-state-machines-in-unity.html</id>
@@ -388,6 +388,37 @@ Every time you play Freak Factory you lose, eventually. You may prolong the game
 </entry>
 
 <entry>
+<id>https://www.richardlord.net/blog/presentations/choreographer-game-designer.html</id>
+<title>Lessons I Learnt as a Choreographer and Apply as a Game Designer</title>
+<link rel="alternate" type="text/html" href="https://www.richardlord.net/blog/presentations/choreographer-game-designer.html" />
+<updated>2015-07-22T12:00:00Z</updated>
+<published>2015-07-22T12:00:00Z</published>
+<category scheme="https://www.richardlord.net" term="Presentations" />
+<summary type="text">In this session at the Develop conference in Brighton I presented seven important lessons that I learnt as a choreographer that are still important to me as a game designer. I accompanied each lesson with the story of how I learnt it and an example of how it might apply in game design.</summary>
+<content type="html" xml:base="https://www.richardlord.net/blog/presentations/choreographer-game-designer.html"><![CDATA[
+<p>Presented at</p>
+<ul>
+<li><a href="http://www.developconference.com/">Develop Brighton</a>, 16 July 2015</li>
+</ul>
+<p>In this session I presented seven important lessons that I learnt as a choreographer that are still important to me as a game designer. I accompanied each lesson with the story of how I learnt it and an example of how it might apply in game design.</p>
+
+<p>The slides from the presentation contain very little information but they are here in case you're interested.</p>
+
+<p>
+<img src="/images/develop2015/Develop2015_1.jpg" width="512" height="384" /><br />
+<img src="/images/develop2015/Develop2015_2.jpg" width="512" height="384" /><br />
+<img src="/images/develop2015/Develop2015_3.jpg" width="512" height="384" /><br />
+<img src="/images/develop2015/Develop2015_4.jpg" width="512" height="384" /><br />
+<img src="/images/develop2015/Develop2015_5.jpg" width="512" height="384" /><br />
+<img src="/images/develop2015/Develop2015_6.jpg" width="512" height="384" /><br />
+<img src="/images/develop2015/Develop2015_7.jpg" width="512" height="384" /><br />
+<img src="/images/develop2015/Develop2015_8.jpg" width="512" height="384" /><br />
+<img src="/images/develop2015/Develop2015_9.jpg" width="512" height="384" />
+</p>
+]]></content>
+</entry>
+
+<entry>
 <id>https://www.richardlord.net/blog/choreography-games/seeing-whats-really-there.html</id>
 <title>Seeing what's really there</title>
 <link rel="alternate" type="text/html" href="https://www.richardlord.net/blog/choreography-games/seeing-whats-really-there.html" />
@@ -420,70 +451,6 @@ I remember as a choreographer at dance school showing my choreography teacher my
 <p>In theory you can do this without the other person there but it is hard. I find that their presence, watching the dance or playing the game, and my anxiety over their reaction helps me to empathise, to see the work as it really is.</p>
 
 <p>With my new game, <a href="/freak-factory/">Freak Factory</a>, I have shown it to numerous people. Family, friends, other developers. In many cases I watch the screen over their shoulder, imagining what they are thinking and feeling, and I smile as my chest tightens, my stomach flips, and I add another issue to my to-do list. It's not traditional user testing and for you it may not work, but it helps me a lot.</p>
-]]></content>
-</entry>
-
-<entry>
-<id>https://www.richardlord.net/blog/choreography-games/what-makes-a-good-collaboration.html</id>
-<title>What Makes a Good Collaboration?</title>
-<link rel="alternate" type="text/html" href="https://www.richardlord.net/blog/choreography-games/what-makes-a-good-collaboration.html" />
-<updated>2015-06-17T12:00:00Z</updated>
-<published>2015-06-17T12:00:00Z</published>
-<category scheme="https://www.richardlord.net" term="Lessons I Learnt as a Choreographer and Apply as a Game Designer" />
-<summary type="text">This blog post was originally published on Gamasutra on 17 June 2015.
-
-Before I became a game developer I was an independent contemporary dance choreographer with my own dance company. And in my 14 years creating dances, and a further 14 creating games, I've experienced all sorts of collaborations. For me, there are three key ingredients to a good collaboration.</summary>
-<content type="html" xml:base="https://www.richardlord.net/blog/choreography-games/what-makes-a-good-collaboration.html"><![CDATA[
-<p><i>This blog post was originally published on <a href="http://www.gamasutra.com/blogs/RichardLord/20150617/246365/What_Makes_a_Good_Collaboration.php">Gamasutra</a> on 17 June 2015.</i></p>
-
-<p>Before I became a game developer I was an independent contemporary dance choreographer with my own dance company. And in my 14 years creating dances, and a further 14 creating games, I've experienced all sorts of collaborations. For me, there are three key ingredients to a good collaboration.</p>
-
-<h2>Skill</h2>
-
-<p>All collaborators should bring skills to the project that wouldn't otherwise be present. There's no point collaborating with someone if you're better than them at everything. A collaborator is your equal. You respect and value each other's skills and by working together you make something better than either of you could make alone.</p>
-
-<h2>Understanding</h2>
-
-<p>All collaborators should understand what you are making. The game is the reason you are working together. You must agree on what the game is and who it is for so you can all focus your skills on delivering that experience to the players.</p>
-
-<h2>Trust</h2>
-
-<p>All collaborators must trust each other. Without trust there will be no collaboration - the untrusted collaborator will be watched and controlled and any influence they might have over the game will be blocked.</p>
-
-<p>I recall one dance production I created where the costume designer showed me designs that I hated. So I stopped working with her. It wasn't her fault, I should never have asked her to work with me because I didn't trust her.</p>
-
-<p>But there was another dance production where the costume designer showed me designs that I hated and I continued working with her. We even went with her designs that I hated, because I trusted her. And when I saw the finished costumes they were fantastic, perfect for the dance. That's why I needed a costume designer.</p>
-
-<h2>And now</h2>
-
-<p>These three ingredients, skill, understanding and trust, went through my mind back in March when <a href="http://www.prawnsoda.co.uk">Brian Roberts</a> sent me a visual design for my new game. I hadn't asked him to do this, I had planned for my first game as an indie to be small and manageable. Simple graphics, simple sounds, interesting gameplay. Build and learn, I thought, I'll find collaborators for the next project, after I've had time to get to know the indie scene in London. This would be my game.</p>
-
-<p><img alt="" height="482" src="/freak-factory/images/press/prototype.png" width="272" /></p>
-
-<p>But I showed a prototype of the game to some friends in the pub and Brian sent me an email later that night - &quot;Sorry I didn't say goodbye. Really like your new game so I thought I'd have a (slightly drunk) blast at some graphics.&quot; Attached was a picture of the main screen of the game, reinterpreted as an industrial space in which slightly cute, slightly scary creatures are created, and you, the player, are the one creating them. It was great.</p>
-
-<p><img alt="" src="/freak-factory/images/press/original.png" /></p>
-
-<p><i>(Here's a tip - if you see a game you want to work on, ask the team creating it - they may say yes.)</i></p>
-
-<p>So I spent a sleepless night deliberating.</p>
-
-<p>I have never created a piece of art without collaborating. In dance you usually have dancers, composers, costume &amp; set designers. Then as a game developer I've never made &quot;my&quot; game, I've always worked on other people's games. Which is why I quit my job - to make my games.</p>
-
-<p>I intended to make this game alone, and now Brian wanted to collaborate on it.</p>
-
-<p>Because I knew Brian, I knew he had the skills. From the graphics he sent me, he clearly understood the game. But collaboration works two ways - I would be giving Brian the power to influence my game. It wouldn't even be my game any more, it would be our game. That's why the trust has to be there.</p>
-
-<p>By the morning I had decided and I sent Brian an email - &quot;I like that a lot. Do you want to talk about doing all the graphics for the game?&quot; We got together, had a great conversation and Brian became the visual designer for the game. And it has been great working together. The game has benefited from his designs and from his feedback. It's a much richer visual experience and it'll be released soon.</p>
-
-<p>Here's the video trailer featuring the final graphics.</p>
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/M8Rtc-p30fk?rel=0" frameborder="0" allowfullscreen></iframe>
-<br />
-
-<p>So there we are, my ingredients for good collaboration - Skill, Understanding and Trust.</p>
-
-<p><a href="/freak-factory/">Freak Factory</a> will be out on 27th July 2015 on iOS &amp; Android. You can read more about it on the game's <a href="/freak-factory/">website</a>.</p>
 ]]></content>
 </entry>
 
