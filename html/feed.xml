@@ -3,14 +3,14 @@
 <id>http://www.richardlord.net</id>
 <title type="text">Richard Lord</title>
 <subtitle type="text">Game Developer</subtitle>
-<updated>2019-10-17T15:41:51Z</updated>
+<updated>2022-09-08T14:46:57Z</updated>
 <link rel="alternate" type="text/html" href="https://www.richardlord.net" />
 <link rel="self" type="application/atom+xml" href="https://www.richardlord.net/feed.xml" />
 <author>
   <name>Richard Lord</name>
   <uri>https://www.richardlord.net</uri>
 </author>
-<rights>©1996-2019 Richard Lord</rights>
+<rights>©1996-2022 Richard Lord</rights>
 
 <entry>
 <id>https://www.richardlord.net/blog/unity/finite-state-machines-in-unity.html</id>
@@ -33,7 +33,7 @@
 <p>To implement this I have a single custom state machine component which manages the states, adding and removing components when entering and exiting states, and not much else.</p>
 <h2>Why it’s not straightforward</h2>
 <p>There was always a little wrinkle in this plan — components can’t exist outside of the game object on which they are created, so you can’t remove a component from a game object and then add it back later, removing it destroys it. It’s often desirable to maintain the internal data of a state when exiting it and re-entering it later so destroying the state component when exiting the state and creating a new one when re-entering it won’t work on it’s own. Over time I’ve used two different solutions for this.</p>
-<p>When I first used components as states I was using Unity 3.5 and to keep things simple I would disable and enable components when changing state. The components for all the states existed on the game object all the time, and all but the current state were disabled. This works in most cases — the update methods don’t run on disabled components, and the <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnEnable.html">OnEnable</a> and <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnDisable.html">OnDisable</a> methods will be called when entering and leaving the state. However some specific messages are still received on disabled components - <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnCollisionEnter.htmlhttps://docs.unity3d.com/ScriptReference/MonoBehaviour.OnCollisionEnter.html">OnCollisionEnter</a> for example - so I had to be a bit careful with this technique.</p>
+<p>When I first used components as states I was using Unity 3.5 and to keep things simple I would disable and enable components when changing state. The components for all the states existed on the game object all the time, and all but the current state were disabled. This works in most cases — the update methods don’t run on disabled components, and the <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnEnable.html">OnEnable</a> and <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnDisable.html">OnDisable</a> methods will be called when entering and leaving the state. However some specific messages are still received on disabled components - <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnCollisionEnter.html">OnCollisionEnter</a> for example - so I had to be a bit careful with this technique.</p>
 <p>When Unity 5.3 was released it included the new <a href="https://docs.unity3d.com/ScriptReference/JsonUtility.html">JsonUtility</a> class which provides a standard way to serialise objects, so since then I have serialised and removed components when leaving a state and deserialised and added them back when entering a state.</p>
 <p>There is still a slight annoyance with this technique - it’s not possible to deserialise a component when creating it, instead you have to create a new instance and deserialise the old data into the new component. Because of this you have to avoid using the <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Awake.html">Awake</a> and <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnEnable.html">OnEnable</a> methods in the state components because these methods are called before the deserialisation. The only initialisation method you can use in each state is the <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Start.html">Start</a> method, but I can work with that.</p>
 <h2>The Implementation</h2>
@@ -70,7 +70,7 @@
 
 <p><image src="/images/vr/gearvr.png" width="653" height="490" alt="" /></p>
 
-<p>Which is why last week and this I am not working on Intergalactic Delivery Driver. I have bought a VR kit (the <a href="http://www.samsung.com/global/galaxy/gear-vr/">Gear VR</a> because it’s relatively inexpensive) and am experimenting with an idea for a VR project. It’s a small project with some interesting technical hurdles and if the result is good I’ll make it available, probably for free.</p>
+<p>Which is why last week and this I am not working on Intergalactic Delivery Driver. I have bought a VR kit (the Samsung Gear VR because it’s relatively inexpensive) and am experimenting with an idea for a VR project. It’s a small project with some interesting technical hurdles and if the result is good I’ll make it available, probably for free.</p>
 
 <p>Then I’ll return to Intergalactic Delivery Driver with, I am sure, renewed enthusiasm and energy.</p>
 ]]></content>
@@ -125,7 +125,7 @@
 
 <p>When I started prototyping the game I imagined a simple level-unlock scenario, maybe with a "saga-map" like King use in most of their games. This puts all the emphasis on the core loop and lets me put all my effort into creating good quality levels for you to play. Developing those levels might lead me to introduce pick-ups, power-ups and other fun details to add joy and progression to the levels and decisions about when to use objects that span multiple levels.</p>
 
-<p>But later, as the prototype developed, I decided to focus more on your career as a delivery driver. I want to use the game to comment on the idea of independence in the workplace, of working for oneself, of the importance of your personal brand, about what Tim O'Reilly calls the <a href="https://conferences.oreilly.com/nextcon/">next:economy</a>. With different agents and opportunities open to the player I can let you choose the direction your career takes. I can hint at what it feels like to work for yourself. I can show how hard it is to get started in this new economy, when everyone else seems to have the good contacts. How a lucky break can open new possibilities that you haven't imagined and how your career path is based as much on luck as planning. As John Lennon sang "Life is what happens to you while you're busy making other plans" (I used that line when talking about <a href="/freak-factory/blog/why-freak-factory.html">Freak Factory</a> too - maybe there is a theme developing in my work).</p>
+<p>But later, as the prototype developed, I decided to focus more on your career as a delivery driver. I want to use the game to comment on the idea of independence in the workplace, of working for oneself, of the importance of your personal brand, about what Tim O'Reilly calls the next:economy. With different agents and opportunities open to the player I can let you choose the direction your career takes. I can hint at what it feels like to work for yourself. I can show how hard it is to get started in this new economy, when everyone else seems to have the good contacts. How a lucky break can open new possibilities that you haven't imagined and how your career path is based as much on luck as planning. As John Lennon sang "Life is what happens to you while you're busy making other plans" (I used that line when talking about <a href="/freak-factory/blog/why-freak-factory.html">Freak Factory</a> too - maybe there is a theme developing in my work).</p>
 
 <p>Those are grand ambitions, and if I followed them literally then the start of the game would be slow, hard and frustrating and as your career developed your decisions, based as much on luck as judgement, would take you down a path that closed off whole sections of the game to you and made your game uniquely different to everyone else's. The former is clearly not a good idea and the later, while interesting in concept, means producing lots more game than any one person can play or make (although procedural generation could help). Instead, I have focused on the ideas of choice and reputation. You pick the agents you work with and you build a reputation that opens up new options for your career as an Intergalactic Delivery Driver.</p>
 
@@ -159,7 +159,7 @@
 <category scheme="https://www.richardlord.net" term="Game Design" />
 <summary type="text">The brilliant Critical Distance have proposed "Choreography" as the topic for their March collection of Blogs of the Round Table and I think, as a choreographer turned game developer, I should have something to say on this. I pondered what to write and eventually decided to write about just one game, the wonderful Monument Valley by ustwo.</summary>
 <content type="html" xml:base="https://www.richardlord.net/blog/game-design/the-choreography-of-monument-valley.html"><![CDATA[
-<p>The brilliant <a href="http://www.critical-distance.com/">Critical Distance</a> have proposed <a href="http://www.critical-distance.com/2016/03/05/march-2016-choreography/">"Choreography"</a> as the topic for their March collection of Blogs of the Round Table and I think, as a choreographer turned game developer, I should have something to say on this. I pondered what to write and eventually decided to write about just one game, the wonderful <a href="http://www.monumentvalleygame.com">Monument Valley</a> by <a href="https://ustwo.com">ustwo</a>.</p>
+<p>The brilliant <a href="https://www.critical-distance.com/">Critical Distance</a> have proposed <a href="https://www.critical-distance.com/2016/03/05/march-2016-choreography/">"Choreography"</a> as the topic for their March collection of Blogs of the Round Table and I think, as a choreographer turned game developer, I should have something to say on this. I pondered what to write and eventually decided to write about just one game, the wonderful <a href="https://www.monumentvalleygame.com">Monument Valley</a> by <a href="https://www.ustwo.com">ustwo</a>.</p>
 
 <p>Launch Monument Valley and the first thing you see is a temple with the number one inside it. The symmetry of the view gives it stability, a calm beginning to the game. But there is far more going on than this screen-shot can reveal.</p>
 
@@ -269,7 +269,7 @@ public static class ScriptableObjectCreator {
 <category scheme="https://www.richardlord.net" term="Unity Game Engine" />
 <summary type="text">Many developers come to Unity from a background in object-oriented programming and look to use the same patterns in Unity that they used elsewhere. You don't neglect what you have learnt elsewhere just because you are using a different tool but sometimes you have to apply those lessons differently with the new tool. Unity has its own idea about how you should architect a game and before you start fighting against this it is best to try working with it - you will be a lot more productive if you do.</summary>
 <content type="html" xml:base="https://www.richardlord.net/blog/unity/inversion-of-control-in-unity.html"><![CDATA[
-<p>Many developers come to <a href="https://unity3d.com/">Unity</a> from a background in object-oriented programming and look to use the same patterns in Unity that they used elsewhere. You don't neglect what you have learnt elsewhere just because you are using a different tool but sometimes you have to apply those lessons differently with the new tool. Unity has its own idea about how you should architect a game and before you start fighting against this it is best to try working with it - you will be a lot more productive if you do.</p>
+<p>Many developers come to <a href="https://unity.com/">Unity</a> from a background in object-oriented programming and look to use the same patterns in Unity that they used elsewhere. You don't neglect what you have learnt elsewhere just because you are using a different tool but sometimes you have to apply those lessons differently with the new tool. Unity has its own idea about how you should architect a game and before you start fighting against this it is best to try working with it - you will be a lot more productive if you do.</p>
 
 <h2>Everything is a MonoBehaviour</h2>
 
@@ -314,7 +314,7 @@ public static class ScriptableObjectCreator {
 
 <p align="center"><img alt="" src="/images/unity/dependency_configure.png" width="395" height="274" /></p>
 
-<p>Unfortunately configuring dependencies in the Unity editor is so easy you won't feel as smart as you did when you used <a href="https://spring.io">Spring</a> or <a href="http://www.robotlegs.org">Robotlegs</a> - even your designers can configure this dependency injection.</p>
+<p>Unfortunately configuring dependencies in the Unity editor is so easy you won't feel as smart as you did when you used <a href="https://spring.io">Spring</a> or <a href="https://github.com/robotlegs/robotlegs-framework">Robotlegs</a> - even your designers can configure this dependency injection.</p>
 
 <h2>Events</h2>
 
@@ -429,7 +429,7 @@ Every time you play Freak Factory you lose, eventually. You may prolong the game
 
 I remember as a choreographer at dance school showing my choreography teacher my first dance piece. I'd spent a term making this dance, working with three dancers who were studying with me. This was extra-curricular activity but I wanted to make this dance and I felt good about it. So, in search of praise I asked my choreography teacher, Ingegerd Lonnroth, to look at it.</summary>
 <content type="html" xml:base="https://www.richardlord.net/blog/choreography-games/seeing-whats-really-there.html"><![CDATA[
-<p><i>This blog post was originally published on the <a href="http://developconf.blogspot.co.uk/2015/06/seeing-whats-really-there.html">Develop:Brighton</a> website on 26 June 2015.</i></p>
+<p><i>This blog post was originally published on the <a href="http://developconf.blogspot.com/2015/06/seeing-whats-really-there.html">Develop:Brighton</a> website on 26 June 2015.</i></p>
 
 <p>I remember as a choreographer at dance school showing my choreography teacher my first dance piece. I'd spent a term making this dance, working with three dancers who were studying with me. This was extra-curricular activity but I wanted to make this dance and I felt good about it. So, in search of praise I asked my choreography teacher, Ingegerd Lonnroth, to look at it.</p>
 

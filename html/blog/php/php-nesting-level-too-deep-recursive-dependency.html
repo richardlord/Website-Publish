@@ -25,17 +25,17 @@
 	<div id="branding">
 		<a href="/" title="Richard Lord" rel="home"><img id="site-image" src="/images/social/me.png" /></a>
 		<div id="site-title"><a href="/" title="Richard Lord" rel="home">Richard&nbsp;Lord</a></div>
-		<div id="site-description">Screenwriter, Choreographer, Game&nbsp;Developer</div>
+		<div id="site-description">Writer, Choreographer, Game&nbsp;Developer</div>
 	</div>
 
 	<nav id="menu" role="navigation">
 	<div>
 		<ul>
-			<li><a href="/writing/">WRITING</a></li>
+			<li><a href="/">WRITING</a></li>
 			<li><a href="/dance/">CHOREOGRAPHY</a></li>
 			<li><a href="/games/">GAME&nbsp;DEVELOPMENT</a></li>
 			<li><a href="/blog/">BLOG</a></li>
-			<li><a href="/">ABOUT</a></li>
+			<li><a href="/about.html">ABOUT</a></li>
 			<li><a href="/contact.html">CONTACT</a></li>
 		</ul>
 	</div>
@@ -53,7 +53,7 @@
 
 <p>I installed PHP 5.2 on one of my testing servers today and a couple of bits of code that previously worked fine in version 5.1.6 threw fatal errors in the new version. The error message was "Nesting level too deep - recursive dependency?" and it took a little time to track down the root of the problem. Here's what I'd done wrong.</p>
 
-<p>In PHP there are <a href="http://php.net/manual/en/language.operators.comparison.php">two comparison operators</a>, <code>==</code> and <code>===</code>. It's generally known that the first is not strict about type but the second is. So, for example</p>
+<p>In PHP there are <a href="https://php.net/manual/en/language.operators.comparison.php">two comparison operators</a>, <code>==</code> and <code>===</code>. It's generally known that the first is not strict about type but the second is. So, for example</p>
 
 <pre>echo ( false == 0 ); // true
 echo ( false === 0 ); // false
@@ -66,7 +66,7 @@ $b = new MyObj();
 if( $a == $b )
 ...</pre>
 
-<p>I hadn't considered <a href="http://php.net/manual/en/language.oop5.object-comparison.php">what I was doing with this code</a>. When comparing two objects using the non-strict comparison operator (==) PHP compares all the properties of the objects and if they match the objects are deemed to be equal. If they don't match they are not equal. In effect, we have a recursive comparison of all the properties of each object, and all their properties, etc. until we reach basic data types like strings and integers.</p>
+<p>I hadn't considered <a href="https://php.net/manual/en/language.oop5.object-comparison.php">what I was doing with this code</a>. When comparing two objects using the non-strict comparison operator (==) PHP compares all the properties of the objects and if they match the objects are deemed to be equal. If they don't match they are not equal. In effect, we have a recursive comparison of all the properties of each object, and all their properties, etc. until we reach basic data types like strings and integers.</p>
 
 <p>If, however, we use strict comparison (===), PHP will check whether the two objects are exactly the same object, not just objects with the same properties.</p>
 
@@ -119,19 +119,19 @@ echo ( $a == $c ); // Fatal error:
 
 <p>The strict comparison will simply check whether the two objects are at the same location in memory and so doesn't even look at the values of the properties.</p>
 
-<p>N.B. The same problem can arise when using the negated comparison operators (use <code>!==</code> instead of <code>!=</code>) and when using <code><a href="http://php.net/manual/en/function.in-array.php">in_array</a></code> (use <code>in_array</code>'s third parameter to indicate strict comparison).</p>
+<p>N.B. The same problem can arise when using the negated comparison operators (use <code>!==</code> instead of <code>!=</code>) and when using <code><a href="https://php.net/manual/en/function.in-array.php">in_array</a></code> (use <code>in_array</code>'s third parameter to indicate strict comparison).</p>
 
 
 <p>Share this post or a comment online -</p>
 <div id="share">
 
-<a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.richardlord.net%2Fblog%2Fphp%2Fphp-nesting-level-too-deep-recursive-dependency.html" target="_blank" title="Facebook"><img src="/images/social/facebook_logo.png" width="36" height="36" /></a>
+<a href="https://www.facebook.com/sharer/sharer.php?u=https%3A//www.richardlord.net/blog/php/php-nesting-level-too-deep-recursive-dependency.html" target="_blank" title="Facebook"><img src="/images/social/facebook_logo.png" width="36" height="36" /></a>
 
-<a href="https://twitter.com/intent/tweet?text=PHP%205.2%20-%20Nesting%20level%20too%20deep%20-%20recursive%20dependency%3F&amp;url=https%3A%2F%2Fwww.richardlord.net%2Fblog%2Fphp%2Fphp-nesting-level-too-deep-recursive-dependency.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+<a href="https://twitter.com/intent/tweet?text=PHP%205.2%20-%20Nesting%20level%20too%20deep%20-%20recursive%20dependency%3F&amp;url=https%3A//www.richardlord.net/blog/php/php-nesting-level-too-deep-recursive-dependency.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
 
-<a href="mailto:?subject=PHP%205.2%20-%20Nesting%20level%20too%20deep%20-%20recursive%20dependency%3F&amp;body=https%3A%2F%2Fwww.richardlord.net%2Fblog%2Fphp%2Fphp-nesting-level-too-deep-recursive-dependency.html" target="_blank" title="Email"><img src="/images/social/email_logo.png" width="36" height="36" /></a>
+<a href="mailto:?subject=PHP%205.2%20-%20Nesting%20level%20too%20deep%20-%20recursive%20dependency%3F&amp;body=https%3A//www.richardlord.net/blog/php/php-nesting-level-too-deep-recursive-dependency.html" target="_blank" title="Email"><img src="/images/social/email_logo.png" width="36" height="36" /></a>
 
-<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=PHP%205.2%20-%20Nesting%20level%20too%20deep%20-%20recursive%20dependency%3F&amp;url=https%3A%2F%2Fwww.richardlord.net%2Fblog%2Fphp%2Fphp-nesting-level-too-deep-recursive-dependency.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=PHP%205.2%20-%20Nesting%20level%20too%20deep%20-%20recursive%20dependency%3F&amp;url=https%3A//www.richardlord.net/blog/php/php-nesting-level-too-deep-recursive-dependency.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
 
 </div>
 <hr />
@@ -148,7 +148,7 @@ echo ( $a == $c ); // Fatal error:
 </div>
 
 <footer role="contentinfo">
-	<p>Richard Lord - Screenwriter, Choreographer, Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+	<p>Richard Lord - Writer, Choreographer, Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
 </footer>
 </div>
 </body>

@@ -25,17 +25,17 @@
 	<div id="branding">
 		<a href="/" title="Richard Lord" rel="home"><img id="site-image" src="/images/social/me.png" /></a>
 		<div id="site-title"><a href="/" title="Richard Lord" rel="home">Richard&nbsp;Lord</a></div>
-		<div id="site-description">Screenwriter, Choreographer, Game&nbsp;Developer</div>
+		<div id="site-description">Writer, Choreographer, Game&nbsp;Developer</div>
 	</div>
 
 	<nav id="menu" role="navigation">
 	<div>
 		<ul>
-			<li><a href="/writing/">WRITING</a></li>
+			<li><a href="/">WRITING</a></li>
 			<li><a href="/dance/">CHOREOGRAPHY</a></li>
 			<li><a href="/games/">GAME&nbsp;DEVELOPMENT</a></li>
 			<li><a href="/blog/">BLOG</a></li>
-			<li><a href="/">ABOUT</a></li>
+			<li><a href="/about.html">ABOUT</a></li>
 			<li><a href="/contact.html">CONTACT</a></li>
 		</ul>
 	</div>
@@ -51,17 +51,17 @@
 
 
 
-<p>This applies to version 0.7 of the <a href="http://framework.zend.com/">Zend Framework</a>. Changes for later versions of the framework are at the end of the article.</p>
+<p>This applies to version 0.7 of the <a href="https://framework.zend.com/">Zend Framework</a>. Changes for later versions of the framework are at the end of the article.</p>
 
 <p>Early versions of the Zend Framework had a noRoute action that was called when the correct action couldn't be found. This was a way to deal with some page not found errors. At some point it was dropped - I don't know when or why because I only started using the Zend Framework recently. It's still possible to handle non-existent actions using the __call() method of the controller class. But there's no obvious way to deal with all page not found errors in one place, including instances where the controller doesn't exist.</p>
 
-<p>The Zend Framework is based around <a href="http://framework.zend.com/manual/en/zend.controller.html">controllers and actions</a>, using URL's of the form http://www.example.com/controller/action. If no action is specified the index action is used, and if no controller is specified the index controller is used. You can modify the mapping of URLs to controllers and actions by setting up different <a href="http://framework.zend.com/manual/en/zend.controller.providedsubclasses.html#zend.controller.providedsubclasses.rewriterouter">rewrite routers</a> in the front controller.</p>
+<p>The Zend Framework is based around <a href="https://framework.zend.com/manual/1.12/en/zend.controller.html">controllers and actions</a>, using URL's of the form http://www.example.com/controller/action. If no action is specified the index action is used, and if no controller is specified the index controller is used. You can modify the mapping of URLs to controllers and actions by setting up different <a href="https://framework.zend.com/manual/1.12/en/zend.controller.router.html">rewrite routers</a> in the front controller.</p>
 
 <p>A 404 error should occur when the controller or action specified in the URL aren't defined. But instead of a 404 error, the Zend Framework throws an exception because the controller class or the action method can't be found. There's nothing worng with this - it leaves it for each developer to decide what to do. So what should we do?</p>
 
 <p>To generate an appropriate 404 error with a custom page we need either to intercept the request before the error occurs or to catch the exception after the error occurs, and in either case to redirect to an appropriate controller and action.</p>
 
-<p>I created a <a href="http://framework.zend.com/manual/en/zend.controller.plugins.html">controller plug-in</a> to do just that. In the pre-despatch method it checks the controller class can be loaded and that it contains the required action. If either is not the case it redirects the request to the index action of the noroute controller. Then one just creates an appropriate noroute controller to display the page not found error.</p>
+<p>I created a <a href="https://framework.zend.com/manual/1.12/en/zend.controller.plugins.html">controller plug-in</a> to do just that. In the pre-despatch method it checks the controller class can be loaded and that it contains the required action. If either is not the case it redirects the request to the index action of the noroute controller. Then one just creates an appropriate noroute controller to display the page not found error.</p>
 
 <p>Here's the plug-in code.</p>
 
@@ -120,7 +120,7 @@ class Bigroom_Controller_Plugin_Noroute
     }
 }</pre>
 
-<p>Simply <a href="http://framework.zend.com/manual/en/zend.controller.plugins.html#zend.controller.plugins.using">register this plug-in</a> with the front controller and set-up the NorouteController class to display the error page. And remember to send a 404 error header from the noroute controller.</p>
+<p>Simply <a href="https://framework.zend.com/manual/1.12/en/zend.controller.plugins.html#zend.controller.plugins.using">register this plug-in</a> with the front controller and set-up the NorouteController class to display the error page. And remember to send a 404 error header from the noroute controller.</p>
 
 <p>The plug-in doesn't deal with modules - mainly because I don't use modules and couldn't decide whether the NorouteController class should be global or per-module. It shouldn't be too hard to add module handling to the code.</p>
 
@@ -132,13 +132,13 @@ class Bigroom_Controller_Plugin_Noroute
 <p>Share this post or a comment online -</p>
 <div id="share">
 
-<a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.richardlord.net%2Fblog%2Fphp%2Fmanaging-404-errors-in-the-zend-framework.html" target="_blank" title="Facebook"><img src="/images/social/facebook_logo.png" width="36" height="36" /></a>
+<a href="https://www.facebook.com/sharer/sharer.php?u=https%3A//www.richardlord.net/blog/php/managing-404-errors-in-the-zend-framework.html" target="_blank" title="Facebook"><img src="/images/social/facebook_logo.png" width="36" height="36" /></a>
 
-<a href="https://twitter.com/intent/tweet?text=Managing%20404%20errors%20in%20the%20Zend%20Framework&amp;url=https%3A%2F%2Fwww.richardlord.net%2Fblog%2Fphp%2Fmanaging-404-errors-in-the-zend-framework.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+<a href="https://twitter.com/intent/tweet?text=Managing%20404%20errors%20in%20the%20Zend%20Framework&amp;url=https%3A//www.richardlord.net/blog/php/managing-404-errors-in-the-zend-framework.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
 
-<a href="mailto:?subject=Managing%20404%20errors%20in%20the%20Zend%20Framework&amp;body=https%3A%2F%2Fwww.richardlord.net%2Fblog%2Fphp%2Fmanaging-404-errors-in-the-zend-framework.html" target="_blank" title="Email"><img src="/images/social/email_logo.png" width="36" height="36" /></a>
+<a href="mailto:?subject=Managing%20404%20errors%20in%20the%20Zend%20Framework&amp;body=https%3A//www.richardlord.net/blog/php/managing-404-errors-in-the-zend-framework.html" target="_blank" title="Email"><img src="/images/social/email_logo.png" width="36" height="36" /></a>
 
-<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=Managing%20404%20errors%20in%20the%20Zend%20Framework&amp;url=https%3A%2F%2Fwww.richardlord.net%2Fblog%2Fphp%2Fmanaging-404-errors-in-the-zend-framework.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=Managing%20404%20errors%20in%20the%20Zend%20Framework&amp;url=https%3A//www.richardlord.net/blog/php/managing-404-errors-in-the-zend-framework.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
 
 </div>
 <hr />
@@ -155,7 +155,7 @@ class Bigroom_Controller_Plugin_Noroute
 </div>
 
 <footer role="contentinfo">
-	<p>Richard Lord - Screenwriter, Choreographer, Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+	<p>Richard Lord - Writer, Choreographer, Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
 </footer>
 </div>
 </body>

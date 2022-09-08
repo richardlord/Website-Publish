@@ -25,17 +25,17 @@
 	<div id="branding">
 		<a href="/" title="Richard Lord" rel="home"><img id="site-image" src="/images/social/me.png" /></a>
 		<div id="site-title"><a href="/" title="Richard Lord" rel="home">Richard&nbsp;Lord</a></div>
-		<div id="site-description">Screenwriter, Choreographer, Game&nbsp;Developer</div>
+		<div id="site-description">Writer, Choreographer, Game&nbsp;Developer</div>
 	</div>
 
 	<nav id="menu" role="navigation">
 	<div>
 		<ul>
-			<li><a href="/writing/">WRITING</a></li>
+			<li><a href="/">WRITING</a></li>
 			<li><a href="/dance/">CHOREOGRAPHY</a></li>
 			<li><a href="/games/">GAME&nbsp;DEVELOPMENT</a></li>
 			<li><a href="/blog/">BLOG</a></li>
-			<li><a href="/">ABOUT</a></li>
+			<li><a href="/about.html">ABOUT</a></li>
 			<li><a href="/contact.html">CONTACT</a></li>
 		</ul>
 	</div>
@@ -53,7 +53,7 @@
 
 <p>In my training courses I often get asked about protecting swf movies. There's two sides to this - one is encrypting the code to make it hard for others to decompile and use, and the other is limiting where the swf can be used from so that users can't simply place your swf on their website.</p>
 
-<a name="obfuscators"></a><p>There are a number of commercial and free obfuscating and encryption tools to help protect your code, three of which are <a href="http://www.genable.com/aso.html">ASO</a>, <a href="http://www.amayeta.com/software/swfencrypt/">SWFEncrypt</a> and <a href="http://www.kindisoft.com/">SecureSWF</a>, so I'm not going to say any more about them (maybe in a later post). Here's a few ideas for how to limit where the swf movie may be used.</p>
+<a name="obfuscators"></a><p>There are a number of commercial and free obfuscating and encryption tools to help protect your code, three of which are ASO, <a href="http://www.amayeta.com/software/swfencrypt/">SWFEncrypt</a> and <a href="http://www.kindisoft.com/">SecureSWF</a>, so I'm not going to say any more about them (maybe in a later post). Here's a few ideas for how to limit where the swf movie may be used.</p>
 
 <h2>What domain is the swf running in?</h2>
 
@@ -169,7 +169,7 @@ else
 stop();
 testWithServer( testResult );</pre>
 
-<p>This is quite basic - The file can be an empty text file - it needs no content. The function succeeds if the file can be loaded and thus is dependent only on the cross-domain policy for the domain hosting the test file that's loaded. If the policy allows the movie to load the file then it succeeds. The advantage to this is that we can update the allowed domains for our swf simply by modifying the cross-domain policy file on the server - there's no need to touch the flash movie. <a href="http://www.adobe.com/livedocs/flash/8/main/00001621.html">(More info on cross-domain policy files here)</a></p>
+<p>This is quite basic - The file can be an empty text file - it needs no content. The function succeeds if the file can be loaded and thus is dependent only on the cross-domain policy for the domain hosting the test file that's loaded. If the policy allows the movie to load the file then it succeeds. The advantage to this is that we can update the allowed domains for our swf simply by modifying the cross-domain policy file on the server - there's no need to touch the flash movie.</p>
 
 <p>It's important that the url is not a relative url - that would enable someone to bypass the security simply by placing an appropriate file on their own server.</p>
 
@@ -180,7 +180,7 @@ testWithServer( testResult );</pre>
  
 <li>by generating a unique id each time the page containing the flash movie is loaded and passing it to the movie via the FlashVars. The swf then passes this back to the server when asking permission to run. The server allows each id to be used once only.</li>
 
-<li>by using encryption in the query and response (see <a href="http://www.meychi.com/archive/000031.php">ASCrypt</a> for some actionscript encryption code).</li>
+<li>by using encryption in the query and response (see ASCrypt for some actionscript encryption code).</li>
 </ul>
 
 <p>But the basic system of an absolute URL and one or more (you can give each swf a unique policy file that it loads via the System.security.loadPolicyFile() method) cross-domain policy files is enough in many cases.</p>
@@ -207,13 +207,13 @@ testWithServer( testResult );</pre>
 <p>Share this post or a comment online -</p>
 <div id="share">
 
-<a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.richardlord.net%2Fblog%2Fflash%2Fprotecting-a-swf.html" target="_blank" title="Facebook"><img src="/images/social/facebook_logo.png" width="36" height="36" /></a>
+<a href="https://www.facebook.com/sharer/sharer.php?u=https%3A//www.richardlord.net/blog/flash/protecting-a-swf.html" target="_blank" title="Facebook"><img src="/images/social/facebook_logo.png" width="36" height="36" /></a>
 
-<a href="https://twitter.com/intent/tweet?text=Protecting%20a%20swf&amp;url=https%3A%2F%2Fwww.richardlord.net%2Fblog%2Fflash%2Fprotecting-a-swf.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+<a href="https://twitter.com/intent/tweet?text=Protecting%20a%20swf&amp;url=https%3A//www.richardlord.net/blog/flash/protecting-a-swf.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
 
-<a href="mailto:?subject=Protecting%20a%20swf&amp;body=https%3A%2F%2Fwww.richardlord.net%2Fblog%2Fflash%2Fprotecting-a-swf.html" target="_blank" title="Email"><img src="/images/social/email_logo.png" width="36" height="36" /></a>
+<a href="mailto:?subject=Protecting%20a%20swf&amp;body=https%3A//www.richardlord.net/blog/flash/protecting-a-swf.html" target="_blank" title="Email"><img src="/images/social/email_logo.png" width="36" height="36" /></a>
 
-<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=Protecting%20a%20swf&amp;url=https%3A%2F%2Fwww.richardlord.net%2Fblog%2Fflash%2Fprotecting-a-swf.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=Protecting%20a%20swf&amp;url=https%3A//www.richardlord.net/blog/flash/protecting-a-swf.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
 
 </div>
 <hr />
@@ -230,7 +230,7 @@ testWithServer( testResult );</pre>
 </div>
 
 <footer role="contentinfo">
-	<p>Richard Lord - Screenwriter, Choreographer, Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+	<p>Richard Lord - Writer, Choreographer, Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
 </footer>
 </div>
 </body>

@@ -25,17 +25,17 @@
 	<div id="branding">
 		<a href="/" title="Richard Lord" rel="home"><img id="site-image" src="/images/social/me.png" /></a>
 		<div id="site-title"><a href="/" title="Richard Lord" rel="home">Richard&nbsp;Lord</a></div>
-		<div id="site-description">Screenwriter, Choreographer, Game&nbsp;Developer</div>
+		<div id="site-description">Writer, Choreographer, Game&nbsp;Developer</div>
 	</div>
 
 	<nav id="menu" role="navigation">
 	<div>
 		<ul>
-			<li><a href="/writing/">WRITING</a></li>
+			<li><a href="/">WRITING</a></li>
 			<li><a href="/dance/">CHOREOGRAPHY</a></li>
 			<li><a href="/games/">GAME&nbsp;DEVELOPMENT</a></li>
 			<li><a href="/blog/">BLOG</a></li>
-			<li><a href="/">ABOUT</a></li>
+			<li><a href="/about.html">ABOUT</a></li>
 			<li><a href="/contact.html">CONTACT</a></li>
 		</ul>
 	</div>
@@ -63,7 +63,7 @@
 <p>To implement this I have a single custom state machine component which manages the states, adding and removing components when entering and exiting states, and not much else.</p>
 <h2>Why it’s not straightforward</h2>
 <p>There was always a little wrinkle in this plan — components can’t exist outside of the game object on which they are created, so you can’t remove a component from a game object and then add it back later, removing it destroys it. It’s often desirable to maintain the internal data of a state when exiting it and re-entering it later so destroying the state component when exiting the state and creating a new one when re-entering it won’t work on it’s own. Over time I’ve used two different solutions for this.</p>
-<p>When I first used components as states I was using Unity 3.5 and to keep things simple I would disable and enable components when changing state. The components for all the states existed on the game object all the time, and all but the current state were disabled. This works in most cases — the update methods don’t run on disabled components, and the <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnEnable.html">OnEnable</a> and <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnDisable.html">OnDisable</a> methods will be called when entering and leaving the state. However some specific messages are still received on disabled components - <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnCollisionEnter.htmlhttps://docs.unity3d.com/ScriptReference/MonoBehaviour.OnCollisionEnter.html">OnCollisionEnter</a> for example - so I had to be a bit careful with this technique.</p>
+<p>When I first used components as states I was using Unity 3.5 and to keep things simple I would disable and enable components when changing state. The components for all the states existed on the game object all the time, and all but the current state were disabled. This works in most cases — the update methods don’t run on disabled components, and the <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnEnable.html">OnEnable</a> and <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnDisable.html">OnDisable</a> methods will be called when entering and leaving the state. However some specific messages are still received on disabled components - <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnCollisionEnter.html">OnCollisionEnter</a> for example - so I had to be a bit careful with this technique.</p>
 <p>When Unity 5.3 was released it included the new <a href="https://docs.unity3d.com/ScriptReference/JsonUtility.html">JsonUtility</a> class which provides a standard way to serialise objects, so since then I have serialised and removed components when leaving a state and deserialised and added them back when entering a state.</p>
 <p>There is still a slight annoyance with this technique - it’s not possible to deserialise a component when creating it, instead you have to create a new instance and deserialise the old data into the new component. Because of this you have to avoid using the <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Awake.html">Awake</a> and <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnEnable.html">OnEnable</a> methods in the state components because these methods are called before the deserialisation. The only initialisation method you can use in each state is the <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Start.html">Start</a> method, but I can work with that.</p>
 <h2>The Implementation</h2>
@@ -87,13 +87,13 @@
 <p>Share this post or a comment online -</p>
 <div id="share">
 
-<a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.richardlord.net%2Fblog%2Funity%2Ffinite-state-machines-in-unity.html" target="_blank" title="Facebook"><img src="/images/social/facebook_logo.png" width="36" height="36" /></a>
+<a href="https://www.facebook.com/sharer/sharer.php?u=https%3A//www.richardlord.net/blog/unity/finite-state-machines-in-unity.html" target="_blank" title="Facebook"><img src="/images/social/facebook_logo.png" width="36" height="36" /></a>
 
-<a href="https://twitter.com/intent/tweet?text=Finite%20State%20Machines%20in%20Unity&amp;url=https%3A%2F%2Fwww.richardlord.net%2Fblog%2Funity%2Ffinite-state-machines-in-unity.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+<a href="https://twitter.com/intent/tweet?text=Finite%20State%20Machines%20in%20Unity&amp;url=https%3A//www.richardlord.net/blog/unity/finite-state-machines-in-unity.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
 
-<a href="mailto:?subject=Finite%20State%20Machines%20in%20Unity&amp;body=https%3A%2F%2Fwww.richardlord.net%2Fblog%2Funity%2Ffinite-state-machines-in-unity.html" target="_blank" title="Email"><img src="/images/social/email_logo.png" width="36" height="36" /></a>
+<a href="mailto:?subject=Finite%20State%20Machines%20in%20Unity&amp;body=https%3A//www.richardlord.net/blog/unity/finite-state-machines-in-unity.html" target="_blank" title="Email"><img src="/images/social/email_logo.png" width="36" height="36" /></a>
 
-<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=Finite%20State%20Machines%20in%20Unity&amp;url=https%3A%2F%2Fwww.richardlord.net%2Fblog%2Funity%2Ffinite-state-machines-in-unity.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=Finite%20State%20Machines%20in%20Unity&amp;url=https%3A//www.richardlord.net/blog/unity/finite-state-machines-in-unity.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
 
 </div>
 <hr />
@@ -106,7 +106,7 @@
 </div>
 
 <footer role="contentinfo">
-	<p>Richard Lord - Screenwriter, Choreographer, Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+	<p>Richard Lord - Writer, Choreographer, Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
 </footer>
 </div>
 </body>

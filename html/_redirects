@@ -8,8 +8,11 @@
 /free-code https://github.com/richardlord 301
 /open-source.html https://github.com/richardlord 301
 
-/about/richardlord / 301
-/about/richardlord.html / 301
+/writing/ /index.html 301
+/writing /index.html 301
+
+/about/richardlord /about.html 301
+/about/richardlord.html /about.html 301
 /contact /contact.html 301
 /about/contact.html /contact.html 301
 /resume.html /games/resume.html 301
@@ -17,8 +20,8 @@
 /works.html /dance/works.html 301
 /about/works.html /dance/works.html 301
 /about/index.html / 301
-/about/ / 301
-/about / 301
+/about/ /about.html 301
+/about /about.html 301
 
 /dance/progressive /progressive.html 301
 /progressive.html /dance/progressive.html 301
@@ -119,7 +122,6 @@
 /blog/monopoly-too-political-or-not-political-enough /blog/game-design/monopoly-too-political-or-not-political-enough.html 301
 /blog/teaching-game-design /blog/game-design/teaching-game-design.html 301
 /blog/the-choreography-of-monument-valley /blog/game-design/the-choreography-of-monument-valley.html 301
-/blog/if-i-had-more-time /blog/general/if-i-had-more-time.html 301
 /blog/most-people-are-good-people /blog/general/most-people-are-good-people.html 301
 /blog/my-first-two-weeks-as-an-indie-game-developer /blog/general/my-first-two-weeks-as-an-indie-game-developer.html 301
 /blog/the-ipad-is-not-a-computer /blog/general/the-ipad-is-not-a-computer.html 301

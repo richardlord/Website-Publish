@@ -25,17 +25,17 @@
 	<div id="branding">
 		<a href="/" title="Richard Lord" rel="home"><img id="site-image" src="/images/social/me.png" /></a>
 		<div id="site-title"><a href="/" title="Richard Lord" rel="home">Richard&nbsp;Lord</a></div>
-		<div id="site-description">Screenwriter, Choreographer, Game&nbsp;Developer</div>
+		<div id="site-description">Writer, Choreographer, Game&nbsp;Developer</div>
 	</div>
 
 	<nav id="menu" role="navigation">
 	<div>
 		<ul>
-			<li><a href="/writing/">WRITING</a></li>
+			<li><a href="/">WRITING</a></li>
 			<li><a href="/dance/">CHOREOGRAPHY</a></li>
 			<li><a href="/games/">GAME&nbsp;DEVELOPMENT</a></li>
 			<li><a href="/blog/">BLOG</a></li>
-			<li><a href="/">ABOUT</a></li>
+			<li><a href="/about.html">ABOUT</a></li>
 			<li><a href="/contact.html">CONTACT</a></li>
 		</ul>
 	</div>
@@ -53,11 +53,11 @@
 
 <p>or <strong>Another reason to avoid PHP's mail() function</strong></p>
 
-<p>Since launching <a href="http://www.giefan.com/">Giefan.com</a> on Monday we've fixed a few bugs that only came to light as a result of the way other people work. One such was an email problem with messages sent to GMail (thanks to Alan for catching this). I've never had a GMail account so it wasn't one of the email applications we tested the messages with.</p>
+<p>Since launching Giefan.com on Monday we've fixed a few bugs that only came to light as a result of the way other people work. One such was an email problem with messages sent to GMail (thanks to Alan for catching this). I've never had a GMail account so it wasn't one of the email applications we tested the messages with.</p>
 
-<p>Email messages were arriving at GMail with messages garbled into a string of apparently random characters and with the sender listed as unknown. I was using <a href="http://php.net/manual/en/function.mb-send-mail.php">mb_send_mail()</a> to send UTF-8 email messages from PHP. I always intended to implement a different email solution at some point but evaluating the various possibilities and making a choice didn't seem as important for the launch period as many of the other features so I chose to start with mb_send_mail() and switch to another solution later.</p>
+<p>Email messages were arriving at GMail with messages garbled into a string of apparently random characters and with the sender listed as unknown. I was using <a href="https://php.net/manual/en/function.mb-send-mail.php">mb_send_mail()</a> to send UTF-8 email messages from PHP. I always intended to implement a different email solution at some point but evaluating the various possibilities and making a choice didn't seem as important for the launch period as many of the other features so I chose to start with mb_send_mail() and switch to another solution later.</p>
 
-<p>mb_send_mail() was sending messages as UTF-8 and base64 encoded, and it seems that GMail failed to correctly understand this from the email headers. As a result, GMail simply displayed the base64 encoded data. The quick fix just to get it working was to switch to PHP's <a href="http://php.net/manual/en/ref.mail.php">mail()</a> function. This would suffice for a few hours while we sought a better solution.</p>
+<p>mb_send_mail() was sending messages as UTF-8 and base64 encoded, and it seems that GMail failed to correctly understand this from the email headers. As a result, GMail simply displayed the base64 encoded data. The quick fix just to get it working was to switch to PHP's <a href="https://php.net/manual/en/ref.mail.php">mail()</a> function. This would suffice for a few hours while we sought a better solution.</p>
 
 <p>The other problem was GMail displaying the sender as unknown, despite having the sender data in the From: header. I tried various different formats for the From: header (quotes around the name, extra spaces etc.) but none seemed to work for GMail. Instead, it always displayed the From: header line in the body of the message (there were no blank lines in the header so that's not the problem, and the messages worked with a number of other email applications we tested them with).</p>
 
@@ -71,19 +71,19 @@
 
 <p>Anyway, the obvious solution was to avoid PHP's mail functions altogether so I hurriedly added Chris Corbyn's <a href="http://www.swiftmailer.org/">Swift Mailer</a> script and altered my code to use it, and all was well. I haven't thoroughly tested Swift Mailer yet but it seems to be working fine - the messages are in UTF-8 and GMail is happy with them.</p>
 
-<p>Swift Mailer is just one of <a href="http://phpmailer.sourceforge.net/">many</a> <a href="http://pear.php.net/package/Mail">alternatives</a> <a href="http://framework.zend.com/manual/en/zend.mail.html">to the</a> mail() function but I like it for it's simplicity of use. Hopefully, when I test it out more thoroughly later this month I'll still be very happy with it.</p>
+<p>Swift Mailer is just one of <a href="http://phpmailer.sourceforge.net/">many</a> <a href="http://pear.php.net/package/Mail">alternatives</a> <a href="https://framework.zend.com/manual/1.12/en/zend.mail.html">to the</a> mail() function but I like it for it's simplicity of use. Hopefully, when I test it out more thoroughly later this month I'll still be very happy with it.</p>
 
 
 <p>Share this post or a comment online -</p>
 <div id="share">
 
-<a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.richardlord.net%2Fblog%2Fphp%2Fphp-mail-and-gmail.html" target="_blank" title="Facebook"><img src="/images/social/facebook_logo.png" width="36" height="36" /></a>
+<a href="https://www.facebook.com/sharer/sharer.php?u=https%3A//www.richardlord.net/blog/php/php-mail-and-gmail.html" target="_blank" title="Facebook"><img src="/images/social/facebook_logo.png" width="36" height="36" /></a>
 
-<a href="https://twitter.com/intent/tweet?text=PHP%20mail%28%29%20function%20and%20GMail&amp;url=https%3A%2F%2Fwww.richardlord.net%2Fblog%2Fphp%2Fphp-mail-and-gmail.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+<a href="https://twitter.com/intent/tweet?text=PHP%20mail%28%29%20function%20and%20GMail&amp;url=https%3A//www.richardlord.net/blog/php/php-mail-and-gmail.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
 
-<a href="mailto:?subject=PHP%20mail%28%29%20function%20and%20GMail&amp;body=https%3A%2F%2Fwww.richardlord.net%2Fblog%2Fphp%2Fphp-mail-and-gmail.html" target="_blank" title="Email"><img src="/images/social/email_logo.png" width="36" height="36" /></a>
+<a href="mailto:?subject=PHP%20mail%28%29%20function%20and%20GMail&amp;body=https%3A//www.richardlord.net/blog/php/php-mail-and-gmail.html" target="_blank" title="Email"><img src="/images/social/email_logo.png" width="36" height="36" /></a>
 
-<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=PHP%20mail%28%29%20function%20and%20GMail&amp;url=https%3A%2F%2Fwww.richardlord.net%2Fblog%2Fphp%2Fphp-mail-and-gmail.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=PHP%20mail%28%29%20function%20and%20GMail&amp;url=https%3A//www.richardlord.net/blog/php/php-mail-and-gmail.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
 
 </div>
 <hr />
@@ -100,7 +100,7 @@
 </div>
 
 <footer role="contentinfo">
-	<p>Richard Lord - Screenwriter, Choreographer, Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+	<p>Richard Lord - Writer, Choreographer, Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
 </footer>
 </div>
 </body>

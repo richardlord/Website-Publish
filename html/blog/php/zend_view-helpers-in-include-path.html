@@ -25,17 +25,17 @@
 	<div id="branding">
 		<a href="/" title="Richard Lord" rel="home"><img id="site-image" src="/images/social/me.png" /></a>
 		<div id="site-title"><a href="/" title="Richard Lord" rel="home">Richard&nbsp;Lord</a></div>
-		<div id="site-description">Screenwriter, Choreographer, Game&nbsp;Developer</div>
+		<div id="site-description">Writer, Choreographer, Game&nbsp;Developer</div>
 	</div>
 
 	<nav id="menu" role="navigation">
 	<div>
 		<ul>
-			<li><a href="/writing/">WRITING</a></li>
+			<li><a href="/">WRITING</a></li>
 			<li><a href="/dance/">CHOREOGRAPHY</a></li>
 			<li><a href="/games/">GAME&nbsp;DEVELOPMENT</a></li>
 			<li><a href="/blog/">BLOG</a></li>
-			<li><a href="/">ABOUT</a></li>
+			<li><a href="/about.html">ABOUT</a></li>
 			<li><a href="/contact.html">CONTACT</a></li>
 		</ul>
 	</div>
@@ -55,7 +55,7 @@
 
 <h2>The Problem</h2>
 
-<p>I'm using the <a href="http://framework.zend.com/">Zend Framework</a> at the moment and came across a problem with creating <a href="http://framework.zend.com/manual/en/zend.view.helpers.html">custom helpers</a> for the Zend_View class. All is fine if you place your helpers either within the zend framework's own helpers folder (not a good idea) or within a directory in your site structure. The problem arises if you place the helpers in a folder in the PHP include path and don't know the full path to the folder.</p>
+<p>I'm using the <a href="https://framework.zend.com/">Zend Framework</a> at the moment and came across a problem with creating <a href="https://framework.zend.com/manual/1.12/en/zend.view.helpers.html">custom helpers</a> for the Zend_View class. All is fine if you place your helpers either within the zend framework's own helpers folder (not a good idea) or within a directory in your site structure. The problem arises if you place the helpers in a folder in the PHP include path and don't know the full path to the folder.</p>
 
 <p>Why would that happen? Well, here's my set-up - on each server I have a folder that is added to the include path. This folder has the same structure on all my servers - development, testing and production - but may be in a different location on some of them. That doesn't matter because I can add the correct folder to PHP's include path in the php.ini configuration file on each server.</p>
 
@@ -147,13 +147,13 @@ $view->addHelperPrefix( 'Bigroom_View_Helper' );</pre>
 <p>Share this post or a comment online -</p>
 <div id="share">
 
-<a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.richardlord.net%2Fblog%2Fphp%2Fzend_view-helpers-in-include-path.html" target="_blank" title="Facebook"><img src="/images/social/facebook_logo.png" width="36" height="36" /></a>
+<a href="https://www.facebook.com/sharer/sharer.php?u=https%3A//www.richardlord.net/blog/php/zend_view-helpers-in-include-path.html" target="_blank" title="Facebook"><img src="/images/social/facebook_logo.png" width="36" height="36" /></a>
 
-<a href="https://twitter.com/intent/tweet?text=Zend_View%20helpers%20in%20include%20path&amp;url=https%3A%2F%2Fwww.richardlord.net%2Fblog%2Fphp%2Fzend_view-helpers-in-include-path.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
+<a href="https://twitter.com/intent/tweet?text=Zend_View%20helpers%20in%20include%20path&amp;url=https%3A//www.richardlord.net/blog/php/zend_view-helpers-in-include-path.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
 
-<a href="mailto:?subject=Zend_View%20helpers%20in%20include%20path&amp;body=https%3A%2F%2Fwww.richardlord.net%2Fblog%2Fphp%2Fzend_view-helpers-in-include-path.html" target="_blank" title="Email"><img src="/images/social/email_logo.png" width="36" height="36" /></a>
+<a href="mailto:?subject=Zend_View%20helpers%20in%20include%20path&amp;body=https%3A//www.richardlord.net/blog/php/zend_view-helpers-in-include-path.html" target="_blank" title="Email"><img src="/images/social/email_logo.png" width="36" height="36" /></a>
 
-<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=Zend_View%20helpers%20in%20include%20path&amp;url=https%3A%2F%2Fwww.richardlord.net%2Fblog%2Fphp%2Fzend_view-helpers-in-include-path.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=Zend_View%20helpers%20in%20include%20path&amp;url=https%3A//www.richardlord.net/blog/php/zend_view-helpers-in-include-path.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
 
 </div>
 <hr />
@@ -170,7 +170,7 @@ $view->addHelperPrefix( 'Bigroom_View_Helper' );</pre>
 </div>
 
 <footer role="contentinfo">
-	<p>Richard Lord - Screenwriter, Choreographer, Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
+	<p>Richard Lord - Writer, Choreographer, Game Developer - <a href="/" title="Richard Lord">www.richardlord.net</a></p>
 </footer>
 </div>
 </body>
