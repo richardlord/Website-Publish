@@ -3,7 +3,7 @@
 <id>http://www.richardlord.net</id>
 <title type="text">Richard Lord</title>
 <subtitle type="text">Game Developer</subtitle>
-<updated>2022-09-08T14:46:57Z</updated>
+<updated>2022-09-19T17:09:09Z</updated>
 <link rel="alternate" type="text/html" href="https://www.richardlord.net" />
 <link rel="self" type="application/atom+xml" href="https://www.richardlord.net/feed.xml" />
 <author>
@@ -52,145 +52,6 @@
 <p>A component can be used in multiple states. If a component is in both the old and new states it is unchanged, it is not removed and re-added.</p>
 <p>That’s all. If this is useful for you do let me know, and if you implement any improvements to it I would like to see them.</p>
 <p>Have fun making your games.</p>
-]]></content>
-</entry>
-
-<entry>
-<id>https://www.richardlord.net/intergalactic-delivery-driver/blog/taking-a-break.html</id>
-<title>Taking A Break</title>
-<link rel="alternate" type="text/html" href="https://www.richardlord.net/intergalactic-delivery-driver/blog/taking-a-break.html" />
-<updated>2016-09-12T12:00:00Z</updated>
-<published>2016-09-12T12:00:00Z</published>
-<category scheme="https://www.richardlord.net" term="Intergalactic Delivery Driver" />
-<summary type="text">Working on a long project is hard. I’ve been working on and off on Intergalactic Delivery Driver for ten months now. There were some gaps in that time, particularly the three months I spent working at King when I got almost nothing done on the game.</summary>
-<content type="html" xml:base="https://www.richardlord.net/intergalactic-delivery-driver/blog/taking-a-break.html"><![CDATA[
-<p>Working on a long project is hard. I’ve been working on and off on <a href="/intergalactic-delivery-driver/">Intergalactic Delivery Driver</a> for ten months now. There were some gaps in that time, particularly the three months I spent working at <a href="https://king.com">King</a> when I got almost nothing done on the game. Even so, the project is ten months old and sometimes my enthusiasm for it wanes. Not because I think any less of the project, I still believe it will be a great game, but because it’s hard to get up every morning and find the energy and enthusiasm to work on the same project day in and day out, particularly when there is no-one else to enthuse you. One week I may sprint along, getting lots done and making enormous progress. Another week I may crawl, achieving very little.</p>
-
-<p>So I have a new plan. When my enthusiasm wanes I will allow myself a break. This break will be deliberate and will involve me working on something different. I may be a small project, a prototype, or some writing. Whatever, it will involve not working on my main project for a short while.</p>
-
-<p><image src="/images/vr/gearvr.png" width="653" height="490" alt="" /></p>
-
-<p>Which is why last week and this I am not working on Intergalactic Delivery Driver. I have bought a VR kit (the Samsung Gear VR because it’s relatively inexpensive) and am experimenting with an idea for a VR project. It’s a small project with some interesting technical hurdles and if the result is good I’ll make it available, probably for free.</p>
-
-<p>Then I’ll return to Intergalactic Delivery Driver with, I am sure, renewed enthusiasm and energy.</p>
-]]></content>
-</entry>
-
-<entry>
-<id>https://www.richardlord.net/blog/general/most-people-are-good-people.html</id>
-<title>Most people are good people</title>
-<link rel="alternate" type="text/html" href="https://www.richardlord.net/blog/general/most-people-are-good-people.html" />
-<updated>2016-06-22T12:00:00Z</updated>
-<published>2016-06-22T12:00:00Z</published>
-<category scheme="https://www.richardlord.net" term="General Stuff" />
-<summary type="text">Most of us trust most of our friends. We trust them not to cheat and lie to us for their own gain. We trust them not to steal from us or to assault us. But how about strangers? Not a specific stranger but strangers in general. Do you trust them? Do you trust the other people in your country not to cheat, lie, steal, and assault others for their own gain? Maybe you think like me that most people are okay but there’s a few bad apples. Or maybe not. Maybe there’s a group of people you particularly don’t trust.</summary>
-<content type="html" xml:base="https://www.richardlord.net/blog/general/most-people-are-good-people.html"><![CDATA[
-<p>Most of us trust most of our friends. We trust them not to cheat and lie to us for their own gain. We trust them not to steal from us or to assault us. But how about strangers? Not a specific stranger but strangers in general. Do you trust them? Do you trust the other people in your country not to cheat, lie, steal, and assault others for their own gain? Maybe you think like me that most people are okay but there’s a few bad apples. Or maybe not. Maybe there’s a group of people you particularly don’t trust. A group that you think has more than a few bad apples. Like maybe politicians, or bankers, or immigrants, or muslims, or christians, or atheists, or women, or men, etc.</p>
-
-<p>How much we trust strangers has a very significant impact on politics, economics and the well being of our country. Trust is the social glue that enables us to live and work together. For example, those who trust others tend to be more accepting of higher taxes. They trust their politicians to spend the money sensibly. They trust other people to use the social welfare system appropriately, not to abuse it. They trust successful people, all of whom have been helped by social policies like education and infrastructure, to give back through the tax system. Socialism is built on trust.</p>
-
-<p>When the trust of others breaks down we instead expect politicians to spend our taxes looking after their self-interests, we expect successfully people to avoid paying their taxes, and we expect strangers to abuse the social welfare system to their own advantage. In such a world it’s only natural to want to pay less tax, to want less money spent on welfare, and to blame these others that we don’t trust for the problems we face.</p>
-
-<p>In Britain there have been a number of incidents recently that likely reduce the trust we have in others.</p>
-<ul>
-<li>The global financial crisis and the subsequent bail-out of the rich through bank bail-outs and the propping-up of asset prices</li>
-<li>The Members of Parliament expenses scandal</li>
-<li>The high levels of immigration from Eastern Europe</li>
-</ul>
-
-<p>There’s probably a lot more if you think about it. In hindsight there are things that could have been handled better. But I want to speak about immigration because it’s particularly relevant at the moment.</p>
-
-<p>When a few foreigners immigrate into Britain they are welcomed. We like quirky and unusual and the foreign couple living near the village pub are precisely that. We welcome them, we ask them about their homeland, their family, what they like about Britain. They become the friends of the people that meet them and are of no concern to the rest of us.</p>
-
-<p>But when there are many immigrants we become suspicious. Why are so many foreigners coming to live here? It’s certainly not for the weather. What do they want? Can we trust them? In time the suspicion fades and the newcomers are treated as British (and their children of course are British), and they in turn may join us in being suspicious of the next wave of immigrants.</p>
-
-<p>The European Union’s policy of free movement of people is laudable, but while it produces long-term benefit to all the nations of Europe it also causes short-term pain in this failure of trust. The EU is still trying to absorb and adjust to the immigration patterns instigated by the large number of countries that joined in 2004 (Cyprus, Czech Republic, Estonia, Hungary, Latvia, Lithuania, Malta, Poland, Slovenia, Slovakia) and 2007 (Bulgaria, Romania) and to calm down from the resulting surge in distrust and nationalist politics.</p>
-
-<p>In time we will trust these strangers among us and regard them as our own. Because most people are good people. Meanwhile, this is the worst time in our 40 year membership for the UK government to call a referendum on our EU membership. This is likely a high point for the Leave vote. I just hope that Remain wins despite the trust deficit that is stacked against it.</p>
-]]></content>
-</entry>
-
-<entry>
-<id>https://www.richardlord.net/intergalactic-delivery-driver/blog/refactoring-the-meta-game-in-intergalactic-delivery-driver.html</id>
-<title>Refactoring the meta-game in Intergalactic Delivery Driver</title>
-<link rel="alternate" type="text/html" href="https://www.richardlord.net/intergalactic-delivery-driver/blog/refactoring-the-meta-game-in-intergalactic-delivery-driver.html" />
-<updated>2016-05-18T12:00:00Z</updated>
-<published>2016-05-18T12:00:00Z</published>
-<category scheme="https://www.richardlord.net" term="Intergalactic Delivery Driver" />
-<summary type="text">Last week was an interesting week for Intergalactic Delivery Driver, the game I'm currently developing. The week started with a crisis in confidence as I debated whether the meta-game would work and ended with a number of changes and much greater confidence in the quality of the game in general and the meta-game in particular.</summary>
-<content type="html" xml:base="https://www.richardlord.net/intergalactic-delivery-driver/blog/refactoring-the-meta-game-in-intergalactic-delivery-driver.html"><![CDATA[
-<p>Last week was an interesting week for <a href="/intergalactic-delivery-driver/">Intergalactic Delivery Driver</a>, the game I'm currently developing. The week started with a crisis in confidence as I debated whether the meta-game would work and ended with a number of changes and much greater confidence in the quality of the game in general and the meta-game in particular.</p>
-
-<p>The meta-game has always been a difficulty within the project. The core-loop was easy, it barely feels like I designed it at all. It was born of inspiration and has felt right since the start. Yes, sometimes I do wonder how many players want to play a game that involves tilting your phone, but it works so well that it's always been worth the risk. The meta-game on the other hand is all hard graft and design. I have thought about it so much and tried so many permutations in my head, on paper and in prototypes that I am bored with it, while still trying hard to make it better. Maybe this time I am there.</p>
-
-<p>When I started prototyping the game I imagined a simple level-unlock scenario, maybe with a "saga-map" like King use in most of their games. This puts all the emphasis on the core loop and lets me put all my effort into creating good quality levels for you to play. Developing those levels might lead me to introduce pick-ups, power-ups and other fun details to add joy and progression to the levels and decisions about when to use objects that span multiple levels.</p>
-
-<p>But later, as the prototype developed, I decided to focus more on your career as a delivery driver. I want to use the game to comment on the idea of independence in the workplace, of working for oneself, of the importance of your personal brand, about what Tim O'Reilly calls the next:economy. With different agents and opportunities open to the player I can let you choose the direction your career takes. I can hint at what it feels like to work for yourself. I can show how hard it is to get started in this new economy, when everyone else seems to have the good contacts. How a lucky break can open new possibilities that you haven't imagined and how your career path is based as much on luck as planning. As John Lennon sang "Life is what happens to you while you're busy making other plans" (I used that line when talking about <a href="/freak-factory/blog/why-freak-factory.html">Freak Factory</a> too - maybe there is a theme developing in my work).</p>
-
-<p>Those are grand ambitions, and if I followed them literally then the start of the game would be slow, hard and frustrating and as your career developed your decisions, based as much on luck as judgement, would take you down a path that closed off whole sections of the game to you and made your game uniquely different to everyone else's. The former is clearly not a good idea and the later, while interesting in concept, means producing lots more game than any one person can play or make (although procedural generation could help). Instead, I have focused on the ideas of choice and reputation. You pick the agents you work with and you build a reputation that opens up new options for your career as an Intergalactic Delivery Driver.</p>
-
-<p>All of that led me to a meta-game based around a jobs board which lists a number of delivery jobs that are available to you. Different jobs have different challenges and rewards and you choose which job to attempt next. Jobs are from different agents and as you gain reputation new agents take an interest in you and offer you work. Each agent brings with them a new type of job with new skills to develop and challenges to overcome.</p>
-
-<p><img src="/intergalactic-delivery-driver/images/blog/deliveries0.png" width="288" height="512" alt="" /></p>
-
-<p>All of which sounded good except that there is no hint to the player as to what direction to take. You are left alone with a list of jobs and little guidance to help you decide what to do next (see, it is like working for yourself!).</p>
-
-<p>So last week I set out to fix this. The first step was to separate the jobs board into multiple jobs boards, one for each agency. This lets you see all the agencies at the start, see which are offering you work, and see what you need to do to gain work from the others. This gives you a clear set of goals you need to complete to get attention from the other agencies.</p>
-
-<p><img src="/intergalactic-delivery-driver/images/blog/agencies1.png" width="288" height="512" alt="" /></p>
-
-<p>Having unlocked an agency the next challenge is to give the player direction and purpose when doing jobs for that agency. In real life it's great if clients keep offering you more work, but in the game a jobs board which keeps refilling with new jobs to do makes it feel to the player like they're not progressing at all. There are other measures of your progress - your reputation, the spaceships you own, the money you have earned, the agents that are offering you work. But when it comes to doing the deliveries, a list of deliveries that keeps refilling feels like a grind.</p>
-
-<p>So what I have decided is to return back to the original plan of a level unlock game, but rather than one massive level unlock I will present each agency as a fixed set of deliveries to complete. That means that each agency will contain a set of deliveries in a particular style for you to unlock, play through, and gain three stars on. The levels within an agency get progressively harder and have a theme to tie them together based on the nature of the agency. You still get to choose which jobs to do, which agencies to develop your relationship with, and which to avoid. But you also get the attraction of completing the next level, of a clear progression through the game, and of playing the same levels as your friends.</p>
-
-<p><img src="/intergalactic-delivery-driver/images/blog/deliveries1.png" width="288" height="512" alt="" /></p>
-
-<p>So that's where the game is at now. I haven't thrown away the procedural generation code, instead I have adapted it to run within the Unity editor. When creating a new agency, I procedurally generate a set of levels for that agency based on the character of that agency. Then I play and manually adjust these levels to make them more interesting. This has enabled me to make 120 levels in an afternoon - 120 levels that I am now playing through and altering to make them better.</p>
-
-]]></content>
-</entry>
-
-<entry>
-<id>https://www.richardlord.net/blog/game-design/the-choreography-of-monument-valley.html</id>
-<title>The Choreography of Monument Valley</title>
-<link rel="alternate" type="text/html" href="https://www.richardlord.net/blog/game-design/the-choreography-of-monument-valley.html" />
-<updated>2016-03-31T12:00:00Z</updated>
-<published>2016-03-31T12:00:00Z</published>
-<category scheme="https://www.richardlord.net" term="Game Design" />
-<summary type="text">The brilliant Critical Distance have proposed "Choreography" as the topic for their March collection of Blogs of the Round Table and I think, as a choreographer turned game developer, I should have something to say on this. I pondered what to write and eventually decided to write about just one game, the wonderful Monument Valley by ustwo.</summary>
-<content type="html" xml:base="https://www.richardlord.net/blog/game-design/the-choreography-of-monument-valley.html"><![CDATA[
-<p>The brilliant <a href="https://www.critical-distance.com/">Critical Distance</a> have proposed <a href="https://www.critical-distance.com/2016/03/05/march-2016-choreography/">"Choreography"</a> as the topic for their March collection of Blogs of the Round Table and I think, as a choreographer turned game developer, I should have something to say on this. I pondered what to write and eventually decided to write about just one game, the wonderful <a href="https://www.monumentvalleygame.com">Monument Valley</a> by <a href="https://www.ustwo.com">ustwo</a>.</p>
-
-<p>Launch Monument Valley and the first thing you see is a temple with the number one inside it. The symmetry of the view gives it stability, a calm beginning to the game. But there is far more going on than this screen-shot can reveal.</p>
-
-<p><img src="/images/monument/mv1.jpg" width="250" height="445" alt="" /></p>
-
-<p>Stars fade in and out of existence, the patterns in the centre of the temple grow and transform, and the temple itself gently bounces like it's the heartbeat of this game.</p>
-
-<p>Through this movement the temple gently invites you to enter its portal. Touch it and the image fades and a new one replaces it.</p>
-
-<p><img src="/images/monument/mv2.jpg" width="250" height="445" alt="" /></p>
-
-<p>Ida, standing on a walkway, looking around, calm and unconcerned as the breeze flutters her dress. You touch the path and Ida quickly turns and moves towards your touch. That turn is important. If you want Ida to walk this way she must first turn and face where she's going and, unlike so many game characters, for Ida turning takes time. The turn is quick, but it is real. The designers decided it was important to animate that turn, to make Ida's movement fluid.</p>
-
-<p>On reaching your touch, Ida stands patiently once more. It is your turn to make some choreography of your own as you rotate the walkway to form the path that Ida requires and with that movement you discover your power to transform this world to her needs.</p>
-
-<p><img src="/images/monument/mv3.jpg" width="250" height="445" alt="" /></p>
-
-<p>So you lead Ida along the walkway and up the steps to her destination. Note the gentle bounce as the control handles retract and then extend again, hear Ida quicken her pace as she climbs the steps to her goal, and then she stands at the top gazing out across the valley. A valley that she and you will explore together.</p>
-
-<p><img src="/images/monument/mv4.jpg" width="250" height="445" alt="" /></p>
-
-<p>The choreography of Monument Valley isn't about how characters move or how the player moves, it's about how everything moves. The choreography is a vital part of the experience and without it the game would be flatter, duller and less enjoyable.</p>
-
-<p>Of all the dance styles I'm familiar with Monument Valley reminds me most of classical ballet. The rigid discipline of the ballerina's body as she turns and jumps, her fast footwork as she chass&eacute;s and coup&eacute;s around the stage, and the lyrical flow of her arms atop her rigidly controlled body are replaced by the mechanics of this world, Ida's rapid steps, and the fluttering flags and flowers that suffuse most levels. The whole is a careful balance between strong mechanics and gentle lyricism.</p>
-
-<p>With each level that balance shifts a little more away from the lyrical and towards the mechanical as Ida gets closer to her goal.</p>
-
-<p>
-<img src="/images/monument/mv5.jpg" width="250" height="445" alt="" />
-<img src="/images/monument/mv6.jpg" width="250" height="445" alt="" />
-</p>
 ]]></content>
 </entry>
 
@@ -451,6 +312,195 @@ I remember as a choreographer at dance school showing my choreography teacher my
 <p>In theory you can do this without the other person there but it is hard. I find that their presence, watching the dance or playing the game, and my anxiety over their reaction helps me to empathise, to see the work as it really is.</p>
 
 <p>With my new game, <a href="/freak-factory/">Freak Factory</a>, I have shown it to numerous people. Family, friends, other developers. In many cases I watch the screen over their shoulder, imagining what they are thinking and feeling, and I smile as my chest tightens, my stomach flips, and I add another issue to my to-do list. It's not traditional user testing and for you it may not work, but it helps me a lot.</p>
+]]></content>
+</entry>
+
+<entry>
+<id>https://www.richardlord.net/blog/choreography-games/what-makes-a-good-collaboration.html</id>
+<title>What Makes a Good Collaboration?</title>
+<link rel="alternate" type="text/html" href="https://www.richardlord.net/blog/choreography-games/what-makes-a-good-collaboration.html" />
+<updated>2015-06-17T12:00:00Z</updated>
+<published>2015-06-17T12:00:00Z</published>
+<category scheme="https://www.richardlord.net" term="Lessons I Learnt as a Choreographer and Apply as a Game Designer" />
+<summary type="text">This blog post was originally published on Gamasutra on 17 June 2015.
+
+Before I became a game developer I was an independent contemporary dance choreographer with my own dance company. And in my 14 years creating dances, and a further 14 creating games, I've experienced all sorts of collaborations. For me, there are three key ingredients to a good collaboration.</summary>
+<content type="html" xml:base="https://www.richardlord.net/blog/choreography-games/what-makes-a-good-collaboration.html"><![CDATA[
+<p><i>This blog post was originally published on <a href="http://www.gamasutra.com/blogs/RichardLord/20150617/246365/What_Makes_a_Good_Collaboration.php">Gamasutra</a> on 17 June 2015.</i></p>
+
+<p>Before I became a game developer I was an independent contemporary dance choreographer with my own dance company. And in my 14 years creating dances, and a further 14 creating games, I've experienced all sorts of collaborations. For me, there are three key ingredients to a good collaboration.</p>
+
+<h2>Skill</h2>
+
+<p>All collaborators should bring skills to the project that wouldn't otherwise be present. There's no point collaborating with someone if you're better than them at everything. A collaborator is your equal. You respect and value each other's skills and by working together you make something better than either of you could make alone.</p>
+
+<h2>Understanding</h2>
+
+<p>All collaborators should understand what you are making. The game is the reason you are working together. You must agree on what the game is and who it is for so you can all focus your skills on delivering that experience to the players.</p>
+
+<h2>Trust</h2>
+
+<p>All collaborators must trust each other. Without trust there will be no collaboration - the untrusted collaborator will be watched and controlled and any influence they might have over the game will be blocked.</p>
+
+<p>I recall one dance production I created where the costume designer showed me designs that I hated. So I stopped working with her. It wasn't her fault, I should never have asked her to work with me because I didn't trust her.</p>
+
+<p>But there was another dance production where the costume designer showed me designs that I hated and I continued working with her. We even went with her designs that I hated, because I trusted her. And when I saw the finished costumes they were fantastic, perfect for the dance. That's why I needed a costume designer.</p>
+
+<h2>And now</h2>
+
+<p>These three ingredients, skill, understanding and trust, went through my mind back in March when <a href="https://www.prawnsoda.co.uk">Brian Roberts</a> sent me a visual design for my new game. I hadn't asked him to do this, I had planned for my first game as an indie to be small and manageable. Simple graphics, simple sounds, interesting gameplay. Build and learn, I thought, I'll find collaborators for the next project, after I've had time to get to know the indie scene in London. This would be my game.</p>
+
+<p><img alt="" height="482" src="/freak-factory/images/press/prototype.png" width="272" /></p>
+
+<p>But I showed a prototype of the game to some friends in the pub and Brian sent me an email later that night - &quot;Sorry I didn't say goodbye. Really like your new game so I thought I'd have a (slightly drunk) blast at some graphics.&quot; Attached was a picture of the main screen of the game, reinterpreted as an industrial space in which slightly cute, slightly scary creatures are created, and you, the player, are the one creating them. It was great.</p>
+
+<p><img alt="" src="/freak-factory/images/press/original.png" /></p>
+
+<p><i>(Here's a tip - if you see a game you want to work on, ask the team creating it - they may say yes.)</i></p>
+
+<p>So I spent a sleepless night deliberating.</p>
+
+<p>I have never created a piece of art without collaborating. In dance you usually have dancers, composers, costume &amp; set designers. Then as a game developer I've never made &quot;my&quot; game, I've always worked on other people's games. Which is why I quit my job - to make my games.</p>
+
+<p>I intended to make this game alone, and now Brian wanted to collaborate on it.</p>
+
+<p>Because I knew Brian, I knew he had the skills. From the graphics he sent me, he clearly understood the game. But collaboration works two ways - I would be giving Brian the power to influence my game. It wouldn't even be my game any more, it would be our game. That's why the trust has to be there.</p>
+
+<p>By the morning I had decided and I sent Brian an email - &quot;I like that a lot. Do you want to talk about doing all the graphics for the game?&quot; We got together, had a great conversation and Brian became the visual designer for the game. And it has been great working together. The game has benefited from his designs and from his feedback. It's a much richer visual experience and it'll be released soon.</p>
+
+<p>Here's the video trailer featuring the final graphics.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/M8Rtc-p30fk?rel=0" frameborder="0" allowfullscreen></iframe>
+<br />
+
+<p>So there we are, my ingredients for good collaboration - Skill, Understanding and Trust.</p>
+
+<p><a href="/freak-factory/">Freak Factory</a> will be out on 27th July 2015 on iOS &amp; Android. You can read more about it on the game's <a href="/freak-factory/">website</a>.</p>
+]]></content>
+</entry>
+
+<entry>
+<id>https://www.richardlord.net/freak-factory/blog/bubble-pack-becomes-freak-factory.html</id>
+<title>Bubble Pack becomes Freak Factory</title>
+<link rel="alternate" type="text/html" href="https://www.richardlord.net/freak-factory/blog/bubble-pack-becomes-freak-factory.html" />
+<updated>2015-06-10T12:00:00Z</updated>
+<published>2015-06-10T12:00:00Z</published>
+<category scheme="https://www.richardlord.net" term="Freak Factory" />
+<summary type="text">I've been heads down building stuff for Bubble Pack for a while now, which is why I haven't talked about it much. A lot of news has built up.
+
+A New Name
+
+The game now has its final name and art style. The name is Freak Factory. What were bubbles are now little critters called Freaks, and what was a simple box is now a factory in which you make these Freaks. And if you don't keep them contained they will escape and the game ends. Trust me, it all makes sense and looks wonderful.</summary>
+<content type="html" xml:base="https://www.richardlord.net/freak-factory/blog/bubble-pack-becomes-freak-factory.html"><![CDATA[
+<p>I've been heads down building stuff for Bubble Pack for a while now, which is why I haven't talked about it much. A lot of news has built up.</p>
+
+<h2>A New Name</h2>
+
+<p>The game now has its final name and art style. The name is <b>Freak Factory</b>. What were bubbles are now little critters called Freaks, and what was a simple box is now a factory in which you make these Freaks. And if you don't keep them contained they will escape and the game ends. Trust me, it all makes sense and looks wonderful.<!--more--></p>
+
+<p>I didn't design the graphics, that was <a href="https://www.prawnsoda.co.uk">Brian Roberts</a> who I used to work with at Stick Sports. There's a little story about how we ended up working together on Freak Factory, which I will tell you next time. For now suffice to say I'm very pleased to be collaborating with him. The graphics he has made are really excellent.</p>
+
+<h2>Trailer</h2>
+
+<p>The best place to see the new graphics is in the trailer for the game. Here it is.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/M8Rtc-p30fk?rel=0" frameborder="0" allowfullscreen></iframe>
+
+<br />
+<h2>Release Date</h2>
+
+<p>The game is nearing completion and we are planning to release it next month. I'll post more detailed information as the date approaches.</p>
+
+<hr />
+]]></content>
+</entry>
+
+<entry>
+<id>https://www.richardlord.net/freak-factory/blog/bubble-pack-update-monetisation.html</id>
+<title>Bubble Pack update - monetisation</title>
+<link rel="alternate" type="text/html" href="https://www.richardlord.net/freak-factory/blog/bubble-pack-update-monetisation.html" />
+<updated>2015-02-23T12:00:00Z</updated>
+<published>2015-02-23T12:00:00Z</published>
+<category scheme="https://www.richardlord.net" term="Freak Factory" />
+<summary type="text">It used to be the only question about monetising your game was how much to charge, and you could leave that decision until quite late in the development. But in this era of free-to-play we have to ask ourselves how we propose to charge for the game, and we have to ask early because the decision can have significant ramifications for the game.
+
+How to charge for your game is sometimes very simple and other times very hard. With Bubble Pack I have always known that I want the initial download to be free. There are two reasons for this</summary>
+<content type="html" xml:base="https://www.richardlord.net/freak-factory/blog/bubble-pack-update-monetisation.html"><![CDATA[
+<p>It used to be the only question about monetising your game was how much to charge, and you could leave that decision until quite late in the development. But in this era of free-to-play we have to ask ourselves how we propose to charge for the game, and we have to ask early because the decision can have significant ramifications for the game.</p>
+
+<p>How to charge for your game is sometimes very simple and other times very hard. With Bubble Pack I have always known that I want the initial download to be free. There are two reasons for this<!--more--></p>
+
+<ol>
+<li>For my first game I want the low barrier to entry that free provides.</li>
+<li>It's too easy for someone else to make a free clone of this game.</li>
+</ol>
+
+<p>However, I also don't want to use advertising in the game. Advertising on mobile is horrible - a preponderance of shitty looking adverts that make your game look cheap and nasty. Most advertising is not the sort of stuff I want to present to people who play my games. If I could fill the game with high quality brand advertising I'd be happy, but instead we get clickbait and ads for other people's games.</p>
+
+<p>Free and no advertising leaves me squarely in the free-to-play space, not necessarily the most comfortable place to be. What I really want to do is an old-fashioned try-before-you-buy model. So here's the plan…</p>
+
+<ul>
+<li>The game will be free to download.</li>
+<li>There will be a single non-consumable in-app-purchase.</li>
+<li>There will be an energy system - a limit on the number of bubbles you can play with at any time.</li>
+<li>When you run out of bubbles you can wait for them to refill or pay once to remove the limit.</li>
+</ul>
+
+<p>And that's it. I have tried to ensure the game can be played for free forever, but the energy system must necessarily be a little annoying or no-one will pay. Please forgive me for that. My goal is for an honest, simple model of one payment to get the full game. If the game is good enough, maybe I can significantly beat the normal 4% conversion on free-to-play.</p>
+
+<p>I added the number of bubbles the player has to the wireframes, and an overlay for buying the game.</p>
+
+<p align="center">
+<img src="/images/bubblepack/BubbleMoney1.png" width="179" height="317" /> &nbsp;
+<img src="/images/bubblepack/BubbleMoney2.png" width="179" height="317" />
+</p>
+
+]]></content>
+</entry>
+
+<entry>
+<id>https://www.richardlord.net/freak-factory/blog/bubble-pack-update-gameplay.html</id>
+<title>Bubble Pack update - gameplay</title>
+<link rel="alternate" type="text/html" href="https://www.richardlord.net/freak-factory/blog/bubble-pack-update-gameplay.html" />
+<updated>2015-02-17T12:00:00Z</updated>
+<published>2015-02-17T12:00:00Z</published>
+<category scheme="https://www.richardlord.net" term="Freak Factory" />
+<summary type="text">I have been playing around with the gameplay for Bubble Pack, adjusting it to get the right difficulty balance. There are lots of small adjustments that can be made to make the game a little easier or a little harder and I also tried a couple of bigger changes.
+
+First I tried letting the player set the power at which the ball is thrown. Unfortunately, this made the game far too easy whilst also making the controls more complicated, so I ditched that idea.</summary>
+<content type="html" xml:base="https://www.richardlord.net/freak-factory/blog/bubble-pack-update-gameplay.html"><![CDATA[
+<p>I have been playing around with the gameplay for Bubble Pack, adjusting it to get the right difficulty balance. There are lots of small adjustments that can be made to make the game a little easier or a little harder and I also tried a couple of bigger changes.</p>
+
+<p>First I tried letting the player set the power at which the ball is thrown. Unfortunately, this made the game far too easy whilst also making the controls more complicated, so I ditched that idea.<!--more--></p>
+
+<p>I also tried removing each bubble after a period of time. The lifespans of bubbles got longer as the game progressed, starting at fifteen moves for the first bubble. So after it had been in play for fifteen moves, the first bubble would pop, opening up more space in the game area for other bubbles. Because the lifespan increased during the course of the game, the game got harder and harder.</p>
+
+<p>This meant it was possible to recover from a bad mistake early in the game, but it also made the early part of the game boring for good players because the bubbles you placed then would be gone later in the game so didn't really matter. So I dropped this idea too and returned to the pure game.</p>
+
+<p>But I did make a lot of smaller adjustments.</p>
+
+<p>I tweaked the power of the shot until it gives the player lots of interesting options.</p>
+
+<p align="center"><img src="/images/bubblepack/BubbleGameplay2.png" width="290" height="514" /></p>
+
+<p>I can think of a number of strategies to try to get a high score and I'm unsure which will be the best, and that's good.</p>
+
+<p>I have also repeatedly tweaked the pace of the bubble to make the game a little faster, a little faster, a little faster, a little slower. The game is still calm, but there's less waiting around for a shot to finish.</p>
+
+<p>I added markers around the edge of the play area to help the player with targeting.</p>
+
+<p>I made the direction targeting for the bubble into a line to make it clearer (some testers were confused that the dots indicated the size of the bubble when in fact they were much smaller).</p>
+
+<p>I also added a second line indicating the direction of the previous shot, which makes planning your shot based on what happened last time a lot easier.</p>
+
+<p align="center"><img src="/images/bubblepack/BubbleGameplay1.png" width="290" height="514" /></p>
+
+<p>These small changes make it a little easier for a beginner player to improve, but to get a great score still requires good spatial planning and reasoning.</p>
+
+<p>When playing the game the control rests squarely with the player. There is no randomness or erratic behaviour in the game to ruin your plans. When you succeed it is your success and when you fail it is your mistake, which leaves every player thinking they can do better next time.</p>
+
+<p>My best score so far is 62. My scores are quite erratic ranging from about 30 to the aforementioned 62 - it's easy to make a mistake and ruin your well laid plans. :twisted:</p>
+
 ]]></content>
 </entry>
 

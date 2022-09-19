@@ -23,7 +23,6 @@
 			<li><a href="/flint-particles/source-code.html">SOURCE CODE</a></li>
 			<li><a href="/flint-particles/documentation.html">DOCUMENTATION</a></li>
 			<li><a href="/flint-particles/examples/">EXAMPLES</a></li>
-			<li><a href="/flint-particles/blog/">BLOG</a></li>
 		</ul>
 	</div>
 	</nav>
@@ -65,11 +64,11 @@ import org.flintparticles.twoD.zones.*;</pre>
 
 <pre class="code">var emitter:Emitter2D = new Emitter2D();</pre>
 
-<p>This creates an <a href="/flint-particles/docs/2d/org/flintparticles/twoD/emitters/Emitter2D.html">emitter for creating 2D particle effects</a>. We&#8217;ll configure the emitter later, but first&#8230;</p>
+<p>This creates an <a href="https://github.com/richardlord/Flint/blob/master/src/org/flintparticles/twoD/emitters/Emitter2D.as">emitter for creating 2D particle effects</a>. We&#8217;ll configure the emitter later, but first&#8230;</p>
 
 <h3>The Renderer</h3>
 
-<p>Our emitter needs a renderer. A renderer draws the particles on the screen. Flint contains <a href="/flint-particles/docs/2d/org/flintparticles/twoD/renderers/package-detail.html">different types of renderers</a>. The different types of renderers use different techniques to draw the particles. In this tutorial we&#8217;ll use a <a href="/flint-particles/docs/2d/org/flintparticles/twoD/renderers/DisplayObjectRenderer.html">DisplayObjectRenderer</a>. The renderer is itself a DisplayObject so we can simply add it to the display list just like any other display object. So lets create our renderer and place it on the stage.
+<p>Our emitter needs a renderer. A renderer draws the particles on the screen. Flint contains <a href="https://github.com/richardlord/Flint/tree/master/src/org/flintparticles/twoD/renderers">different types of renderers</a>. The different types of renderers use different techniques to draw the particles. In this tutorial we&#8217;ll use a <a href="https://github.com/richardlord/Flint/blob/master/src/org/flintparticles/twoD/renderers/DisplayObjectRenderer.as">DisplayObjectRenderer</a>. The renderer is itself a DisplayObject so we can simply add it to the display list just like any other display object. So lets create our renderer and place it on the stage.
 
 <pre class="code">var renderer:DisplayObjectRenderer = new DisplayObjectRenderer();
 addChild( renderer );</pre>
@@ -84,7 +83,7 @@ addChild( renderer );</pre>
 
 <h3>The Counter</h3>
 
-<p>Our emitter needs to know how often to create a new particle. To do this we add a counter to the emitter. Flint has <a href="/flint-particles/docs/2d/org/flintparticles/common/counters/package-detail.html">a number of counters</a>, for creating a <a href="/flint-particles/docs/2d/org/flintparticles/common/counters/Steady.html">steady stream of particles</a>, a <a href="/flint-particles/docs/2d/org/flintparticles/common/counters/Blast.html">single blast of particles</a>, and various other types of activity. We want to keep creating new snowflakes so we&#8217;ll use a <a href="/flint-particles/docs/2d/org/flintparticles/common/counters/Steady.html">Steady counter</a> to create a steady supply of snowflakes. We add the counter to the emitter using the counter property of the emitter, like this&#8230;</p>
+<p>Our emitter needs to know how often to create a new particle. To do this we add a counter to the emitter. Flint has <a href="https://github.com/richardlord/Flint/tree/master/src/org/flintparticles/common/counters">a number of counters</a>, for creating a <a href="https://github.com/richardlord/Flint/blob/master/src/org/flintparticles/common/counters/Steady.as">steady stream of particles</a>, a <a href="https://github.com/richardlord/Flint/blob/master/src/org/flintparticles/common/counters/Blast.as">single blast of particles</a>, and various other types of activity. We want to keep creating new snowflakes so we&#8217;ll use a <a href="https://github.com/richardlord/Flint/blob/master/src/org/flintparticles/common/counters/Steady.as">Steady counter</a> to create a steady supply of snowflakes. We add the counter to the emitter using the counter property of the emitter, like this&#8230;</p>
 
 <pre class="code">emitter.counter = new Steady( 100 );</pre>
 
@@ -94,13 +93,13 @@ addChild( renderer );</pre>
 
 <p>We have to tell the emitter how to set up our particles. The sort of things we want to set up are the particle&#8217;s position, velocity, image and color. To set up the particles we add initializers to the emitter. Each initializer sets some property or properties of the particle.</p>
 
-<p>The first thing we&#8217;ll do is tell the emitter what the particles should look like. We&#8217;re using a DisplayObjectRenderer so our renderer will need a new DisplayObject for each particle. We&#8217;ll use the <a href="/flint-particles/docs/2d/org/flintparticles/common/initializers/ImageClass.html">ImageClass</a> initializer to tell the emitter what type of DisplayObject to create for each particle.</p>
+<p>The first thing we&#8217;ll do is tell the emitter what the particles should look like. We&#8217;re using a DisplayObjectRenderer so our renderer will need a new DisplayObject for each particle. We&#8217;ll use the <a href="https://github.com/richardlord/Flint/blob/master/src/org/flintparticles/common/initializers/ImageClass.as">ImageClass</a> initializer to tell the emitter what type of DisplayObject to create for each particle.</p>
 
 <p>If we had an image in our library that we want to use we would export the image for use in Actionscript and pass the Class it&#8217;s exported as to the ImageClass constructor like this (in Flex, we&#8217;d embed the image in the project and use the associated class in the same way).</p>
 
 <pre class="code">var imgClass:ImageClass = new ImageClass( MyImageClass );</pre>
 
-<p>However, I&#8217;m going to use the <a href="/flint-particles/docs/2d/org/flintparticles/common/displayObjects/RadialDot.html">RadialDot</a> class that is in the Flint library. The RadialDot class is a simple circular image with a gradient fill. The constructor for the dot class takes an argument which is the radius of the dot, which we&#8217;ll set to 2 pixels, so we also have to pass this value to the ImageClass constructor like this&#8230;</p>
+<p>However, I&#8217;m going to use the <a href="https://github.com/richardlord/Flint/blob/master/src/org/flintparticles/common/displayObjects/RadialDot.as">RadialDot</a> class that is in the Flint library. The RadialDot class is a simple circular image with a gradient fill. The constructor for the dot class takes an argument which is the radius of the dot, which we&#8217;ll set to 2 pixels, so we also have to pass this value to the ImageClass constructor like this&#8230;</p>
 
 <pre class="code">var imgClass:ImageClass = new ImageClass( RadialDot, [2] );</pre>
 
@@ -114,9 +113,9 @@ addChild( renderer );</pre>
 
 <h3>Using Zones</h3>
 
-<p>Next we add a <a href="/flint-particles/docs/2d/org/flintparticles/twoD/initializers/Position.html">Position</a> initializer to place the particle in the right position on screen. The Position initializer uses a <a href="/flint-particles/docs/2d/org/flintparticles/twoD/zones/package-detail.html">Zone</a>. A zone is a defined area of the particle system. Flint has classes to define various shapes of zone in the org.flintparticles.twoD.zones package. When you pass a zone to the Position initializer you are telling the initializer to place the particle at a random point within that zone.</p>
+<p>Next we add a <a href="https://github.com/richardlord/Flint/blob/master/src/org/flintparticles/twoD/initializers/Position.as">Position</a> initializer to place the particle in the right position on screen. The Position initializer uses a Zone. A zone is a defined area of the particle system. Flint has classes to define various shapes of zone in the <a href="https://github.com/richardlord/Flint/tree/master/src/org/flintparticles/twoD/zones">org.flintparticles.twoD.zones package</a>. When you pass a zone to the Position initializer you are telling the initializer to place the particle at a random point within that zone.</p>
 
-<p>We want all our particles to be placed just above the top of the stage so that they fall into the stage from above. To do this we use a <a href="/flint-particles/docs/2d/org/flintparticles/twoD/zones/LineZone.html">LineZone</a> placed just above the top of the stage so that the particles are placed anywhere along this line.</p>
+<p>We want all our particles to be placed just above the top of the stage so that they fall into the stage from above. To do this we use a <a href="https://github.com/richardlord/Flint/blob/master/src/org/flintparticles/twoD/zones/LineZone.as">LineZone</a> placed just above the top of the stage so that the particles are placed anywhere along this line.</p>
 
 <pre class="code">var zone:LineZone = new LineZone( new Point( -5, -5 ), new Point( 505, -5 ) );
 var position:Position = new Position( zone );
@@ -126,11 +125,11 @@ emitter.addInitializer( position );</pre>
 
 <pre class="code">emitter.addInitializer( new Position( new LineZone( new Point( -5, -5 ), new Point( 505, -5 ) ) ) );</pre>
 
-<p>Now our particles are placed properly, we need to make them move. For them to move they need to have a velocity and to do this we add a <a href="/flint-particles/docs/2d/org/flintparticles/twoD/initializers/Velocity.html">Velocity</a> initializer to the emitter.</p>
+<p>Now our particles are placed properly, we need to make them move. For them to move they need to have a velocity and to do this we add a <a href="https://github.com/richardlord/Flint/blob/master/src/org/flintparticles/twoD/initializers/Velocity.as">Velocity</a> initializer to the emitter.</p>
 
 <p>Perhaps surprisingly, the Velocity initializer also uses a zone to obtain its value. To see how this works, imagine a line zone as used above. Then imagine that the particle is at point 0,0 and that we have a random point within the zone. The particle will be given an initial velocity such that it will reach that point within one second. In other words the velocity vector is the vector from the origin to a random point inside the zone.</p>
 
-<p>For now, we want all our particles to drop down the screen at exactly the same speed, so we use the simplest of zones &#8211; a <a href="/flint-particles/docs/2d/org/flintparticles/twoD/zones/PointZone.html">PointZone</a>. Because a PointZone only contains a single point, it will always set the velocity to the coordinates of that point. To fall down the screen, we want the x value in the velocity to be zero and the y value to be something bigger than zero.</p>
+<p>For now, we want all our particles to drop down the screen at exactly the same speed, so we use the simplest of zones &#8211; a <a href="https://github.com/richardlord/Flint/blob/master/src/org/flintparticles/twoD/zones/PointZone.as">PointZone</a>. Because a PointZone only contains a single point, it will always set the velocity to the coordinates of that point. To fall down the screen, we want the x value in the velocity to be zero and the y value to be something bigger than zero.</p>
 
 <p>So we set up the Velocity initializer like this&#8230;</p>
 
@@ -150,7 +149,7 @@ emitter.addInitializer( velocity );</pre>
 
 <p>While initializers modify the properties of a particle once, when it is created, actions modify the properties of the particles continuously after they have been created.</p>
 
-<p>To get started, we only need to add one action to our emitter. Although the particles have a position and a velocity, we have to add an action to update the particle&#8217;s position every frame, based on the value of its velocity. To do this we use the <a href="/flint-particles/docs/2d/org/flintparticles/twoD/actions/Move.html">Move</a> action.</p>
+<p>To get started, we only need to add one action to our emitter. Although the particles have a position and a velocity, we have to add an action to update the particle&#8217;s position every frame, based on the value of its velocity. To do this we use the <a href="https://github.com/richardlord/Flint/blob/master/src/org/flintparticles/twoD/actions/Move.as">Move</a> action.</p>
 
 <p>We add the Move action like this&#8230;</p>
 
@@ -199,7 +198,7 @@ emitter.start();</pre>
 
 <h3>Removing the particles</h3>
 
-<p>With the current code we never remove the particles. When they get to the bottom of the screen they just keep going. Eventually the flash movie will slow down and maybe even crash because it has too many particles to manage, so we need to remove the particles when they leave the screen. To do this we use the dramatically titled <a href="/flint-particles/docs/2d/org/flintparticles/twoD/actions/DeathZone.html">DeathZone</a> action.</p>
+<p>With the current code we never remove the particles. When they get to the bottom of the screen they just keep going. Eventually the flash movie will slow down and maybe even crash because it has too many particles to manage, so we need to remove the particles when they leave the screen. To do this we use the dramatically titled <a href="https://github.com/richardlord/Flint/blob/master/src/org/flintparticles/twoD/actions/DeathZone.as">DeathZone</a> action.</p>
 
 <p>The DeathZone action checks whether particles are outside (or inside) a defined zone and destroys them if they are. We&#8217;ll use a rectangular zone slightly bigger than the stage and destroy all particles that are outside this zone. The code looks like this&#8230;</p>
 
@@ -213,7 +212,7 @@ emitter.addAction( deathZone );</pre>
 
 <h3>Making it more realistic</h3>
 
-<p>We&#8217;ll add a couple more behaviours to the emitter to make the snow look more realistic. First we add another initializer. This will vary the size of the particles so that not all the snow flakes are the same size. We use the <a href="/flint-particles/docs/2d/org/flintparticles/common/initializers/ScaleImageInit.html">ScaleImageInit</a> initializer.</p>
+<p>We&#8217;ll add a couple more behaviours to the emitter to make the snow look more realistic. First we add another initializer. This will vary the size of the particles so that not all the snow flakes are the same size. We use the <a href="https://github.com/richardlord/Flint/blob/master/src/org/flintparticles/common/initializers/ScaleImageInit.as">ScaleImageInit</a> initializer.</p>
 
 <p>The ScaleImageInit adjusts the size of the image based on a scaling value. The ScaleImageInit constructor takes two parameters &#8211; the smallest and largest scale factors to use. It will scale each particle using a random value between these two parameters. Since a scale factor of one is normal size, we&#8217;ll use values just below and above that&#8230;</p>
 
@@ -224,7 +223,7 @@ emitter.addInitializer( scaleImage );</pre>
 
 <pre class="code">emitter.addInitializer( new ScaleImageInit( 0.75, 2 ) );</pre>
 
-<p>Finally, we&#8217;ll add some random drifting movement to the snow flakes. Because snow flakes are light they tend to drift about in the air currents. We can use the <a href="/flint-particles/docs/2d/org/flintparticles/twoD/actions/RandomDrift.html">RandomDrift</a> action to make the snow flakes drift around. The RandomDrift constructor takes two parameters; the maximum horizontal drift per second and the maximum vertical drift per second. We add it to the emitter like this&#8230;</p>
+<p>Finally, we&#8217;ll add some random drifting movement to the snow flakes. Because snow flakes are light they tend to drift about in the air currents. We can use the <a href="https://github.com/richardlord/Flint/blob/master/src/org/flintparticles/twoD/actions/RandomDrift.as">RandomDrift</a> action to make the snow flakes drift around. The RandomDrift constructor takes two parameters; the maximum horizontal drift per second and the maximum vertical drift per second. We add it to the emitter like this&#8230;</p>
 
 <pre class="code">var drift:RandomDrift = new RandomDrift( 15, 15 );
 emitter.addAction( drift );</pre>

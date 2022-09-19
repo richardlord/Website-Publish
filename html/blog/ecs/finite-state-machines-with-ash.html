@@ -53,7 +53,7 @@
 
 <p><a href="https://en.wikipedia.org/wiki/Finite-state_machine">Finite state machines</a> are one of the staple constructs in game development. During the course of a game, game objects may pass through many states and managing those states effectively is important.</p>
 
-<p>The difficulty with finite state machines in an entity system framework like <a href="/ash/">Ash</a> can be summed up in one sentence - the state pattern doesn’t work with an entity system framework. Entity system frameworks use a data-oriented paradigm in which game objects are not self-contained OOP objects. So you can’t use the <a href="https://en.wikipedia.org/wiki/State_pattern">state pattern</a>, or any <a href="/blog/actionscript/finite-state-machines-for-ai-in-actionscript.html">variation</a> of it. All the data is in the components, all the logic is in the systems.</p>
+<p>The difficulty with finite state machines in an entity system framework like <a href="/ash/">Ash</a> can be summed up in one sentence - the state pattern doesn’t work with an entity system framework. Entity system frameworks use a data-oriented paradigm in which game objects are not self-contained OOP objects. So you can’t use the <a href="https://en.wikipedia.org/wiki/State_pattern">state pattern</a>, or any variation of it. All the data is in the components, all the logic is in the systems.</p>
 
 <p>If your states are few and simple it is possible to use a good old fashioned switch statement inside a system, with the data for all the states in one or more components that are used by that system, but I wouldn’t usually recommend that.</p>
 
@@ -458,18 +458,6 @@ fsm.changeState( "playing" );</pre>
 <p>There will be further refinement and additions to the state machine tools based on feedback so please do let me know how you get on with them. Use <a href="https://groups.google.com/g/ash-framework?hl=en">the mailing list for Ash</a> to get in touch.</p>
 
 
-<p>Share this post or a comment online -</p>
-<div id="share">
-
-<a href="https://www.facebook.com/sharer/sharer.php?u=https%3A//www.richardlord.net/blog/ecs/finite-state-machines-with-ash.html" target="_blank" title="Facebook"><img src="/images/social/facebook_logo.png" width="36" height="36" /></a>
-
-<a href="https://twitter.com/intent/tweet?text=Finite%20State%20Machines%20with%20Ash%20entity%20component%20system%20framework&amp;url=https%3A//www.richardlord.net/blog/ecs/finite-state-machines-with-ash.html&amp;via=richard_lord" target="_blank" title="Twitter"><img src="/images/social/twitter_logo.png" width="36" height="36" /></a>
-
-<a href="mailto:?subject=Finite%20State%20Machines%20with%20Ash%20entity%20component%20system%20framework&amp;body=https%3A//www.richardlord.net/blog/ecs/finite-state-machines-with-ash.html" target="_blank" title="Email"><img src="/images/social/email_logo.png" width="36" height="36" /></a>
-
-<a href="https://www.linkedin.com/shareArticle?mini=true&amp;title=Finite%20State%20Machines%20with%20Ash%20entity%20component%20system%20framework&amp;url=https%3A//www.richardlord.net/blog/ecs/finite-state-machines-with-ash.html" target="_blank" title="LinkedIn"><img src="/images/social/linkedin_logo.png" width="36" height="36" /></a>
-
-</div>
 <hr />
 <p>Also in the collection <b><a href="./">Entity-Component-System architecture</a></b></p>
 <ul><li><a href="introducing-ash.html">Ash - a new entity system framework for Actionscript games</a></li>
