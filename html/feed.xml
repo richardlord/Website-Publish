@@ -3,14 +3,14 @@
 <id>http://www.richardlord.net</id>
 <title type="text">Richard Lord</title>
 <subtitle type="text">Game Developer</subtitle>
-<updated>2022-09-19T17:09:09Z</updated>
+<updated>2023-10-17T21:25:46Z</updated>
 <link rel="alternate" type="text/html" href="https://www.richardlord.net" />
 <link rel="self" type="application/atom+xml" href="https://www.richardlord.net/feed.xml" />
 <author>
   <name>Richard Lord</name>
   <uri>https://www.richardlord.net</uri>
 </author>
-<rights>©1996-2022 Richard Lord</rights>
+<rights>©1996-2023 Richard Lord</rights>
 
 <entry>
 <id>https://www.richardlord.net/blog/unity/finite-state-machines-in-unity.html</id>
